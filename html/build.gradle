@@ -52,6 +52,7 @@ dependencies {
 	implementation "com.kotcrab.vis:vis-ui:$visUiVersion:sources"
 	implementation "space.earlygrey:shapedrawer:$shapeDrawerVersion:sources"
 	implementation "space.earlygrey:simple-graphs:$simpleGraphsVersion:sources"
+    implementation "org.mini2Dx:universal-tween-engine:$tweenEngineVersion:sources"
 	implementation project(':core')
 
 //// You can use the lines below instead of the "com.badlogicgames.gdx:gdx-backend-gwt" dependencies.
@@ -65,7 +66,7 @@ dependencies {
 import org.akhikhl.gretty.AppBeforeIntegrationTestTask
 import org.wisepersist.gradle.plugins.gwt.GwtSuperDev
 
-gretty.httpPort = 8080
+gretty.httpPort = 8888
 gretty.resourceBase = project.buildDir.path + "/gwt/draftOut"
 gretty.contextPath = "/"
 gretty.portPropertiesFileName = "TEMP_PORTS.properties"
