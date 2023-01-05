@@ -9,11 +9,8 @@
 	<inherits name="com.github.tommyettinger.colorful.colorful" />
 	<inherits name="com.kotcrab.vis.vis-ui" />
 	<inherits name="com.ray3k.tenpatch.tenpatch" />
-	<inherits name="digital" />
 	<inherits name="formic" />
-	<inherits name="funderby" />
 	<inherits name="guacamole_gdx_gwt" />
-	<inherits name="jdkgdxds" />
 	<inherits name="lando.systems.ld52.Main" />
 	<inherits name="libgdx_screenmanager" />
 	<inherits name="libgdx_screenmanager_gwt" />
