@@ -9,6 +9,10 @@ import lando.systems.ld52.Config;
 public class TitleScreen extends BaseScreen {
 
     private TextureRegion logo;
+    private TextureRegion dog;
+    private TextureRegion cat;
+    private TextureRegion kitten;
+    private float stateTime = 0;
 
     @Override
     protected void create() {
@@ -25,6 +29,13 @@ public class TitleScreen extends BaseScreen {
     public void update(float delta) {
         super.update(delta);
         // ...
+        stateTime += delta;
+        dog = assets.dog.getKeyFrame(stateTime);
+        cat = assets.cat.getKeyFrame(stateTime);
+        kitten = assets.kitten.getKeyFrame(stateTime);
+        if (!dog.isFlipX()) dog.flip(true, false);
+        if (!cat.isFlipX()) cat.flip(true, false);
+        if (!kitten.isFlipX()) kitten.flip(true, false);
     }
 
     @Override
@@ -36,9 +47,20 @@ public class TitleScreen extends BaseScreen {
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
         {
-            batch.draw(logo,
-                    0.5f * (Gdx.graphics.getWidth() - logo.getRegionWidth()),
-                    0.5f * (Gdx.graphics.getHeight() - logo.getRegionHeight()));
+            float margin = 10;
+            float logoX = 0.5f * (Gdx.graphics.getWidth()  - logo.getRegionWidth());
+            float logoY = 0.5f * (Gdx.graphics.getHeight() - logo.getRegionHeight());
+            batch.draw(logo, logoX, logoY);
+            batch.draw(dog,
+                    margin, margin,
+                    2 * dog.getRegionWidth(), 2 * dog.getRegionHeight());
+            batch.draw(cat,
+                    margin, Gdx.graphics.getHeight() - 2 * cat.getRegionHeight() - 10,
+                    2 * cat.getRegionWidth(), 2 * cat.getRegionHeight());
+            batch.draw(kitten,
+                    logoX + logo.getRegionWidth() * (2f / 3f) - 4 * margin,
+                    logoY + logo.getRegionHeight() - 2 * margin,
+                    2 * kitten.getRegionWidth(), 2 * kitten.getRegionHeight());
         }
         batch.end();
     }
