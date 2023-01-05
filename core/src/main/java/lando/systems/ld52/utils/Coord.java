@@ -1,6 +1,7 @@
 package lando.systems.ld52.utils;
 
 import com.badlogic.gdx.utils.Array;
+import text.formic.Stringf;
 
 public class Coord {
 
@@ -44,7 +45,7 @@ public class Coord {
 
     @Override
     public String toString() {
-        return String.format("(%d, %d)", x, y);
+        return Stringf.format("(%d, %d)", x, y);
     }
 
     @Override
