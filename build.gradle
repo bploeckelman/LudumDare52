@@ -10,7 +10,14 @@ buildscript {
 	}
 	dependencies {
 		classpath "org.wisepersist:gwt-gradle-plugin:$gwtPluginVersion"
+		classpath "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+	}
+}
 
+import com.badlogic.gdx.tools.texturepacker.TexturePacker
+task texturePacker {
+	doLast {
+		TexturePacker.processIfModified("${project.rootDir}/sprites", "${project.rootDir}/assets/sprites", "sprites")
 	}
 }
 
@@ -24,6 +31,7 @@ configure(subprojects) {
 	sourceCompatibility = 1.8
 	compileJava {
 		options.incremental = true
+		dependsOn texturePacker
 	}
 }
 

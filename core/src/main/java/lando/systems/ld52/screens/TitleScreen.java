@@ -8,6 +8,7 @@ import lando.systems.ld52.Config;
 
 public class TitleScreen extends BaseScreen {
 
+    private TextureRegion background;
     private TextureRegion logo;
     private TextureRegion dog;
     private TextureRegion cat;
@@ -22,6 +23,7 @@ public class TitleScreen extends BaseScreen {
         worldCam.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCam.update();
 
+        background = assets.atlas.findRegion("fire-color-gradient");
         logo = assets.atlas.findRegion("libgdx");
     }
 
@@ -47,8 +49,10 @@ public class TitleScreen extends BaseScreen {
         batch.setProjectionMatrix(worldCamera.combined);
         batch.begin();
         {
+            batch.draw(background, 0, 0, worldCamera.viewportWidth, worldCamera.viewportHeight);
+
             float margin = 10;
-            float logoX = 0.5f * (Gdx.graphics.getWidth()  - logo.getRegionWidth());
+            float logoX = 0.5f * (Gdx.graphics.getWidth()  - logo.getRegionWidth()) + 80;
             float logoY = 0.5f * (Gdx.graphics.getHeight() - logo.getRegionHeight());
             batch.draw(logo, logoX, logoY);
             batch.draw(dog,
