@@ -1,16 +1,15 @@
 package lando.systems.ld52.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld52.Config;
-import lando.systems.ld52.gameobjects.Gameboard;
+import lando.systems.ld52.gameobjects.GameBoard;
 
 public class GameScreen extends BaseScreen {
 
     private TextureRegion background;
-    public Gameboard gameboard;
+    public GameBoard gameboard;
     private float stateTime = 0;
 
     @Override
@@ -20,7 +19,7 @@ public class GameScreen extends BaseScreen {
         OrthographicCamera worldCam = (OrthographicCamera) worldCamera;
         worldCam.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCam.update();
-        gameboard = new Gameboard();
+        gameboard = new GameBoard();
         background = assets.atlas.findRegion("fire-color-gradient");
     }
 
