@@ -35,7 +35,6 @@ public class HarvestedSoulUI extends VisWindow {
         funFactLabel = new VisLabel("Father of X Æ A-12");
         funFactLabel.setFontScale(.75f);
         add(funFactLabel).align(Align.left).growX();
-        setDebug(true);
     }
 
     public void setSoul(String name, String occupation, String funFact) {

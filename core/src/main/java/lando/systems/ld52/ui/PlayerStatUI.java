@@ -30,6 +30,5 @@ public class PlayerStatUI extends VisTable {
         scytheProgressBar.setWidth(50f);
         scytheProgressBar.setValue(50f);
         add(scytheProgressBar).width(50f).maxWidth(50f).growY();
-        setDebug(true);
     }
 }

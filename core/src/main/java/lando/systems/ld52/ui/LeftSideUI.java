@@ -11,7 +11,6 @@ public class LeftSideUI extends VisTable {
     public LeftSideUI(Assets assets, float x, float y, float width, float height) {
         setSize(width, height);
         setPosition(x, y);
-        setDebug(true);
         ScoreBoxUI scoreBoxUI = new ScoreBoxUI();
         add(scoreBoxUI).pad(MARGIN).growX().size(WIDTH, SCOREBOX_HEIGHT);
         row();
