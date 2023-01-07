@@ -35,8 +35,9 @@ public class Tile {
     }
 
     public void render(SpriteBatch batch) {
-        batch.setColor(tileColor);
-        batch.draw(Main.game.assets.pixelRegion, tileArea.x, tileArea.y, tileArea.width, tileArea.height);
+        // TODO - make tiles fit layout (add margin/spacing)
+//        batch.setColor(tileColor);
+//        batch.draw(Main.game.assets.pixelRegion, tileArea.x, tileArea.y, tileArea.width, tileArea.height);
         batch.setColor(Color.WHITE);
         if (object != null){
             object.render(batch);

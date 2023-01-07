@@ -36,6 +36,7 @@ public class Assets implements Disposable {
     public BitmapFont largeFont;
 
     public Texture pixel;
+    public Texture gameScreenLayout;
     public TextureRegion circleTex;
     public TextureRegion pixelRegion;
 
@@ -46,6 +47,7 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> playerFront;
     public Animation<TextureRegion> playerSide;
     public Animation<TextureRegion> playerBack;
+    public Animation<TextureRegion> scythe;
 
     public Sound settingSound;
 
@@ -89,6 +91,7 @@ public class Assets implements Disposable {
 
             mgr.load("audio/sounds/settingSound.ogg", Sound.class);
 
+            mgr.load("images/layout-alpha-1.png", Texture.class);
         }
 
         if (load == Load.SYNC) {
@@ -100,6 +103,8 @@ public class Assets implements Disposable {
     public float updateLoading() {
         if (!mgr.update()) return mgr.getProgress();
         if (initialized) return 1;
+
+        gameScreenLayout = mgr.get("images/layout-alpha-1.png", Texture.class);
 
         atlas = mgr.get("sprites/sprites.atlas");
         strings = mgr.get("i18n/strings", I18NBundle.class);
@@ -115,9 +120,10 @@ public class Assets implements Disposable {
         dog = new Animation<>(0.1f, atlas.findRegions("pets/dog"), Animation.PlayMode.LOOP);
         kitten = new Animation<>(.1f, atlas.findRegions("pets/kitten"), Animation.PlayMode.LOOP);
 
-        playerFront = new Animation<>(.2f, atlas.findRegions("player/front1"), Animation.PlayMode.LOOP);
-        playerSide = new Animation<>(.2f, atlas.findRegions("player/side1"), Animation.PlayMode.LOOP);
-        playerBack = new Animation<>(.2f, atlas.findRegions("player/back1"), Animation.PlayMode.LOOP);
+        playerFront = new Animation<>(.2f, atlas.findRegions("player/reaper"), Animation.PlayMode.LOOP);
+        playerSide = new Animation<>(.2f, atlas.findRegions("player/reaper"), Animation.PlayMode.LOOP);
+        playerBack = new Animation<>(.2f, atlas.findRegions("player/reaper"), Animation.PlayMode.LOOP);
+        scythe = new Animation<>(.2f, atlas.findRegions("player/scythe"), Animation.PlayMode.LOOP);
 
         // initialize patch values
         Patch.debug.ninePatch        = new NinePatch(atlas.findRegion("ninepatch/debug"), 2, 2, 2, 2);
