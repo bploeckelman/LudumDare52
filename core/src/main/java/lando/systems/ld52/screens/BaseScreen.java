@@ -8,11 +8,16 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.kotcrab.vis.ui.VisUI;
 import de.eskalon.commons.screen.ManagedScreen;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.Main;
+import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.utils.screenshake.ScreenShakeCameraController;
 
 public abstract class BaseScreen extends ManagedScreen implements Disposable {
@@ -26,6 +31,9 @@ public abstract class BaseScreen extends ManagedScreen implements Disposable {
     public final Vector3 pointerPos;
     public ScreenShakeCameraController screenShaker;
     public Camera worldCamera;
+    public AudioManager audioManager;
+    protected Stage uiStage;
+    protected Skin skin;
 
     protected boolean active;
 
@@ -38,6 +46,7 @@ public abstract class BaseScreen extends ManagedScreen implements Disposable {
         this.batch = assets.batch;
         this.pointerPos = new Vector3();
         this.active = false;
+        this.audioManager = game.audioManager;
     }
 
     @Override
@@ -46,6 +55,7 @@ public abstract class BaseScreen extends ManagedScreen implements Disposable {
         ((OrthographicCamera) worldCamera).setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCamera.update();
         screenShaker = new ScreenShakeCameraController(worldCamera);
+        initializeUI();
     }
 
     @Override
@@ -86,5 +96,14 @@ public abstract class BaseScreen extends ManagedScreen implements Disposable {
     }
 
     public void resetWorldCamera() {}
+
+    protected void initializeUI() {
+        // reset the stage in case it hasn't already been set to the current window camera orientation
+        // NOTE - doesn't seem to be a way to directly set the stage camera as the window camera
+        //  could go in the other direction, create the uiStage and set windowCam = stage.cam
+        skin = VisUI.getSkin();
+        StretchViewport viewport = new StretchViewport(windowCamera.viewportWidth, windowCamera.viewportHeight);
+        uiStage = new Stage(viewport, batch);
+    }
 
 }

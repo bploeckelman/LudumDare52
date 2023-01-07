@@ -19,6 +19,7 @@ import de.damios.guacamole.gdx.graphics.NestableFrameBuffer;
 import de.eskalon.commons.core.ManagedGame;
 import de.eskalon.commons.screen.transition.ScreenTransition;
 import de.eskalon.commons.utils.BasicInputMultiplexer;
+import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.screens.BaseScreen;
 import lando.systems.ld52.screens.GameScreen;
 import lando.systems.ld52.screens.TitleScreen;
@@ -36,6 +37,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 	public NestableFrameBuffer frameBuffer;
 	public TextureRegion frameBufferRegion;
 	public OrthographicCamera windowCamera;
+	public AudioManager audioManager;
 
 	public Main() {
 		Main.game = this;
@@ -72,6 +74,8 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 			Tween.registerAccessor(Vector3.class, new Vector3Accessor());
 			Tween.registerAccessor(OrthographicCamera.class, new CameraAccessor());
 		};
+
+		audioManager = new AudioManager(assets, tween);
 
 		Pixmap.Format format = Pixmap.Format.RGBA8888;
 		int width = Config.Screen.framebuffer_width;
