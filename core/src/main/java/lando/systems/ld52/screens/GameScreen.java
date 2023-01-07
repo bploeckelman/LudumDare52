@@ -29,7 +29,7 @@ public class GameScreen extends BaseScreen {
         OrthographicCamera worldCam = (OrthographicCamera) worldCamera;
         worldCam.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCam.update();
-        gameboard = new GameBoard();
+        gameboard = new GameBoard(assets);
         background = assets.atlas.findRegion("fire-color-gradient");
 
         player = new Player(assets, gameboard.gridDelta);

@@ -2,23 +2,29 @@ package lando.systems.ld52.gameobjects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 
 public class GameBoard {
 
+    private final static float boardWidth = 500;
     public final static int gridSize = 7;
-    public Rectangle boardArea;
-    private final float boardWidth = 500;
-    public final float gridDelta = boardWidth / gridSize;
-    Tile[][] tiles;
+    public final static float gridDelta = boardWidth / gridSize;
 
-    public GameBoard() {
+    private final Assets assets;
+    private Tile[][] tiles;
+
+    public Rectangle boardArea;
+
+    public GameBoard(Assets assets) {
+        this.assets = assets;
+
         boardArea = new Rectangle(Config.Screen.window_width/2f - boardWidth/2f, Config.Screen.window_height/2f - boardWidth/2f, boardWidth, boardWidth);
         tiles = new Tile[gridSize][];
         for (int x = 0; x < gridSize; x++){
             tiles[x] = new Tile[gridSize];
             for (int y = 0; y < gridSize; y++) {
-                tiles[x][y] = new Tile(x, y, gridDelta, boardArea);
+                tiles[x][y] = new Tile(assets, x, y, gridDelta, boardArea);
             }
         }
     }
