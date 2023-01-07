@@ -8,23 +8,25 @@ public enum Feature {
     // TODO - add additional params that can be used elsewhere
     //   like a Category enum (mouth, eyes, facial hair, etc...)
 
-      cigarette        ("cigarette")
-    , collar_a         ("collar-a-idle")
-    , eyepatch_a       ("eyepatch-a")
-    , eyes_a           ("eyes-a-idle")
-    , glasses_a        ("glasses-a")
-    , hair_long_brown  ("hair-long-brown")
-    , hair_short_black ("hair-short-black")
-    , mustache_a       ("mustache-a")
-    , nose_clown       ("nose-clown")
-    , tongue           ("tongue")
+      cigarette        ("cigarette", "cigarette")
+    , collar_a         ("collar-a-idle", "collor type a")
+    , eyepatch_a       ("eyepatch-a", "eye patch")
+    , eyes_a           ("eyes-a-idle", "normal eye")
+    , glasses_a        ("glasses-a", "glass type a")
+    , hair_long_brown  ("hair-long-brown", "brown long hair")
+    , hair_short_black ("hair-short-black", "brown short hair")
+    , mustache_a       ("mustache-a", "mustache type a")
+    , nose_clown       ("nose-clown", "clown nose")
+    , tongue           ("tongue", "tongue out")
     ;
 
     public static final String prefix = "faces/test/";
     public final String regionsName;
+    public final String displayName;
 
-    Feature(String regionsName) {
+    Feature(String regionsName, String displayName) {
         this.regionsName = prefix + regionsName;
+        this.displayName = displayName;
     }
 
     public static Animation<TextureRegion> get(Assets assets, Feature feature) {

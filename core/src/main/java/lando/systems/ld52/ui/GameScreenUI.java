@@ -14,7 +14,7 @@ public class GameScreenUI extends VisTable {
         setSize(windowCamera.viewportWidth, windowCamera.viewportHeight);
         setPosition(0, 0);
         leftSideUI = new LeftSideUI(assets, 0, 0, 280f, windowCamera.viewportHeight);
-        rightSideUI = new RightSideUI(windowCamera.viewportWidth * 3 / 4, 0, windowCamera.viewportWidth / 4, windowCamera.viewportHeight);
+        rightSideUI = new RightSideUI(assets, windowCamera.viewportWidth - 280f, 0, 280f, windowCamera.viewportHeight);
         addActor(leftSideUI);
         addActor(rightSideUI);
     }

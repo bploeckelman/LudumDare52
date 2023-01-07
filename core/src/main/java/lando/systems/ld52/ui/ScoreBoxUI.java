@@ -13,7 +13,6 @@ public class ScoreBoxUI extends VisWindow {
     public ScoreBoxUI() {
         super("");
         setTouchable(Touchable.disabled);
-        setSize(256, 80);
         setBackground(Assets.Patch.metal.drawable);
         VisLabel label = new VisLabel("Score Box");
         add(label).align(Align.top);
