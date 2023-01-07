@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.gameobjects.GameBoard;
+import lando.systems.ld52.gameobjects.Hourglass;
 import lando.systems.ld52.gameobjects.Player;
 import lando.systems.ld52.gameobjects.Scythe;
 import lando.systems.ld52.ui.GameScreenUI;
@@ -18,6 +19,7 @@ public class GameScreen extends BaseScreen {
 
     public Player player;
     public Scythe scythe;
+    public Hourglass hourglass;
 
     private float stateTime = 0;
     private GameScreenUI gameScreenUI;
@@ -34,6 +36,7 @@ public class GameScreen extends BaseScreen {
 
         player = new Player(assets, gameboard);
         scythe = new Scythe(assets);
+        hourglass = new Hourglass(assets);
 
         initializeUI();
         gameScreenUI = new GameScreenUI(windowCamera, assets);
@@ -54,11 +57,11 @@ public class GameScreen extends BaseScreen {
     @Override
     public void update(float delta) {
         super.update(delta);
-        // ...
         stateTime += delta;
         gameboard.update(delta);
         player.update(delta);
         scythe.update(delta);
+        hourglass.update(delta);
     }
 
     @Override
@@ -72,6 +75,7 @@ public class GameScreen extends BaseScreen {
             gameboard.render(batch);
             player.render(batch);
             scythe.render(batch);
+            hourglass.render(batch);
         }
         batch.end();
         uiStage.draw();
