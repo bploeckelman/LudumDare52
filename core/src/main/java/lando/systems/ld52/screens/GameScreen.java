@@ -1,5 +1,7 @@
 package lando.systems.ld52.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -51,6 +53,11 @@ public class GameScreen extends BaseScreen {
         float oscillation = (sinValue + 1) / 2 * oscillationRange;
         scytheMeterVersion1.scytheProgressBar.setValue(oscillation);
 
+
+        // temp garbage
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            player.switchDirections();
+        }
     }
 
     @Override
