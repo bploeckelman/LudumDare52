@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import lando.systems.ld52.Assets;
+import lando.systems.ld52.Main;
 import lando.systems.ld52.utils.Coord;
 
 public class Tile {
@@ -38,12 +39,15 @@ public class Tile {
         }
     }
 
-    public void render(SpriteBatch batch) {
+    public void render(SpriteBatch batch, boolean highlighted) {
         batch.setColor(color);
         batch.draw(texture, bounds.x, bounds.y, bounds.width, bounds.height);
         batch.setColor(Color.WHITE);
         if (object != null){
             object.render(batch);
+        }
+        if (highlighted){
+            Assets.Patch.debug.ninePatch.draw(batch, bounds.x, bounds.y, bounds.width, bounds.height);
         }
     }
 }

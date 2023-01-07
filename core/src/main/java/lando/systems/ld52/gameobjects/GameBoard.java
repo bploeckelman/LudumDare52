@@ -65,7 +65,8 @@ public class GameBoard {
 
         for (int x = 0; x < gridSize; x++){
             for (int y = 0; y < gridSize; y++) {
-                tiles[x][y].render(batch);
+                boolean highlighted = (x == 3 && y == 4);
+                tiles[x][y].render(batch, highlighted);
             }
         }
     }

@@ -7,12 +7,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
 
-enum MoveDirection {
-    clockwise,
-    counterclockwise;
-}
-
 public class Player implements GameObject {
+
+    public enum MoveDirection {
+        clockwise,
+        counterclockwise;
+    }
+
     private final GameBoard _gameBoard;
     private final Animation<TextureRegion> _front;
     private final Animation<TextureRegion> _back;
@@ -29,6 +30,7 @@ public class Player implements GameObject {
     private int _boardPosition;
 
     private Vector2 _renderPosition = new Vector2();
+    public HarvestZone harvestZone;
 
     public Player(Assets assets, GameBoard gameBoard) {
         _front = assets.playerFront;
@@ -38,6 +40,7 @@ public class Player implements GameObject {
         _gameBoard = gameBoard;
 
         reset();
+        this.harvestZone = new HarvestZone(this);
     }
 
     private void reset() {

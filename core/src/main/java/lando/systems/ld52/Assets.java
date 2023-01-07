@@ -43,6 +43,7 @@ public class Assets implements Disposable {
     public TextureRegion circleTex;
     public TextureRegion pixelRegion;
 
+
     public Animation<TextureRegion> cat;
     public Animation<TextureRegion> dog;
     public Animation<TextureRegion> kitten;
