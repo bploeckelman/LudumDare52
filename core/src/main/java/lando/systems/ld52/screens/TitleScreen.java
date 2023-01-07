@@ -1,10 +1,16 @@
 package lando.systems.ld52.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
+import lando.systems.ld52.ui.SettingsUI;
 
 public class TitleScreen extends BaseScreen {
 
@@ -13,8 +19,14 @@ public class TitleScreen extends BaseScreen {
     private TextureRegion dog;
     private TextureRegion cat;
     private TextureRegion kitten;
+    private TextButton startGameButton;
+    private TextButton creditButton;
+    private TextButton settingsButton;
     private float stateTime = 0;
     private boolean exiting;
+    private final float BUTTON_WIDTH = 180f;
+    private final float BUTTON_HEIGHT = 50f;
+    private final float BUTTON_PADDING = 10f;
 
     @Override
     protected void create() {
@@ -32,6 +44,7 @@ public class TitleScreen extends BaseScreen {
     public void show(){
         super.show();
         exiting = false;
+        game.getInputMultiplexer().addProcessor(uiStage);
     }
 
     @Override
@@ -46,10 +59,6 @@ public class TitleScreen extends BaseScreen {
         if (!cat.isFlipX()) cat.flip(true, false);
         if (!kitten.isFlipX()) kitten.flip(true, false);
 
-        if (Gdx.input.justTouched() && !exiting ){
-            exiting = true;
-            game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.BLEND.name());
-        }
     }
 
     @Override
@@ -79,6 +88,66 @@ public class TitleScreen extends BaseScreen {
                     2 * kitten.getRegionWidth(), 2 * kitten.getRegionHeight());
         }
         batch.end();
+        uiStage.draw();
+    }
+
+    @Override
+    public void initializeUI() {
+        super.initializeUI();
+
+        SettingsUI settingsUI = new SettingsUI(assets, skin, audioManager, windowCamera);
+
+        TextButton.TextButtonStyle outfitMediumStyle = skin.get("text", TextButton.TextButtonStyle.class);
+        TextButton.TextButtonStyle titleScreenButtonStyle = new TextButton.TextButtonStyle(outfitMediumStyle);
+        titleScreenButtonStyle.font = assets.smallFont;
+        titleScreenButtonStyle.fontColor = Color.WHITE;
+        titleScreenButtonStyle.up = Assets.Patch.glass.drawable;
+        titleScreenButtonStyle.down = Assets.Patch.glass_dim.drawable;
+        titleScreenButtonStyle.over = Assets.Patch.glass_dim.drawable;
+
+        float left = windowCamera.viewportWidth * (5f / 8f);
+        float top = windowCamera.viewportHeight * (1f / 2f);
+
+        startGameButton = new TextButton("Start Game", titleScreenButtonStyle);
+//        Gdx.app.log("startbuttonwidth&height", "width: " + startGameButton.getWidth() + " & height: " + startGameButton.getHeight());
+        startGameButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+        startGameButton.setPosition(left, top);
+        startGameButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.audioManager.stopAllSounds();
+                exiting = true;
+                game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.BLEND.name());
+            }
+        });
+
+        settingsButton = new TextButton("Settings", titleScreenButtonStyle);
+        settingsButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+        settingsButton.setPosition(left, startGameButton.getY() - startGameButton.getHeight() - BUTTON_PADDING);
+        settingsButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //settingsUI.showSettings();
+            }
+        });
+
+
+        creditButton = new TextButton("Credits", titleScreenButtonStyle);
+        creditButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+        creditButton.setPosition(left, settingsButton.getY() - settingsButton.getHeight() - BUTTON_PADDING);
+        creditButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                exiting = true;
+                game.getScreenManager().pushScreen("credit", TransitionManager.TransitionType.BLEND.name());
+            }
+        });
+
+
+        uiStage.addActor(startGameButton);
+        uiStage.addActor(settingsButton);
+        uiStage.addActor(creditButton);
+        uiStage.addActor(settingsUI);
     }
 
 }

@@ -22,6 +22,7 @@ public class AudioManager implements Disposable {
     // none should not have a sound
     public enum Sounds {
         none
+        , settingSound
     }
 
     public enum Musics {
@@ -41,6 +42,8 @@ public class AudioManager implements Disposable {
     public AudioManager(Assets assets, TweenManager tween) {
         this.assets = assets;
         this.tween = tween;
+
+        putSound(Sounds.settingSound, assets.settingSound);
 
         musicVolume = new MutableFloat(0.5f);
         soundVolume = new MutableFloat(0.75f);

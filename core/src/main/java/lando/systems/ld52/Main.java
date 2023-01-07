@@ -92,7 +92,8 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		windowCamera.update();
 
 		BasicInputMultiplexer inputMux = new BasicInputMultiplexer();
-		Gdx.input.setInputProcessor(inputMux);
+		Gdx.input.setInputProcessor(game.getInputMultiplexer());
+		//Gdx.input.setInputProcessor(inputMux);
 
 		screenManager.initialize(inputMux, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 		screenManager.addScreen("title", new TitleScreen());
