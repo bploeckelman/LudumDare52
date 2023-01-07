@@ -85,6 +85,7 @@ public class Player implements GameObject {
                 _current = _side;
                 break;
             case 2: // bottom
+                _flipped = true;
                 _current = _back;
                 break;
             default:
