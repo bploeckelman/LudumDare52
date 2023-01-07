@@ -95,7 +95,7 @@ public class HarvestZone {
             batch.draw(Main.game.assets.circleTex, golfX - golfIndicatorSize/2f, golfY- golfIndicatorSize/2f, golfIndicatorSize, golfIndicatorSize);
         }
         Assets.Patch.debug.ninePatch.draw(batch, startPos.x, startPos.y - (GameBoard.tileSize + GameBoard.margin)/2f, 0, (GameBoard.tileSize + GameBoard.margin)/2f, maxWidth, (GameBoard.tileSize + GameBoard.margin), 1f, 1f, rotation);
-
+        batch.setColor(Color.WHITE);
     }
 
     public void handleClick() {
