@@ -2,6 +2,7 @@ package lando.systems.ld52.gameobjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.CpuSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -18,6 +19,8 @@ public class Player implements GameObject {
     private final Animation<TextureRegion> _front;
     private final Animation<TextureRegion> _back;
     private final Animation<TextureRegion> _side;
+
+    private final Animation<TextureRegion> _scythe;
 
     private Animation<TextureRegion> _current;
     private boolean _flipped;
@@ -37,6 +40,8 @@ public class Player implements GameObject {
         _front = assets.playerFront;
         _back = assets.playerBack;
         _side = assets.playerSide;
+
+        _scythe = assets.playerScythe;
 
         this.gameBoard = gameBoard;
 
@@ -153,12 +158,30 @@ public class Player implements GameObject {
     @Override
     public void render(SpriteBatch batch) {
         float xScale = _flipped ? -1 : 1;
+
+        if (!_flipped) {
+            renderScythe(batch);
+        }
+
         batch.draw(_current.getKeyFrame(_animTime),
                 _renderPosition.x, _renderPosition.y,
                 GameBoard.tileSize / 2, 0,
                 GameBoard.tileSize, GameBoard.tileSize,
                 xScale, 1, 0);
 
+        if (_flipped) {
+            renderScythe(batch);
+        }
+
         harvestZone.render(batch);
+    }
+
+    private void renderScythe(SpriteBatch batch) {
+        float xScale = _flipped ? -1 : 1;
+        batch.draw(_scythe.getKeyFrame(_animTime),
+                _renderPosition.x, _renderPosition.y,
+                GameBoard.tileSize / 2, 0,
+                GameBoard.tileSize, GameBoard.tileSize,
+                xScale, 1, 0);
     }
 }

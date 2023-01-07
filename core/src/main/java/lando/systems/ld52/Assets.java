@@ -52,6 +52,7 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> playerFront;
     public Animation<TextureRegion> playerSide;
     public Animation<TextureRegion> playerBack;
+    public Animation<TextureRegion> playerScythe;
     public Animation<TextureRegion> scythe;
 
     public ObjectMap<Head, Animation<TextureRegion>> heads;
@@ -162,9 +163,11 @@ public class Assets implements Disposable {
         dog = new Animation<>(0.1f, atlas.findRegions("pets/dog"), Animation.PlayMode.LOOP);
         kitten = new Animation<>(.1f, atlas.findRegions("pets/kitten"), Animation.PlayMode.LOOP);
 
-        playerFront = new Animation<>(.2f, atlas.findRegions("player/reaper"), Animation.PlayMode.LOOP);
-        playerSide = new Animation<>(.2f, atlas.findRegions("player/reaper"), Animation.PlayMode.LOOP);
-        playerBack = new Animation<>(.2f, atlas.findRegions("player/reaper"), Animation.PlayMode.LOOP);
+        playerFront = new Animation<>(.2f, atlas.findRegions("player/reaper1"), Animation.PlayMode.LOOP);
+        playerSide = new Animation<>(.2f, atlas.findRegions("player/reaper1"), Animation.PlayMode.LOOP);
+        playerBack = new Animation<>(.2f, atlas.findRegions("player/reaper1"), Animation.PlayMode.LOOP);
+        playerScythe = new Animation<>(.2f, atlas.findRegions("player/scythe1"), Animation.PlayMode.LOOP);
+
         scythe = new Animation<>(.2f, atlas.findRegions("player/scythe"), Animation.PlayMode.LOOP);
 
         heads = new ObjectMap<>();
