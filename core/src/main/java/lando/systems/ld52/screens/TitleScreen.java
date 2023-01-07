@@ -14,6 +14,7 @@ public class TitleScreen extends BaseScreen {
     private TextureRegion cat;
     private TextureRegion kitten;
     private float stateTime = 0;
+    private boolean exiting;
 
     @Override
     protected void create() {
@@ -28,6 +29,12 @@ public class TitleScreen extends BaseScreen {
     }
 
     @Override
+    public void show(){
+        super.show();
+        exiting = false;
+    }
+
+    @Override
     public void update(float delta) {
         super.update(delta);
         // ...
@@ -38,6 +45,11 @@ public class TitleScreen extends BaseScreen {
         if (!dog.isFlipX()) dog.flip(true, false);
         if (!cat.isFlipX()) cat.flip(true, false);
         if (!kitten.isFlipX()) kitten.flip(true, false);
+
+        if (Gdx.input.justTouched() && !exiting ){
+            exiting = true;
+            game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.BLEND.name());
+        }
     }
 
     @Override
