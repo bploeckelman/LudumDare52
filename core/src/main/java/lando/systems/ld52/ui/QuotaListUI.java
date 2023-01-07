@@ -18,6 +18,7 @@ public class QuotaListUI extends VisWindow {
     public QuotaListUI(Assets assets) {
         super("");
         this.assets = assets;
+        align(Align.top);
         setTouchable(Touchable.disabled);
         setBackground(Assets.Patch.metal.drawable);
         VisLabel label = new VisLabel("Quota List", "large");
