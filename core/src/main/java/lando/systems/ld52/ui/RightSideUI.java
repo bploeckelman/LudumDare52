@@ -9,10 +9,11 @@ public class RightSideUI extends VisTable {
     private final float WIDTH = 256f;
     private final float BUTTON_HEIGHT = 80f;
     private final float MARGIN = 12f;
+    public QuotaListUI quotaListUI;
     public RightSideUI(Assets assets, float x, float y, float width, float height) {
         setSize(width, height);
         setPosition(x, y);
-        QuotaListUI quotaListUI = new QuotaListUI(assets);
+        quotaListUI = new QuotaListUI(assets);
         add(quotaListUI).pad(MARGIN).growX().growY().width(WIDTH);
         row();
 

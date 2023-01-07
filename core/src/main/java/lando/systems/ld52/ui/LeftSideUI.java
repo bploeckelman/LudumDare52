@@ -8,16 +8,19 @@ public class LeftSideUI extends VisTable {
     private final float SCOREBOX_HEIGHT = 80f;
     private final float CHARACTER_STAT_HEIGHT = 250f;
     private final float MARGIN = 12f;
+    public ScoreBoxUI scoreBoxUI;
+    public HarvestedSoulUI harvestedSoulUI;
+    public PlayerStatUI playerStatUI;
     public LeftSideUI(Assets assets, float x, float y, float width, float height) {
         setSize(width, height);
         setPosition(x, y);
-        ScoreBoxUI scoreBoxUI = new ScoreBoxUI();
+        scoreBoxUI = new ScoreBoxUI();
         add(scoreBoxUI).pad(MARGIN).growX().size(WIDTH, SCOREBOX_HEIGHT);
         row();
-        HarvestedSoulUI harvestedSoulUI = new HarvestedSoulUI();
+        harvestedSoulUI = new HarvestedSoulUI();
         add(harvestedSoulUI).padLeft(MARGIN).padRight(MARGIN).padBottom(MARGIN).growX().size(WIDTH, CHARACTER_STAT_HEIGHT);
         row();
-        PlayerStatUI playerStatUI = new PlayerStatUI(assets);
+        playerStatUI = new PlayerStatUI(assets);
         add(playerStatUI).padLeft(MARGIN).padRight(MARGIN).padBottom(MARGIN).growX().width(WIDTH).growY();
     }
 }
