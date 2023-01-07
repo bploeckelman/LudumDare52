@@ -14,9 +14,9 @@ enum MoveDirection {
 
 public class Player implements GameObject {
     private final GameBoard _gameBoard;
-    private Animation<TextureRegion> _front;
-    private Animation<TextureRegion> _back;
-    private Animation<TextureRegion> _side;
+    private final Animation<TextureRegion> _front;
+    private final Animation<TextureRegion> _back;
+    private final Animation<TextureRegion> _side;
 
     private Animation<TextureRegion> _current;
     private boolean _flipped;
@@ -101,7 +101,6 @@ public class Player implements GameObject {
     }
 
     private void setPosition() {
-        Rectangle board = _gameBoard.bounds;
         float tileSize = GameBoard.tileSize;
         int gridSize = GameBoard.gridSize;
         float moveLaneSize = 88f;

@@ -13,6 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.badlogic.gdx.utils.ObjectMap;
+import lando.systems.ld52.assets.Feature;
+import lando.systems.ld52.assets.Head;
 import lando.systems.ld52.assets.InputPrompts;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
@@ -48,6 +51,9 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> playerSide;
     public Animation<TextureRegion> playerBack;
     public Animation<TextureRegion> scythe;
+
+    public ObjectMap<Head, Animation<TextureRegion>> heads;
+    public ObjectMap<Feature, Animation<TextureRegion>> features;
 
     public Sound settingSound;
 
@@ -124,6 +130,18 @@ public class Assets implements Disposable {
         playerSide = new Animation<>(.2f, atlas.findRegions("player/reaper"), Animation.PlayMode.LOOP);
         playerBack = new Animation<>(.2f, atlas.findRegions("player/reaper"), Animation.PlayMode.LOOP);
         scythe = new Animation<>(.2f, atlas.findRegions("player/scythe"), Animation.PlayMode.LOOP);
+
+        heads = new ObjectMap<>();
+        for (Head head : Head.values()) {
+            Animation<TextureRegion> animation = new Animation<>(0.1f, atlas.findRegions(head.regionsName), Animation.PlayMode.LOOP);
+            heads.put(head, animation);
+        }
+
+        features = new ObjectMap<>();
+        for (Feature feature : Feature.values()) {
+            Animation<TextureRegion> animation = new Animation<>(0.1f, atlas.findRegions(feature.regionsName), Animation.PlayMode.LOOP);
+            features.put(feature, animation);
+        }
 
         // initialize patch values
         Patch.debug.ninePatch        = new NinePatch(atlas.findRegion("ninepatch/debug"), 2, 2, 2, 2);
