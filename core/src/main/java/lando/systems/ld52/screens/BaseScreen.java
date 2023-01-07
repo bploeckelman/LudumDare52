@@ -82,6 +82,8 @@ public abstract class BaseScreen extends ManagedScreen implements Disposable {
             Config.Debug.ui = !Config.Debug.ui;
         }
         screenShaker.update(delta);
+        audioManager.update(delta);
+        uiStage.act(delta);
     }
 
     @Override

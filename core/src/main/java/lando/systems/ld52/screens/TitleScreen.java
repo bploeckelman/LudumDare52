@@ -127,7 +127,7 @@ public class TitleScreen extends BaseScreen {
         settingsButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //settingsUI.showSettings();
+                settingsUI.showSettings();
             }
         });
 
