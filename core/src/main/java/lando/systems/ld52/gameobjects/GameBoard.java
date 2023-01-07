@@ -9,12 +9,13 @@ public class GameBoard {
 
     private final static float boardWidth = 500;
     public final static int gridSize = 7;
-    public final static float gridDelta = boardWidth / gridSize;
+    public final static float tileSize = boardWidth / gridSize;
 
     private final Assets assets;
     private Tile[][] tiles;
 
     public Rectangle boardArea;
+
 
     public GameBoard(Assets assets) {
         this.assets = assets;
@@ -24,7 +25,8 @@ public class GameBoard {
         for (int x = 0; x < gridSize; x++){
             tiles[x] = new Tile[gridSize];
             for (int y = 0; y < gridSize; y++) {
-                tiles[x][y] = new Tile(assets, x, y, gridDelta, boardArea);
+                tiles[x][y] = new Tile(assets, x, y, tileSize, boardArea);
+
             }
         }
     }

@@ -32,7 +32,7 @@ public class GameScreen extends BaseScreen {
         gameboard = new GameBoard(assets);
         background = assets.atlas.findRegion("fire-color-gradient");
 
-        player = new Player(assets, gameboard.gridDelta);
+        player = new Player(assets, gameboard);
         scytheMeterVersion1 = new ScytheMeter(100f, 100f, 0, 1f, 0.01f, skin);
         initializeUI();
         uiStage.addActor(scytheMeterVersion1);
