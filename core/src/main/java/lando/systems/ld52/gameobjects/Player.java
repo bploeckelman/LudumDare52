@@ -30,7 +30,7 @@ public class Player implements GameObject {
 
     private MoveDirection _moveDirection = MoveDirection.clockwise;
 
-    public int _boardPosition;
+    public int boardPosition;
 
     private Vector2 _renderPosition = new Vector2();
     private Vector2 _nextPosition = new Vector2();
@@ -50,7 +50,7 @@ public class Player implements GameObject {
     }
 
     private void reset() {
-        _boardPosition = 0;
+        boardPosition = 0;
         _moveDirection = MoveDirection.clockwise;
         _current = _front;
         _flipped = false;
@@ -86,14 +86,14 @@ public class Player implements GameObject {
         //     5   4
 
         int perimeterTiles = gameBoard.gridSize * 4;
-        _boardPosition += increment;
-        if (_boardPosition == -1) {
-            _boardPosition += perimeterTiles;
-        } else if (_boardPosition == perimeterTiles) {
-            _boardPosition = 0;
+        boardPosition += increment;
+        if (boardPosition == -1) {
+            boardPosition += perimeterTiles;
+        } else if (boardPosition == perimeterTiles) {
+            boardPosition = 0;
         }
 
-        int side = _boardPosition / gameBoard.gridSize;
+        int side = boardPosition / gameBoard.gridSize;
         _flipped = false;
         switch (side) {
             case 1: // right
@@ -122,12 +122,12 @@ public class Player implements GameObject {
         int gridSize = GameBoard.gridSize;
         float moveLaneSize = 88f;
 
-        int sidePosition = (_boardPosition % gridSize);
+        int sidePosition = (boardPosition % gridSize);
         float sideOffset = sidePosition * tileSize;
 
         float xPos, yPos;
 
-        int side = _boardPosition / gridSize;
+        int side = boardPosition / gridSize;
 
         switch (side) {
             case 1: // right
