@@ -100,11 +100,13 @@ public class Player implements GameObject {
     }
 
     private void setPosition() {
-        Rectangle board = _gameBoard.boardArea;
-        float tileSize = _gameBoard.tileSize;
-        int gridSize = _gameBoard.gridSize;
+        Rectangle board = _gameBoard.bounds;
+        float tileSize = GameBoard.tileSize;
+        int gridSize = GameBoard.gridSize;
+        float moveLaneSize = 88f;
 
-        float sideOffset = (_boardPosition % gridSize) * tileSize;
+        int sidePosition = (_boardPosition % gridSize);
+        float sideOffset = sidePosition * tileSize;
 
         float xPos, yPos;
 
@@ -112,21 +114,21 @@ public class Player implements GameObject {
 
         switch (side) {
             case 1: // right
-                xPos = board.x + board.width;
-                yPos = board.y + board.height - (tileSize + sideOffset);
+                xPos = _gameBoard.right() + (moveLaneSize - tileSize) / 2f;
+                yPos = _gameBoard.top() - (tileSize + sideOffset) - ((sidePosition + 1) * GameBoard.margin);
                 break;
             case 2: // bottom
-                xPos = board.x + board.width - (tileSize + sideOffset);
-                yPos = board.y - tileSize;
+                xPos = _gameBoard.right() - (tileSize + sideOffset) - ((sidePosition + 1) * GameBoard.margin);
+                yPos = _gameBoard.bottom() - tileSize - (moveLaneSize - tileSize) / 2f;
                 break;
             case 3: // left
-                xPos = board.x - tileSize;
-                yPos = board.y + sideOffset;
+                xPos = _gameBoard.left() - tileSize - (moveLaneSize - tileSize) / 2f;
+                yPos = _gameBoard.bottom() + sideOffset + ((sidePosition + 1) * GameBoard.margin);
                 break;
             case 0: // top
             default:
-                xPos = board.x + sideOffset;
-                yPos = board.y + board.height;
+                xPos = _gameBoard.left() + sideOffset + ((sidePosition + 1) * GameBoard.margin);
+                yPos = _gameBoard.top() + (moveLaneSize - tileSize) / 2f;
                 break;
         }
         _renderPosition.set(xPos, yPos);
@@ -135,7 +137,10 @@ public class Player implements GameObject {
     @Override
     public void render(SpriteBatch batch) {
         float xScale = _flipped ? -1 : 1;
-        batch.draw(_current.getKeyFrame(_animTime), _renderPosition.x, _renderPosition.y, _gameBoard.tileSize / 2,
-                0, _gameBoard.tileSize, _gameBoard.tileSize, xScale, 1, 0);
+        batch.draw(_current.getKeyFrame(_animTime),
+                _renderPosition.x, _renderPosition.y,
+                GameBoard.tileSize / 2, 0,
+                GameBoard.tileSize, GameBoard.tileSize,
+                xScale, 1, 0);
     }
 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lando.systems.ld52.Assets;
-import lando.systems.ld52.Main;
 
 public class TileHead extends TileObject {
 
@@ -32,10 +31,10 @@ public class TileHead extends TileObject {
     public void render(SpriteBatch batch) {
         TextureRegion keyframe = animation.getKeyFrame(stateTime);
         batch.draw(keyframe,
-                tile.tileArea.x+margin,
-                tile.tileArea.y+margin,
-                tile.tileArea.width - margin*2f,
-                tile.tileArea.height - margin *2f);
+                tile.bounds.x + margin,
+                tile.bounds.y + margin,
+                tile.bounds.width - margin * 2f,
+                tile.bounds.height - margin * 2f);
     }
 
 }

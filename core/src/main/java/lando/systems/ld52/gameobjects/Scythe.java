@@ -30,7 +30,7 @@ public class Scythe implements GameObject {
         this.animation = assets.scythe;
         this.stateTime = 0;
         this.rotation = 0;
-        this.size = new Vector2(100, 100);
+        this.size = new Vector2(64, 64);
         this.scale = new Vector2(1, 1);
         TextureRegion keyframe = animation.getKeyFrame(stateTime);
         this.position = new Vector2(
@@ -62,7 +62,7 @@ public class Scythe implements GameObject {
         float speed = 1000;
         rotation -= (t * speed) * dt;
 
-        float minPos = 100;
+        float minPos = (88 - size.x) / 2f;
         float maxPos = 560;
         position.y = minPos + t * (maxPos - minPos);
     }
