@@ -48,6 +48,11 @@ public class TitleScreen extends BaseScreen {
     }
 
     @Override
+    public void hide() {
+        game.getInputMultiplexer().removeProcessor(uiStage);
+    }
+
+    @Override
     public void update(float delta) {
         super.update(delta);
         // ...

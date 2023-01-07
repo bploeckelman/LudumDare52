@@ -2,9 +2,12 @@ package lando.systems.ld52.screens;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld52.Config;
-import lando.systems.ld52.gameobjects.*;
+import lando.systems.ld52.gameobjects.GameBoard;
+import lando.systems.ld52.gameobjects.Player;
+import lando.systems.ld52.ui.ScytheMeter;
 
 public class GameScreen extends BaseScreen {
 
@@ -14,6 +17,10 @@ public class GameScreen extends BaseScreen {
     public Player player;
 
     private float stateTime = 0;
+    // temp oscillation for scythe meter
+    private float oscillationSpeed = 2; // controls how fast the oscillation occurs
+    private float oscillationRange = 1; // controls the range of the oscillation
+    private ScytheMeter scytheMeterVersion1;
 
     @Override
     protected void create() {
@@ -26,6 +33,9 @@ public class GameScreen extends BaseScreen {
         background = assets.atlas.findRegion("fire-color-gradient");
 
         player = new Player(assets, gameboard.gridDelta);
+        scytheMeterVersion1 = new ScytheMeter(100f, 100f, 0, 1f, 0.01f, skin);
+        initializeUI();
+        uiStage.addActor(scytheMeterVersion1);
     }
 
     @Override
@@ -35,6 +45,12 @@ public class GameScreen extends BaseScreen {
         stateTime += delta;
         gameboard.update(delta);
         player.update(delta);
+
+        // Probably belongs to player, having it here for testing UI
+        float sinValue = MathUtils.sin(stateTime * oscillationSpeed);
+        float oscillation = (sinValue + 1) / 2 * oscillationRange;
+        scytheMeterVersion1.scytheProgressBar.setValue(oscillation);
+
     }
 
     @Override
@@ -51,6 +67,7 @@ public class GameScreen extends BaseScreen {
             player.render(batch);
         }
         batch.end();
+        uiStage.draw();
     }
 
 }
