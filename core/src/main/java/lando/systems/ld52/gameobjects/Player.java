@@ -1,9 +1,9 @@
 package lando.systems.ld52.gameobjects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
 
@@ -14,7 +14,7 @@ public class Player implements GameObject {
         counterclockwise;
     }
 
-    private final GameBoard _gameBoard;
+    public final GameBoard gameBoard;
     private final Animation<TextureRegion> _front;
     private final Animation<TextureRegion> _back;
     private final Animation<TextureRegion> _side;
@@ -27,7 +27,7 @@ public class Player implements GameObject {
 
     private MoveDirection _moveDirection = MoveDirection.clockwise;
 
-    private int _boardPosition;
+    public int _boardPosition;
 
     private Vector2 _renderPosition = new Vector2();
     public HarvestZone harvestZone;
@@ -37,7 +37,7 @@ public class Player implements GameObject {
         _back = assets.playerBack;
         _side = assets.playerSide;
 
-        _gameBoard = gameBoard;
+        this.gameBoard = gameBoard;
 
         reset();
         this.harvestZone = new HarvestZone(this);
@@ -56,10 +56,16 @@ public class Player implements GameObject {
     @Override
     public void update(float dt) {
         _animTime += dt;
+        if (Gdx.input.justTouched()){
+            harvestZone.handleClick();
+        }
         if (_animTime > _moveTime) {
             _animTime = 0;
-            movePlayer();
+            if (harvestZone.currentPhase == HarvestZone.HarvestPhase.cycle) {
+                movePlayer();
+            }
         }
+        harvestZone.update(dt);
     }
 
     private void movePlayer() {
@@ -71,7 +77,7 @@ public class Player implements GameObject {
         // 6 |---|---| 3
         //     5   4
 
-        int perimeterTiles = _gameBoard.gridSize * 4;
+        int perimeterTiles = gameBoard.gridSize * 4;
         _boardPosition += increment;
         if (_boardPosition == -1) {
             _boardPosition += perimeterTiles;
@@ -79,7 +85,7 @@ public class Player implements GameObject {
             _boardPosition = 0;
         }
 
-        int side = _boardPosition / _gameBoard.gridSize;
+        int side = _boardPosition / gameBoard.gridSize;
         _flipped = false;
         switch (side) {
             case 1: // right
@@ -117,21 +123,21 @@ public class Player implements GameObject {
 
         switch (side) {
             case 1: // right
-                xPos = _gameBoard.right() + (moveLaneSize - tileSize) / 2f;
-                yPos = _gameBoard.top() - (tileSize + sideOffset) - ((sidePosition + 1) * GameBoard.margin);
+                xPos = gameBoard.right() + (moveLaneSize - tileSize) / 2f;
+                yPos = gameBoard.top() - (tileSize + sideOffset) - ((sidePosition + 1) * GameBoard.margin);
                 break;
             case 2: // bottom
-                xPos = _gameBoard.right() - (tileSize + sideOffset) - ((sidePosition + 1) * GameBoard.margin);
-                yPos = _gameBoard.bottom() - tileSize - (moveLaneSize - tileSize) / 2f;
+                xPos = gameBoard.right() - (tileSize + sideOffset) - ((sidePosition + 1) * GameBoard.margin);
+                yPos = gameBoard.bottom() - tileSize - (moveLaneSize - tileSize) / 2f;
                 break;
             case 3: // left
-                xPos = _gameBoard.left() - tileSize - (moveLaneSize - tileSize) / 2f;
-                yPos = _gameBoard.bottom() + sideOffset + ((sidePosition + 1) * GameBoard.margin);
+                xPos = gameBoard.left() - tileSize - (moveLaneSize - tileSize) / 2f;
+                yPos = gameBoard.bottom() + sideOffset + ((sidePosition + 1) * GameBoard.margin);
                 break;
             case 0: // top
             default:
-                xPos = _gameBoard.left() + sideOffset + ((sidePosition + 1) * GameBoard.margin);
-                yPos = _gameBoard.top() + (moveLaneSize - tileSize) / 2f;
+                xPos = gameBoard.left() + sideOffset + ((sidePosition + 1) * GameBoard.margin);
+                yPos = gameBoard.top() + (moveLaneSize - tileSize) / 2f;
                 break;
         }
         _renderPosition.set(xPos, yPos);
@@ -145,5 +151,7 @@ public class Player implements GameObject {
                 GameBoard.tileSize / 2, 0,
                 GameBoard.tileSize, GameBoard.tileSize,
                 xScale, 1, 0);
+
+        harvestZone.render(batch);
     }
 }
