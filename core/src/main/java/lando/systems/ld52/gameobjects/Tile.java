@@ -11,6 +11,7 @@ public class Tile {
     public int x;
     public int y;
     public Rectangle tileArea;
+    public TileObject object;
 
     // Debug probably
     public Color tileColor;
@@ -20,16 +21,24 @@ public class Tile {
         this.y = y;
         tileArea = new Rectangle(board.x + x * tileSize, board.y + y * tileSize, tileSize, tileSize);
         tileColor = new Color(Color.WHITE);
-        tileColor.fromHsv(MathUtils.random(360f), .5f, .8f);
+        tileColor.fromHsv(MathUtils.random(360f), .3f, .5f);
+        if(MathUtils.randomBoolean(.5f)){
+            object = new TileHead(this);
+        }
     }
 
     public void update(float dt) {
-
+        if (object != null){
+            object.update(dt);
+        }
     }
 
     public void render(SpriteBatch batch) {
         batch.setColor(tileColor);
         batch.draw(Main.game.assets.pixelRegion, tileArea.x, tileArea.y, tileArea.width, tileArea.height);
         batch.setColor(Color.WHITE);
+        if (object != null){
+            object.render(batch);
+        }
     }
 }
