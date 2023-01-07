@@ -35,6 +35,10 @@ public class TileHead extends TileObject {
         features = new Array<>();
         featureAnims = new Array<>();
         for (Feature feature : Feature.values()) {
+            // skip some stuff so we only have one feature per 'category'
+            if (feature == Feature.hair_long_brown) continue;
+            if (feature == Feature.glasses_a) continue;
+            if (feature == Feature.cigarette) continue;
             features.add(feature);
             featureAnims.add(Feature.get(assets, feature));
         }

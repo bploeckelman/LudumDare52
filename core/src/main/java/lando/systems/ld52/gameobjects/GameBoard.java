@@ -8,10 +8,16 @@ import lando.systems.ld52.Main;
 
 public class GameBoard {
 
-    public final static int gridSize = 7;
-    public final static float tileSize = 64;
-    public final static float margin = 12;
-    public final static float boardSize = margin + (tileSize + margin) * gridSize;
+//    public final static int gridSize = 7;
+//    public final static float tileSize = 72;
+//    public final static float margin = 6;
+//    public final static float boardSize = margin + (tileSize + margin) * gridSize;
+
+    // 6x6 grid instead of 7x7
+    public final static float boardSize = 550;
+    public final static int gridSize = 6;
+    public final static float margin = 6;
+    public final static float tileSize = (boardSize - (gridSize + 1) * margin) / (gridSize);
 
     private final Tile[][] tiles;
 
