@@ -16,10 +16,11 @@ public class ScytheMeter extends VisTable {
         VisProgressBar.ProgressBarStyle horizontalProgressBarStyle = skin.get("default-horizontal", VisProgressBar.ProgressBarStyle.class);
         VisProgressBar.ProgressBarStyle scytheProgressBarStyle = new VisProgressBar.ProgressBarStyle(horizontalProgressBarStyle);
         scytheProgressBarStyle.knobAfter =  new TextureRegionDrawable(Utils.getColoredTextureRegion(Color.YELLOW));
-        scytheProgressBarStyle.knobBefore =  new TextureRegionDrawable(Utils.getColoredTextureRegion(Color.GREEN));        scytheProgressBar = new VisProgressBar(min, max, stepSize, false);
+        scytheProgressBarStyle.knobBefore =  new TextureRegionDrawable(Utils.getColoredTextureRegion(Color.GREEN));
+        scytheProgressBar = new VisProgressBar(min, max, stepSize, false);
         scytheProgressBar.setValue(.5f);
         scytheProgressBar.setStyle(scytheProgressBarStyle);
-        addActor(scytheProgressBar);
+        add(scytheProgressBar);
     }
 
     public void resetScytheMeter() {
