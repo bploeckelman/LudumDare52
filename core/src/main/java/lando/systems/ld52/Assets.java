@@ -2,6 +2,7 @@ package lando.systems.ld52;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -57,6 +58,8 @@ public class Assets implements Disposable {
     public ObjectMap<Feature, Animation<TextureRegion>> features;
 
     public Sound settingSound;
+
+    public Music mainTheme;
 
     public enum Patch {
         debug, panel, metal, glass,
@@ -125,9 +128,12 @@ public class Assets implements Disposable {
             mgr.load("fonts/outfit-medium-40px.fnt", BitmapFont.class);
             mgr.load("fonts/outfit-medium-80px.fnt", BitmapFont.class);
 
-            mgr.load("audio/sounds/settingSound.ogg", Sound.class);
-
             mgr.load("images/layout-alpha-1.png", Texture.class);
+
+            mgr.load("audio/sounds/settingSound.ogg", Sound.class);
+            mgr.load("audio/music/maintheme.ogg", Music.class);
+
+
         }
 
         if (load == Load.SYNC) {
@@ -219,6 +225,8 @@ public class Assets implements Disposable {
         NinePatches.shear                           = new NinePatch(atlas.findRegion("ninepatch/shear"),                   75, 75, 12, 12);
 
         settingSound = mgr.get("audio/sounds/settingSound.ogg", Sound.class);
+
+        mainTheme = mgr.get("audio/music/maintheme.ogg", Music.class);
 
         initialized = true;
         return 1;

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lando.systems.ld52.Config;
+import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.gameobjects.GameBoard;
 import lando.systems.ld52.gameobjects.Hourglass;
 import lando.systems.ld52.gameobjects.Player;
@@ -41,6 +42,9 @@ public class GameScreen extends BaseScreen {
         initializeUI();
         gameScreenUI = new GameScreenUI(windowCamera, assets);
         uiStage.addActor(gameScreenUI);
+        game.audioManager.playMusic(AudioManager.Musics.mainTheme);
+
+
     }
 
     @Override
