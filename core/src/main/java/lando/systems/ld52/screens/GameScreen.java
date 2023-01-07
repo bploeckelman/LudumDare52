@@ -4,12 +4,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lando.systems.ld52.Config;
+import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.gameobjects.GameBoard;
 import lando.systems.ld52.gameobjects.Hourglass;
 import lando.systems.ld52.gameobjects.Player;
 import lando.systems.ld52.gameobjects.Scythe;
 import lando.systems.ld52.ui.GameScreenUI;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen extends BaseScreen {
 
@@ -24,6 +28,8 @@ public class GameScreen extends BaseScreen {
 
     private float stateTime = 0;
     private GameScreenUI gameScreenUI;
+
+    private List<Feature> quotaFeatureList;
 
     @Override
     protected void create() {
@@ -44,6 +50,16 @@ public class GameScreen extends BaseScreen {
         uiStage.addActor(gameScreenUI);
         game.audioManager.playMusic(AudioManager.Musics.mainTheme);
 
+        quotaFeatureList = new ArrayList<>();
+        quotaFeatureList.add(Feature.eyepatch_a);
+        quotaFeatureList.add(Feature.tongue);
+        quotaFeatureList.add(Feature.nose_clown);
+        setQuota(quotaFeatureList);
+    }
+
+    public void setQuota(List<Feature> quotaFeatureList) {
+        gameScreenUI.rightSideUI.quotaListUI.resetQuota();
+        gameScreenUI.rightSideUI.quotaListUI.setQuotaList(quotaFeatureList);
 
     }
 
