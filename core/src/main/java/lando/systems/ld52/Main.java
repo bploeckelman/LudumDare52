@@ -20,10 +20,7 @@ import de.eskalon.commons.core.ManagedGame;
 import de.eskalon.commons.screen.transition.ScreenTransition;
 import de.eskalon.commons.utils.BasicInputMultiplexer;
 import lando.systems.ld52.audio.AudioManager;
-import lando.systems.ld52.screens.BaseScreen;
-import lando.systems.ld52.screens.GameScreen;
-import lando.systems.ld52.screens.TitleScreen;
-import lando.systems.ld52.screens.TransitionManager;
+import lando.systems.ld52.screens.*;
 import lando.systems.ld52.utils.Time;
 import lando.systems.ld52.utils.accessors.*;
 
@@ -98,6 +95,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		screenManager.initialize(inputMux, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 		screenManager.addScreen("title", new TitleScreen());
 		screenManager.addScreen("game", new GameScreen());
+		screenManager.addScreen("credit", new CreditScreen());
 		TransitionManager.initialize(screenManager);
 
 		screenManager.pushScreen("title", TransitionManager.TransitionType.BLEND.name());
