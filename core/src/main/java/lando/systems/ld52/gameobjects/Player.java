@@ -30,6 +30,7 @@ public class Player implements GameObject {
     public int _boardPosition;
 
     private Vector2 _renderPosition = new Vector2();
+    private Vector2 _nextPosition = new Vector2();
     public HarvestZone harvestZone;
 
     public Player(Assets assets, GameBoard gameBoard) {
@@ -50,7 +51,7 @@ public class Player implements GameObject {
         _flipped = false;
         _animTime = 0;
 
-        setPosition();
+        setPosition(true);
     }
 
     @Override
@@ -65,7 +66,9 @@ public class Player implements GameObject {
                 movePlayer();
             }
         }
+
         harvestZone.update(dt);
+        _renderPosition.lerp(_nextPosition, dt * 10);
     }
 
     private void movePlayer() {
@@ -102,14 +105,14 @@ public class Player implements GameObject {
                 _current = _front;
                 break;
         }
-        setPosition();
+        setPosition(false);
     }
 
     public void switchDirections() {
         _moveDirection = _moveDirection == MoveDirection.clockwise ? MoveDirection.counterclockwise : MoveDirection.clockwise;
     }
 
-    private void setPosition() {
+    private void setPosition(boolean immediate) {
         float tileSize = GameBoard.tileSize;
         int gridSize = GameBoard.gridSize;
         float moveLaneSize = 88f;
@@ -140,7 +143,11 @@ public class Player implements GameObject {
                 yPos = gameBoard.top() + (moveLaneSize - tileSize) / 2f;
                 break;
         }
-        _renderPosition.set(xPos, yPos);
+        _nextPosition.set(xPos, yPos);
+
+        if (immediate) {
+            _renderPosition.set(_nextPosition);
+        }
     }
 
     @Override
