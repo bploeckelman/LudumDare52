@@ -4,12 +4,15 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld52.Config;
-import lando.systems.ld52.gameobjects.GameBoard;
+import lando.systems.ld52.gameobjects.*;
 
 public class GameScreen extends BaseScreen {
 
     private TextureRegion background;
     public GameBoard gameboard;
+
+    public Player player;
+
     private float stateTime = 0;
 
     @Override
@@ -21,6 +24,8 @@ public class GameScreen extends BaseScreen {
         worldCam.update();
         gameboard = new GameBoard();
         background = assets.atlas.findRegion("fire-color-gradient");
+
+        player = new Player(assets, gameboard.gridDelta);
     }
 
     @Override
@@ -29,6 +34,7 @@ public class GameScreen extends BaseScreen {
         // ...
         stateTime += delta;
         gameboard.update(delta);
+        player.update(delta);
     }
 
     @Override
@@ -42,6 +48,7 @@ public class GameScreen extends BaseScreen {
         {
             batch.draw(background, 0, 0, worldCamera.viewportWidth, worldCamera.viewportHeight);
             gameboard.render(batch);
+            player.render(batch);
         }
         batch.end();
     }

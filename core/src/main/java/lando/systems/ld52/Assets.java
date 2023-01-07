@@ -43,6 +43,10 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> dog;
     public Animation<TextureRegion> kitten;
 
+    public Animation<TextureRegion> playerFront;
+    public Animation<TextureRegion> playerSide;
+    public Animation<TextureRegion> playerBack;
+
     public Sound settingSound;
 
     public enum Patch {
@@ -110,6 +114,10 @@ public class Assets implements Disposable {
         cat = new Animation<>(0.1f, atlas.findRegions("pets/cat"), Animation.PlayMode.LOOP);
         dog = new Animation<>(0.1f, atlas.findRegions("pets/dog"), Animation.PlayMode.LOOP);
         kitten = new Animation<>(.1f, atlas.findRegions("pets/kitten"), Animation.PlayMode.LOOP);
+
+        playerFront = new Animation<>(.2f, atlas.findRegions("player/front1"), Animation.PlayMode.LOOP);
+        playerSide = new Animation<>(.2f, atlas.findRegions("player/side1"), Animation.PlayMode.LOOP);
+        playerBack = new Animation<>(.2f, atlas.findRegions("player/back1"), Animation.PlayMode.LOOP);
 
         // initialize patch values
         Patch.debug.ninePatch        = new NinePatch(atlas.findRegion("ninepatch/debug"), 2, 2, 2, 2);

@@ -6,15 +6,15 @@ import lando.systems.ld52.Config;
 
 public class GameBoard {
 
-    public static int gridSize = 7;
+    public final static int gridSize = 7;
     public Rectangle boardArea;
     private final float boardWidth = 500;
+    public final float gridDelta = boardWidth / gridSize;
     Tile[][] tiles;
 
     public GameBoard() {
         boardArea = new Rectangle(Config.Screen.window_width/2f - boardWidth/2f, Config.Screen.window_height/2f - boardWidth/2f, boardWidth, boardWidth);
         tiles = new Tile[gridSize][];
-        float gridDelta = boardWidth / gridSize;
         for (int x = 0; x < gridSize; x++){
             tiles[x] = new Tile[gridSize];
             for (int y = 0; y < gridSize; y++) {
