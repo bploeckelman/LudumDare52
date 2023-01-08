@@ -4,43 +4,41 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.OrderedMap;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.assets.Head;
 
+import java.util.Comparator;
+import java.util.function.ToIntFunction;
+
 public class TileHead extends TileObject {
 
-
-//    private final Animation<TextureRegion> animation;
     private float stateTime;
 
-    // TODO: face slot
-    // Hair Color
-    // Hair Style? whatever we come up with needs to be stored here
     private final Head head;
-    private final Array<Feature> features;
     private final Animation<TextureRegion> headAnim;
-    private final Array<Animation<TextureRegion>> featureAnims;
+    private final OrderedMap<Feature, Animation<TextureRegion>> featureAnims;
 
     public TileHead(Assets assets, Tile tile) {
         super(tile);
-//        animation = new Animation<>(0.1f, assets.atlas.findRegion("faces/test-face"));
-//        animation.setPlayMode(Animation.PlayMode.LOOP);
         stateTime = 0f;
 
-        // TODO - this is temporary, need a robust way to pick a set of features based on some criteria
-        //   one that doesn't generate two 'hair' features for example... see note in Feature
         head = Head.a;
         headAnim = Head.get(assets, head);
-        features = new Array<>();
-        featureAnims = new Array<>();
-        for (Feature feature : Feature.values()) {
-            // skip some stuff so we only have one feature per 'category'
-            if (feature == Feature.hair_long_brown) continue;
-            if (feature == Feature.glasses_a) continue;
-            if (feature == Feature.cigarette) continue;
+
+        // pick random features from each category in category layer order
+        Array<Feature> features = new Array<>();
+        for (Feature.Category category : Feature.Category.values()) {
+            Feature feature = Feature.getRandomFrom(category);
             features.add(feature);
-            featureAnims.add(Feature.get(assets, feature));
+        }
+
+        // populate feature -> anim map based on the selected features
+        featureAnims = new OrderedMap<>();
+        for (Feature feature : features) {
+            featureAnims.put(feature, Feature.get(assets, feature));
         }
     }
 
@@ -51,18 +49,27 @@ public class TileHead extends TileObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        // take out margin to try to
+        // NOTE - margin is zero here to make the characters larger for legibility,
+        //  tiles are bigger now so it might be ok to restore the margin
         float margin = 0f;
 
-        TextureRegion headKeyframe = headAnim.getKeyFrame(stateTime);
-        batch.draw(headKeyframe,
-                tile.bounds.x + margin,
-                tile.bounds.y + margin,
-                tile.bounds.width - margin * 2f,
-                tile.bounds.height - margin * 2f);
+        Array<Feature> keys = featureAnims.orderedKeys();
+        for (int i = 0; i < keys.size; i++) {
+            Feature feature = keys.get(i);
 
-        for (Animation<TextureRegion> featureAnim : featureAnims) {
-            TextureRegion featureKeyframe = featureAnim.getKeyFrame(stateTime);
+            // draw the head after the 'clothes' category (which is shoulders essentially)
+            if (feature.category.layer == 1) {
+                TextureRegion headKeyframe = headAnim.getKeyFrame(stateTime);
+                batch.draw(headKeyframe,
+                        tile.bounds.x + margin,
+                        tile.bounds.y + margin,
+                        tile.bounds.width - margin * 2f,
+                        tile.bounds.height - margin * 2f);
+            }
+
+            // draw this feature
+            Animation<TextureRegion> animation = featureAnims.get(feature);
+            TextureRegion featureKeyframe = animation.getKeyFrame(stateTime);
             batch.draw(featureKeyframe,
                     tile.bounds.x + margin,
                     tile.bounds.y + margin,

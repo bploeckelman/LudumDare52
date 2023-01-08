@@ -51,7 +51,7 @@ public class GameScreen extends BaseScreen {
         quotaFeatureList = new ArrayList<>();
         quotaFeatureList.add(Feature.eyepatch_a);
         quotaFeatureList.add(Feature.tongue);
-        quotaFeatureList.add(Feature.nose_clown);
+        quotaFeatureList.add(Feature.hair_long_brown);
         setQuota(quotaFeatureList);
     }
 
