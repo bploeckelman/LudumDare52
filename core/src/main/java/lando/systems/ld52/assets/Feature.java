@@ -5,32 +5,33 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectMap;
 import lando.systems.ld52.Assets;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public enum Feature {
-    // TODO - add additional params that can be used elsewhere
-    //   like a Category enum (mouth, eyes, facial hair, etc...)
 
-      cigarette        (Category.mouth, "cigarette", "cigarette")
-    , collar_a         (Category.clothes, "collar-a-idle", "collor type a")
-    , eyepatch_a       (Category.eye, "eyepatch-a", "eye patch")
-    , eyes_a           (Category.eye, "eyes-a-idle", "normal eye") // TODO - should this be a separate thing? are we doing eye color vs eye-wear
-    , glasses_a        (Category.eye, "glasses-a", "glass type a")
-    , hair_long_brown  (Category.hair_head, "hair-long-brown", "brown long hair")
-    , hair_short_black (Category.hair_head, "hair-short-black", "brown short hair")
-    , mustache_a       (Category.hair_face, "mustache-a", "mustache type a")
-    , nose_clown       (Category.nose, "nose-clown", "clown nose")
-    , tongue           (Category.mouth, "tongue", "tongue out")
+      collar_a         (Category.clothes,   "collar-a-idle",   "collor type a")
+    // TODO - eyes should be a separate thing? are we doing eye color vs eye-wear?
+    , eyes_a           (Category.eye,       "eyes-a-idle",     "normal eye")
+    , glasses_a        (Category.eye,       "glasses-a",       "glass type a")
+    , eyepatch_a       (Category.eye,       "eyepatch-a",      "eye patch")
+    , nose_normal      (Category.nose,      "feature-blank",   "normal nose")
+    , nose_clown       (Category.nose,      "nose-clown",      "clown nose")
+    , tongue           (Category.mouth,     "tongue",          "tongue out")
+    , clean_shaven     (Category.hair_face, "feature-blank",   "clean shaven")
+    , mustache_a       (Category.hair_face, "mustache-a",      "mustache type a")
+    , hair_bald        (Category.hair_head, "feature-blank",   "bald")
+    , hair_long_brown  (Category.hair_head, "hair-long-brown",  "long brown hair")
+    , hair_short_black (Category.hair_head, "hair-short-black", "short black hair")
+//    , cigarette        (Category.mouth, "cigarette", "cigarette") // NOTE - not legible onscreen so removing it as a feature option
     ;
 
     public enum Category {
           clothes   (0)
         , eye       (1)
-        , nose      (2) // TODO - only one 'nose' feature... might need a way to pick 'nothing' in a category and have it still count, like 'bald' for 'hair_head'
+        , nose      (2)
         , mouth     (3)
         , hair_face (4)
         , hair_head (5)
