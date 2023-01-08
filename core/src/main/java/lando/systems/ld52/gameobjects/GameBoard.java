@@ -26,15 +26,23 @@ public class GameBoard {
     public final static float tileSize = (boardSize - (gridSize + 1) * margin) / (gridSize);
     public final static float MAX_TIME_IN_SECONDS = 90;
 
-    private final static float walkPathSize = 100;
+    public enum CornerTransition { none, top_left, top_right, bottom_right, bottom_left }
+    public CornerTransition cornerTransition = CornerTransition.none;
 
     private final Vector2 cornerPosTopLeft = new Vector2(280, 590);
     private final Vector2 cornerPosTopRight = new Vector2(868, 590);
     private final Vector2 cornerPosBottomLeft = new Vector2(280, 0);
     private final Vector2 cornerPosBottomRight = new Vector2(870, 0);
+
     private final Animation<TextureRegion> cornerIdleAnim;
     private final Animation<TextureRegion> cornerActionAnim;
     private float cornerStateTime;
+
+    private final Animation<TextureRegion> walkpathTopAnim;
+    private final Animation<TextureRegion> walkpathRightAnim;
+    private final Animation<TextureRegion> walkpathBottomAnim;
+    private final Animation<TextureRegion> walkpathLeftAnim;
+    private float walkpathStateTime;
 
     public Tile[][] tiles;
 
@@ -53,6 +61,12 @@ public class GameBoard {
         cornerIdleAnim = assets.cornerIdle;
         cornerActionAnim = assets.cornerAction;
         cornerStateTime = 0f;
+
+        walkpathTopAnim = assets.walkpathTop;
+        walkpathRightAnim = assets.walkpathRight;
+        walkpathBottomAnim = assets.walkpathBottom;
+        walkpathLeftAnim = assets.walkpathLeft;
+        walkpathStateTime = 0f;
     }
     
     public void setupBoard(Assets assets, RoundData roundData) {
@@ -91,6 +105,7 @@ public class GameBoard {
         }
 
         cornerStateTime += dt;
+        walkpathStateTime += dt;
     }
 
     public void render(SpriteBatch batch) {
@@ -108,13 +123,25 @@ public class GameBoard {
             }
         }
 
+        TextureRegion keyframe;
+
         // draw edge animations
         // TODO - only animate the edge that the reap-o man is currently traversing
+        keyframe = walkpathTopAnim.getKeyFrame(walkpathStateTime);
+        batch.draw(keyframe, 380, 632);
+
+        keyframe = walkpathRightAnim.getKeyFrame(walkpathStateTime);
+        batch.draw(keyframe, 912, 100);
+
+        keyframe = walkpathBottomAnim.getKeyFrame(walkpathStateTime);
+        batch.draw(keyframe, 380, 0);
+
+        keyframe = walkpathLeftAnim.getKeyFrame(walkpathStateTime);
+        batch.draw(keyframe, 280, 100);
 
         // render corner animations
         // TODO - figure out which animation is appropriate for each
         //  and draw that keyframe rather than only the idle one
-        TextureRegion keyframe;
 
         // top left
         keyframe = cornerIdleAnim.getKeyFrame(cornerStateTime);

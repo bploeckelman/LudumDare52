@@ -17,6 +17,7 @@ public class Player implements GameObject {
     }
 
     public enum Side { top, right, bottom, left}
+    public boolean visible;
 
     public final GameBoard gameBoard;
     private final Animation<TextureRegion> _front;
@@ -50,6 +51,7 @@ public class Player implements GameObject {
         _scythe = assets.playerScythe;
 
         this.gameBoard = gameBoard;
+        visible = true;
 
         reset();
         this.harvestZone = new HarvestZone(this);
@@ -111,6 +113,7 @@ public class Player implements GameObject {
             currentRow = boardPosition - (GameBoard.gridSize *3);
         }
 
+        Side previousSide = currentSide;
         int side = boardPosition / GameBoard.gridSize;
         flipped = false;
         switch (side) {
@@ -181,6 +184,8 @@ public class Player implements GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
+        if (!visible) return;
+
         float xScale = flipped ? -1 : 1;
 
         if (!flipped) {

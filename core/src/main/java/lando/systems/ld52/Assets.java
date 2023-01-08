@@ -62,6 +62,10 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> tombstone;
     public Animation<TextureRegion> cornerIdle;
     public Animation<TextureRegion> cornerAction;
+    public Animation<TextureRegion> walkpathTop;
+    public Animation<TextureRegion> walkpathBottom;
+    public Animation<TextureRegion> walkpathLeft;
+    public Animation<TextureRegion> walkpathRight;
 
     public Array<Animation<TextureRegion>> numberParticles;
 
@@ -232,6 +236,11 @@ public class Assets implements Disposable {
         tombstone = new Animation<>(.2f, atlas.findRegions("objects/tombstone"), Animation.PlayMode.LOOP);
         cornerIdle = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-idle/walkpath-corner-a-idle"), Animation.PlayMode.LOOP);
         cornerAction = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-action/walkpath-corner-a-action"), Animation.PlayMode.NORMAL);
+        float walkpathFrameDuration = 0.25f;
+        walkpathTop = new Animation<>(walkpathFrameDuration, atlas.findRegions("world/walkpath-top/walkpath-top"), Animation.PlayMode.LOOP);
+        walkpathBottom = new Animation<>(walkpathFrameDuration, atlas.findRegions("world/walkpath-bottom/walkpath-bottom"), Animation.PlayMode.LOOP);
+        walkpathLeft = new Animation<>(walkpathFrameDuration, atlas.findRegions("world/walkpath-left/walkpath-left"), Animation.PlayMode.LOOP);
+        walkpathRight = new Animation<>(walkpathFrameDuration, atlas.findRegions("world/walkpath-right/walkpath-right"), Animation.PlayMode.LOOP);
 
         heads = new ObjectMap<>();
         for (Head head : Head.values()) {
