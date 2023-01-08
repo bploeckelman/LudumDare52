@@ -5,7 +5,7 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import lando.systems.ld52.Assets;
 
 public class RightSideUI extends VisTable {
-    private final float WIDTH = 256f;
+    private final float WIDTH = 220f;
     private final float QUOTA_HEIGHT = 450f;
     private final float MARGIN = 12f;
     public QuotaListUI quotaListUI;

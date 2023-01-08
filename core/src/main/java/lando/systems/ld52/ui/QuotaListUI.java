@@ -36,6 +36,7 @@ public class QuotaListUI extends VisWindow {
         setTouchable(Touchable.disabled);
         setBackground(new NinePatchDrawable(Assets.NinePatches.plain_gradient));
 
+
         heavenQuotaTable = new VisTable();
         hellQuotaTable = new VisTable();
 
