@@ -32,6 +32,7 @@
 	<extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld52.utils.Point" />
 	<extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld52.particles.Particles" />
 	<extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld52.particles.Particle" />
+	<extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld52.serialization.RoundDto" />
 
 
 	<!-- These two lines reduce the work GWT has to do during compilation and also shrink output size. -->
