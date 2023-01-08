@@ -6,6 +6,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
@@ -23,7 +24,8 @@ public class HarvestZone {
     public enum HarvestPhase { cycle, golf, collection}
 
     private final float golfIndicatorSize = 8f;
-    private final float golfMaxTime = 1f;
+    private final float golfMaxTime = .25f; // Time it takes to go one tile
+    private final int tilesStart = 4;
     private final Interpolation golfInterpolation = Interpolation.slowFast;
 
     private Player player;
@@ -41,7 +43,7 @@ public class HarvestZone {
     public HarvestZone(Player player) {
         this.player = player;
         this.currentPhase = HarvestPhase.cycle;
-        this.tilesLong = 5;
+        this.tilesLong = tilesStart;
         this.startPos = new Vector2();
         this.scythe = new Scythe(game.assets);
         tileToHarvest = null;
@@ -87,11 +89,12 @@ public class HarvestZone {
         startPos.set(xPos, yPos);
 
         if (currentPhase == HarvestPhase.golf){
+            float maxGolfTime = golfMaxTime * tilesLong;
             golfTimer += dt;
-            if (golfTimer > 2*golfMaxTime) {
-                golfTimer -= 2*golfMaxTime;
+            if (golfTimer > 2*maxGolfTime) {
+                golfTimer -= 2*maxGolfTime;
             }
-            float tempgolfpos = golfTimer/golfMaxTime;
+            float tempgolfpos = golfTimer/maxGolfTime;
             if (tempgolfpos > 1f) {
                 tempgolfpos = 2f - tempgolfpos;
             }
@@ -121,14 +124,24 @@ public class HarvestZone {
         batch.setColor(Color.WHITE);
     }
 
+    public void adjustRange(int amount) {
+        tilesLong += amount;
+        tilesLong = MathUtils.clamp(tilesLong, 1, GameBoard.gridSize);
+    }
+
     public void handleInput() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            adjustRange(1);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
+            adjustRange(-1);
+        }
         boolean touched = Gdx.input.isTouched();
 
         if (currentPhase == HarvestPhase.cycle && (touched && !touchLastFrame)){
             currentPhase = HarvestPhase.golf;
-
             golfTimer = 0;
-        } else if(currentPhase == HarvestPhase.golf && (!touched && touchLastFrame)) {
+        } else if (currentPhase == HarvestPhase.golf && (!touched && touchLastFrame)) {
             currentPhase = HarvestPhase.collection;
             // TODO: when we store this for gravestones, check this later
             float maxWidth = (GameBoard.tileSize+GameBoard.margin) * tilesLong;

@@ -1,5 +1,6 @@
 package lando.systems.ld52.gameobjects;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.CpuSpriteBatch;
@@ -14,6 +15,8 @@ public class Player implements GameObject {
         clockwise,
         counterclockwise;
     }
+
+    public enum Side { top, right, bottom, left}
 
     public final GameBoard gameBoard;
     private final Animation<TextureRegion> _front;
@@ -35,6 +38,9 @@ public class Player implements GameObject {
     private Vector2 _renderPosition = new Vector2();
     private Vector2 _nextPosition = new Vector2();
     public HarvestZone harvestZone;
+    public Side currentSide = Side.left;
+    public int currentCol;
+    public int currentRow;
 
     public Player(Assets assets, GameBoard gameBoard) {
         _front = assets.playerFront;
@@ -83,7 +89,7 @@ public class Player implements GameObject {
         // 6 |---|---| 3
         //     5   4
 
-        int perimeterTiles = gameBoard.gridSize * 4;
+        int perimeterTiles = GameBoard.gridSize * 4;
         boardPosition += increment;
         if (boardPosition == -1) {
             boardPosition += perimeterTiles;
@@ -91,21 +97,39 @@ public class Player implements GameObject {
             boardPosition = 0;
         }
 
-        int side = boardPosition / gameBoard.gridSize;
+        if (boardPosition < GameBoard.gridSize){
+            currentRow = GameBoard.gridSize;
+            currentCol = boardPosition;
+        } else if (boardPosition < GameBoard.gridSize * 2) {
+            currentCol = GameBoard.gridSize;
+            currentRow = GameBoard.gridSize - (boardPosition - GameBoard.gridSize);
+        } else if (boardPosition < GameBoard.gridSize * 3) {
+            currentRow = -1;
+            currentCol = (GameBoard.gridSize) - (boardPosition - (GameBoard.gridSize * 2));
+        } else {
+            currentCol = -1;
+            currentRow = boardPosition - (GameBoard.gridSize *3);
+        }
+
+        int side = boardPosition / GameBoard.gridSize;
         _flipped = false;
         switch (side) {
             case 1: // right
+                currentSide = Side.right;
                 _flipped = true;
             case 3: // left
+                currentSide = Side.left;
                 _current = _side;
                 break;
             case 2: // bottom
+                currentSide = Side.bottom;
                 _flipped = true;
                 _current = _back;
                 break;
             default:
                 // top
                 _current = _front;
+                currentSide = Side.top;
                 break;
         }
         setPosition(false);
