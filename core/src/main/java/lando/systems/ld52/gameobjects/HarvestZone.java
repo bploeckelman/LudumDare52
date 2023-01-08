@@ -199,6 +199,8 @@ public class HarvestZone {
                 }
                 final GameScreen gameScreen = _gameScreen;
 
+                scythe.flipped = player.flipped;
+
                 Timeline.createSequence().push(
                         Tween.set(scythe.position, Vector2Accessor.XY).target(startPos.x, startPos.y))
                         .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, spinTime).target(tileToHarvest.getCenter().x, tileToHarvest.getCenter().y))

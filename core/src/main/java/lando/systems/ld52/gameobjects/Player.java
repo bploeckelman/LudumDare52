@@ -1,6 +1,5 @@
 package lando.systems.ld52.gameobjects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -27,7 +26,7 @@ public class Player implements GameObject {
     private final Animation<TextureRegion> _scythe;
 
     private Animation<TextureRegion> _current;
-    private boolean _flipped;
+    public boolean flipped;
 
     private float _animTime = 0;
     private final float _moveTime = 0.88f;
@@ -60,7 +59,7 @@ public class Player implements GameObject {
         boardPosition = 0;
         _moveDirection = MoveDirection.clockwise;
         _current = _front;
-        _flipped = false;
+        flipped = false;
         _animTime = 0;
 
         setPosition(true);
@@ -113,20 +112,20 @@ public class Player implements GameObject {
         }
 
         int side = boardPosition / GameBoard.gridSize;
-        _flipped = false;
+        flipped = false;
         switch (side) {
             case 1: // right
                 currentSide = Side.right;
-                _flipped = true;
+                flipped = true;
                 break;
             case 3: // left
                 currentSide = Side.left;
-                _flipped = true;
+                flipped = true;
                 _current = _side;
                 break;
             case 2: // bottom
                 currentSide = Side.bottom;
-                _flipped = true;
+                flipped = true;
                 _current = _back;
                 break;
             default:
@@ -183,9 +182,9 @@ public class Player implements GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        float xScale = _flipped ? -1 : 1;
+        float xScale = flipped ? -1 : 1;
 
-        if (!_flipped) {
+        if (!flipped) {
             renderScythe(batch);
         }
 
@@ -195,7 +194,7 @@ public class Player implements GameObject {
                 GameBoard.tileSize, GameBoard.tileSize,
                 xScale, 1, 0);
 
-        if (_flipped) {
+        if (flipped) {
             renderScythe(batch);
         }
 
@@ -203,7 +202,8 @@ public class Player implements GameObject {
     }
 
     private void renderScythe(SpriteBatch batch) {
-        float xScale = _flipped ? -1 : 1;
+        if (harvestZone.currentPhase == HarvestZone.HarvestPhase.collection) return;
+        float xScale = flipped ? -1 : 1;
         batch.draw(_scythe.getKeyFrame(_animTime),
                 _renderPosition.x, _renderPosition.y,
                 GameBoard.tileSize / 2, 0,

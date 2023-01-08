@@ -12,12 +12,7 @@ public class Scythe implements GameObject {
 
     private final Animation<TextureRegion> animation;
     private float stateTime;
-
-    private final float lifetime = 2f;
-    private float elapsed = 0f;
-    private final float pausetime = 1f;
-    private float paused = 0f;
-    private int direction = 1;
+    public boolean flipped = false;
 
     public MutableFloat rotation;
     private final Vector2 size;
@@ -37,44 +32,26 @@ public class Scythe implements GameObject {
     }
 
     @Override
-    public void update(float dt) {
-//        stateTime += dt;
-//
-//        paused -= dt;
-//        if (paused <= 0) {
-//            paused = 0;
-//        }
-//
-//        if (paused == 0) {
-//            elapsed += direction * dt;
-//            if (elapsed <= 0 || elapsed >= lifetime) {
-//                direction *= -1;
-//                paused = pausetime;
-//            }
-//            elapsed = MathUtils.clamp(elapsed, 0, lifetime);
-//        }
-//
-//        float progress = Calc.min(elapsed / lifetime, 1f); // 0 <-> 1
-//        float t = Interpolation.fastSlow.apply(progress);
-//
-//        float speed = 1000;
-//        rotation -= (t * speed) * dt;
-//
-//        float minPos = (88 - size.x) / 2f;
-//        float maxPos = 560;
-//        position.y = minPos + t * (maxPos - minPos);
-    }
+    public void update(float dt) { }
 
     @Override
     public void render(SpriteBatch batch) {
         TextureRegion keyframe = animation.getKeyFrame(stateTime);
+
+        float xScale = scale.x;
+        float curRotation = rotation.floatValue();
+        if (flipped) {
+            xScale *= -1;
+            curRotation = 360 - curRotation;
+        }
+
         batch.draw(keyframe,
                 position.x - size.x/2f, position.y - size.y/2f,
                 keyframe.getRegionWidth() / 2f,
                 keyframe.getRegionHeight() / 2f,
                 size.x, size.y,
-                scale.x, scale.y,
-                rotation.floatValue()
+                xScale, scale.y,
+                curRotation
         );
     }
 
