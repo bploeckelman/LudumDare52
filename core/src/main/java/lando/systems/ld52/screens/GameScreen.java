@@ -90,8 +90,8 @@ public class GameScreen extends BaseScreen {
     private RoundData getRoundData(RoundDto roundDto, Quota heavenQuota, Quota hellQuota) {
         RoundData roundData = new RoundData();
 
-        for (int y = 0; y < roundDto.tileDtos.length; y++) {
-            for (int x = 0; x < roundDto.tileDtos[y].length; x++) {
+        for (int x = 0; x < roundDto.tileDtos.length; x++) {
+            for (int y = 0; y < roundDto.tileDtos[x].length; y++) {
                 TileData tileData = new TileData();
 
                 TileDto tileDto = roundDto.tileDtos[x][y];
