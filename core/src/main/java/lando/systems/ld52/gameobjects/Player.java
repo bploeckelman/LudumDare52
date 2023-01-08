@@ -120,7 +120,6 @@ public class Player implements GameObject {
                 break;
             case 3: // left
                 currentSide = Side.left;
-                flipped = true;
                 _current = _side;
                 break;
             case 2: // bottom

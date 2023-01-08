@@ -1,6 +1,7 @@
 package lando.systems.ld52.gameobjects;
 
 import lando.systems.ld52.assets.Feature;
+import lando.systems.ld52.serialization.QuotaDto;
 
 import java.util.HashMap;
 
@@ -9,14 +10,12 @@ public class Quota {
 
     public final Source source;
 
-    // TODO - the value here should probably be a little data structure
-    //  that holds metadata on the character who filled this feature (or null if not yet filled)
     public final HashMap<Feature, Boolean> features;
 
-    public Quota(Source source, Feature... features) {
-        this.source = source;
+    public Quota(QuotaDto quota) {
+        this.source = quota.source;
         this.features = new HashMap<>();
-        for (Feature feature : features) {
+        for (Feature feature : quota.features) {
             this.features.put(feature, false);
         }
     }

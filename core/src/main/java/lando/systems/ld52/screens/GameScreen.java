@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Json;
 import com.kotcrab.vis.ui.util.ToastManager;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
@@ -15,8 +16,12 @@ import lando.systems.ld52.Main;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.gameobjects.*;
+import lando.systems.ld52.serialization.QuotaDto;
+import lando.systems.ld52.serialization.RoundDto;
 import lando.systems.ld52.ui.GameScreenUI;
 import lando.systems.ld52.ui.QuotaListUI;
+
+import java.util.HashMap;
 
 public class GameScreen extends BaseScreen {
 
@@ -41,6 +46,12 @@ public class GameScreen extends BaseScreen {
         OrthographicCamera worldCam = (OrthographicCamera) worldCamera;
         worldCam.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCam.update();
+
+        // String roundData = getRandomRound();
+        // these can be final Strings in a class
+        String roundData = "{heaven:{source:heaven,features:[hair_long_brown,nose_normal,tongue]},hell:{source:hell,features:[clean_shaven,eyepatch_a,tongue]}}";
+        RoundDto roundDto = RoundDto.fromJson(roundData);
+
         gameboard = new GameBoard(assets, this);
         background = new TextureRegion(assets.gameScreenLayout);
 
@@ -54,22 +65,35 @@ public class GameScreen extends BaseScreen {
 
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
         Gdx.app.log("Creating GameScreen", "Music");
-//        currentMusic.setPosition(14f);
-//        Main.game.audioManager.loopSound(AudioManager.Sounds.swoosh1, .5f);
 
-        heavenQuota = new Quota(Quota.Source.heaven,
-                  Feature.getRandomFrom(Feature.Category.hair_head)
-                , Feature.getRandomFrom(Feature.Category.nose)
-                , Feature.getRandomFrom(Feature.Category.mouth)
-        );
-        hellQuota = new Quota(Quota.Source.hell,
-                  Feature.getRandomFrom(Feature.Category.hair_face)
-                , Feature.getRandomFrom(Feature.Category.eye)
-                , Feature.getRandomFrom(Feature.Category.mouth)
-        );
+        heavenQuota = new Quota(roundDto.heaven);
+        hellQuota = new Quota(roundDto.hell);
+
         QuotaListUI quotaListUI = gameScreenUI.rightSideUI.quotaListUI;
         quotaListUI.setQuotas(heavenQuota, hellQuota);
         quotaToastShown = false;
+    }
+
+    private String getRandomRound() {
+        // moved generation here
+        QuotaDto heavenQuotaDto = new QuotaDto();
+        heavenQuotaDto.set(
+                Quota.Source.heaven,
+                Feature.getRandomFrom(Feature.Category.hair_head),
+                Feature.getRandomFrom(Feature.Category.nose),
+                Feature.getRandomFrom(Feature.Category.mouth));
+        QuotaDto hellQuotaDto = new QuotaDto();
+        hellQuotaDto.set(
+                Quota.Source.hell,
+                Feature.getRandomFrom(Feature.Category.hair_face),
+                Feature.getRandomFrom(Feature.Category.eye),
+                Feature.getRandomFrom(Feature.Category.mouth));
+        RoundDto round = new RoundDto();
+        round.heaven = heavenQuotaDto;
+        round.hell  = hellQuotaDto;
+
+        Json json = new Json();
+        return json.toJson(round);
     }
 
     @Override
