@@ -23,7 +23,7 @@ public class HarvestZone {
     private Vector2 startPos;
     private float rotation;
     private float golfTimer;
-    private float golfPosition;
+    public float golfPosition;
     public Tile tileToHarvest;
 
     public HarvestZone(Player player) {

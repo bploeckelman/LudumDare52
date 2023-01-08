@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lando.systems.ld52.Assets;
 
 public class PlayerUI implements GameObject {
+
+    private final Player player;
     private final TextureRegion background;
     private final Animation<TextureRegion> idle;
     private final Animation<TextureRegion> backswing;
@@ -16,7 +18,8 @@ public class PlayerUI implements GameObject {
     private Animation<TextureRegion> current;
     private float stateTime;
 
-    public PlayerUI(Assets assets) {
+    public PlayerUI(Player player, Assets assets) {
+        this.player = player;
         background = assets.pixelRegion;
         current = idle = new Animation<>(.2f, assets.atlas.findRegions("ui/player/death-swing-idle/death-swing-idle"), Animation.PlayMode.LOOP);
         backswing = new Animation<>(0.1f, assets.atlas.findRegions("ui/player/death-swing-back/death-swing-back"),Animation.PlayMode.NORMAL);
@@ -28,17 +31,19 @@ public class PlayerUI implements GameObject {
     public void update(float dt) {
         stateTime += dt;
 
-        // should probably pass in player and check state to determine position
-        // - this is just cycling through animation - sorry
-        if (Gdx.input.justTouched()) {
-            stateTime = 0;
-            if (current == idle) {
-                current = backswing;
-            } else if (current == backswing) {
-                current = swing;
-            } else {
+        HarvestZone harvestZone = player.harvestZone;
+
+        switch (harvestZone.currentPhase) {
+            case cycle:
                 current = idle;
-            }
+                break;
+            case golf:
+                current = backswing;
+                stateTime = backswing.getAnimationDuration() * harvestZone.golfPosition;
+                break;
+            case collection:
+                current = swing;
+                break;
         }
     }
 

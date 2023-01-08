@@ -41,7 +41,7 @@ public class GameScreen extends BaseScreen {
         player = new Player(assets, gameboard);
         scythe = new Scythe(assets);
         hourglass = new Hourglass(assets);
-        playerUI = new PlayerUI(assets);
+        playerUI = new PlayerUI(player, assets);
 
         initializeUI();
         gameScreenUI = new GameScreenUI(windowCamera, assets);
