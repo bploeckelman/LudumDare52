@@ -15,6 +15,12 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	window: {
 		file: font-window.fnt
 	}
+	outfit-medium-10px: {
+		file: outfit-medium-10px.fnt
+	}
+	outfit-medium-14px: {
+		file: outfit-medium-14px.fnt
+	}
 	outfit-medium-20px: {
 		file: outfit-medium-20px.fnt
 	}
@@ -137,7 +143,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
-		font: font
+		font: font,
 	}
 	window: {
 		font: window
@@ -148,11 +154,29 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	subtitle: {
 		font: subtitle
 	}
-	outfit-medium-20px: {
-		font: outfit-medium-20px, fontColor: black
+	font: {
+		font: font
 	}
+	outfit-medium-10px: {
+		font: outfit-medium-10px,
+	}
+	outfit-medium-14px: {
+		font: outfit-medium-14px,
+	}
+	outfit-medium-20px: {
+		font: outfit-medium-20px,
+	}
+	outfit-medium-40px: {
+		font: outfit-medium-40px
+	}
+	outfit-medium-80px: {
+		font: outfit-medium-80px
+	}
+	large: { font: outfit-medium-40px },
+	larger: { font: outfit-medium-80px },
+	white: { font: default, fontColor: white }
 }
-com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+	com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: {
 		font: list
 		fontColorSelected: white
@@ -230,7 +254,35 @@ com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
 		handle: split
 	}
 }
+com.kotcrab.vis.ui.widget.VisImageButton$VisImageButtonStyle: {
+	default: {
+		up: split,
+		down: black,
+		over: split,
+		disabled: split
+		focusBorder: highlight
+	}
+},
+com.kotcrab.vis.ui.widget.toast.Toast$ToastStyle: {
+	default: {
+		background: split,
+		closeButtonStyle: default
+	}
+	dark: {
+		background: black,
+		closeButtonStyle: default
+	}
+}
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: {
+		font: font
+		up: button-normal
+		down: button-normal-pressed
+		over: button-normal-over
+		focused: button-normal-over
+	}
+}
+com.kotcrab.vis.ui.widget.VisTextButton$VisTextButtonStyle: {
 	default: {
 		font: font
 		up: button-normal
@@ -379,12 +431,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 		default: { up: buttonUp, over: buttonOver, down: buttonDown, disabled: buttonDisabled, font: default, fontColor: font,
 			overFontColor: fontOver, downFontColor: fontDown, disabledFontColor: fontDisabled, pressedOffsetY: -1, pressedOffsetX: 1, imageUp: icon }
-	},
-	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-		default: { font: outfit-medium-20px, fontColor: font },
-		large: { font: outfit-medium-40px, fontColor: font },
-		larger: { font: outfit-medium-80px, fontColor: font },
-		white: { font: default, fontColor: white }
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 		default: { fontColorUnselected: font, selection: selection, fontColorSelected: fontDown, font: default },

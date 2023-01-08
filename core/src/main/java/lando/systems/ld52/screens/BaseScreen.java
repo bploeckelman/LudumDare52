@@ -10,9 +10,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.util.ToastManager;
 import de.eskalon.commons.screen.ManagedScreen;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
@@ -32,6 +34,7 @@ public abstract class BaseScreen extends ManagedScreen implements Disposable {
     public ScreenShakeCameraController screenShaker;
     public Camera worldCamera;
     public AudioManager audioManager;
+    public ToastManager toasts;
     protected Stage uiStage;
     protected Skin skin;
 
@@ -107,6 +110,9 @@ public abstract class BaseScreen extends ManagedScreen implements Disposable {
         skin = VisUI.getSkin();
         StretchViewport viewport = new StretchViewport(windowCamera.viewportWidth, windowCamera.viewportHeight);
         uiStage = new Stage(viewport, batch);
+        toasts = new ToastManager(uiStage);
+        toasts.setAlignment(Align.top | Align.center);
+//        toasts.setScreenPaddingY(0);
     }
 
 }

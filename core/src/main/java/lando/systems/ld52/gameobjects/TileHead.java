@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.OrderedMap;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.assets.Head;
+import lando.systems.ld52.screens.GameScreen;
+import lando.systems.ld52.ui.QuotaListUI;
 
 import java.util.Comparator;
 import java.util.function.ToIntFunction;
@@ -76,6 +78,20 @@ public class TileHead extends TileObject {
                     tile.bounds.width - margin * 2f,
                     tile.bounds.height - margin * 2f);
         }
+    }
+
+    @Override
+    public boolean collect(GameScreen gameScreen) {
+        if (gameScreen == null) return false;
+        QuotaListUI quotaListUI = gameScreen.gameScreenUI.rightSideUI.quotaListUI;
+        Quota heavenQuota = gameScreen.heavenQuota;
+        Quota hellQuota = gameScreen.hellQuota;
+        for (Feature feature : featureAnims.orderedKeys()) {
+            heavenQuota.satisfy(feature);
+            hellQuota.satisfy(feature);
+        }
+        quotaListUI.setQuotas(heavenQuota, hellQuota);
+        return true;
     }
 
 }

@@ -1,97 +1,116 @@
 package lando.systems.ld52.ui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.kotcrab.vis.ui.widget.VisImage;
 import com.kotcrab.vis.ui.widget.VisLabel;
+import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisWindow;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.assets.Feature;
+import lando.systems.ld52.assets.Head;
+import lando.systems.ld52.gameobjects.Quota;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuotaListUI extends VisWindow {
 
-    private Image quotaImage1;
-    private VisLabel quotaLabel1;
-    private Image quotaImage2;
-    private VisLabel quotaLabel2;
-    private Image quotaImage3;
-    private VisLabel quotaLabel3;
-    private Image quotaImage4;
-    private VisLabel quotaLabel4;
-    private Image quotaImage5;
-    private VisLabel quotaLabel5;
-    private List<VisLabel> quotaLabels = new ArrayList<>();
-    private List<Image> quotaImages = new ArrayList<>();
-    private Assets assets;
+    private final Assets assets;
+    private final VisTable heavenQuotaTable;
+    private final VisTable hellQuotaTable;
+    private final Color backgroundTint = new Color(0.4f, 0.4f, 0.4f, 0.5f);
+    private final Color satisfiedBackgroundTint = new Color(0.1f, 0.6f, 0.0f, 0.1f);
+    private final Color imageBackgroundTint = new Color(0.2f, 0.2f, 0.2f, 0.5f);
 
     public QuotaListUI(Assets assets) {
         super("");
         this.assets = assets;
         align(Align.top);
         setTouchable(Touchable.disabled);
-        setBackground(Assets.Patch.metal.drawable);
-        VisLabel label = new VisLabel("Quota List", "large");
+        setBackground(new NinePatchDrawable(Assets.NinePatches.plain_gradient));
+
+        heavenQuotaTable = new VisTable();
+        hellQuotaTable = new VisTable();
+
+        VisLabel label = new VisLabel("Quotas", "outfit-medium-40px");
+
         add(label).colspan(2).align(Align.top);
         row();
-        quotaImage1 = new Image();
-        add(quotaImage1);
-        quotaLabel1 = new VisLabel("None");
-        add(quotaLabel1).align(Align.center);
+        add(heavenQuotaTable).fill().padTop(5);
         row();
-        quotaImage2 = new Image();
-        add(quotaImage2);
-        quotaLabel2 = new VisLabel("");
-        add(quotaLabel2).align(Align.center);
-        row();
-        quotaImage3 = new Image();
-        add(quotaImage3);
-        quotaLabel3 = new VisLabel("");
-        add(quotaLabel3).align(Align.center);
-        row();
-        quotaImage4 = new Image();
-        add(quotaImage4);
-        quotaLabel4 = new VisLabel("");
-        add(quotaLabel4).align(Align.center);
-        row();
-        quotaImage5 = new Image();
-        add(quotaImage1);
-        quotaLabel5 = new VisLabel("");
-        add(quotaLabel5).align(Align.center);
-
-        quotaImages.add(quotaImage1);
-        quotaLabels.add(quotaLabel1);
-        quotaImages.add(quotaImage2);
-        quotaLabels.add(quotaLabel2);
-        quotaImages.add(quotaImage3);
-        quotaLabels.add(quotaLabel3);
-        quotaImages.add(quotaImage4);
-        quotaLabels.add(quotaLabel4);
-        quotaImages.add(quotaImage5);
-        quotaLabels.add(quotaLabel5);
+        add(hellQuotaTable).fill().padTop(5);
     }
 
-    public void resetQuota() {
-        for (Image image : quotaImages) {
-            image.setDrawable(null);
+    public void setQuotas(Quota quota1, Quota quota2) {
+        Quota heaven = null;
+        Quota hell = null;
+        if      (quota1.source == Quota.Source.heaven) heaven = quota1;
+        else if (quota2.source == Quota.Source.heaven) heaven = quota2;
+        if      (quota1.source == Quota.Source.hell)   hell   = quota1;
+        else if (quota2.source == Quota.Source.hell)   hell   = quota2;
+
+        Drawable heavenBackground = new TextureRegionDrawable(assets.atlas.findRegion("ui/background-heaven")).tint(backgroundTint);
+        Drawable hellBackground   = new TextureRegionDrawable(assets.atlas.findRegion("ui/background-hell")).tint(backgroundTint);
+        Drawable imageBackground  = new TextureRegionDrawable(assets.pixelRegion).tint(imageBackgroundTint);
+
+        heavenQuotaTable.clear();
+        heavenQuotaTable.setBackground(heavenBackground);
+        heavenQuotaTable.add(new VisLabel("Heaven", "outfit-medium-20px")).colspan(2).align(Align.top);
+        heavenQuotaTable.row();
+        if (heaven != null) {
+            for (Feature feature : heaven.features.keySet()) {
+                VisImage featureImage = new VisImage(new TextureRegionDrawable(assets.features.get(feature).getKeyFrame(0)));
+                VisLabel featureLabel = new VisLabel(feature.displayName, "outfit-medium-14px");
+                Stack imageStack = new Stack(
+                          new Container<>(new VisImage(imageBackground))
+                        , new Container<>(new VisImage(Head.get(assets, Head.a).getKeyFrame(0)))
+                        , new Container<>(featureImage)
+                );
+
+                Drawable background = new TextureRegionDrawable(assets.pixelRegion)
+                        .tint(heaven.features.get(feature) ? satisfiedBackgroundTint : backgroundTint);
+                VisTable innerTable = new VisTable();
+                innerTable.setBackground(background);
+                innerTable.add(imageStack).fill();
+                innerTable.add(featureLabel).fill().align(Align.center);
+
+                heavenQuotaTable.add(innerTable).fillX();
+                heavenQuotaTable.row();
+            }
         }
-        for (VisLabel quotaLabel : quotaLabels) {
-            quotaLabel.setText("");
+
+        hellQuotaTable.clear();
+        hellQuotaTable.setBackground(hellBackground);
+        hellQuotaTable.add(new VisLabel("Hell", "outfit-medium-20px")).colspan(2).align(Align.top);
+        hellQuotaTable.row();
+        if (hell != null) {
+            for (Feature feature : hell.features.keySet()) {
+                VisImage featureImage = new VisImage(new TextureRegionDrawable(assets.features.get(feature).getKeyFrame(0)));
+                VisLabel featureLabel = new VisLabel(feature.displayName, "outfit-medium-14px");
+                Stack imageStack = new Stack(
+                          new Container<>(new VisImage(imageBackground))
+                        , new Container<>(new VisImage(Head.get(assets, Head.a).getKeyFrame(0)))
+                        , new Container<>(featureImage)
+                );
+
+                Drawable background = new TextureRegionDrawable(assets.pixelRegion)
+                        .tint(hell.features.get(feature) ? satisfiedBackgroundTint : backgroundTint);
+                VisTable innerTable = new VisTable();
+                innerTable.setBackground(background);
+                innerTable.add(imageStack).fill();
+                innerTable.add(featureLabel).fill().align(Align.center);
+
+                hellQuotaTable.add(innerTable).fillX();
+                hellQuotaTable.row();
+            }
         }
     }
 
-    public void setQuotaList(List<Feature> features) {
-        for (int i = 0; i < features.size(); i++) {
-            quotaImages.get(i).setDrawable(new TextureRegionDrawable(assets.features.get(features.get(i)).getKeyFrame(0f)));
-            quotaLabels.get(i).setText(features.get(i).displayName);
-        }
-    }
-
-    public void setQuota1(Feature feature) {
-        quotaLabel1.setText(feature.displayName);
-        quotaImage1.setDrawable(new TextureRegionDrawable(assets.features.get(feature).getKeyFrame(0f)));
-    }
 }

@@ -12,16 +12,16 @@ import java.util.Map;
 
 public enum Feature {
 
-      collar_a         (Category.clothes,   "collar-a-idle",   "collor type a")
+      collar_a         (Category.clothes,   "collar-a-idle",   "collar")
     // TODO - eyes should be a separate thing? are we doing eye color vs eye-wear?
-    , eyes_a           (Category.eye,       "eyes-a-idle",     "normal eye")
-    , glasses_a        (Category.eye,       "glasses-a",       "glass type a")
+    , eyes_a           (Category.eye,       "eyes-a-idle",     "eyes")
+    , glasses_a        (Category.eye,       "glasses-a",       "glasses")
     , eyepatch_a       (Category.eye,       "eyepatch-a",      "eye patch")
     , nose_normal      (Category.nose,      "feature-blank",   "normal nose")
     , nose_clown       (Category.nose,      "nose-clown",      "clown nose")
     , tongue           (Category.mouth,     "tongue",          "tongue out")
     , clean_shaven     (Category.hair_face, "feature-blank",   "clean shaven")
-    , mustache_a       (Category.hair_face, "mustache-a",      "mustache type a")
+    , mustache_a       (Category.hair_face, "mustache-a",      "mustache")
     , hair_bald        (Category.hair_head, "feature-blank",   "bald")
     , hair_long_brown  (Category.hair_head, "hair-long-brown",  "long brown hair")
     , hair_short_black (Category.hair_head, "hair-short-black", "short black hair")

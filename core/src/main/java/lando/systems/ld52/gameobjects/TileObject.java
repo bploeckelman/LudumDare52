@@ -1,6 +1,7 @@
 package lando.systems.ld52.gameobjects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import lando.systems.ld52.screens.GameScreen;
 
 public class TileObject implements GameObject{
     protected float margin = 5f;
@@ -25,7 +26,7 @@ public class TileObject implements GameObject{
      * Called when this tile object was collected with a click
      * @return
      */
-    public boolean collect() {
+    public boolean collect(GameScreen gameScreen) {
         return false;
     }
 }

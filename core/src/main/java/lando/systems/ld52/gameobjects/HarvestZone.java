@@ -11,6 +11,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.audio.AudioManager;
+import lando.systems.ld52.screens.BaseScreen;
+import lando.systems.ld52.screens.GameScreen;
 import lando.systems.ld52.utils.accessors.Vector2Accessor;
 
 import static lando.systems.ld52.Main.game;
@@ -172,7 +174,6 @@ public class HarvestZone {
                 // WTF? This should never happen, I am not going to throw an exception just in case though
                 currentPhase = HarvestPhase.cycle;
             } else {
-
                 switch(player.currentSide) {
                     case right:
                         scytheSpinTimeMultiplier = (7 - tileToHarvest.coord.x()) + 1;
@@ -191,11 +192,18 @@ public class HarvestZone {
 
                 float spinTime = scytheSpinTimeMultiplier * .1075f;
 
+                GameScreen _gameScreen = null;
+                BaseScreen screen = game.getScreenManager().getCurrentScreen();
+                if (screen instanceof GameScreen) {
+                    _gameScreen = (GameScreen) screen;
+                }
+                final GameScreen gameScreen = _gameScreen;
+
                 Timeline.createSequence().push(
                         Tween.set(scythe.position, Vector2Accessor.XY).target(startPos.x, startPos.y))
                         .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, spinTime).target(tileToHarvest.getCenter().x, tileToHarvest.getCenter().y))
                                 .push(Tween.to(scythe.rotation, 0, spinTime).target(-720)))
-                        .push(Tween.call((type, source) -> tileToHarvest.collect()))
+                        .push(Tween.call((type, source) -> tileToHarvest.collect(gameScreen)))
                         .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, spinTime).target(startPos.x, startPos.y))
                                 .push(Tween.to(scythe.rotation, 0, spinTime).target(0)))
                         .push(Tween.call((type, source) -> {

@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
+import lando.systems.ld52.screens.GameScreen;
 import lando.systems.ld52.utils.Coord;
 
 public class Tile {
@@ -58,9 +59,9 @@ public class Tile {
         return bounds.getCenter(center);
     }
 
-    public void collect() {
+    public void collect(GameScreen gameScreen) {
         if (object != null) {
-            object.collect();
+            object.collect(gameScreen);
             // TODO: remove me when we actually do things
             object = null;
         }
