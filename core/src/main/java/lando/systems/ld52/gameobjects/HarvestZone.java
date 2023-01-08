@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
+import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.utils.accessors.Vector2Accessor;
 
 import static lando.systems.ld52.Main.game;
