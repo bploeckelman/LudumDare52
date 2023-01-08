@@ -69,6 +69,7 @@ public class Player implements GameObject {
             _animTime = 0;
             if (harvestZone.currentPhase == HarvestZone.HarvestPhase.cycle) {
                 movePlayer();
+
             }
         }
 

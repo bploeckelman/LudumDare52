@@ -12,7 +12,10 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Main;
+import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.utils.accessors.Vector2Accessor;
+
+import static lando.systems.ld52.Main.game;
 
 public class HarvestZone {
 
@@ -38,7 +41,7 @@ public class HarvestZone {
         this.currentPhase = HarvestPhase.cycle;
         this.tilesLong = 5;
         this.startPos = new Vector2();
-        this.scythe = new Scythe(Main.game.assets);
+        this.scythe = new Scythe(game.assets);
         tileToHarvest = null;
     }
 
@@ -105,7 +108,7 @@ public class HarvestZone {
             float golfWidth = golfPosition * maxWidth;
             float golfX = startPos.x + MathUtils.cosDeg(rotation) * golfWidth;
             float golfY = startPos.y + MathUtils.sinDeg(rotation) * golfWidth;
-            batch.draw(Main.game.assets.circleTex, golfX - golfIndicatorSize/2f, golfY- golfIndicatorSize/2f, golfIndicatorSize, golfIndicatorSize);
+            batch.draw(game.assets.circleTex, golfX - golfIndicatorSize/2f, golfY- golfIndicatorSize/2f, golfIndicatorSize, golfIndicatorSize);
         }
         if (currentPhase == HarvestPhase.collection) {
             scythe.render(batch);
@@ -117,6 +120,7 @@ public class HarvestZone {
     public void handleClick() {
         if (currentPhase == HarvestPhase.cycle){
             currentPhase = HarvestPhase.golf;
+
             golfTimer = 0;
         } else if(currentPhase == HarvestPhase.golf) {
             currentPhase = HarvestPhase.collection;
@@ -152,7 +156,7 @@ public class HarvestZone {
                             currentPhase = HarvestPhase.cycle;
                             tileToHarvest = null;
                         }))
-                        .start(Main.game.tween);
+                        .start(game.tween);
             }
 
         }

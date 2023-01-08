@@ -23,6 +23,7 @@ public class AudioManager implements Disposable {
     public enum Sounds {
         none
         , settingSound
+        , swoosh1
     }
 
     public enum Musics {
@@ -45,6 +46,8 @@ public class AudioManager implements Disposable {
         this.tween = tween;
 
         putSound(Sounds.settingSound, assets.settingSound);
+        putSound(Sounds.swoosh1, assets.swoosh1);
+//        putSound(Sounds., assets.);
 //        putSound(Musics.mainTheme, assets.mainTheme);
 
         musics.put(Musics.mainTheme, assets.mainTheme);

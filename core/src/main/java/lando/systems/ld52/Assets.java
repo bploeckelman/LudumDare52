@@ -59,6 +59,7 @@ public class Assets implements Disposable {
     public ObjectMap<Feature, Animation<TextureRegion>> features;
 
     public Sound settingSound;
+    public Sound swoosh1;
 
     public Music mainTheme;
 
@@ -132,6 +133,8 @@ public class Assets implements Disposable {
             mgr.load("images/layout-alpha-1.png", Texture.class);
 
             mgr.load("audio/sounds/settingSound.ogg", Sound.class);
+            mgr.load("audio/sounds/swoosh1.ogg", Sound.class);
+
             mgr.load("audio/music/maintheme.ogg", Music.class);
 
 
@@ -228,6 +231,11 @@ public class Assets implements Disposable {
         NinePatches.shear                           = new NinePatch(atlas.findRegion("ninepatch/shear"),                   75, 75, 12, 12);
 
         settingSound = mgr.get("audio/sounds/settingSound.ogg", Sound.class);
+         swoosh1 = mgr.get("audio/sounds/swoosh1.ogg", Sound.class);
+//         = mgr.get("audio/sounds/.ogg", Sound.class);
+//         = mgr.get("audio/sounds/.ogg", Sound.class);
+//         = mgr.get("audio/sounds/.ogg", Sound.class);
+//         = mgr.get("audio/sounds/.ogg", Sound.class);
 
         mainTheme = mgr.get("audio/music/maintheme.ogg", Music.class);
 
