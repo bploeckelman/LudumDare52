@@ -146,7 +146,7 @@ public class GameScreen extends BaseScreen {
     public void render(float delta) {
         update(delta);
 
-        batch.setProjectionMatrix(worldCamera.combined);
+        batch.setProjectionMatrix(screenShaker.getCombinedMatrix());
         batch.begin();
         {
             batch.draw(background, 0, 0, worldCamera.viewportWidth, worldCamera.viewportHeight);
@@ -154,9 +154,14 @@ public class GameScreen extends BaseScreen {
             gameboard.render(batch);
             particles.draw(batch, Particles.Layer.middle);
             player.render(batch);
+            particles.draw(batch, Particles.Layer.foreground);
+        }
+        batch.end();
+        batch.setProjectionMatrix(windowCamera.combined);
+        batch.begin();
+        {
             hourglass.render(batch);
             playerUI.render(batch);
-            particles.draw(batch, Particles.Layer.foreground);
         }
         batch.end();
         uiStage.draw();

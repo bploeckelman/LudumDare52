@@ -64,8 +64,10 @@ public class Tile {
             object.collect(gameScreen);
             if (object.getClass() == TileTombstone.class) {
                 gameScreen.game.particles.explode(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2, bounds.width);
+                gameScreen.screenShaker.addDamage(25f);
             } else if (object.getClass() == TileHead.class) {
                 gameScreen.game.particles.bleed(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+                gameScreen.screenShaker.addDamage(100f);
             }
             // TODO: remove me when we actually do things
             object = null;
