@@ -44,7 +44,6 @@ public class Assets implements Disposable {
     public TextureRegion circleTex;
     public TextureRegion pixelRegion;
 
-
     public Animation<TextureRegion> cat;
     public Animation<TextureRegion> dog;
     public Animation<TextureRegion> kitten;
@@ -54,6 +53,7 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> playerBack;
     public Animation<TextureRegion> playerScythe;
     public Animation<TextureRegion> scythe;
+    public Animation<TextureRegion> tombstone;
 
     public ObjectMap<Head, Animation<TextureRegion>> heads;
     public ObjectMap<Feature, Animation<TextureRegion>> features;
@@ -172,6 +172,7 @@ public class Assets implements Disposable {
         playerScythe = new Animation<>(.2f, atlas.findRegions("player/scythe1"), Animation.PlayMode.LOOP);
 
         scythe = new Animation<>(.2f, atlas.findRegions("player/scythe"), Animation.PlayMode.LOOP);
+        tombstone = new Animation<>(.2f, atlas.findRegions("objects/tombstone"), Animation.PlayMode.LOOP);
 
         heads = new ObjectMap<>();
         for (Head head : Head.values()) {

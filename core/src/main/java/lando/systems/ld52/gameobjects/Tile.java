@@ -30,6 +30,8 @@ public class Tile {
         color.fromHsv(MathUtils.random(360f), .3f, .5f);
         if(MathUtils.randomBoolean(.5f)){
             object = new TileHead(assets, this);
+        } else if (MathUtils.randomBoolean(.33f)) {
+            object = new TileTombstone(assets, this);
         }
     }
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class TileObject implements GameObject{
     protected float margin = 5f;
+
     Tile tile;
 
     public TileObject(Tile tile) {
