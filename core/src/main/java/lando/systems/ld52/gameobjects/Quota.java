@@ -11,11 +11,22 @@ public class Quota {
 
     public static class Person {
         public final HashMap<Feature, Boolean> features = new HashMap<>();
+
+        // TODO - probably best to limit number of features to max of 3 so UI doesn't get nuts
         public void addAll(Feature... features) {
             for (Feature feature : features) {
                 this.features.put(feature, false);
             }
         }
+
+        public void satisfy(Array<Feature> features) {
+            for (Feature feature : features) {
+                if (this.features.containsKey(feature)) {
+                    this.features.put(feature, true);
+                }
+            }
+        }
+
         public boolean isSatisfied() {
             boolean satisfied = true;
             for (HashMap.Entry<Feature, Boolean> entry : features.entrySet()) {
@@ -30,6 +41,7 @@ public class Quota {
     }
 
     public final Source source;
+    // TODO - add a quantity modifier for each person (so we can say you need 2x or 3x people like this to fill the quota not just one)
     public final Array<Person> people;
 
     public Quota(Source source) {
@@ -43,11 +55,10 @@ public class Quota {
         people.add(person);
     }
 
-    // TODO - need to adjust this to set all features for the person who has been reaped
-    public void satisfy(Feature feature) {
-//        if (features.containsKey(feature)) {
-//            features.put(feature, true);
-//        }
+    public void satisfy(Array<Feature> features) {
+        for (Person person : people) {
+            person.satisfy(features);
+        }
     }
 
     public boolean isSatisfied() {
