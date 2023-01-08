@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.Main;
+import lando.systems.ld52.screens.GameScreen;
 
 public class GameBoard {
 
@@ -22,8 +23,10 @@ public class GameBoard {
     private final Tile[][] tiles;
 
     public Rectangle bounds;
+    public GameScreen screen;
 
-    public GameBoard(Assets assets) {
+    public GameBoard(Assets assets, GameScreen screen) {
+        this.screen = screen;
         bounds = new Rectangle(
                 (Config.Screen.window_width  - boardSize) / 2f,
                 (Config.Screen.window_height - boardSize) / 2f,
@@ -71,9 +74,22 @@ public class GameBoard {
 
         for (int x = 0; x < gridSize; x++){
             for (int y = 0; y < gridSize; y++) {
-                boolean highlighted = (x == 3 && y == 4);
-                tiles[x][y].render(batch, highlighted);
+                Tile t = tiles[x][y];
+                boolean highlighted = t.equals(screen.player.harvestZone.tileToHarvest);
+                t.render(batch, highlighted);
             }
         }
+    }
+
+    public Tile getTileAt(float worldX, float worldY) {
+        if (worldX < left() || worldX >= right() || worldY < bottom() || worldY >= top()) {
+            return null;
+        }
+        int xIndex = (int)((worldX - left())/bounds.width*gridSize);
+        int yIndex = (int)((worldY - bottom())/bounds.height*gridSize);
+
+        return tiles[xIndex][yIndex];
+
+        // something went wrong?
     }
 }

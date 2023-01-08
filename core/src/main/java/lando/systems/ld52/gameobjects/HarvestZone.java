@@ -24,12 +24,14 @@ public class HarvestZone {
     private float rotation;
     private float golfTimer;
     private float golfPosition;
+    public Tile tileToHarvest;
 
     public HarvestZone(Player player) {
         this.player = player;
         this.currentPhase = HarvestPhase.cycle;
         this.tilesLong = 5;
         this.startPos = new Vector2();
+        tileToHarvest = null;
     }
 
     public void update(float dt) {
@@ -104,6 +106,11 @@ public class HarvestZone {
             golfTimer = 0;
         } else if(currentPhase == HarvestPhase.golf) {
             currentPhase = HarvestPhase.cycle;
+            float maxWidth = (GameBoard.tileSize+GameBoard.margin) * tilesLong;
+            float golfWidth = golfPosition * maxWidth;
+            float golfX = startPos.x + MathUtils.cosDeg(rotation) * golfWidth;
+            float golfY = startPos.y + MathUtils.sinDeg(rotation) * golfWidth;
+            tileToHarvest = player.gameBoard.getTileAt(golfX, golfY);
         }
     }
 }
