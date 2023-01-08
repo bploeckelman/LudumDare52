@@ -94,6 +94,24 @@ public class Particles implements Disposable {
                 .init());
     }
 
+    public void bleed(float x, float y) {
+        TextureRegion keyframe = assets.particles.circle;
+        tempColor.set(Color.RED);
+        int numParticles = 50;
+        for (int i = 0; i < numParticles; ++i) {
+            activeParticles.get(Layer.foreground).add(Particle.initializer(particlePool.obtain())
+                    .keyframe(keyframe)
+                    .startPos(x, y)
+                    .velocityDirection(MathUtils.random(0, 360), MathUtils.random(-50, -25))
+                    .startSize(MathUtils.random(10, 16))
+                    .endSize(MathUtils.random(2, 8))
+                    .startAlpha(1f)
+                    .endAlpha(0f)
+                    .timeToLive(1f)
+                    .startColor(tempColor)
+                    .init());
+        }
+    }
 
     public void sparkle(float x, float y) {
         TextureRegion keyframe = assets.particles.sparkle;
