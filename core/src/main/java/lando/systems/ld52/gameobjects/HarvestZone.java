@@ -5,6 +5,7 @@ import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
@@ -35,6 +36,7 @@ public class HarvestZone {
     private float golfTimer;
     public float golfPosition;
     public Tile tileToHarvest;
+    private boolean touchLastFrame;
 
     public HarvestZone(Player player) {
         this.player = player;
@@ -43,9 +45,11 @@ public class HarvestZone {
         this.startPos = new Vector2();
         this.scythe = new Scythe(game.assets);
         tileToHarvest = null;
+        touchLastFrame = false;
     }
 
     public void update(float dt) {
+        handleInput();
         float tileSize = GameBoard.tileSize;
         int gridSize = GameBoard.gridSize;
         float moveLaneSize = 88f;
@@ -117,12 +121,14 @@ public class HarvestZone {
         batch.setColor(Color.WHITE);
     }
 
-    public void handleClick() {
-        if (currentPhase == HarvestPhase.cycle){
+    public void handleInput() {
+        boolean touched = Gdx.input.isTouched();
+
+        if (currentPhase == HarvestPhase.cycle && (touched && !touchLastFrame)){
             currentPhase = HarvestPhase.golf;
 
             golfTimer = 0;
-        } else if(currentPhase == HarvestPhase.golf) {
+        } else if(currentPhase == HarvestPhase.golf && (!touched && touchLastFrame)) {
             currentPhase = HarvestPhase.collection;
             // TODO: when we store this for gravestones, check this later
             float maxWidth = (GameBoard.tileSize+GameBoard.margin) * tilesLong;
@@ -148,7 +154,7 @@ public class HarvestZone {
                 Timeline.createSequence().push(
                         Tween.set(scythe.position, Vector2Accessor.XY).target(startPos.x, startPos.y))
                         .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, 1f).target(golfX, golfY))
-                                .push(Tween.to(scythe.rotation, 0, 1f).target(720)))
+                                .push(Tween.to(scythe.rotation, 0, 1f).target(-720)))
                         .push(Tween.call((type, source) -> tileToHarvest.collect()))
                         .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, 1f).target(startPos.x, startPos.y))
                                 .push(Tween.to(scythe.rotation, 0, 1f).target(0)))
@@ -160,5 +166,6 @@ public class HarvestZone {
             }
 
         }
+        touchLastFrame = touched;
     }
 }

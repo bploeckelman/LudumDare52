@@ -62,9 +62,6 @@ public class Player implements GameObject {
     @Override
     public void update(float dt) {
         _animTime += dt;
-        if (Gdx.input.justTouched()){
-            harvestZone.handleClick();
-        }
         if (_animTime > _moveTime) {
             _animTime = 0;
             if (harvestZone.currentPhase == HarvestZone.HarvestPhase.cycle) {
