@@ -85,11 +85,14 @@ public class GameBoard {
         if (worldX < left() || worldX >= right() || worldY < bottom() || worldY >= top()) {
             return null;
         }
-        int xIndex = (int)((worldX - left())/bounds.width*gridSize);
-        int yIndex = (int)((worldY - bottom())/bounds.height*gridSize);
+        try {
+            int xIndex = (int) ((worldX - left()) / bounds.width * gridSize);
+            int yIndex = (int) ((worldY - bottom()) / bounds.height * gridSize);
 
-        return tiles[xIndex][yIndex];
-
-        // something went wrong?
+            return tiles[xIndex][yIndex];
+        } catch (Exception ex) {
+            // something went wrong?
+            return null;
+        }
     }
 }

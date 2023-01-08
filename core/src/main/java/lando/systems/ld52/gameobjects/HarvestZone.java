@@ -111,6 +111,18 @@ public class HarvestZone {
             float golfX = startPos.x + MathUtils.cosDeg(rotation) * golfWidth;
             float golfY = startPos.y + MathUtils.sinDeg(rotation) * golfWidth;
             tileToHarvest = player.gameBoard.getTileAt(golfX, golfY);
+            if (tileToHarvest == null) { // Sorry Brian P
+                tileToHarvest = player.gameBoard.getTileAt(golfX - 20, golfY);
+                if (tileToHarvest == null) {
+                    tileToHarvest = player.gameBoard.getTileAt(golfX + 20, golfY);
+                    if (tileToHarvest == null) {
+                        tileToHarvest = player.gameBoard.getTileAt(golfX, golfY - 20);
+                        if (tileToHarvest == null) {
+                            tileToHarvest = player.gameBoard.getTileAt(golfX, golfY + 20);
+                        }
+                    }
+                }
+            }
         }
     }
 }
