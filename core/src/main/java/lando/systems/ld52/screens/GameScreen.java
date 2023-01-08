@@ -67,8 +67,19 @@ public class GameScreen extends BaseScreen {
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
         Gdx.app.log("Creating GameScreen", "Music");
 
-        heavenQuota = new Quota(roundDto.heaven);
-        hellQuota = new Quota(roundDto.hell);
+        heavenQuota = new Quota(Quota.Source.heaven);
+        hellQuota = new Quota(Quota.Source.hell);
+
+        heavenQuota.addPerson(
+                  Feature.getRandomFrom(Feature.Category.hair_head)
+                , Feature.getRandomFrom(Feature.Category.eye)
+                , Feature.getRandomFrom(Feature.Category.nose)
+        );
+        hellQuota.addPerson(
+                  Feature.getRandomFrom(Feature.Category.hair_head)
+                , Feature.getRandomFrom(Feature.Category.eye)
+                , Feature.getRandomFrom(Feature.Category.hair_face)
+        );
 
         QuotaListUI quotaListUI = gameScreenUI.rightSideUI.quotaListUI;
         quotaListUI.setQuotas(heavenQuota, hellQuota);

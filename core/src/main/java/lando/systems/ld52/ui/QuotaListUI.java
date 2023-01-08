@@ -66,25 +66,28 @@ public class QuotaListUI extends VisWindow {
         heavenQuotaTable.add(new VisLabel("Heaven", "outfit-medium-20px")).colspan(2).align(Align.top);
         heavenQuotaTable.row();
         if (heaven != null) {
-            for (Feature feature : heaven.features.keySet()) {
-                VisImage featureImage = new VisImage(new TextureRegionDrawable(assets.features.get(feature).getKeyFrame(0)));
-                VisLabel featureLabel = new VisLabel(feature.displayName, "outfit-medium-14px");
-                Stack imageStack = new Stack(
-                          new Container<>(new VisImage(imageBackground))
-                        , new Container<>(new VisImage(Head.get(assets, Head.a).getKeyFrame(0)))
-                        , new Container<>(featureImage)
-                );
-
-                Drawable background = new TextureRegionDrawable(assets.pixelRegion)
-                        .tint(heaven.features.get(feature) ? satisfiedBackgroundTint : backgroundTint);
-                VisTable innerTable = new VisTable();
-                innerTable.setBackground(background);
-                innerTable.add(imageStack).fill();
-                innerTable.add(featureLabel).fill().align(Align.center);
-
-                heavenQuotaTable.add(innerTable).fillX();
-                heavenQuotaTable.row();
-            }
+//            for (Quota.Person person : heaven.people) {
+//                for ()
+//            }
+//            for (Feature feature : heaven.features.keySet()) {
+//                VisImage featureImage = new VisImage(new TextureRegionDrawable(assets.features.get(feature).getKeyFrame(0)));
+//                VisLabel featureLabel = new VisLabel(feature.displayName, "outfit-medium-14px");
+//                Stack imageStack = new Stack(
+//                          new Container<>(new VisImage(imageBackground))
+//                        , new Container<>(new VisImage(Head.get(assets, Head.a).getKeyFrame(0)))
+//                        , new Container<>(featureImage)
+//                );
+//
+//                Drawable background = new TextureRegionDrawable(assets.pixelRegion)
+//                        .tint(heaven.features.get(feature) ? satisfiedBackgroundTint : backgroundTint);
+//                VisTable innerTable = new VisTable();
+//                innerTable.setBackground(background);
+//                innerTable.add(imageStack).fill();
+//                innerTable.add(featureLabel).fill().align(Align.center);
+//
+//                heavenQuotaTable.add(innerTable).fillX();
+//                heavenQuotaTable.row();
+//            }
         }
 
         hellQuotaTable.clear();
@@ -92,25 +95,25 @@ public class QuotaListUI extends VisWindow {
         hellQuotaTable.add(new VisLabel("Hell", "outfit-medium-20px")).colspan(2).align(Align.top);
         hellQuotaTable.row();
         if (hell != null) {
-            for (Feature feature : hell.features.keySet()) {
-                VisImage featureImage = new VisImage(new TextureRegionDrawable(assets.features.get(feature).getKeyFrame(0)));
-                VisLabel featureLabel = new VisLabel(feature.displayName, "outfit-medium-14px");
-                Stack imageStack = new Stack(
-                          new Container<>(new VisImage(imageBackground))
-                        , new Container<>(new VisImage(Head.get(assets, Head.a).getKeyFrame(0)))
-                        , new Container<>(featureImage)
-                );
-
-                Drawable background = new TextureRegionDrawable(assets.pixelRegion)
-                        .tint(hell.features.get(feature) ? satisfiedBackgroundTint : backgroundTint);
-                VisTable innerTable = new VisTable();
-                innerTable.setBackground(background);
-                innerTable.add(imageStack).fill();
-                innerTable.add(featureLabel).fill().align(Align.center);
-
-                hellQuotaTable.add(innerTable).fillX();
-                hellQuotaTable.row();
-            }
+//            for (Feature feature : hell.features.keySet()) {
+//                VisImage featureImage = new VisImage(new TextureRegionDrawable(assets.features.get(feature).getKeyFrame(0)));
+//                VisLabel featureLabel = new VisLabel(feature.displayName, "outfit-medium-14px");
+//                Stack imageStack = new Stack(
+//                          new Container<>(new VisImage(imageBackground))
+//                        , new Container<>(new VisImage(Head.get(assets, Head.a).getKeyFrame(0)))
+//                        , new Container<>(featureImage)
+//                );
+//
+//                Drawable background = new TextureRegionDrawable(assets.pixelRegion)
+//                        .tint(hell.features.get(feature) ? satisfiedBackgroundTint : backgroundTint);
+//                VisTable innerTable = new VisTable();
+//                innerTable.setBackground(background);
+//                innerTable.add(imageStack).fill();
+//                innerTable.add(featureLabel).fill().align(Align.center);
+//
+//                hellQuotaTable.add(innerTable).fillX();
+//                hellQuotaTable.row();
+//            }
         }
     }
 
