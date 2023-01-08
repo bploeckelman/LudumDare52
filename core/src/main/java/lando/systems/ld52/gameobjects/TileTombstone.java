@@ -18,6 +18,7 @@ public class TileTombstone extends TileObject {
         super(tile);
         tombstone = assets.tombstone;
         stateTime = 0f;
+        blocksHarvest = true;
     }
 
     @Override

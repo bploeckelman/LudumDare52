@@ -66,4 +66,11 @@ public class Tile {
             object = null;
         }
     }
+
+    public boolean blocks(){
+        if (object != null) {
+            return object.blocksHarvest;
+        }
+        return false;
+    }
 }

@@ -7,9 +7,11 @@ public class TileObject implements GameObject{
     protected float margin = 5f;
 
     Tile tile;
+    public boolean blocksHarvest;
 
     public TileObject(Tile tile) {
         this.tile = tile;
+        blocksHarvest = false;
     }
 
     @Override

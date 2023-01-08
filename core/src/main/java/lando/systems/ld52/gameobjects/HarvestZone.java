@@ -65,31 +65,44 @@ public class HarvestZone {
         float xPos, yPos;
 
         int side = player.boardPosition / gridSize;
+        int xDelta = 0;
+        int yDelta = 0;
 
-        switch (side) {
-            case 1: // right
+        switch (player.currentSide) {
+            case right: // right
                 rotation = 180;
+                xDelta = -1;
                 xPos = player.gameBoard.right();
                 yPos = player.gameBoard.top() - (tileSize + sideOffset) - ((sidePosition + 1) * GameBoard.margin) + tileSize/2f;
                 break;
-            case 2: // bottom
+            case bottom: // bottom
                 rotation = 90;
+                yDelta = 1;
                 xPos = player.gameBoard.right() - (tileSize + sideOffset) - ((sidePosition + 1) * GameBoard.margin) + tileSize/2f;
                 yPos = player.gameBoard.bottom();
                 break;
-            case 3: // left
+            case left: // left
                 rotation = 0;
+                xDelta = 1;
                 xPos = player.gameBoard.left();
                 yPos = player.gameBoard.bottom() + sideOffset + ((sidePosition + 1) * GameBoard.margin) + tileSize/2f;
                 break;
-            case 0: // top
+            case top: // top
             default:
                 rotation = 270;
+                yDelta = -1;
                 xPos = player.gameBoard.left() + sideOffset + ((sidePosition + 1) * GameBoard.margin) + tileSize/2f;
                 yPos = player.gameBoard.top();
                 break;
         }
         startPos.set(xPos, yPos);
+
+        for (int i = 1; i <= tilesLong; i++) {
+            currentPathLength = i;
+            if(player.gameBoard.tiles[player.currentCol + (i*xDelta)][player.currentRow + (i*yDelta)].blocks()) {
+                break;
+            }
+        }
 
         if (currentPhase == HarvestPhase.golf){
             float maxGolfTime = golfMaxTime * currentPathLength;
