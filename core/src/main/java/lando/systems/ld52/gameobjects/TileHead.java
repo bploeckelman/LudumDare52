@@ -3,17 +3,16 @@ package lando.systems.ld52.gameobjects;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
 import lando.systems.ld52.Assets;
+import lando.systems.ld52.Config;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.assets.Head;
 import lando.systems.ld52.screens.GameScreen;
 import lando.systems.ld52.ui.QuotaListUI;
-
-import java.util.Comparator;
-import java.util.function.ToIntFunction;
 
 public class TileHead extends TileObject {
 
@@ -91,6 +90,9 @@ public class TileHead extends TileObject {
             hellQuota.satisfy(feature);
         }
         quotaListUI.setQuotas(heavenQuota, hellQuota);
+        gameScreen.game.particles.lightning(new Vector2(tile.bounds.x + MathUtils.random(-150, 150), Config.Screen.window_height), new Vector2(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2));
+        gameScreen.game.particles.bleed(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2);
+        gameScreen.screenShaker.addDamage(100f);
         return true;
     }
 
