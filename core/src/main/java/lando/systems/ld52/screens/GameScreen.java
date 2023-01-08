@@ -16,12 +16,11 @@ import lando.systems.ld52.Main;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.gameobjects.*;
+import lando.systems.ld52.particles.Particles;
 import lando.systems.ld52.serialization.QuotaDto;
 import lando.systems.ld52.serialization.RoundDto;
 import lando.systems.ld52.ui.GameScreenUI;
 import lando.systems.ld52.ui.QuotaListUI;
-
-import java.util.HashMap;
 
 public class GameScreen extends BaseScreen {
 
@@ -33,6 +32,7 @@ public class GameScreen extends BaseScreen {
     public PlayerUI playerUI;
     private Music currentMusic;
     public GameScreenUI gameScreenUI;
+    public Particles particles;
 
     private TextureRegion background;
     public Quota heavenQuota;
@@ -58,6 +58,7 @@ public class GameScreen extends BaseScreen {
         player = new Player(assets, gameboard);
         hourglass = new Hourglass(assets);
         playerUI = new PlayerUI(player, assets);
+        this.particles = Main.game.particles;
 
         initializeUI();
         gameScreenUI = new GameScreenUI(windowCamera, assets);
@@ -149,10 +150,13 @@ public class GameScreen extends BaseScreen {
         batch.begin();
         {
             batch.draw(background, 0, 0, worldCamera.viewportWidth, worldCamera.viewportHeight);
+            particles.draw(batch, Particles.Layer.background);
             gameboard.render(batch);
+            particles.draw(batch, Particles.Layer.middle);
             player.render(batch);
             hourglass.render(batch);
             playerUI.render(batch);
+            particles.draw(batch, Particles.Layer.foreground);
         }
         batch.end();
         uiStage.draw();

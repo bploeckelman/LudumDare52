@@ -20,6 +20,7 @@ import de.eskalon.commons.core.ManagedGame;
 import de.eskalon.commons.screen.transition.ScreenTransition;
 import de.eskalon.commons.utils.BasicInputMultiplexer;
 import lando.systems.ld52.audio.AudioManager;
+import lando.systems.ld52.particles.Particles;
 import lando.systems.ld52.screens.*;
 import lando.systems.ld52.utils.Time;
 import lando.systems.ld52.utils.accessors.*;
@@ -30,6 +31,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 
 	public Assets assets;
 	public Engine engine;
+	public Particles particles;
 	public TweenManager tween;
 	public NestableFrameBuffer frameBuffer;
 	public TextureRegion frameBufferRegion;
@@ -72,6 +74,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 			Tween.registerAccessor(OrthographicCamera.class, new CameraAccessor());
 		};
 
+		particles = new Particles(assets);
 		audioManager = new AudioManager(assets, tween);
 		currentMusicPosition = 0f;
 
@@ -137,6 +140,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		// update systems
 		{
 			// TODO - need a way to separate 'pausable update' from 'always update' on entity components
+			particles.update(Time.delta);
 			engine.update(Time.delta);
 		}
 	}
@@ -152,6 +156,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		screenManager.getScreens().forEach(BaseScreen::dispose);
 		frameBuffer.dispose();
 		assets.dispose();
+		particles.dispose();
 	}
 
 }

@@ -11,10 +11,8 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.*;
+import lando.systems.ld52.assets.EffectAnims;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.assets.Head;
 import lando.systems.ld52.assets.InputPrompts;
@@ -31,6 +29,8 @@ public class Assets implements Disposable {
     public GlyphLayout layout;
     public AssetManager mgr;
     public TextureAtlas atlas;
+    public Particles particles;
+    public EffectAnims effectAnims;
 
     public I18NBundle strings;
     public InputPrompts inputPrompts;
@@ -55,6 +55,8 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> scythe;
     public Animation<TextureRegion> tombstone;
 
+    public Array<Animation<TextureRegion>> numberParticles;
+
     public ObjectMap<Head, Animation<TextureRegion>> heads;
     public ObjectMap<Feature, Animation<TextureRegion>> features;
 
@@ -77,6 +79,18 @@ public class Assets implements Disposable {
         public NinePatch ninePatch;
         public NinePatchDrawable drawable;
     }
+
+    public static class Particles {
+        public TextureRegion circle;
+        public TextureRegion sparkle;
+        public TextureRegion smoke;
+        public TextureRegion ring;
+        public TextureRegion dollar;
+        public TextureRegion blood;
+        public TextureRegion sparks;
+        public TextureRegion line;
+    }
+
 
     public static class NinePatches {
         public static NinePatch plain;
@@ -174,6 +188,7 @@ public class Assets implements Disposable {
         atlas = mgr.get("sprites/sprites.atlas");
         strings = mgr.get("i18n/strings", I18NBundle.class);
         inputPrompts = new InputPrompts(this);
+        effectAnims = new EffectAnims(this);
 
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");
         font      = mgr.get("fonts/outfit-medium-40px.fnt");
@@ -249,6 +264,21 @@ public class Assets implements Disposable {
         NinePatches.metal_yellow                    = new NinePatch(atlas.findRegion("ninepatch/metal-yellow"),            12, 12, 12, 12);
         NinePatches.panel_grey                      = new NinePatch(atlas.findRegion("kenney-uipack/grey_panel"),           8,  8,  8,  8);
         NinePatches.shear                           = new NinePatch(atlas.findRegion("ninepatch/shear"),                   75, 75, 12, 12);
+
+        // initialize particle images
+        particles = new Particles();
+        particles.circle  = atlas.findRegion("particles/circle");
+        particles.ring    = atlas.findRegion("particles/ring");
+        particles.smoke   = atlas.findRegion("particles/smoke");
+        particles.sparkle = atlas.findRegion("particles/sparkle");
+        particles.dollar  = atlas.findRegion("particles/dollars");
+        particles.blood   = atlas.findRegion("characters/blood-stain");
+        particles.sparks  = atlas.findRegion("particles/sparks");
+        particles.line    = atlas.findRegion("particles/line");
+        numberParticles = new Array<>();
+        for (int i = 0; i <= 9; ++i) {
+            numberParticles.add(new Animation<>(0.1f, atlas.findRegions("particles/font-points-" + i)));
+        }
 
         settingSound = mgr.get("audio/sounds/settingSound.ogg", Sound.class);
          swoosh1 = mgr.get("audio/sounds/swoosh1.ogg", Sound.class);

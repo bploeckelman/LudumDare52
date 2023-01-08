@@ -62,6 +62,7 @@ public class Tile {
     public void collect(GameScreen gameScreen) {
         if (object != null) {
             object.collect(gameScreen);
+            gameScreen.game.particles.explode(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2, bounds.width);
             // TODO: remove me when we actually do things
             object = null;
         }
