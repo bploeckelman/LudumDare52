@@ -27,6 +27,7 @@ public class PlayerUI implements GameObject {
         stateTime = 0f;
     }
 
+    private boolean collect = false;
     @Override
     public void update(float dt) {
         stateTime += dt;
@@ -38,10 +39,15 @@ public class PlayerUI implements GameObject {
                 current = idle;
                 break;
             case golf:
+                collect = false;
                 current = backswing;
                 stateTime = backswing.getAnimationDuration() * harvestZone.golfPosition;
                 break;
             case collection:
+                if (!collect) {
+                    stateTime = 0;
+                    collect = true;
+                }
                 current = swing;
                 break;
         }

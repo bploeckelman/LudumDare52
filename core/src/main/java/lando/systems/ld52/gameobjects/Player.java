@@ -26,7 +26,7 @@ public class Player implements GameObject {
     private boolean _flipped;
 
     private float _animTime = 0;
-    private float _moveTime = 1;
+    private float _moveTime = 0.86f;
 
     private MoveDirection _moveDirection = MoveDirection.clockwise;
 
