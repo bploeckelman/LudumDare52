@@ -20,7 +20,6 @@ public class GameScreen extends BaseScreen {
     public GameBoard gameboard;
 
     public Player player;
-    public Scythe scythe;
 
     private float stateTime = 0;
     private GameScreenUI gameScreenUI;
@@ -39,7 +38,6 @@ public class GameScreen extends BaseScreen {
         background = new TextureRegion(assets.gameScreenLayout);
 
         player = new Player(assets, gameboard);
-        scythe = new Scythe(assets);
         hourglass = new Hourglass(assets);
         playerUI = new PlayerUI(player, assets);
 
@@ -78,7 +76,6 @@ public class GameScreen extends BaseScreen {
         stateTime += delta;
         gameboard.update(delta);
         player.update(delta);
-        scythe.update(delta);
         hourglass.update(delta);
         playerUI.update(delta);
     }
@@ -93,7 +90,6 @@ public class GameScreen extends BaseScreen {
             batch.draw(background, 0, 0, worldCamera.viewportWidth, worldCamera.viewportHeight);
             gameboard.render(batch);
             player.render(batch);
-            scythe.render(batch);
             hourglass.render(batch);
             playerUI.render(batch);
         }

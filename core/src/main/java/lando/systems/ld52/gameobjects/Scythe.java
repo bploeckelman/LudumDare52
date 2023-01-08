@@ -1,5 +1,6 @@
 package lando.systems.ld52.gameobjects;
 
+import aurelienribon.tweenengine.primitives.MutableFloat;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,15 +22,15 @@ public class Scythe implements GameObject {
     private float paused = 0f;
     private int direction = 1;
 
-    private float rotation;
+    public MutableFloat rotation;
     private final Vector2 size;
     private final Vector2 scale;
-    private final Vector2 position;
+    public Vector2 position;
 
     public Scythe(Assets assets) {
         this.animation = assets.scythe;
         this.stateTime = 0;
-        this.rotation = 0;
+        this.rotation = new MutableFloat(0);
         this.size = new Vector2(64, 64);
         this.scale = new Vector2(1, 1);
         TextureRegion keyframe = animation.getKeyFrame(stateTime);
@@ -40,43 +41,43 @@ public class Scythe implements GameObject {
 
     @Override
     public void update(float dt) {
-        stateTime += dt;
-
-        paused -= dt;
-        if (paused <= 0) {
-            paused = 0;
-        }
-
-        if (paused == 0) {
-            elapsed += direction * dt;
-            if (elapsed <= 0 || elapsed >= lifetime) {
-                direction *= -1;
-                paused = pausetime;
-            }
-            elapsed = MathUtils.clamp(elapsed, 0, lifetime);
-        }
-
-        float progress = Calc.min(elapsed / lifetime, 1f); // 0 <-> 1
-        float t = Interpolation.fastSlow.apply(progress);
-
-        float speed = 1000;
-        rotation -= (t * speed) * dt;
-
-        float minPos = (88 - size.x) / 2f;
-        float maxPos = 560;
-        position.y = minPos + t * (maxPos - minPos);
+//        stateTime += dt;
+//
+//        paused -= dt;
+//        if (paused <= 0) {
+//            paused = 0;
+//        }
+//
+//        if (paused == 0) {
+//            elapsed += direction * dt;
+//            if (elapsed <= 0 || elapsed >= lifetime) {
+//                direction *= -1;
+//                paused = pausetime;
+//            }
+//            elapsed = MathUtils.clamp(elapsed, 0, lifetime);
+//        }
+//
+//        float progress = Calc.min(elapsed / lifetime, 1f); // 0 <-> 1
+//        float t = Interpolation.fastSlow.apply(progress);
+//
+//        float speed = 1000;
+//        rotation -= (t * speed) * dt;
+//
+//        float minPos = (88 - size.x) / 2f;
+//        float maxPos = 560;
+//        position.y = minPos + t * (maxPos - minPos);
     }
 
     @Override
     public void render(SpriteBatch batch) {
         TextureRegion keyframe = animation.getKeyFrame(stateTime);
         batch.draw(keyframe,
-                position.x, position.y,
+                position.x - size.x/2f, position.y - size.y/2f,
                 keyframe.getRegionWidth() / 2f,
                 keyframe.getRegionHeight() / 2f,
                 size.x, size.y,
                 scale.x, scale.y,
-                rotation
+                rotation.floatValue()
         );
     }
 

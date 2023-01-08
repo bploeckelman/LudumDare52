@@ -50,4 +50,12 @@ public class Tile {
             Assets.Patch.debug.ninePatch.draw(batch, bounds.x, bounds.y, bounds.width, bounds.height);
         }
     }
+
+    public void collect() {
+        if (object != null) {
+            object.collect();
+            // TODO: remove me when we actually do things
+            object = null;
+        }
+    }
 }
