@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
+import lando.systems.ld52.Config;
 import lando.systems.ld52.screens.GameScreen;
 import lando.systems.ld52.utils.Coord;
 
@@ -62,6 +63,7 @@ public class Tile {
     public void collect(GameScreen gameScreen) {
         if (object != null) {
             object.collect(gameScreen);
+            gameScreen.game.particles.lightning(new Vector2(bounds.x + MathUtils.random(-150, 150), Config.Screen.window_height), new Vector2(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2));
             if (object.getClass() == TileTombstone.class) {
                 gameScreen.game.particles.explode(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2, bounds.width);
                 gameScreen.screenShaker.addDamage(25f);

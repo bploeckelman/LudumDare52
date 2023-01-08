@@ -113,6 +113,28 @@ public class Particles implements Disposable {
         }
     }
 
+    Vector2 tempStart = new Vector2();
+    public void lightning(Vector2 start, Vector2 end) {
+        tempStart.set(start).add(10, 40);
+        TextureRegion keyframe = assets.particles.line;
+        float dist = tempStart.dst(end);
+        tempVec2.set(end).sub(tempStart).nor();
+        float angle = tempVec2.angleDeg();
+        for (int i = 0; i < dist/5f; i++) {
+            float size = MathUtils.random(8f, 30f);
+            activeParticles.get(Layer.foreground).add(Particle.initializer(particlePool.obtain())
+                    .keyframe(keyframe)
+                    .startPos(tempStart.x + tempVec2.x * (5*i), tempStart.y + tempVec2.y * (5*i))
+                    .startSize(size, 15)
+                    .startColor(1f, 1f, 0, 1f)
+                    .endColor(.3f, .3f, .3f, .3f)
+                    .startRotation(angle + MathUtils.random(-30, 30))
+                    .timeToLive(.8f * i / (dist/5f))
+                    .init()
+            );
+        }
+    }
+
     public void sparkle(float x, float y) {
         TextureRegion keyframe = assets.particles.sparkle;
         tempColor.set(Color.WHITE);
