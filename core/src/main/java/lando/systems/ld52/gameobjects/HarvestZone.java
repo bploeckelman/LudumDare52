@@ -23,7 +23,7 @@ public class HarvestZone {
 
     private static final float golfIndicatorSize = 8f;
     private static final float golfMaxTime = .215f; // Time it takes to go one tile
-    private static final int tilesStart = 4;
+    private static final int tilesStart = 3;
     private final Interpolation golfInterpolation = Interpolation.slowFast;
 
     private final Player player;
