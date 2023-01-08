@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
+import lando.systems.ld52.data.TileData;
 import lando.systems.ld52.screens.GameScreen;
 import lando.systems.ld52.utils.Coord;
 
@@ -20,7 +21,7 @@ public class Tile {
     // Debug probably
     public Color color;
 
-    public Tile(Assets assets, int x, int y, float tileSize, GameBoard board) {
+    public Tile(Assets assets, int x, int y, float tileSize, GameBoard board, TileData tileData) {
         texture = assets.atlas.findRegion("tiles/tile");
         coord = Coord.at(x, y);
         bounds = new Rectangle(
@@ -29,10 +30,14 @@ public class Tile {
                 tileSize, tileSize);
         color = new Color(1f, 1f, 1f, 1f);
         color.fromHsv(MathUtils.random(360f), .3f, .5f);
-        if(MathUtils.randomBoolean(.5f)){
-            object = new TileHead(assets, this);
-        } else if (MathUtils.randomBoolean(.33f)) {
-            object = new TileTombstone(assets, this);
+
+        switch (tileData.type) {
+            case obstacle:
+                object = new TileTombstone(assets, this);
+                break;
+            case character:
+                object = new TileHead(assets, this, tileData);
+                break;
         }
     }
 

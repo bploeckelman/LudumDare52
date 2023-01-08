@@ -11,6 +11,7 @@ import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.assets.Head;
+import lando.systems.ld52.data.TileData;
 import lando.systems.ld52.screens.GameScreen;
 import lando.systems.ld52.ui.QuotaListUI;
 
@@ -22,7 +23,7 @@ public class TileHead extends TileObject {
     private final Animation<TextureRegion> headAnim;
     private final OrderedMap<Feature, Animation<TextureRegion>> featureAnims;
 
-    public TileHead(Assets assets, Tile tile) {
+    public TileHead(Assets assets, Tile tile, TileData tileData) {
         super(tile);
         stateTime = 0f;
 
@@ -31,10 +32,14 @@ public class TileHead extends TileObject {
 
         // pick random features from each category in category layer order
         Array<Feature> features = new Array<>();
-        for (Feature.Category category : Feature.Category.values()) {
-            Feature feature = Feature.getRandomFrom(category);
-            features.add(feature);
-        }
+        features.add(Feature.getFeature(tileData.clothes, Feature.Category.clothes));
+        features.add(Feature.getFeature(tileData.eye, Feature.Category.eye));
+        features.add(Feature.getFeature(tileData.nose, Feature.Category.nose));
+        features.add(Feature.getFeature(tileData.mouth, Feature.Category.mouth));
+        features.add(Feature.getFeature(tileData.hair_face, Feature.Category.hair_face));
+        features.add(Feature.getFeature(tileData.hair_head, Feature.Category.hair_head));
+        // features.add(Feature.getFeature(tileData.hat, Feature.Category.hat));
+        // features.add(Feature.getFeature(tileData.neck, Feature.Category.neck));
 
         // populate feature -> anim map based on the selected features
         featureAnims = new OrderedMap<>();

@@ -1,10 +1,15 @@
 package lando.systems.ld52.gameobjects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.Main;
+import lando.systems.ld52.assets.Feature;
+import lando.systems.ld52.data.RoundData;
+import lando.systems.ld52.data.TileData;
+import lando.systems.ld52.data.TileType;
 import lando.systems.ld52.screens.GameScreen;
 
 public class GameBoard {
@@ -32,11 +37,14 @@ public class GameBoard {
                 (Config.Screen.window_height - boardSize) / 2f,
                 boardSize, boardSize);
 
+        // this will get passed in
+        RoundData roundData = new RoundData();
+
         tiles = new Tile[gridSize][];
         for (int x = 0; x < gridSize; x++){
             tiles[x] = new Tile[gridSize];
             for (int y = 0; y < gridSize; y++) {
-                tiles[x][y] = new Tile(assets, x, y, tileSize, this);
+                tiles[x][y] = new Tile(assets, x, y, tileSize, this, roundData.tileData[x][y]);
             }
         }
     }

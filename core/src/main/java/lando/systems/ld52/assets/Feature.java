@@ -74,4 +74,7 @@ public enum Feature {
         return features.get(MathUtils.random(0, features.size - 1));
     }
 
+    public static Feature getFeature(Feature feature, Category category) {
+        return feature != null ? feature : getRandomFrom(category);
+    }
 }
