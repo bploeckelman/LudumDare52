@@ -6,10 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.audio.AudioManager;
-import lando.systems.ld52.gameobjects.GameBoard;
-import lando.systems.ld52.gameobjects.Hourglass;
-import lando.systems.ld52.gameobjects.Player;
-import lando.systems.ld52.gameobjects.Scythe;
+import lando.systems.ld52.gameobjects.*;
 import lando.systems.ld52.ui.GameScreenUI;
 
 import java.util.ArrayList;
@@ -24,11 +21,11 @@ public class GameScreen extends BaseScreen {
 
     public Player player;
     public Scythe scythe;
-    public Hourglass hourglass;
 
     private float stateTime = 0;
     private GameScreenUI gameScreenUI;
-
+    public Hourglass hourglass;
+    public PlayerUI playerUI;
     private List<Feature> quotaFeatureList;
 
     @Override
@@ -44,6 +41,7 @@ public class GameScreen extends BaseScreen {
         player = new Player(assets, gameboard);
         scythe = new Scythe(assets);
         hourglass = new Hourglass(assets);
+        playerUI = new PlayerUI(assets);
 
         initializeUI();
         gameScreenUI = new GameScreenUI(windowCamera, assets);
@@ -82,6 +80,7 @@ public class GameScreen extends BaseScreen {
         player.update(delta);
         scythe.update(delta);
         hourglass.update(delta);
+        playerUI.update(delta);
     }
 
     @Override
@@ -96,6 +95,7 @@ public class GameScreen extends BaseScreen {
             player.render(batch);
             scythe.render(batch);
             hourglass.render(batch);
+            playerUI.render(batch);
         }
         batch.end();
         uiStage.draw();
