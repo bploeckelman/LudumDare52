@@ -3,6 +3,7 @@ package lando.systems.ld52.gameobjects;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
@@ -155,11 +156,15 @@ public class GameBoard {
     }
 
     public int getSecondsLeft() {
-        return (int)Math.ceil(timer);
+        int displaySeconds = (int)Math.ceil(timer);
+        if (displaySeconds < 0){
+            displaySeconds = 0;
+        }
+        return displaySeconds;
     }
 
     public float getTimerPercent() {
-        return (timer/ MAX_TIME_IN_SECONDS);
+        return MathUtils.clamp(timer/ MAX_TIME_IN_SECONDS,0, 1f);
     }
 
     public Tile getTileAt(float worldX, float worldY) {
