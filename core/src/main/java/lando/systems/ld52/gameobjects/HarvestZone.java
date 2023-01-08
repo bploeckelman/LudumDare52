@@ -1,10 +1,7 @@
 package lando.systems.ld52.gameobjects;
 
-import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -13,8 +10,6 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
-import lando.systems.ld52.Main;
-import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.utils.accessors.Vector2Accessor;
 
 import static lando.systems.ld52.Main.game;
@@ -23,17 +18,17 @@ public class HarvestZone {
 
     public enum HarvestPhase { cycle, golf, collection}
 
-    private final float golfIndicatorSize = 8f;
-    private final float golfMaxTime = .25f; // Time it takes to go one tile
-    private final int tilesStart = 4;
+    private static final float golfIndicatorSize = 8f;
+    private static final float golfMaxTime = .25f; // Time it takes to go one tile
+    private static final int tilesStart = 4;
     private final Interpolation golfInterpolation = Interpolation.slowFast;
 
-    private Player player;
+    private final Player player;
     public Scythe scythe;
 
     public HarvestPhase currentPhase;
     public int tilesLong;
-    private Vector2 startPos;
+    private final Vector2 startPos;
     private float rotation;
     private float golfTimer;
     public float golfPosition;
@@ -54,7 +49,6 @@ public class HarvestZone {
         handleInput();
         float tileSize = GameBoard.tileSize;
         int gridSize = GameBoard.gridSize;
-        float moveLaneSize = 88f;
 
         int sidePosition = (player.boardPosition % gridSize);
         float sideOffset = sidePosition * tileSize;
@@ -130,12 +124,15 @@ public class HarvestZone {
     }
 
     public void handleInput() {
+        // TODO: remove this before release
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             adjustRange(1);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
             adjustRange(-1);
         }
+
+
         boolean touched = Gdx.input.isTouched();
 
         if (currentPhase == HarvestPhase.cycle && (touched && !touchLastFrame)){
@@ -163,6 +160,7 @@ public class HarvestZone {
             }
             if (tileToHarvest == null) {
                 // WTF? This should never happen, I am not going to throw an exception just in case though
+                currentPhase = HarvestPhase.cycle;
             } else {
                 Timeline.createSequence().push(
                         Tween.set(scythe.position, Vector2Accessor.XY).target(startPos.x, startPos.y))
