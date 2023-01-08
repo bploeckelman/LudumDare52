@@ -59,6 +59,8 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> playerScythe;
     public Animation<TextureRegion> scythe;
     public Animation<TextureRegion> tombstone;
+    public Animation<TextureRegion> cornerIdle;
+    public Animation<TextureRegion> cornerAction;
 
     public Array<Animation<TextureRegion>> numberParticles;
 
@@ -223,6 +225,8 @@ public class Assets implements Disposable {
 
         scythe = new Animation<>(.2f, atlas.findRegions("player/scythe"), Animation.PlayMode.LOOP);
         tombstone = new Animation<>(.2f, atlas.findRegions("objects/tombstone"), Animation.PlayMode.LOOP);
+        cornerIdle = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-idle/walkpath-corner-a-idle"), Animation.PlayMode.LOOP);
+        cornerAction = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-action/walkpath-corner-a-action"), Animation.PlayMode.NORMAL);
 
         heads = new ObjectMap<>();
         for (Head head : Head.values()) {

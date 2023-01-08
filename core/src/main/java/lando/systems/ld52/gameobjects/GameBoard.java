@@ -1,16 +1,14 @@
 package lando.systems.ld52.gameobjects;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.Main;
-import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.data.RoundData;
-import lando.systems.ld52.data.TileData;
-import lando.systems.ld52.data.TileType;
 import lando.systems.ld52.screens.GameScreen;
 
 public class GameBoard {
@@ -26,6 +24,16 @@ public class GameBoard {
     public final static float margin = 6;
     public final static float tileSize = (boardSize - (gridSize + 1) * margin) / (gridSize);
 
+    private final static float walkPathSize = 100;
+
+    private final Vector2 cornerPosTopLeft = new Vector2(280, 590);
+    private final Vector2 cornerPosTopRight = new Vector2(868, 590);
+    private final Vector2 cornerPosBottomLeft = new Vector2(280, 0);
+    private final Vector2 cornerPosBottomRight = new Vector2(870, 0);
+    private final Animation<TextureRegion> cornerIdleAnim;
+    private final Animation<TextureRegion> cornerActionAnim;
+    private float cornerStateTime;
+
     public final Tile[][] tiles;
 
     public Rectangle bounds;
@@ -37,6 +45,10 @@ public class GameBoard {
                 (Config.Screen.window_width  - boardSize) / 2f,
                 (Config.Screen.window_height - boardSize) / 2f,
                 boardSize, boardSize);
+
+        cornerIdleAnim = assets.cornerIdle;
+        cornerActionAnim = assets.cornerAction;
+        cornerStateTime = 0f;
 
         tiles = new Tile[gridSize][];
         for (int x = 0; x < gridSize; x++){
@@ -69,6 +81,8 @@ public class GameBoard {
                 tiles[x][y].update(dt);
             }
         }
+
+        cornerStateTime += dt;
     }
 
     public void render(SpriteBatch batch) {
@@ -85,6 +99,54 @@ public class GameBoard {
                 t.render(batch, highlighted);
             }
         }
+
+        // draw edge animations
+        // TODO - only animate the edge that the reap-o man is currently traversing
+
+        // render corner animations
+        // TODO - figure out which animation is appropriate for each
+        //  and draw that keyframe rather than only the idle one
+        TextureRegion keyframe;
+
+        // top left
+        keyframe = cornerIdleAnim.getKeyFrame(cornerStateTime);
+        batch.draw(keyframe, cornerPosTopLeft.x, cornerPosTopLeft.y);
+
+        // top right
+        keyframe = cornerIdleAnim.getKeyFrame(cornerStateTime);
+        batch.draw(keyframe,
+                cornerPosTopRight.x, cornerPosTopRight.y,
+                keyframe.getRegionWidth() / 2f,
+                keyframe.getRegionHeight() / 2f,
+                keyframe.getRegionWidth(),
+                keyframe.getRegionHeight(),
+                1f, 1f,
+                -90
+        );
+
+        // bottom right
+        keyframe = cornerIdleAnim.getKeyFrame(cornerStateTime);
+        batch.draw(keyframe,
+                cornerPosBottomRight.x, cornerPosBottomRight.y,
+                keyframe.getRegionWidth() / 2f,
+                keyframe.getRegionHeight() / 2f,
+                keyframe.getRegionWidth(),
+                keyframe.getRegionHeight(),
+                1f, 1f,
+                -180
+        );
+
+        // bottom left
+        keyframe = cornerIdleAnim.getKeyFrame(cornerStateTime);
+        batch.draw(keyframe,
+                cornerPosBottomLeft.x, cornerPosBottomLeft.y,
+                keyframe.getRegionWidth() / 2f,
+                keyframe.getRegionHeight() / 2f,
+                keyframe.getRegionWidth(),
+                keyframe.getRegionHeight(),
+                1f, 1f,
+                -270
+        );
     }
 
     public Tile getTileAt(float worldX, float worldY) {
