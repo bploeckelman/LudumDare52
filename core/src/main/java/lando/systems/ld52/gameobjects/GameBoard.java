@@ -36,24 +36,26 @@ public class GameBoard {
     private final Animation<TextureRegion> cornerActionAnim;
     private float cornerStateTime;
 
-    public final Tile[][] tiles;
+    public Tile[][] tiles;
 
     public Rectangle bounds;
     public GameScreen screen;
     public float timer;
 
-    public GameBoard(Assets assets, GameScreen screen, RoundData roundData) {
+    public GameBoard(GameScreen screen, Assets assets) {
         this.screen = screen;
         timer = MAX_TIME_IN_SECONDS;
         bounds = new Rectangle(
-                (Config.Screen.window_width  - boardSize) / 2f,
+                (Config.Screen.window_width - boardSize) / 2f,
                 (Config.Screen.window_height - boardSize) / 2f,
                 boardSize, boardSize);
-
+     
         cornerIdleAnim = assets.cornerIdle;
         cornerActionAnim = assets.cornerAction;
         cornerStateTime = 0f;
-
+    }
+    
+    public void setupBoard(Assets assets, RoundData roundData) {
         tiles = new Tile[gridSize][];
         for (int x = 0; x < gridSize; x++){
             tiles[x] = new Tile[gridSize];

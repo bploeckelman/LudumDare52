@@ -50,24 +50,8 @@ public class GameScreen extends BaseScreen {
         worldCam.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCam.update();
 
-        heavenQuota = new Quota(Quota.Source.heaven);
-        hellQuota = new Quota(Quota.Source.hell);
+        gameboard = new GameBoard(this, assets);
 
-        heavenQuota.addPerson(
-                Feature.getRandomFrom(Feature.Category.hair_head)
-                , Feature.getRandomFrom(Feature.Category.eye)
-                , Feature.getRandomFrom(Feature.Category.nose)
-        );
-        hellQuota.addPerson(
-                Feature.getRandomFrom(Feature.Category.hair_head)
-                , Feature.getRandomFrom(Feature.Category.eye)
-                , Feature.getRandomFrom(Feature.Category.hair_face)
-        );
-
-        RoundDto roundDto = new RoundDto();
-        RoundData roundData = getRoundData(roundDto, heavenQuota, hellQuota);
-
-        gameboard = new GameBoard(assets, this, roundData);
         background = new TextureRegion(assets.gameScreenLayout);
 
         player = new Player(assets, gameboard);
@@ -82,13 +66,45 @@ public class GameScreen extends BaseScreen {
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
         Gdx.app.log("Creating GameScreen", "Music");
 
+        setRound(0);
+    }
+
+    private int _roundNumber = 0;
+    public void nextRound() {
+        if (++_roundNumber > 5) {
+            _roundNumber = 0;
+        }
+        setRound(_roundNumber);
+    }
+
+    public void setRound(int round) {
+        heavenQuota = new Quota(Quota.Source.heaven);
+        hellQuota = new Quota(Quota.Source.hell);
+
+        heavenQuota.addPerson(
+                Feature.getRandomFrom(Feature.Category.hair_head)
+                , Feature.getRandomFrom(Feature.Category.eye)
+                , Feature.getRandomFrom(Feature.Category.nose)
+        );
+        hellQuota.addPerson(
+                Feature.getRandomFrom(Feature.Category.hair_head)
+                , Feature.getRandomFrom(Feature.Category.eye)
+                , Feature.getRandomFrom(Feature.Category.hair_face)
+        );
+
         QuotaListUI quotaListUI = gameScreenUI.rightSideUI.quotaListUI;
         quotaListUI.setQuotas(heavenQuota, hellQuota);
         quotaToastShown = false;
+
+        RoundDto roundDto = RoundDto.fromJson("{tileDtos:[[{},{},{},{},{},{}],[{tileType:obstacle},{tileType:character_hell,quotaIndex:1},{},{},{tileType:character_rando},{tileType:obstacle}],[{},{},{},{},{},{}],[{},{},{tileType:obstacle},{tileType:character_heaven,quotaIndex:1},{},{}],[{},{tileType:character_rando},{},{tileType:obstacle},{},{}],[{},{},{},{},{},{tileType:character_rando}]]}");
+        RoundData roundData = getRoundData(roundDto, heavenQuota, hellQuota);
+        gameboard.setupBoard(assets, roundData);
     }
 
     private RoundData getRoundData(RoundDto roundDto, Quota heavenQuota, Quota hellQuota) {
         RoundData roundData = new RoundData();
+
+        // TODO - to ensure random characters don't generate heaven/hell character
 
         for (int x = 0; x < roundDto.tileDtos.length; x++) {
             for (int y = 0; y < roundDto.tileDtos[x].length; y++) {
@@ -177,6 +193,12 @@ public class GameScreen extends BaseScreen {
     public void update(float delta) {
         super.update(delta);
         playerUI.update(delta);
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
+            nextRound();
+            return;
+        }
+
         if (quotaToastShown) {
             return;
         }
