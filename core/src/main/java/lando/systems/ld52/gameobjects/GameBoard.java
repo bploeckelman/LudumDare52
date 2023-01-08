@@ -3,6 +3,7 @@ package lando.systems.ld52.gameobjects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Json;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.Main;
@@ -30,15 +31,12 @@ public class GameBoard {
     public Rectangle bounds;
     public GameScreen screen;
 
-    public GameBoard(Assets assets, GameScreen screen) {
+    public GameBoard(Assets assets, GameScreen screen, RoundData roundData) {
         this.screen = screen;
         bounds = new Rectangle(
                 (Config.Screen.window_width  - boardSize) / 2f,
                 (Config.Screen.window_height - boardSize) / 2f,
                 boardSize, boardSize);
-
-        // this will get passed in
-        RoundData roundData = new RoundData();
 
         tiles = new Tile[gridSize][];
         for (int x = 0; x < gridSize; x++){

@@ -15,10 +15,13 @@ import lando.systems.ld52.Config;
 import lando.systems.ld52.Main;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.audio.AudioManager;
+import lando.systems.ld52.data.RoundData;
+import lando.systems.ld52.data.TileData;
+import lando.systems.ld52.data.TileType;
 import lando.systems.ld52.gameobjects.*;
 import lando.systems.ld52.particles.Particles;
-import lando.systems.ld52.serialization.QuotaDto;
 import lando.systems.ld52.serialization.RoundDto;
+import lando.systems.ld52.serialization.TileDto;
 import lando.systems.ld52.ui.GameScreenUI;
 import lando.systems.ld52.ui.QuotaListUI;
 
@@ -47,12 +50,24 @@ public class GameScreen extends BaseScreen {
         worldCam.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCam.update();
 
-        // String roundData = getRandomRound();
-        // these can be final Strings in a class
-        String roundData = "{heaven:{source:heaven,features:[hair_long_brown,nose_normal,tongue]},hell:{source:hell,features:[clean_shaven,eyepatch_a,tongue]}}";
-        RoundDto roundDto = RoundDto.fromJson(roundData);
+        heavenQuota = new Quota(Quota.Source.heaven);
+        hellQuota = new Quota(Quota.Source.hell);
 
-        gameboard = new GameBoard(assets, this);
+        heavenQuota.addPerson(
+                Feature.getRandomFrom(Feature.Category.hair_head)
+                , Feature.getRandomFrom(Feature.Category.eye)
+                , Feature.getRandomFrom(Feature.Category.nose)
+        );
+        hellQuota.addPerson(
+                Feature.getRandomFrom(Feature.Category.hair_head)
+                , Feature.getRandomFrom(Feature.Category.eye)
+                , Feature.getRandomFrom(Feature.Category.hair_face)
+        );
+
+        RoundDto roundDto = new RoundDto();
+        RoundData roundData = getRoundData(roundDto, heavenQuota, hellQuota);
+
+        gameboard = new GameBoard(assets, this, roundData);
         background = new TextureRegion(assets.gameScreenLayout);
 
         player = new Player(assets, gameboard);
@@ -67,45 +82,76 @@ public class GameScreen extends BaseScreen {
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
         Gdx.app.log("Creating GameScreen", "Music");
 
-        heavenQuota = new Quota(Quota.Source.heaven);
-        hellQuota = new Quota(Quota.Source.hell);
-
-        heavenQuota.addPerson(
-                  Feature.getRandomFrom(Feature.Category.hair_head)
-                , Feature.getRandomFrom(Feature.Category.eye)
-                , Feature.getRandomFrom(Feature.Category.nose)
-        );
-        hellQuota.addPerson(
-                  Feature.getRandomFrom(Feature.Category.hair_head)
-                , Feature.getRandomFrom(Feature.Category.eye)
-                , Feature.getRandomFrom(Feature.Category.hair_face)
-        );
-
         QuotaListUI quotaListUI = gameScreenUI.rightSideUI.quotaListUI;
         quotaListUI.setQuotas(heavenQuota, hellQuota);
         quotaToastShown = false;
     }
 
-    private String getRandomRound() {
-        // moved generation here
-        QuotaDto heavenQuotaDto = new QuotaDto();
-        heavenQuotaDto.set(
-                Quota.Source.heaven,
-                Feature.getRandomFrom(Feature.Category.hair_head),
-                Feature.getRandomFrom(Feature.Category.nose),
-                Feature.getRandomFrom(Feature.Category.mouth));
-        QuotaDto hellQuotaDto = new QuotaDto();
-        hellQuotaDto.set(
-                Quota.Source.hell,
-                Feature.getRandomFrom(Feature.Category.hair_face),
-                Feature.getRandomFrom(Feature.Category.eye),
-                Feature.getRandomFrom(Feature.Category.mouth));
-        RoundDto round = new RoundDto();
-        round.heaven = heavenQuotaDto;
-        round.hell  = hellQuotaDto;
+    private RoundData getRoundData(RoundDto roundDto, Quota heavenQuota, Quota hellQuota) {
+        RoundData roundData = new RoundData();
 
-        Json json = new Json();
-        return json.toJson(round);
+        for (int y = 0; y < roundDto.tileDtos.length; y++) {
+            for (int x = 0; x < roundDto.tileDtos[y].length; x++) {
+                TileData tileData = new TileData();
+
+                TileDto tileDto = roundDto.tileDtos[x][y];
+                switch (tileDto.tileType) {
+                    case obstacle:
+                        tileData.type = TileType.obstacle;
+                        break;
+                    case character_hell:
+                        tileData.type = TileType.character;
+                        Quota.Person charHell = hellQuota.people.get(tileDto.quotaIndex - 1);
+                        mapFeatures(tileData, charHell);
+                        break;
+                    case character_heaven:
+                        tileData.type = TileType.character;
+                        Quota.Person charHeaven = heavenQuota.people.get(tileDto.quotaIndex - 1);
+                        mapFeatures(tileData, charHeaven);
+                        break;
+                    case character_rando:
+                        tileData.type = TileType.character;
+                        // remove features? - this could gen a match in heaven/hell
+                        break;
+                    case powerUp_type1:
+                        break;
+                }
+
+                roundData.tileData[x][y] = tileData;
+            }
+        }
+
+        return roundData;
+    }
+
+    private void mapFeatures(TileData tileData, Quota.Person character) {
+        for (Feature feature : character.features.keySet()) {
+            switch (feature.category) {
+                case clothes:
+                    tileData.clothes = feature;
+                    break;
+                case eye:
+                    tileData.eye = feature;
+                    break;
+                case nose:
+                    tileData.nose = feature;
+                    break;
+                case hair_face:
+                    tileData.hair_face = feature;
+                    break;
+                case hair_head:
+                    tileData.hair_head = feature;
+                    break;
+                // TODO
+                // case hat:
+                //    tileData.hat = feature;
+                //    break;
+                // case neck:
+                //    tileData.neck = feature;
+                //    break;
+            }
+
+        }
     }
 
     @Override
