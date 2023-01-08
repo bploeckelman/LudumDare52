@@ -60,6 +60,9 @@ public class Assets implements Disposable {
 
     public Sound settingSound;
     public Sound swoosh1;
+    public Sound charge1;
+    public Sound poof1;
+    public Sound impactGrave1;
 
     public Music mainTheme;
     public Music mutedMainTheme;
@@ -135,6 +138,10 @@ public class Assets implements Disposable {
 
             mgr.load("audio/sounds/settingSound.ogg", Sound.class);
             mgr.load("audio/sounds/swoosh1.ogg", Sound.class);
+            mgr.load("audio/sounds/charge1.ogg", Sound.class);
+            mgr.load("audio/sounds/poof1.ogg", Sound.class);
+//            mgr.load("audio/sounds/.ogg", Sound.class);
+//            mgr.load("audio/sounds/.ogg", Sound.class);
 
             mgr.load("audio/music/maintheme.ogg", Music.class);
             mgr.load("audio/music/mainthemeLowpass.ogg", Music.class);
@@ -235,7 +242,8 @@ public class Assets implements Disposable {
 
         settingSound = mgr.get("audio/sounds/settingSound.ogg", Sound.class);
          swoosh1 = mgr.get("audio/sounds/swoosh1.ogg", Sound.class);
-//         = mgr.get("audio/sounds/.ogg", Sound.class);
+         charge1 = mgr.get("audio/sounds/charge1.ogg", Sound.class);
+         poof1 = mgr.get("audio/sounds/poof1.ogg", Sound.class);
 //         = mgr.get("audio/sounds/.ogg", Sound.class);
 //         = mgr.get("audio/sounds/.ogg", Sound.class);
 //         = mgr.get("audio/sounds/.ogg", Sound.class);

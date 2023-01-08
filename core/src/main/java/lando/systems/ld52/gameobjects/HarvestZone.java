@@ -20,7 +20,7 @@ public class HarvestZone {
     public enum HarvestPhase { cycle, golf, collection}
 
     private static final float golfIndicatorSize = 8f;
-    private static final float golfMaxTime = .25f; // Time it takes to go one tile
+    private static final float golfMaxTime = .215f; // Time it takes to go one tile
     private static final int tilesStart = 4;
     private final Interpolation golfInterpolation = Interpolation.slowFast;
 
@@ -36,6 +36,7 @@ public class HarvestZone {
     public float golfPosition;
     public Tile tileToHarvest;
     private boolean touchLastFrame;
+    private int scytheSpinTimeMultiplier;
 
     public HarvestZone(Player player) {
         this.player = player;
@@ -43,6 +44,7 @@ public class HarvestZone {
         this.tilesLong = tilesStart;
         this.startPos = new Vector2();
         this.scythe = new Scythe(game.assets);
+        this.scytheSpinTimeMultiplier = 1;
         tileToHarvest = null;
         touchLastFrame = false;
     }
@@ -142,10 +144,14 @@ public class HarvestZone {
 
         if (currentPhase == HarvestPhase.cycle && (touched && !touchLastFrame)){
             currentPhase = HarvestPhase.golf;
+            game.audioManager.loopSound(AudioManager.Sounds.charge1, game.audioManager.soundVolume.floatValue());
             golfTimer = 0;
         } else if (currentPhase == HarvestPhase.golf && (!touched && touchLastFrame)) {
             currentPhase = HarvestPhase.collection;
-            game.audioManager.loopSound(AudioManager.Sounds.swoosh1, game.audioManager.musicVolume.floatValue());
+            game.audioManager.stopSound(AudioManager.Sounds.charge1);
+            game.audioManager.playSound(AudioManager.Sounds.poof1);
+
+            game.audioManager.loopSound(AudioManager.Sounds.swoosh1, game.audioManager.soundVolume.floatValue());
             int tileIndex = MathUtils.clamp((int)(currentPathLength * golfPosition), 0, currentPathLength);
             tileIndex++; // don't want it 0 indexed
             switch (player.currentSide) {
@@ -166,13 +172,32 @@ public class HarvestZone {
                 // WTF? This should never happen, I am not going to throw an exception just in case though
                 currentPhase = HarvestPhase.cycle;
             } else {
+
+                switch(player.currentSide) {
+                    case right:
+                        scytheSpinTimeMultiplier = (7 - tileToHarvest.coord.x()) + 1;
+                        break;
+                    case left:
+                        scytheSpinTimeMultiplier = tileToHarvest.coord.x() + 1;
+                        break;
+                    case bottom:
+                        scytheSpinTimeMultiplier = tileToHarvest.coord.y() + 1;
+                        break;
+                    case top:
+                        scytheSpinTimeMultiplier = (7 - tileToHarvest.coord.y()) + 1;
+                        break;
+                }
+
+
+                float spinTime = scytheSpinTimeMultiplier * .1075f;
+
                 Timeline.createSequence().push(
                         Tween.set(scythe.position, Vector2Accessor.XY).target(startPos.x, startPos.y))
-                        .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, 1f).target(tileToHarvest.getCenter().x, tileToHarvest.getCenter().y))
-                                .push(Tween.to(scythe.rotation, 0, 1f).target(-720)))
+                        .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, spinTime).target(tileToHarvest.getCenter().x, tileToHarvest.getCenter().y))
+                                .push(Tween.to(scythe.rotation, 0, spinTime).target(-720)))
                         .push(Tween.call((type, source) -> tileToHarvest.collect()))
-                        .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, 1f).target(startPos.x, startPos.y))
-                                .push(Tween.to(scythe.rotation, 0, 1f).target(0)))
+                        .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, spinTime).target(startPos.x, startPos.y))
+                                .push(Tween.to(scythe.rotation, 0, spinTime).target(0)))
                         .push(Tween.call((type, source) -> {
                             currentPhase = HarvestPhase.cycle;
                             tileToHarvest = null;
