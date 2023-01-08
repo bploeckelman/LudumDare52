@@ -81,6 +81,7 @@ public abstract class BaseScreen extends ManagedScreen implements Disposable {
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
             Config.Debug.ui = !Config.Debug.ui;
         }
+
         screenShaker.update(delta);
         audioManager.update(delta);
         uiStage.act(delta);

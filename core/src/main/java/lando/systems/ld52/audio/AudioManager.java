@@ -29,6 +29,7 @@ public class AudioManager implements Disposable {
     public enum Musics {
         none
         , mainTheme
+        , mutedMainTheme
     }
 
     public ObjectMap<Sounds, SoundContainer> sounds = new ObjectMap<>();
@@ -51,11 +52,12 @@ public class AudioManager implements Disposable {
 //        putSound(Musics.mainTheme, assets.mainTheme);
 
         musics.put(Musics.mainTheme, assets.mainTheme);
+        musics.put(Musics.mutedMainTheme, assets.mutedMainTheme);
 
 
 //        putMusic(Musics.mainTheme, assets.settingSound);
 
-        musicVolume = new MutableFloat(0.5f);
+        musicVolume = new MutableFloat(0.75f);
         soundVolume = new MutableFloat(0.75f);
 
         isMusicMuted = false;
@@ -145,6 +147,20 @@ public class AudioManager implements Disposable {
         return (s != null) ? s.play(volume, pitch, pan) : 0;
     }
 
+    public long loopSound(Sounds soundOption, float volume) {
+        volume = volume * soundVolume.floatValue();
+        if (isSoundMuted || soundOption == Sounds.none) return -1;
+
+        SoundContainer soundCont = sounds.get(soundOption);
+        if (soundCont == null) {
+            // Gdx.app.log("NoSound", "No sound found for " + soundOption.toString());
+            return 0;
+        }
+
+        Sound s = soundCont.getSound();
+        return (s != null) ? s.loop(volume) : 0;
+    }
+
     public long playDirectionalSoundFromVector(Sounds soundOption, Vector2 vector, float viewportWidth) {
         if (isSoundMuted || soundOption == Sounds.none) return -1;
 
@@ -162,19 +178,6 @@ public class AudioManager implements Disposable {
         return (s != null) ? s.play(soundVolume.floatValue(), 1f, pan) : 0;
     }
 
-    public long loopSound(Sounds soundOption, float volume) {
-        volume = volume * soundVolume.floatValue();
-        if (isSoundMuted || soundOption == Sounds.none) return -1;
-
-        SoundContainer soundCont = sounds.get(soundOption);
-        if (soundCont == null) {
-            // Gdx.app.log("NoSound", "No sound found for " + soundOption.toString());
-            return 0;
-        }
-
-        Sound s = soundCont.getSound();
-        return (s != null) ? s.loop(volume) : 0;
-    }
 
 
     public void stopSound(Sounds soundOption) {

@@ -35,7 +35,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 	public TextureRegion frameBufferRegion;
 	public OrthographicCamera windowCamera;
 	public AudioManager audioManager;
-
+	public float currentMusicPosition;
 	public Main() {
 		Main.game = this;
 	}
@@ -73,6 +73,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		};
 
 		audioManager = new AudioManager(assets, tween);
+		currentMusicPosition = 0f;
 
 		Pixmap.Format format = Pixmap.Format.RGBA8888;
 		int width = Config.Screen.framebuffer_width;
@@ -95,6 +96,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		screenManager.initialize(inputMux, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 		screenManager.addScreen("title", new TitleScreen());
 		screenManager.addScreen("game", new GameScreen());
+		screenManager.addScreen("cutscene", new CutsceneScreen());
 		screenManager.addScreen("credit", new CreditScreen());
 		TransitionManager.initialize(screenManager);
 

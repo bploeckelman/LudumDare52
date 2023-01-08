@@ -62,6 +62,7 @@ public class Assets implements Disposable {
     public Sound swoosh1;
 
     public Music mainTheme;
+    public Music mutedMainTheme;
 
     public enum Patch {
         debug, panel, metal, glass,
@@ -136,6 +137,7 @@ public class Assets implements Disposable {
             mgr.load("audio/sounds/swoosh1.ogg", Sound.class);
 
             mgr.load("audio/music/maintheme.ogg", Music.class);
+            mgr.load("audio/music/mainthemeLowpass.ogg", Music.class);
 
 
         }
@@ -239,6 +241,7 @@ public class Assets implements Disposable {
 //         = mgr.get("audio/sounds/.ogg", Sound.class);
 
         mainTheme = mgr.get("audio/music/maintheme.ogg", Music.class);
+        mutedMainTheme = mgr.get("audio/music/mainthemeLowpass.ogg", Music.class);
 
         initialized = true;
         return 1;

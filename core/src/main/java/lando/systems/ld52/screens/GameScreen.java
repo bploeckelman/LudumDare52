@@ -1,9 +1,13 @@
 package lando.systems.ld52.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lando.systems.ld52.Config;
+import lando.systems.ld52.Main;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.gameobjects.*;
@@ -11,6 +15,8 @@ import lando.systems.ld52.ui.GameScreenUI;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static lando.systems.ld52.Main.*;
 
 public class GameScreen extends BaseScreen {
 
@@ -26,6 +32,7 @@ public class GameScreen extends BaseScreen {
     public Hourglass hourglass;
     public PlayerUI playerUI;
     private List<Feature> quotaFeatureList;
+    private Music currentMusic;
 
     @Override
     protected void create() {
@@ -44,7 +51,11 @@ public class GameScreen extends BaseScreen {
         initializeUI();
         gameScreenUI = new GameScreenUI(windowCamera, assets);
         uiStage.addActor(gameScreenUI);
-        game.audioManager.playMusic(AudioManager.Musics.mainTheme);
+
+        currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
+        Gdx.app.log("Creating GameScreen", "Music");
+//        currentMusic.setPosition(14f);
+//        Main.game.audioManager.loopSound(AudioManager.Sounds.swoosh1, .5f);
 
         quotaFeatureList = new ArrayList<>();
         quotaFeatureList.add(Feature.eyepatch_a);
@@ -62,12 +73,20 @@ public class GameScreen extends BaseScreen {
     @Override
     public void show(){
         super.show();
+
         game.getInputMultiplexer().addProcessor(uiStage);
+        Gdx.app.log("currentMusicPositionGameScreenOnShow()", String.valueOf(Main.game.currentMusicPosition));
+        currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
+        currentMusic.setPosition(Main.game.currentMusicPosition);
+//        currentMusic.setVolume(game.audioManager.musicVolume.floatValue());
     }
 
     @Override
     public void hide() {
+
         game.getInputMultiplexer().removeProcessor(uiStage);
+//        Main.game.currentMusicPosition = currentMusic.getPosition();
+
     }
 
     @Override
@@ -78,6 +97,11 @@ public class GameScreen extends BaseScreen {
         player.update(delta);
         hourglass.update(delta);
         playerUI.update(delta);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
+            // .hide() happens at the END of transition - can't set the time there (value will be set at 0f)
+            Main.game.currentMusicPosition = currentMusic.getPosition();
+            game.getScreenManager().pushScreen("cutscene", TransitionManager.TransitionType.CROSSHATCH.name());
+        }
     }
 
     @Override

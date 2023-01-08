@@ -140,9 +140,11 @@ public class HarvestZone {
 
         if (currentPhase == HarvestPhase.cycle && (touched && !touchLastFrame)){
             currentPhase = HarvestPhase.golf;
+
             golfTimer = 0;
         } else if (currentPhase == HarvestPhase.golf && (!touched && touchLastFrame)) {
             currentPhase = HarvestPhase.collection;
+            game.audioManager.loopSound(AudioManager.Sounds.swoosh1, game.audioManager.musicVolume.floatValue());
             // TODO: when we store this for gravestones, check this later
             float maxWidth = (GameBoard.tileSize+GameBoard.margin) * tilesLong;
             float golfWidth = golfPosition * maxWidth;
@@ -174,6 +176,7 @@ public class HarvestZone {
                         .push(Tween.call((type, source) -> {
                             currentPhase = HarvestPhase.cycle;
                             tileToHarvest = null;
+                            game.audioManager.stopSound(AudioManager.Sounds.swoosh1);
                         }))
                         .start(game.tween);
             }

@@ -1,6 +1,5 @@
 package lando.systems.ld52.gameobjects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,19 +10,19 @@ public class PlayerUI implements GameObject {
 
     private final Player player;
     private final TextureRegion background;
-    private final Animation<TextureRegion> idle;
-    private final Animation<TextureRegion> backswing;
-    private final Animation<TextureRegion> swing;
+    private final Animation<TextureRegion> idleAnimation;
+    private final Animation<TextureRegion> backswingAnimation;
+    private final Animation<TextureRegion> swingAnimation;
 
-    private Animation<TextureRegion> current;
+    private Animation<TextureRegion> currentAnimation;
     private float stateTime;
 
     public PlayerUI(Player player, Assets assets) {
         this.player = player;
         background = assets.pixelRegion;
-        current = idle = new Animation<>(.2f, assets.atlas.findRegions("ui/player/death-swing-idle/death-swing-idle"), Animation.PlayMode.LOOP);
-        backswing = new Animation<>(0.1f, assets.atlas.findRegions("ui/player/death-swing-back/death-swing-back"),Animation.PlayMode.NORMAL);
-        swing = new Animation<>(0.1f, assets.atlas.findRegions("ui/player/death-swing-thru/death-swing-thru"), Animation.PlayMode.NORMAL);
+        currentAnimation = idleAnimation = new Animation<>(.2f, assets.atlas.findRegions("ui/player/death-swing-idle/death-swing-idle"), Animation.PlayMode.LOOP);
+        backswingAnimation = new Animation<>(0.1f, assets.atlas.findRegions("ui/player/death-swing-back/death-swing-back"),Animation.PlayMode.NORMAL);
+        swingAnimation = new Animation<>(0.1f, assets.atlas.findRegions("ui/player/death-swing-thru/death-swing-thru"), Animation.PlayMode.NORMAL);
         stateTime = 0f;
     }
 
@@ -36,19 +35,20 @@ public class PlayerUI implements GameObject {
 
         switch (harvestZone.currentPhase) {
             case cycle:
-                current = idle;
+                currentAnimation = idleAnimation;
                 break;
             case golf:
                 collect = false;
-                current = backswing;
-                stateTime = backswing.getAnimationDuration() * harvestZone.golfPosition;
+                currentAnimation = backswingAnimation;
+                stateTime = backswingAnimation.getAnimationDuration() * harvestZone.golfPosition;
                 break;
             case collection:
                 if (!collect) {
                     stateTime = 0;
                     collect = true;
                 }
-                current = swing;
+
+                currentAnimation = swingAnimation;
                 break;
         }
     }
@@ -65,7 +65,7 @@ public class PlayerUI implements GameObject {
         NinePatch patch = Assets.NinePatches.plain_gradient;
         patch.draw(batch, x, y, w, h);
 
-        TextureRegion keyframe = current.getKeyFrame(stateTime);
+        TextureRegion keyframe = currentAnimation.getKeyFrame(stateTime);
         batch.draw(keyframe,
                 x + (w - keyframe.getRegionWidth()) / 2f,
                 y + (h - keyframe.getRegionHeight()) / 2f);
