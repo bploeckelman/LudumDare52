@@ -23,6 +23,7 @@ public class GameBoard {
     public final static int gridSize = 6;
     public final static float margin = 6;
     public final static float tileSize = (boardSize - (gridSize + 1) * margin) / (gridSize);
+    public final static float MAX_TIME_IN_SECONDS = 90;
 
     private final static float walkPathSize = 100;
 
@@ -38,9 +39,11 @@ public class GameBoard {
 
     public Rectangle bounds;
     public GameScreen screen;
+    public float timer;
 
     public GameBoard(Assets assets, GameScreen screen, RoundData roundData) {
         this.screen = screen;
+        timer = MAX_TIME_IN_SECONDS;
         bounds = new Rectangle(
                 (Config.Screen.window_width  - boardSize) / 2f,
                 (Config.Screen.window_height - boardSize) / 2f,
@@ -76,6 +79,8 @@ public class GameBoard {
     }
 
     public void update(float dt) {
+        // TODO: don't to this on pause?
+        timer -= dt;
         for (int x = 0; x < gridSize; x++) {
             for (int y = 0; y < gridSize; y++) {
                 tiles[x][y].update(dt);
@@ -147,6 +152,14 @@ public class GameBoard {
                 1f, 1f,
                 -270
         );
+    }
+
+    public int getSecondsLeft() {
+        return (int)Math.ceil(timer);
+    }
+
+    public float getTimerPercent() {
+        return (timer/ MAX_TIME_IN_SECONDS);
     }
 
     public Tile getTileAt(float worldX, float worldY) {

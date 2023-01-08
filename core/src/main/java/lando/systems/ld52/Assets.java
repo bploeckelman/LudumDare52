@@ -48,6 +48,7 @@ public class Assets implements Disposable {
     public Texture cutscene3;
     public TextureRegion circleTex;
     public TextureRegion pixelRegion;
+    public TextureRegion hourglassTex;
 
     public Animation<TextureRegion> cat;
     public Animation<TextureRegion> dog;
@@ -79,6 +80,8 @@ public class Assets implements Disposable {
 
     public Music mainTheme;
     public Music mutedMainTheme;
+
+    public ShaderProgram hourglassShader;
 
     public enum Patch {
         debug, panel, metal, glass,
@@ -195,6 +198,8 @@ public class Assets implements Disposable {
         if (!mgr.update()) return mgr.getProgress();
         if (initialized) return 1;
 
+        hourglassShader = loadShader("shaders/default.vert", "shaders/hourglass.frag");
+
         gameScreenLayout = mgr.get("images/layout-alpha-1.png", Texture.class);
 
         atlas = mgr.get("sprites/sprites.atlas");
@@ -299,6 +304,8 @@ public class Assets implements Disposable {
         for (int i = 0; i <= 9; ++i) {
             numberParticles.add(new Animation<>(0.1f, atlas.findRegions("particles/font-points-" + i)));
         }
+
+        hourglassTex = atlas.findRegion("ui/hourglass-shader");
 
         settingSound = mgr.get("audio/sounds/settingSound.ogg", Sound.class);
          swoosh1 = mgr.get("audio/sounds/swoosh1.ogg", Sound.class);

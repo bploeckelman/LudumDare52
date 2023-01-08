@@ -71,7 +71,7 @@ public class GameScreen extends BaseScreen {
         background = new TextureRegion(assets.gameScreenLayout);
 
         player = new Player(assets, gameboard);
-        hourglass = new Hourglass(assets);
+        hourglass = new Hourglass(assets, gameboard);
         playerUI = new PlayerUI(player, assets);
         this.particles = Main.game.particles;
 
@@ -157,7 +157,7 @@ public class GameScreen extends BaseScreen {
     @Override
     public void show(){
         super.show();
-
+        // TODO: we need to reset gameboard here
         game.getInputMultiplexer().addProcessor(uiStage);
 //        Gdx.app.log("currentMusicPositionGameScreenOnShow()", String.valueOf(Main.game.currentMusicPosition));
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
