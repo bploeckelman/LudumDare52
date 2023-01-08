@@ -120,6 +120,17 @@ public class AudioManager implements Disposable {
         return (s != null) ? s.play(volume) : 0;
     }
 
+    public void stopSound(Sounds soundOption, long soundId) {
+        SoundContainer soundCont = sounds.get(soundOption);
+        if (soundCont == null) {
+            // Gdx.app.log("NoSound", "No sound found for " + soundOption.toString());
+            return;
+        }
+
+        Sound s = soundCont.getSound();
+        s.stop(soundId);
+    }
+
     public long playSound(Sounds soundOption, float volume, float pitch, float pan) {
         volume = volume * soundVolume.floatValue();
         if (isSoundMuted || soundOption == Sounds.none) return -1;
