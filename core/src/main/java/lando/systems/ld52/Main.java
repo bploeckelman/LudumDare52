@@ -101,6 +101,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		screenManager.addScreen("game", new GameScreen());
 		screenManager.addScreen("cutscene", new CutsceneScreen());
 		screenManager.addScreen("credit", new CreditScreen());
+		screenManager.addScreen("intro-story", new IntroStoryScreen());
 		TransitionManager.initialize(screenManager);
 
 		screenManager.pushScreen("title", TransitionManager.TransitionType.BLEND.name());

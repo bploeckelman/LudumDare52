@@ -1,6 +1,7 @@
 package lando.systems.ld52.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -64,6 +65,9 @@ public class TitleScreen extends BaseScreen {
         if (!cat.isFlipX()) cat.flip(true, false);
         if (!kitten.isFlipX()) kitten.flip(true, false);
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.BLEND.name());
+        }
     }
 
     @Override
@@ -122,7 +126,7 @@ public class TitleScreen extends BaseScreen {
             public void clicked(InputEvent event, float x, float y) {
                 game.audioManager.stopAllSounds();
                 exiting = true;
-                game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.CROSSHATCH.name());
+                game.getScreenManager().pushScreen("intro-story", TransitionManager.TransitionType.CROSSHATCH.name());
             }
         });
 
