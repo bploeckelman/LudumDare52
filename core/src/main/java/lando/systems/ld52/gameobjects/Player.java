@@ -1,9 +1,7 @@
 package lando.systems.ld52.gameobjects;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.CpuSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -13,7 +11,7 @@ public class Player implements GameObject {
 
     public enum MoveDirection {
         clockwise,
-        counterclockwise;
+        counterclockwise
     }
 
     public enum Side { top, right, bottom, left}
@@ -29,14 +27,14 @@ public class Player implements GameObject {
     private boolean _flipped;
 
     private float _animTime = 0;
-    private float _moveTime = 0.86f;
+    private final float _moveTime = 0.86f;
 
     private MoveDirection _moveDirection = MoveDirection.clockwise;
 
     public int boardPosition;
 
-    private Vector2 _renderPosition = new Vector2();
-    private Vector2 _nextPosition = new Vector2();
+    private final Vector2 _renderPosition = new Vector2();
+    private final Vector2 _nextPosition = new Vector2();
     public HarvestZone harvestZone;
     public Side currentSide = Side.left;
     public int currentCol;
@@ -102,14 +100,15 @@ public class Player implements GameObject {
             currentCol = boardPosition;
         } else if (boardPosition < GameBoard.gridSize * 2) {
             currentCol = GameBoard.gridSize;
-            currentRow = GameBoard.gridSize - (boardPosition - GameBoard.gridSize);
+            currentRow = GameBoard.gridSize - (boardPosition - GameBoard.gridSize) - 1;
         } else if (boardPosition < GameBoard.gridSize * 3) {
             currentRow = -1;
-            currentCol = (GameBoard.gridSize) - (boardPosition - (GameBoard.gridSize * 2));
+            currentCol = (GameBoard.gridSize) - (boardPosition - (GameBoard.gridSize * 2)) - 1;
         } else {
             currentCol = -1;
             currentRow = boardPosition - (GameBoard.gridSize *3);
         }
+        Gdx.app.log("debug", "Row: " + currentRow + " col: " + currentCol);
 
         int side = boardPosition / GameBoard.gridSize;
         _flipped = false;
@@ -117,8 +116,10 @@ public class Player implements GameObject {
             case 1: // right
                 currentSide = Side.right;
                 _flipped = true;
+                break;
             case 3: // left
                 currentSide = Side.left;
+                _flipped = true;
                 _current = _side;
                 break;
             case 2: // bottom

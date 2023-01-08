@@ -20,7 +20,7 @@ public class GameBoard {
     public final static float margin = 6;
     public final static float tileSize = (boardSize - (gridSize + 1) * margin) / (gridSize);
 
-    private final Tile[][] tiles;
+    public final Tile[][] tiles;
 
     public Rectangle bounds;
     public GameScreen screen;

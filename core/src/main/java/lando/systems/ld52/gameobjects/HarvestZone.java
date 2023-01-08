@@ -29,6 +29,7 @@ public class HarvestZone {
 
     public HarvestPhase currentPhase;
     public int tilesLong;
+    public int currentPathLength;
     private final Vector2 startPos;
     private float rotation;
     private float golfTimer;
@@ -48,6 +49,9 @@ public class HarvestZone {
 
     public void update(float dt) {
         handleInput();
+        currentPathLength = tilesLong;
+        // TODO: if hits something along the way, change currentPathLength
+
         float tileSize = GameBoard.tileSize;
         int gridSize = GameBoard.gridSize;
 
@@ -84,16 +88,16 @@ public class HarvestZone {
         startPos.set(xPos, yPos);
 
         if (currentPhase == HarvestPhase.golf){
-            float maxGolfTime = golfMaxTime * tilesLong;
+            float maxGolfTime = golfMaxTime * currentPathLength;
             golfTimer += dt;
             if (golfTimer > 2*maxGolfTime) {
                 golfTimer -= 2*maxGolfTime;
             }
-            float tempgolfpos = golfTimer/maxGolfTime;
-            if (tempgolfpos > 1f) {
-                tempgolfpos = 2f - tempgolfpos;
+            float tempGolfPos = golfTimer/maxGolfTime;
+            if (tempGolfPos > 1f) {
+                tempGolfPos = 2f - tempGolfPos;
             }
-            golfPosition = golfInterpolation.apply(tempgolfpos);
+            golfPosition = golfInterpolation.apply(tempGolfPos);
         }
 
         scythe.update(dt);
@@ -101,7 +105,7 @@ public class HarvestZone {
 
     public void render(SpriteBatch batch) {
         // TODO: this will need to be stored if we are going to check for gravestones, etc along the path
-        float maxWidth = (GameBoard.tileSize+GameBoard.margin) * tilesLong;
+        float maxWidth = (GameBoard.tileSize+GameBoard.margin) * currentPathLength;
         if (currentPhase == HarvestPhase.cycle) {
             batch.setColor(1f, 1f, 1f, .5f);
         }
@@ -138,28 +142,25 @@ public class HarvestZone {
 
         if (currentPhase == HarvestPhase.cycle && (touched && !touchLastFrame)){
             currentPhase = HarvestPhase.golf;
-
             golfTimer = 0;
         } else if (currentPhase == HarvestPhase.golf && (!touched && touchLastFrame)) {
             currentPhase = HarvestPhase.collection;
             game.audioManager.loopSound(AudioManager.Sounds.swoosh1, game.audioManager.musicVolume.floatValue());
-            // TODO: when we store this for gravestones, check this later
-            float maxWidth = (GameBoard.tileSize+GameBoard.margin) * tilesLong;
-            float golfWidth = golfPosition * maxWidth;
-            float golfX = startPos.x + MathUtils.cosDeg(rotation) * golfWidth;
-            float golfY = startPos.y + MathUtils.sinDeg(rotation) * golfWidth;
-            tileToHarvest = player.gameBoard.getTileAt(golfX, golfY);
-            if (tileToHarvest == null) { // Sorry Brian P
-                tileToHarvest = player.gameBoard.getTileAt(golfX - 20, golfY);
-                if (tileToHarvest == null) {
-                    tileToHarvest = player.gameBoard.getTileAt(golfX + 20, golfY);
-                    if (tileToHarvest == null) {
-                        tileToHarvest = player.gameBoard.getTileAt(golfX, golfY - 20);
-                        if (tileToHarvest == null) {
-                            tileToHarvest = player.gameBoard.getTileAt(golfX, golfY + 20);
-                        }
-                    }
-                }
+            int tileIndex = MathUtils.clamp((int)(currentPathLength * golfPosition), 0, currentPathLength);
+            tileIndex++; // don't want it 0 indexed
+            switch (player.currentSide) {
+                case top:
+                    tileToHarvest = player.gameBoard.tiles[player.currentCol][player.currentRow - tileIndex];
+                    break;
+                case right:
+                    tileToHarvest = player.gameBoard.tiles[player.currentCol - tileIndex][player.currentRow];
+                    break;
+                case bottom:
+                    tileToHarvest = player.gameBoard.tiles[player.currentCol][player.currentRow + tileIndex];
+                    break;
+                case left:
+                    tileToHarvest = player.gameBoard.tiles[player.currentCol + tileIndex][player.currentRow];
+                    break;
             }
             if (tileToHarvest == null) {
                 // WTF? This should never happen, I am not going to throw an exception just in case though
@@ -167,7 +168,7 @@ public class HarvestZone {
             } else {
                 Timeline.createSequence().push(
                         Tween.set(scythe.position, Vector2Accessor.XY).target(startPos.x, startPos.y))
-                        .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, 1f).target(golfX, golfY))
+                        .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, 1f).target(tileToHarvest.getCenter().x, tileToHarvest.getCenter().y))
                                 .push(Tween.to(scythe.rotation, 0, 1f).target(-720)))
                         .push(Tween.call((type, source) -> tileToHarvest.collect()))
                         .push(Timeline.createParallel().push(Tween.to(scythe.position, Vector2Accessor.XY, 1f).target(startPos.x, startPos.y))

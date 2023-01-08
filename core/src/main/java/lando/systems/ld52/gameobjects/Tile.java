@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
-import lando.systems.ld52.Main;
 import lando.systems.ld52.utils.Coord;
 
 public class Tile {
@@ -51,6 +51,11 @@ public class Tile {
         if (highlighted){
             Assets.Patch.debug.ninePatch.draw(batch, bounds.x, bounds.y, bounds.width, bounds.height);
         }
+    }
+
+    Vector2 center = new Vector2();
+    public Vector2 getCenter() {
+        return bounds.getCenter(center);
     }
 
     public void collect() {
