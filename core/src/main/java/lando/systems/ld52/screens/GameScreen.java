@@ -77,7 +77,7 @@ public class GameScreen extends BaseScreen {
         super.show();
 
         game.getInputMultiplexer().addProcessor(uiStage);
-        Gdx.app.log("currentMusicPositionGameScreenOnShow()", String.valueOf(Main.game.currentMusicPosition));
+//        Gdx.app.log("currentMusicPositionGameScreenOnShow()", String.valueOf(Main.game.currentMusicPosition));
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
         currentMusic.setPosition(Main.game.currentMusicPosition);
 //        currentMusic.setVolume(game.audioManager.musicVolume.floatValue());

@@ -26,6 +26,8 @@ public class AudioManager implements Disposable {
         , swoosh1
         , charge1
         , poof1
+        , clock
+
     }
 
     public enum Musics {
@@ -52,6 +54,10 @@ public class AudioManager implements Disposable {
         putSound(Sounds.swoosh1, assets.swoosh1);
         putSound(Sounds.charge1, assets.charge1);
         putSound(Sounds.poof1, assets.poof1);
+        putSound(Sounds.clock, assets.clock1);
+        putSound(Sounds.clock, assets.clock2);
+        putSound(Sounds.clock, assets.clock3);
+        putSound(Sounds.clock, assets.clock4);
 //        putSound(Sounds., assets.);
 //        putSound(Musics.mainTheme, assets.mainTheme);
 

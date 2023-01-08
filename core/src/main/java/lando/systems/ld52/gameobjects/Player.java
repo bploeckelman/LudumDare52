@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
+import lando.systems.ld52.audio.AudioManager;
+
+import static lando.systems.ld52.Main.game;
 
 public class Player implements GameObject {
 
@@ -27,7 +30,7 @@ public class Player implements GameObject {
     private boolean _flipped;
 
     private float _animTime = 0;
-    private final float _moveTime = 0.86f;
+    private final float _moveTime = 0.88f;
 
     private MoveDirection _moveDirection = MoveDirection.clockwise;
 
@@ -133,6 +136,7 @@ public class Player implements GameObject {
                 break;
         }
         setPosition(false);
+        game.audioManager.playSound(AudioManager.Sounds.clock, .35f);
     }
 
     public void switchDirections() {
