@@ -108,7 +108,6 @@ public class Player implements GameObject {
             currentCol = -1;
             currentRow = boardPosition - (GameBoard.gridSize *3);
         }
-        Gdx.app.log("debug", "Row: " + currentRow + " col: " + currentCol);
 
         int side = boardPosition / GameBoard.gridSize;
         _flipped = false;
