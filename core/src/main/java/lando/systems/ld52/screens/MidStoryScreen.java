@@ -118,7 +118,7 @@ public class MidStoryScreen extends BaseScreen {
                                     subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "I absolutely CRUSHED my Heaven quota yesterday!" : "Hell quota: Hell yeah!";
                                     break;
                                 case 1:
-                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Heaven quota reaped AF!" : "Got that hell quota hella quick!";
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Heaven quota reaped AF!" : "Hell quota hella quickly";
                                     break;
                                 case 2:
                                     subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Hey Heaven: Special  delivery!" : "Hell better watch out for that one!";

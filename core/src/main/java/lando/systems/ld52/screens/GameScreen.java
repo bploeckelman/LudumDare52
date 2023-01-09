@@ -277,7 +277,7 @@ public class GameScreen extends BaseScreen {
             score += 1000 + Math.pow(gameboard.getSecondsLeft(), 1.2) * 20;
             Stats.hellQuotaMet++;
         } else if (gameboard.getSecondsLeft() <= 0) {
-            showToast("You failed to meet either quota!", ToastManager.UNTIL_CLOSED);
+            showToast("Neither quota fulfilled.\n\nDisappointing, but not surprising.", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = null;
             quotaToastShown = true;
             Stats.noQuotaMet++;
@@ -318,7 +318,7 @@ public class GameScreen extends BaseScreen {
             float panelWidth = 700;
             batch.setProjectionMatrix(windowCamera.combined);
             batch.begin();
-            batch.setColor(0, 0, 0, overlayAlpha * .5f);
+            batch.setColor(0, 0, 0, overlayAlpha * .9f);
             batch.draw(assets.pixelRegion, 0,0, Config.Screen.window_width, Config.Screen.window_height);
             batch.setColor(1f, 1f, 1f, overlayAlpha);
             Assets.NinePatches.glass_blue.draw(batch, Config.Screen.window_width /2f - panelWidth/2f, Config.Screen.window_height /2f - 150, panelWidth, 300);
