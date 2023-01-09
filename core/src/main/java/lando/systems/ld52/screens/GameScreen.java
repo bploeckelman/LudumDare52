@@ -257,7 +257,7 @@ public class GameScreen extends BaseScreen {
             }
             score += 1000 + gameboard.getSecondsLeft() * 20;
         } else if (gameboard.getSecondsLeft() <= 0) {
-            showToast("You've failed to meet quota!", ToastManager.UNTIL_CLOSED);
+            showToast("You failed to meet either quota!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = null;
             quotaToastShown = true;
         }
@@ -267,11 +267,7 @@ public class GameScreen extends BaseScreen {
         hourglass.update(delta);
         gameScreenUI.leftSideUI.scoreBoxUI.setScoreLabel(score);
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
-            // .hide() happens at the END of transition - can't set the time there (value will be set at 0f)
-            Main.game.currentMusicPosition = currentMusic.getPosition();
-            game.getScreenManager().pushScreen("cutscene", TransitionManager.getRandomTransition().name());
-        }
+
     }
 
     @Override

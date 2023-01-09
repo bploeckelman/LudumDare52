@@ -24,7 +24,7 @@ public class Player implements GameObject {
     private Animation<TextureRegion> currentPlayerAnimation;
 
     private float _animTime = 0;
-    private final float _moveTime = 0.88f;
+    private final float _moveTime = 0.44f;
 
     private MoveDirection _moveDirection = MoveDirection.clockwise;
 

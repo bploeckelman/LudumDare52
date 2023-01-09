@@ -38,12 +38,13 @@ public class IntroStoryScreen extends BaseScreen {
         worldCam.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCam.update();
         whiteWithAlpha = new Color(Color.WHITE);
-        clickPhase = 0;
+        clickPhase = 1;
         phaseAccum = 0;
 
         storyAccum = 0;
 
-        subtitles = " ";
+        subtitles = "Another day, another shift at Reapo Depot...\n\n " +
+                "Not the most satisfying job in the world, but hey - it's a living!\n\n";
         clickToAdvance = "(click to advance)";
         backgroundTexture = game.assets.cutsceneBackground;
         cutsceneTexture = game.assets.cutscene0;
@@ -106,20 +107,42 @@ public class IntroStoryScreen extends BaseScreen {
                         cutsceneTexture = game.assets.cutscene2;
 
 
-                        subtitles = "Reaping, crossing over, harvesting souls... Doesn't really matter WHAT you call it. " +
-                                "Bottom line is, we got a lot of souls need be harvested these days. Too many, if you ask me.\n\n" +
-                                "How many people on Earth these days? Numbers we're seeing, must be two, three thousand at least, huh?";
+                        subtitles = " Reaping, crossing over, ferrying spirits... Doesn't really matter WHAT you call it.\n\n " +
+                                "Bottom line, lot of souls need to be harvested these days. \n\n" +
+                                "Too many, if you ask me."
+                               ;
 
                         break;
-                    case 4:
-                        cutsceneTexture = game.assets.cutscene3;
-                        subtitles = "8 BILLION? Jeez. Okay\n\n"+
-                        "No wonder they've been \"encouraging\" us to work overtime.";
+                        case 4:
+                        cutsceneTexture = game.assets.cutscene2;
+
+
+                        subtitles = "How many people we got on Earth these days, anyway? " +
+                                    "Seven, eight thousand?\n\n";
+
                         break;
                     case 5:
+                        subtitles = "BILLION? \n\n" +
+                                "With a B?? \n\n" +
+                                "Jesus. No wonder they're \"encouraging\" us to work overtime.";
+                        break;
+                    case 6:
+                        subtitles = "Honestly, you ask me, this whole gig's wearing a bit thin.\n\n"+
+                        "I've barely got it in me to meet the upstairs quota... \n\n" +
+                                "and don't even get me STARTED on all the people going downstairs";
+                        break;
+                        case 7:
+                        subtitles = "Ya know, I probably don't have to get ALL the souls on my list.\n\n" +
+                                "Maybe I just reap the ones who really stick out...\n\n" +
+                                "Enough to hit both quotas, get the boss to notice... Easy peasy.";
+
+                        break;
+                        case 8:
                         cutsceneTexture = game.assets.cutscene3;
-                        subtitles = "Honestly, whole gig's wearing a bit thin if you ask me.\n\n"+
-                        "Honestly? I don't even ";
+                        subtitles = "Anyway, we better get this show on the road - can't risk another write-up.\n\n" +
+                                "You're late with the scythe on ONE royal matriarch and Management won't let you hear the end of it. \n\n" +
+                                "Let's do this.";
+
                         break;
                     default:
                         isStoryOver = true;
@@ -150,7 +173,7 @@ public class IntroStoryScreen extends BaseScreen {
             assets.largeFont.getData().setScale(.3f);
             assets.largeFont.setColor(whiteWithAlpha);
             assets.layout.setText(assets.largeFont, subtitles, whiteWithAlpha, camera.viewportWidth, Align.left, true);
-            assets.largeFont.draw(batch, assets.layout, 120, camera.viewportHeight * .05f + assets.layout.height);
+            assets.largeFont.draw(batch, assets.layout, 100, camera.viewportHeight * .05f + assets.layout.height);
 
             assets.largeFont.getData().setScale(.23f);
             assets.largeFont.setColor(whiteWithAlpha);
