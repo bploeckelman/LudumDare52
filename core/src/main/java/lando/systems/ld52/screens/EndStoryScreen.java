@@ -189,7 +189,15 @@ public class EndStoryScreen extends BaseScreen {
                 batch.draw(assets.horns.getKeyFrame(phaseAccum), 240, 400, 200, 325);
             }
             batch.draw(assets.playerNoScythe.getKeyFrame(phaseAccum), 250, 300, 250f, 250f);
-            if (Stats.heavenQuotaMet == Stats.hellQuotaMet) {
+            if (Stats.heavenQuotaMet > Stats.hellQuotaMet) {
+                assets.layout.setText(assets.largeFont, "HEAVEN", whiteWithAlpha, camera.viewportWidth, Align.center, false);
+                assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
+            }
+            else if (Stats.heavenQuotaMet < Stats.hellQuotaMet) {
+                assets.layout.setText(assets.largeFont, "HELL", whiteWithAlpha, camera.viewportWidth, Align.center, false);
+                assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
+            }
+            else if (Stats.heavenQuotaMet == Stats.hellQuotaMet) {
                 assets.layout.setText(assets.largeFont, "PURGATORY", whiteWithAlpha, camera.viewportWidth, Align.center, false);
                 assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
             }
