@@ -166,7 +166,7 @@ public class IntroStoryScreen extends BaseScreen {
         batch.begin();
         {
             batch.setColor(whiteWithAlpha);
-            batch.draw(backgroundTexture, 0, 300, windowCamera.viewportWidth, 600);
+            batch.draw(backgroundTexture, 0, 200, windowCamera.viewportWidth, 800);
             batch.draw(cutsceneTexture, windowCamera.viewportWidth / 2 - 500f / 2, 220f, 500f, 500f);
 
             assets.largeFont.getData().setScale(.3f);

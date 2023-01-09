@@ -203,7 +203,7 @@ public class Assets implements Disposable {
             mgr.load("audio/music/maintheme.ogg", Music.class);
             mgr.load("audio/music/mainthemeLowpass.ogg", Music.class);
 
-            mgr.load("images/title-background_00.png", Texture.class);
+            mgr.load("images/story-background_00.png", Texture.class);
             mgr.load("images/cutscene_0.png", Texture.class);
             mgr.load("images/cutscene_1.png", Texture.class);
             mgr.load("images/cutscene_2.png", Texture.class);
@@ -246,7 +246,7 @@ public class Assets implements Disposable {
         rossDog = new Animation<>(.1f, atlas.findRegions("pets/ross-dog"), Animation.PlayMode.LOOP);
         whiteLab = new Animation<>(.1f, atlas.findRegions("pets/white-lab-dog"), Animation.PlayMode.LOOP);
 
-        cutsceneBackground = mgr.get("images/title-background_00.png");
+        cutsceneBackground = mgr.get("images/story-background_00.png");
         cutscene0 = mgr.get("images/cutscene_0.png");
         cutscene1 = mgr.get("images/cutscene_1.png");
         cutscene2 = mgr.get("images/cutscene_2.png");
