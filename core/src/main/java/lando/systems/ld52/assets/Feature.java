@@ -47,7 +47,7 @@ public enum Feature {
     , mustache_a       (Category.hair_face, "mustache-a",      "Creeper 'stache", "With a 'stache like that, it's probably for the best he's gone.")
     , beard_beard       (Category.hair_face, "beard-beard",      "Full Beard", "With a beard like that, wherever this one's going I hope they have IPAs.")
     , beard_goatee       (Category.hair_face, "beard-goatee",      "Goatee", "Look at that goatee! \n\nI guess the 90s really ARE coming back")
-    , beard_soulpatch       (Category.hair_face, "beard-soulpatch",      "Soulpatch (ew)", "Soulpatch? Yikes. Glad this one's gone.")
+    , beard_soulpatch       (Category.hair_face, "beard-soulpatch",      "\"Soul\"-patch (ew)", "Soulpatch? Yikes. Glad this one's gone.")
 //    ,beard_beard       (Category.hair_face, "beard-",      "")
                                                                                         // Very funny jokes go here, need to figure out what the max line length is at the normal text size"
     , hair_bald        (Category.hair_head, "feature-blank",   "Shaved", "What a beautifully smooth dome!")

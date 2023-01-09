@@ -62,7 +62,8 @@ public class QuotaListUI extends VisWindow {
 
         Drawable heavenBackground = new TextureRegionDrawable(assets.atlas.findRegion("ui/background-heaven")).tint(backgroundTint);
         Drawable hellBackground   = new TextureRegionDrawable(assets.atlas.findRegion("ui/background-hell")).tint(backgroundTint);
-        Drawable imageBackground  = new TextureRegionDrawable(assets.pixelRegion).tint(imageBackgroundTint);
+        TextureRegionDrawable imageBackground  = new TextureRegionDrawable(assets.atlas.findRegion("ninepatch/plain-gradient"));//.tint(imageBackgroundTint);
+        imageBackground.setMinSize(60, 60);
 
         heavenQuotaTable.clear();
         heavenQuotaTable.defaults().align(Align.top);
