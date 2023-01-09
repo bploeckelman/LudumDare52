@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
+import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.screens.GameScreen;
 
 public class TileTombstone extends TileObject {
@@ -41,6 +42,8 @@ public class TileTombstone extends TileObject {
         gameScreen.game.particles.explode(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2, tile.bounds.width);
         gameScreen.screenShaker.addDamage(25f);
         gameScreen.score += 100;
+
+        gameScreen.audioManager.playSound(AudioManager.Sounds.thud);
         return false;
     }
 
