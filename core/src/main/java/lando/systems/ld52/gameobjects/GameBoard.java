@@ -24,7 +24,7 @@ public class GameBoard {
     public final static int gridSize = 6;
     public final static float margin = 6;
     public final static float tileSize = (boardSize - (gridSize + 1) * margin) / (gridSize);
-    public final static float MAX_TIME_IN_SECONDS = 90;
+    public final static float MAX_TIME_IN_SECONDS = 30;
 
     public enum CornerTransition { none, top_left, top_right, bottom_right, bottom_left }
     public CornerTransition cornerTransition = CornerTransition.none;
@@ -91,6 +91,10 @@ public class GameBoard {
 
     public float bottom() {
         return bounds.y;
+    }
+
+    public void resetTimer() {
+        timer = MAX_TIME_IN_SECONDS;
     }
 
     public void update(float dt) {
