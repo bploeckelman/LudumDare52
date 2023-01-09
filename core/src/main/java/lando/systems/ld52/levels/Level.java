@@ -32,6 +32,7 @@ public class Level {
                             Feature.beard_soulpatch
                     )
             ),
+            // y, x (for easier visualization)
             new TileDto(0, 1, TileDto.TileType.obstacle),
             new TileDto(1, 1, TileDto.TileType.character_hell, 1),
             new TileDto(1, 4, TileDto.TileType.character_rando),
@@ -58,6 +59,7 @@ public class Level {
                             Feature.Category.hair_face
                     )
             ),
+            // y, x (for easier visualization)
             new TileDto(0, 5, TileDto.TileType.character_heaven, 1),
             new TileDto(1, 2, TileDto.TileType.character_rando),
             new TileDto(2, 0, TileDto.TileType.character_rando),

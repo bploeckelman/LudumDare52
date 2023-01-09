@@ -50,12 +50,12 @@ public class Quota {
     public boolean didJustSatisfy = false;
 
     public Quota(QuotaDto quotaDto) {
-        this.source = quotaDto.getSource();
+        this.source = quotaDto.source;
 
-        for (PersonDto personDto : quotaDto.getPeople()) {
-            Feature[] features = personDto.getFeatures();
+        for (PersonDto personDto : quotaDto.people) {
+            Feature[] features = personDto.features;
             if (features == null) {
-                Feature.Category[] categories = personDto.getCategories();
+                Feature.Category[] categories = personDto.categories;
                 features = new Feature[categories.length];
                 for (int i = 0; i < categories.length; i++) {
                     features[i] = Feature.getRandomFrom(categories[i]);

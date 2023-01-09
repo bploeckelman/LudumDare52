@@ -16,8 +16,6 @@ public class TileDto {
     public int x;
     public int y;
 
-    public TileDto() {}
-
     public TileDto(int y, int x, TileType tileType) {
         this(y, x, tileType, 0);
     }

@@ -22,8 +22,6 @@ import lando.systems.ld52.data.TileType;
 import lando.systems.ld52.gameobjects.*;
 import lando.systems.ld52.levels.Level;
 import lando.systems.ld52.particles.Particles;
-import lando.systems.ld52.serialization.PersonDto;
-import lando.systems.ld52.serialization.QuotaDto;
 import lando.systems.ld52.serialization.RoundDto;
 import lando.systems.ld52.serialization.TileDto;
 import lando.systems.ld52.tutorial.TutorialManager;
@@ -97,14 +95,10 @@ public class GameScreen extends BaseScreen {
     }
 
     public void setRound(int round) {
-
-//        String dto = Gdx.files.internal("levels/level1.json").readString();
-//        RoundDto roundDto = RoundDto.fromJson(dto);
-
         RoundDto roundDto = Level.getLevel(round);
 
-        heavenQuota = new Quota(roundDto.getHeaven());
-        hellQuota = new Quota(roundDto.getHell());
+        heavenQuota = new Quota(roundDto.heaven);
+        hellQuota = new Quota(roundDto.hell);
         RoundData roundData = getRoundData(roundDto, heavenQuota, hellQuota);
 
         QuotaListUI quotaListUI = gameScreenUI.rightSideUI.quotaListUI;
