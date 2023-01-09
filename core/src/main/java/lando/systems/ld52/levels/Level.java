@@ -12,6 +12,8 @@ public class Level {
     public static RoundDto getLevel(int round) {
         switch (round) {
             case 1:
+                return level1;
+            case 2: level2:
                 return level2;
             default:
                 return level1;
