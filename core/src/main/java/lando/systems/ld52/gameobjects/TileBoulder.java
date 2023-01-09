@@ -15,7 +15,7 @@ public class TileBoulder extends TileObject {
 
     public TileBoulder(Assets assets, Tile tile) {
         super(tile);
-
+        blocksHarvest = true;
         int numBoulders = 5;
         int index = MathUtils.random(0, numBoulders - 1);
         texture = assets.atlas.findRegion("tiles/boulder", index);
