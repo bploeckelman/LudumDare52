@@ -72,14 +72,15 @@ public class MidStoryScreen extends BaseScreen {
     public void show() {
         super.show();
         game.getInputMultiplexer().addProcessor(uiStage);
-        game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
+//        game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
         storyAccum = 0;
         phaseAccum = 0;
-        clickPhase = 0;
+        clickPhase = 1;
         isStoryOver = false;
         backgroundTexture = game.assets.cutsceneBackground;
         cutsceneTexture = game.assets.cutscene0;
-        subtitles = "Day " + getGameScreenRoundNumber() + " over";
+        int displayNumber = getGameScreenRoundNumber() + 1;
+        subtitles = "Day " + displayNumber + " complete. Phew! Long one.";
     }
 
     @Override
@@ -107,24 +108,47 @@ public class MidStoryScreen extends BaseScreen {
                 switch (clickPhase) {
                     case 0:
                         cutsceneTexture = game.assets.cutscene0;
-                        subtitles = "Another shitty work day";
+                        subtitles = "Whew! Glad that's over!";
                         break;
                     case 1:
                         cutsceneTexture = game.assets.cutscene1;
                         if (Stats.last_quota_reached == null) {
-                            subtitles = "I didn't meet the quota yesterday :(";
+                            subtitles = "Can't believe I didn't make quota yesterday. Boss is going to have my scythe for sure!";
                         } else {
-                            subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "I worked my ass off filling heaven's quota yesterday" : "I did good for hell's quota yesterday";
+                            switch (getGameScreenRoundNumber()) {
+                                case 0:
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "I absolutely CRUSHED my Heaven quota yesterday!" : "Hell quota: Hell yeah!";
+                                    break;
+                                case 1:
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Heaven quota reaped AF!" : "Got that hell quota hella quick!";
+                                    break;
+                                case 2:
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Heaven: Incoming soul!" : "Hell better watch out for that one!";
+                                    break;
+                                case 3:
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Heaven quota complete? Heavenly!" : "Hell yeah.";
+                                    break;
+
+                                default:
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "I absolutely CRUSHED my Heaven quota yesterday!" : "Hell quota: Hell yeah!";
+                                    break;
+
+                            }
                         }
                         break;
-                    case 2:
-                        cutsceneTexture = game.assets.cutscene2;
-                        subtitles = "Let's check today's quota.";
-                        break;
-                    case 3:
-                        cutsceneTexture = game.assets.cutscene3;
-                        subtitles = "Meh, same thing. Let's get this over with.";
-                        break;
+//                    case 2:
+//                        cutsceneTexture = game.assets.cutscene2;
+//
+//                        if (Stats.last_quota_reached == null) {
+//                            subtitles = "Can't win 'em all, I guess...";
+//                        } else {
+//                            subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Heaven's quota: Heavenly!" : "Did that Hell quota hella quick.";
+//                        }
+//                        break;
+//                    case 3:
+//                        cutsceneTexture = game.assets.cutscene3;
+//                        subtitles = "The days are short but the weeks are long, ya know?";
+//                        break;
                     default:
                         isStoryOver = true;
                         prepUpGameScreenAndTransition();

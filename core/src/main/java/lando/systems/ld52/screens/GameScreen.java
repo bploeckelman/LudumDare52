@@ -71,6 +71,7 @@ public class GameScreen extends BaseScreen {
         uiStage.addActor(gameScreenUI);
 
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
+        game.audioManager.playSound(AudioManager.Sounds.bell, .5f);
 
 
         tutorialManager = new TutorialManager();
@@ -109,6 +110,7 @@ public class GameScreen extends BaseScreen {
 
         gameboard.setupBoard(assets, roundData);
         player.reset();
+        gameScreenUI.leftSideUI.harvestedSoulUI.clear();
     }
 
     private RoundData getRoundData(RoundDto roundDto, Quota heavenQuota, Quota hellQuota) {
@@ -187,8 +189,9 @@ public class GameScreen extends BaseScreen {
         // TODO: we need to reset gameboard here
         game.getInputMultiplexer().addProcessor(uiStage);
 //        Gdx.app.log("currentMusicPositionGameScreenOnShow()", String.valueOf(Main.game.currentMusicPosition));
-        currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
-        currentMusic.setPosition(Main.game.currentMusicPosition);
+//        currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
+//        game.audioManager.playSound(AudioManager.Sounds.bell, .5f);
+//        currentMusic.setPosition(Main.game.currentMusicPosition);
         isFreshStart = false;
 //        currentMusic.setVolume(game.audioManager.musicVolume.floatValue());
     }
@@ -226,10 +229,10 @@ public class GameScreen extends BaseScreen {
 
         if (quotaToastShown) {
             if (Gdx.input.isTouched() && _roundNumber < MAX_ROUND_NUMBER) {
-                game.getScreenManager().pushScreen("mid-story", TransitionManager.TransitionType.CROSSHATCH.name());
+                game.getScreenManager().pushScreen("mid-story", TransitionManager.getRandomTransition().name());
             }
             else if (Gdx.input.isTouched() && _roundNumber >= MAX_ROUND_NUMBER) {
-                game.getScreenManager().pushScreen("end-story", TransitionManager.TransitionType.CROSSHATCH.name());
+                game.getScreenManager().pushScreen("end-story", TransitionManager.getRandomTransition().name());
             }
             return;
         }
@@ -256,7 +259,7 @@ public class GameScreen extends BaseScreen {
             }
             score += 1000 + gameboard.getSecondsLeft() * 20;
         } else if (gameboard.getSecondsLeft() <= 0) {
-            showToast("You've failed to meet quota!", ToastManager.UNTIL_CLOSED);
+            showToast("You failed to meet either quota!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = null;
             quotaToastShown = true;
         }
@@ -266,11 +269,7 @@ public class GameScreen extends BaseScreen {
         hourglass.update(delta);
         gameScreenUI.leftSideUI.scoreBoxUI.setScoreLabel(score);
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
-            // .hide() happens at the END of transition - can't set the time there (value will be set at 0f)
-            Main.game.currentMusicPosition = currentMusic.getPosition();
-            game.getScreenManager().pushScreen("cutscene", TransitionManager.TransitionType.CROSSHATCH.name());
-        }
+
     }
 
     @Override

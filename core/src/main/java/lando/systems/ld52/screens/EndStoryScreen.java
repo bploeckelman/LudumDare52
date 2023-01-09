@@ -40,7 +40,7 @@ public class EndStoryScreen extends BaseScreen {
 
         storyAccum = 0;
 
-        subtitles = " ";
+        subtitles = "Finally! Time to kick back and relax!";
         backgroundTexture = game.assets.cutsceneBackground;
         cutsceneTexture = game.assets.cutscene0;
 
@@ -50,7 +50,7 @@ public class EndStoryScreen extends BaseScreen {
     public void show() {
         super.show();
         game.getInputMultiplexer().addProcessor(uiStage);
-        game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
+//        game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
     }
 
     @Override
@@ -78,7 +78,8 @@ public class EndStoryScreen extends BaseScreen {
                 switch (clickPhase) {
                     case 0:
                         cutsceneTexture = game.assets.cutscene1;
-                        subtitles = "Time to retire";
+                        subtitles = "Can't wait to enjoy my favorite reaper leisure activities in my afterlife\n\n" +
+                                "location of choice!";
                         break;
                     default:
                         isStoryOver = true;

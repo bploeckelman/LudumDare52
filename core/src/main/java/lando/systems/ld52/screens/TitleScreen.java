@@ -68,7 +68,8 @@ public class TitleScreen extends BaseScreen {
         if (!kitten.isFlipX()) kitten.flip(true, false);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.BLEND.name());
+            game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.PAGE_CURL.name());
+//            game.getScreenManager().pushScreen("end-story", TransitionManager.TransitionType.PAGE_CURL.name());
         }
     }
 
@@ -132,7 +133,7 @@ public class TitleScreen extends BaseScreen {
                 if (!gameScreen.isFreshStart) {
                     gameScreen.resetGame();
                 }
-                game.getScreenManager().pushScreen("intro-story", TransitionManager.TransitionType.DIRECTIONAL_WARP.name());
+                game.getScreenManager().pushScreen("intro-story", TransitionManager.TransitionType.PAGE_CURL.name());
             }
         });
 

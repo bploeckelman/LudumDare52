@@ -47,7 +47,7 @@ public enum Feature {
     , mustache_a       (Category.hair_face, "mustache-a",      "Creeper 'stache", "With a 'stache like that, this is probably for the best.")
     , beard_beard       (Category.hair_face, "beard-beard",      "Full Beard", "I wonder if the IPAs are in heaven or hell.")
     , beard_goatee       (Category.hair_face, "beard-goatee",      "Goatee", "I guess the 90s really ARE coming back!")
-    , beard_soulpatch       (Category.hair_face, "beard-soulpatch",      "Soulpatch (lol)", "Soulpatch? Yikes.")
+    , beard_soulpatch       (Category.hair_face, "beard-soulpatch",      "Soulpatch (ew)", "Soulpatch? Yikes.")
 //    ,beard_beard       (Category.hair_face, "beard-",      "")
 
     , hair_bald        (Category.hair_head, "feature-blank",   "Shaved", "What a beautifully smooth dome!")
@@ -132,4 +132,30 @@ public enum Feature {
     public static Feature getFeature(Feature feature, Category category) {
         return feature != null ? feature : getRandomFrom(category);
     }
+
+    // ------------------------------------------------------------------------
+    // Fun names
+
+    public static String getRandomCharacterName() {
+        return characterNames[MathUtils.random(0, characterNames.length - 1)];
+    }
+
+    private static final String[] characterNames = new String[] {
+              "Billy Windows"
+            , "Steve Apple"
+            , "Elon Stank"
+            , "Mark Suckerhill"
+            , "Sam Bankrun-Fired"
+            , "Elizabeth Sherlock"
+            , "Storin Buffet"
+            , "Tom Bones"
+            , "Liam McPoyle"
+            , "Big Richard"
+            , "Max Power"
+            , "Tiny Tom"
+            , "Urist Dwarvenson"
+            , "Geoff Bezers"
+            // TODO - moar....
+    };
+
 }

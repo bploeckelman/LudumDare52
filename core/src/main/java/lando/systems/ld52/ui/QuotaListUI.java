@@ -47,9 +47,9 @@ public class QuotaListUI extends VisWindow {
 
         add(label).colspan(2).align(Align.top);
         row();
-        add(heavenQuotaTable).fill().padTop(5);
+        add(heavenQuotaTable).grow().padTop(5);
         row();
-        add(hellQuotaTable).fill().padTop(5);
+        add(hellQuotaTable).grow().padTop(5);
     }
 
     public void setQuotas(Quota quota1, Quota quota2) {
@@ -78,8 +78,6 @@ public class QuotaListUI extends VisWindow {
                 // initialize the image stack with the appropriate backgrounds
                 Stack imageStack = new Stack(
                           new Container<>(new VisImage(imageBackground))
-                        // TODO - use a generic head image, that's not used on the board (maybe white or gray?)
-                        //  so player's don't think that the head skin tone also needs to match
                         , new Container<>(new VisImage(Head.get(assets, Head.blank).getKeyFrame(0)))
                 );
 
@@ -96,7 +94,7 @@ public class QuotaListUI extends VisWindow {
                     imageStack.add(featureImage);
 
                     VisLabel featureLabel = new VisLabel(feature.displayName, "outfit-medium-14px");
-                    labelTable.add(featureLabel).fillX();
+                    labelTable.add(featureLabel).growX();
                     labelTable.row();
                 }
 
@@ -107,10 +105,10 @@ public class QuotaListUI extends VisWindow {
                 // initialize the inner table for this row
                 VisTable innerTable = new VisTable();
                 innerTable.setBackground(background);
-                innerTable.add(imageStack).fill();
-                innerTable.add(labelTable).fill();
+                innerTable.add(imageStack).padRight(10);
+                innerTable.add(labelTable).grow();
 
-                heavenQuotaTable.add(innerTable).fillX();
+                heavenQuotaTable.add(innerTable).growX();
                 heavenQuotaTable.row();
             }
         }
@@ -128,8 +126,6 @@ public class QuotaListUI extends VisWindow {
                 // initialize the image stack with the appropriate backgrounds
                 Stack imageStack = new Stack(
                           new Container<>(new VisImage(imageBackground))
-                        // TODO - use a generic head image, that's not used on the board (maybe white or gray?)
-                        //  so player's don't think that the head skin tone also needs to match
                         , new Container<>(new VisImage(Head.get(assets, Head.blank).getKeyFrame(0)))
                 );
 
@@ -146,7 +142,7 @@ public class QuotaListUI extends VisWindow {
                     imageStack.add(featureImage);
 
                     VisLabel featureLabel = new VisLabel(feature.displayName, "outfit-medium-14px");
-                    labelTable.add(featureLabel).fillX();
+                    labelTable.add(featureLabel).growX();
                     labelTable.row();
                 }
 
@@ -157,10 +153,10 @@ public class QuotaListUI extends VisWindow {
                 // initialize the inner table for this row
                 VisTable innerTable = new VisTable();
                 innerTable.setBackground(background);
-                innerTable.add(imageStack).fill();
-                innerTable.add(labelTable).fill();
+                innerTable.add(imageStack).padRight(10);
+                innerTable.add(labelTable).grow();
 
-                hellQuotaTable.add(innerTable).fillX();
+                hellQuotaTable.add(innerTable).growX();
                 hellQuotaTable.row();
             }
         }

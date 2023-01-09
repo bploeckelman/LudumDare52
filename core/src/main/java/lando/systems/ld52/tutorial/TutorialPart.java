@@ -119,11 +119,11 @@ public class TutorialPart {
         textColor.set(1f, 1f, 1f, alpha);
         Assets.NinePatches.glass_blue.draw(batch, textBounds.x - 10, textBounds.y - 10, textBounds.width + 20, textBounds.height + 20);
         assets.font.getData().setScale(.5f);
-        assets.layout.setText(assets.font, text, textColor, textBounds.width, Align.center, true);
-        assets.font.draw(batch, assets.layout, textBounds.x, textBounds.y + textBounds.height/2f + assets.layout.height/2f);
+        assets.layout.setText(assets.font, text, textColor, textBounds.width, Align.left, true);
+        assets.font.draw(batch, assets.layout, textBounds.x + 10, textBounds.y + textBounds.height/2f + assets.layout.height/2f);
         assets.font.getData().setScale(.3f);
 
-        assets.layout.setText(assets.font, continueText, textColor, textBounds.width, Align.center, true);
+        assets.layout.setText(assets.font, continueText, textColor, textBounds.width, Align.left, true);
         assets.font.draw(batch, assets.layout, textBounds.x, textBounds.y + assets.layout.height + 5);
 
         assets.font.getData().setScale(1f);

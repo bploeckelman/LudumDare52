@@ -22,13 +22,14 @@ public class Quota {
             }
         }
 
-        public void satisfy(Array<Feature> features) {
+        public boolean satisfy(Array<Feature> features) {
             for (Feature feature : features) {
                 if (this.features.containsKey(feature)) {
                     this.features.put(feature, true);
                     didJustSatisfy = true;
                 }
             }
+            return isSatisfied();
         }
 
         public boolean isSatisfied() {
@@ -71,13 +72,15 @@ public class Quota {
         people.add(person);
     }
 
-    public void satisfy(Array<Feature> features) {
+    public boolean satisfy(Array<Feature> features) {
+        boolean didSatisfy = false;
         for (Person person : people) {
             person.satisfy(features);
             if (person.didJustSatisfy) {
                 didJustSatisfy = true;
             }
         }
+        return didSatisfy;
     }
 
     public boolean isSatisfied() {
