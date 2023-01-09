@@ -12,7 +12,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
+import lando.systems.ld52.gameobjects.Stats;
 import lando.systems.ld52.particles.Particles;
+import lando.systems.ld52.utils.Utils;
 
 public class EndStoryScreen extends BaseScreen {
 
@@ -108,7 +110,13 @@ public class EndStoryScreen extends BaseScreen {
         batch.begin();
         {
             batch.setColor(whiteWithAlpha);
-            batch.draw(backgroundTexture, 0, 200, windowCamera.viewportWidth, 800);
+            if (Stats.heavenQuotaMet == Stats.hellQuotaMet) {
+                batch.draw(Utils.getColoredTextureRegion(Color.GRAY), 0, 200, windowCamera.viewportWidth, 800);
+                assets.layout.setText(assets.largeFont, "PURGATORY", whiteWithAlpha, camera.viewportWidth, Align.center, false);
+                assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
+            } else {
+                batch.draw(backgroundTexture, 0, 200, windowCamera.viewportWidth, 800);
+            }
             batch.draw(assets.chair, 50, 200, 200f, 200f);
             batch.draw(assets.playerNoScythe.getKeyFrame(phaseAccum), 250, 300, 250f, 250f);
             batch.draw(assets.beerPack, 245, 200, 100f, 100f);
