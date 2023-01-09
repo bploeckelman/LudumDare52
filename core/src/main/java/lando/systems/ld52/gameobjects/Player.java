@@ -47,8 +47,8 @@ public class Player implements GameObject {
         this.gameBoard = gameBoard;
         gameBoard.player = this;
 
+        harvestZone = new HarvestZone(this);
         reset();
-        this.harvestZone = new HarvestZone(this);
     }
 
     public void reset() {
