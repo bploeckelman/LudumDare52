@@ -1,0 +1,45 @@
+- ** [HTML5/WebGL](https://lando.systems/games/ld52-reapo-man/) **
+- ** [Desktop/Java](https://lando.systems/games/ld52-reapo-man/ld52-reapo-man-desktop.jar) **
+- ** [Source](https://github.com/bploeckelman/LudumDare52) **
+
+![final-gif.gif](///raw/103/z/55869.gif)
+
+# 💀 Guess who? It's the _Reapo_ Man! 💀
+
+Time for your dayjob down at the Reapo Depot, where you'll be harvesting the souls of the nearly departed.
+
+Use your charge-up scythe to reap souls in this action-puzzler - but be sure to harvest the souls from your Heaven or Hell quota before the time runs out!
+
+Avoid obstacles in your scythe's path and gain power-ups to extend your reap-range.
+
+At the end of the week, retire to your afterlife of leisure!
+
+Enjoy original art, music, and color commentary from Lando Systems.
+
+# Controls:
+---
+**Left Click & Hold** to swing your golf scythe and get some reapin done
+
+
+# About the Team:
+---
+
+[LandoSystems](https://lando.systems) is a group of jammers from Madison, Wisconsin that varies in size from 2 to 12 people. This is the team's 27th Ludum Dare game!! :grinning:
+
+# Team Members:
+---
+
+Code:
+- Doug Graham [dsgraham](https://twitter.com/dsgraham) :elephant: [dsgraham on mastodon](https://mastodon.gamedev.place/@dsgraham)
+- Brian Ploeckelman [PalpatinesSmile](https://twitter.com/PalpatinesSmile) :elephant: [brian on mastodon](https://mastodon.gamedev.place/@brian)
+- Jeffrey Hwang :elephant: [jeffreyhwang on mastodon](https://mastodon.gamedev.place/@jeffreyhwang)
+- Brian Rossman
+
+Art:
+- Matt Neumann
+
+Audio (and Code and Story, Triple Threat!):
+- Pete Valeo
+
+Testing:
+- Cal Rossman
