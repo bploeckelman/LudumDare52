@@ -99,6 +99,9 @@ public class TileHead extends TileObject {
         Quota hellQuota = gameScreen.hellQuota;
         heavenQuota.satisfiedCount = 0;
         hellQuota.satisfiedCount = 0;
+
+        String afterlifeZone = "{GRADIENT=blue;gray}Destination{ENDGRADIENT}: {GRADIENT=gray;white}Purgatory{ENDGRADIENT}";
+        AudioManager.Sounds reapSound = AudioManager.Sounds.soulReap;
         heavenQuota.satisfy(featureAnims.orderedKeys());
 
         if (heavenQuota.satisfiedCount > 0) {
@@ -107,23 +110,25 @@ public class TileHead extends TileObject {
             for (int i = 0; i < heavenQuota.satisfiedCount; i++) {
                 gameScreen.game.particles.flyUp(gameScreen.game.assets.angel, tile.bounds.getX() + tile.bounds.width / 2, tile.bounds.getY() + tile.bounds.width / 2);
             }
+            afterlifeZone = "{GRADIENT=black;gray}Destination{ENDGRADIENT}: {GRADIENT=sky;white}Heaven{ENDGRADIENT}";
+            // TODO: Pete heave sound
+            // reapSound = heaven sound
         }
+
         hellQuota.satisfy(featureAnims.orderedKeys());
         if (hellQuota.satisfiedCount > 0) {
-        gameScreen.audioManager.playSound(AudioManager.Sounds.hell, 1f);
+            gameScreen.audioManager.playSound(AudioManager.Sounds.hell, 1f);
             for (int i = 0; i < hellQuota.satisfiedCount; i++) {
                 gameScreen.game.particles.flyUp(gameScreen.game.assets.devil, tile.bounds.getX() + tile.bounds.width / 2, tile.bounds.getY() + tile.bounds.width / 2);
             }
-
+            afterlifeZone = "{GRADIENT=black;gray}Destination{ENDGRADIENT}: {GRADIENT=red;black}Hell{ENDGRADIENT}";
+            // TODO: Pete heave sound
+            // reapSound = hell sound
         }
-        boolean heavenSatisfied = heavenQuota.satisfy(featureAnims.orderedKeys());
-        boolean hellSatisfied = hellQuota.satisfy(featureAnims.orderedKeys());
+
         quotaListUI.setQuotas(heavenQuota, hellQuota);
 
         // add this head to the harvested ui
-        String afterlifeZone = "{GRADIENT=blue;gray}Destination{ENDGRADIENT}: {GRADIENT=gray;white}Purgatory{ENDGRADIENT}";
-        if      (heavenSatisfied) afterlifeZone = "{GRADIENT=black;gray}Destination{ENDGRADIENT}: {GRADIENT=sky;white}Heaven{ENDGRADIENT}";
-        else if (hellSatisfied)   afterlifeZone = "{GRADIENT=black;gray}Destination{ENDGRADIENT}: {GRADIENT=red;black}Hell{ENDGRADIENT}";
 
         HarvestedSoulUI harvestedSoulUI = gameScreen.gameScreenUI.leftSideUI.harvestedSoulUI;
         harvestedSoulUI.setSoul(this, afterlifeZone);
@@ -131,7 +136,7 @@ public class TileHead extends TileObject {
         gameScreen.game.particles.lightning(new Vector2(tile.bounds.x + MathUtils.random(-150, 150), Config.Screen.window_height), new Vector2(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2));
         gameScreen.game.particles.bleed(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2);
         gameScreen.screenShaker.addDamage(100f);
-        gameScreen.audioManager.playSound(AudioManager.Sounds.soulReap, .5f);
+        gameScreen.audioManager.playSound(reapSound, .5f);
         gameScreen.score += 200;
         return true;
     }
