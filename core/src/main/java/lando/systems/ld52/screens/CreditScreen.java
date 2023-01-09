@@ -2,7 +2,6 @@ package lando.systems.ld52.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 import lando.systems.ld52.Config;
@@ -20,9 +19,6 @@ public class CreditScreen extends BaseScreen {
 
     private boolean isCreditOver = false;
     private boolean exitingScreen = false;
-
-    private final Animation<TextureRegion> catAnimation;
-    private final Animation<TextureRegion> dogAnimation;
     private final TextureRegion background;
 
     private final String title = "{RAINBOW}Death Who?{ENDRAINBOW}";
@@ -32,7 +28,7 @@ public class CreditScreen extends BaseScreen {
     private final String developers = "{COLOR=gray}Developed by:{COLOR=white}\n {GRADIENT=white;gray}Brian Ploeckelman{ENDGRADIENT} \n {GRADIENT=white;gray}Doug Graham{ENDGRADIENT} \n {GRADIENT=white;gray}Brian Rossman{ENDGRADIENT} \n {GRADIENT=white;gray}Jeffrey Hwang{ENDGRADIENT}";
     private final String rossman = "{GRADIENT=gray;black}...also Brian Rossman\n(in our memories){ENDGRADIENT}";
     private final String artists = "{COLOR=gray}Art by:{COLOR=white}\n {GRADIENT=white;gray}Matt Neumann{ENDGRADIENT}";
-    private final String emotionalSupport = "{COLOR=cyan}Emotional Support:{COLOR=white}\n  Asuka, Osha,\n  Cherry";
+    private final String emotionalSupport = "{COLOR=cyan}Emotional Support:{COLOR=white}\n  Asuka, Osha,\n  Cherry,\n  Obi, Yoda";
     private final String music = "{COLOR=gray}Sound by:{COLOR=white}\n {GRADIENT=white;gray}Pete Valeo{ENDGRADIENT}";
     private final String libgdx = "Made with {COLOR=red}<3{COLOR=white}\nand LibGDX";
     private final String disclaimer = "{GRADIENT=black;gray}Disclaimer:{ENDGRADIENT}  {GRADIENT=gold;yellow}{JUMP=.2}{WAVE=0.8;1.1;1.1}No rabbits were harmed in the making of this game{ENDWAVE}{ENDJUMP}{ENDGRADIENT}";
@@ -59,8 +55,6 @@ public class CreditScreen extends BaseScreen {
         rossmanLabel.setLineAlign(Align.left);
         rossmanLabel.setFontScale(0.4f);
 
-        catAnimation = game.assets.cat;
-        dogAnimation = game.assets.dog;
         background = game.assets.pixelRegion;
 
         rightCreditLabel = new TypingLabel(game.assets.smallFont, artists.toLowerCase() + "\n\n" + music.toLowerCase() + "\n\n" + libgdx.toLowerCase(), Config.Screen.window_width / 2 + 75f, Config.Screen.window_height / 2f + 135f);
@@ -125,12 +119,16 @@ public class CreditScreen extends BaseScreen {
             themeLabel.render(batch);
             leftCreditLabel.render(batch);
             if (leftCreditLabel.hasEnded()) {
-                TextureRegion catTexture = catAnimation.getKeyFrame(accum);
-                TextureRegion dogTexture = dogAnimation.getKeyFrame(accum);
-                TextureRegion kittenTexture = game.assets.kitten.getKeyFrame(accum);
+                TextureRegion catTexture = game.assets.cherry.getKeyFrame(accum);
+                TextureRegion dogTexture = game.assets.asuka.getKeyFrame(accum);
+                TextureRegion kittenTexture = game.assets.osha.getKeyFrame(accum);
+                TextureRegion rossDogTexture = game.assets.rossDog.getKeyFrame(accum);
+                TextureRegion whiteLabTexture = game.assets.whiteLab.getKeyFrame(accum);
                 batch.draw(catTexture, 60f, 215f);
                 batch.draw(dogTexture, 60f, 245f);
                 batch.draw(kittenTexture, 270f, 245f);
+                batch.draw(rossDogTexture, 230f, 185f);
+                batch.draw(whiteLabTexture, 50f, 175f);
                 //rossmanLabel.render(batch);
             }
             rightCreditLabel.render(batch);

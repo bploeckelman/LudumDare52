@@ -58,9 +58,9 @@ public class TitleScreen extends BaseScreen {
         super.update(delta);
         // ...
         stateTime += delta;
-        dog = assets.dog.getKeyFrame(stateTime);
-        cat = assets.cat.getKeyFrame(stateTime);
-        kitten = assets.kitten.getKeyFrame(stateTime);
+        dog = assets.asuka.getKeyFrame(stateTime);
+        cat = assets.cherry.getKeyFrame(stateTime);
+        kitten = assets.osha.getKeyFrame(stateTime);
         if (!dog.isFlipX()) dog.flip(true, false);
         if (!cat.isFlipX()) cat.flip(true, false);
         if (!kitten.isFlipX()) kitten.flip(true, false);

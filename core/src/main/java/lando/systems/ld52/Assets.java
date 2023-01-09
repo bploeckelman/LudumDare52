@@ -51,9 +51,11 @@ public class Assets implements Disposable {
     public TextureRegion pixelRegion;
     public TextureRegion hourglassTex;
 
-    public Animation<TextureRegion> cat;
-    public Animation<TextureRegion> dog;
-    public Animation<TextureRegion> kitten;
+    public Animation<TextureRegion> cherry;
+    public Animation<TextureRegion> asuka;
+    public Animation<TextureRegion> osha;
+    public Animation<TextureRegion> rossDog;
+    public Animation<TextureRegion> whiteLab;
 
     public Animation<TextureRegion> playerWithScythe;
     public Animation<TextureRegion> playerNoScythe;
@@ -233,11 +235,13 @@ public class Assets implements Disposable {
 
         circleTex = atlas.findRegion("particles/circle");
 
-        cat = new Animation<>(0.1f, atlas.findRegions("pets/cat"), Animation.PlayMode.LOOP);
-        dog = new Animation<>(0.1f, atlas.findRegions("pets/dog"), Animation.PlayMode.LOOP);
-        kitten = new Animation<>(.1f, atlas.findRegions("pets/kitten"), Animation.PlayMode.LOOP);
+        cherry = new Animation<>(0.1f, atlas.findRegions("pets/cat"), Animation.PlayMode.LOOP);
+        asuka = new Animation<>(0.1f, atlas.findRegions("pets/dog"), Animation.PlayMode.LOOP);
+        osha = new Animation<>(.1f, atlas.findRegions("pets/kitten"), Animation.PlayMode.LOOP);
         angel = new Animation<>(.1f, atlas.findRegions("particles/angels/angel"), Animation.PlayMode.LOOP);
         devil = new Animation<>(.1f, atlas.findRegions("particles/devils/devil"), Animation.PlayMode.LOOP);
+        rossDog = new Animation<>(.1f, atlas.findRegions("pets/ross-dog"), Animation.PlayMode.LOOP);
+        whiteLab = new Animation<>(.1f, atlas.findRegions("pets/white-lab-dog"), Animation.PlayMode.LOOP);
 
         cutsceneBackground = mgr.get("images/title-background_00.png");
         cutscene0 = mgr.get("images/cutscene_0.png");

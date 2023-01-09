@@ -56,12 +56,12 @@ public class SettingsUI extends Group {
 
         VisSlider.SliderStyle horizontalSliderStyle = skin.get("default-horizontal", VisSlider.SliderStyle.class);
         VisSlider.SliderStyle customCatSliderStyle = new VisSlider.SliderStyle(horizontalSliderStyle);
-        customCatSliderStyle.knob = new TextureRegionDrawable(assets.cat.getKeyFrame(0));
+        customCatSliderStyle.knob = new TextureRegionDrawable(assets.cherry.getKeyFrame(0));
         customCatSliderStyle.knobDown = customCatSliderStyle.knob;
         customCatSliderStyle.knobOver = customCatSliderStyle.knob;
 
         VisSlider.SliderStyle customDogSliderStyle = new VisSlider.SliderStyle(horizontalSliderStyle);
-        customDogSliderStyle.knob = new TextureRegionDrawable(assets.dog.getKeyFrame(0));
+        customDogSliderStyle.knob = new TextureRegionDrawable(assets.asuka.getKeyFrame(0));
         customDogSliderStyle.knobDown = customDogSliderStyle.knob;
         customDogSliderStyle.knobOver = customDogSliderStyle.knob;
 
