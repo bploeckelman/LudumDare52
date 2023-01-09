@@ -85,7 +85,7 @@ public class GameScreen extends BaseScreen {
         return _roundNumber;
     }
     public void nextRound() {
-        if (++_roundNumber > MAX_ROUND_NUMBER) {
+        if (++_roundNumber >= MAX_ROUND_NUMBER) {
             _roundNumber = 0;
         }
         setRound(_roundNumber);
