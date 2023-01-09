@@ -93,7 +93,15 @@ public class TileHead extends TileObject {
         Quota heavenQuota = gameScreen.heavenQuota;
         Quota hellQuota = gameScreen.hellQuota;
         heavenQuota.satisfy(featureAnims.orderedKeys());
+        if (heavenQuota.didJustSatisfy) {
+            heavenQuota.didJustSatisfy = false;
+            gameScreen.game.particles.flyUp(gameScreen.game.assets.angel, tile.bounds.getX() + tile.bounds.width / 2, tile.bounds.getY() + tile.bounds.width / 2);
+        }
         hellQuota.satisfy(featureAnims.orderedKeys());
+        if (hellQuota.didJustSatisfy) {
+            hellQuota.didJustSatisfy = false;
+            gameScreen.game.particles.flyUp(gameScreen.game.assets.devil, tile.bounds.getX() + tile.bounds.width / 2, tile.bounds.getY() + tile.bounds.width / 2);
+        }
         quotaListUI.setQuotas(heavenQuota, hellQuota);
         gameScreen.game.particles.lightning(new Vector2(tile.bounds.x + MathUtils.random(-150, 150), Config.Screen.window_height), new Vector2(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2));
         gameScreen.game.particles.bleed(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2);
