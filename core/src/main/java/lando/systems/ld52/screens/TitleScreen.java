@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -17,8 +18,7 @@ import lando.systems.ld52.ui.SettingsUI;
 
 public class TitleScreen extends BaseScreen {
 
-    private TextureRegion background;
-    private TextureRegion logo;
+    private Texture background;
     private TextureRegion dog;
     private TextureRegion cat;
     private TextureRegion kitten;
@@ -40,10 +40,10 @@ public class TitleScreen extends BaseScreen {
         worldCam.update();
 
 //        background = assets.atlas.findRegion("fire-color-gradient");
-        background = assets.atlas.findRegion("story-background");
+        background = assets.titleBackground;
 
 //        background = assets.mgr.get("images/story-background_00.png");
-        logo = assets.atlas.findRegion("libgdx");
+//        logo = assets.atlas.findRegion("libgdx");
     }
 
     @Override
@@ -89,9 +89,9 @@ public class TitleScreen extends BaseScreen {
         {
             batch.draw(background, 0, 0, worldCamera.viewportWidth, worldCamera.viewportHeight);
 
-            float margin = 10;
-            float logoX = 0.5f * (Gdx.graphics.getWidth()  - logo.getRegionWidth()) + 80;
-            float logoY = 0.5f * (Gdx.graphics.getHeight() - logo.getRegionHeight());
+//            float margin = 10;
+//            float logoX = 0.5f * (Gdx.graphics.getWidth()  - logo.getRegionWidth()) + 80;
+//            float logoY = 0.5f * (Gdx.graphics.getHeight() - logo.getRegionHeight());
 //            batch.draw(logo, logoX, logoY);
 //            batch.draw(dog,
 //                    margin, margin,

@@ -48,6 +48,7 @@ public class Assets implements Disposable {
     public Texture cutscene1;
     public Texture cutscene2;
     public Texture cutscene3;
+    public Texture titleBackground;
     public TextureRegion circleTex;
     public TextureRegion pixelRegion;
     public TextureRegion hourglassTex;
@@ -239,6 +240,7 @@ public class Assets implements Disposable {
             mgr.load("images/cutscene_1.png", Texture.class, linearTexParams);
             mgr.load("images/cutscene_2.png", Texture.class, linearTexParams);
             mgr.load("images/cutscene_3.png", Texture.class, linearTexParams);
+            mgr.load("images/title-background_00.png", Texture.class, linearTexParams);
         }
 
         if (load == Load.SYNC) {
@@ -293,6 +295,7 @@ public class Assets implements Disposable {
         cutscene1 = mgr.get("images/cutscene_1.png");
         cutscene2 = mgr.get("images/cutscene_2.png");
         cutscene3 = mgr.get("images/cutscene_3.png");
+        titleBackground = mgr.get("images/title-background_00.png");
         skull = atlas.findRegion("skull", 0);
 
         playerWithScythe = new Animation<>(.2f, atlas.findRegions("player/reapo-idle-a"), Animation.PlayMode.LOOP);
