@@ -12,33 +12,48 @@ import java.util.Map;
 
 public enum Feature {
 
-      collar_a         (Category.clothes,   "collar-a-idle",   "collar")
+      collar_a         (Category.clothes,   "collar-a-idle",   "Collar")
+    , buttonup_purple         (Category.clothes,   "clothes-buttonup-purple",   "Purple Buttonup")
+    , buttonup_blue         (Category.clothes,   "clothes-buttonup-blue",   "Blue Buttonup")
+    , sweatshirt_red         (Category.clothes,   "clothes-sweatshirt-red",   "Red Hoodie")
+    , sweatshirt_blue         (Category.clothes,   "clothes-sweatshirt-blue",   "Blue Hoodie")
+    , plain_green         (Category.clothes,   "clothes-plain-green",   "Green Tee")
+//    , hawaiian_red         (Category.clothes,   "clothes-hawaiian-red",   "Red Hawaiian")
+//    , hawaiian_blue         (Category.clothes,   "clothes-hawaiian-blue",   "Blue Hawaiian")
+//    , clothes_         (Category.clothes,   "",   "")
+//    , clothes_         (Category.clothes,   "",   "")
+
+
     // TODO - eyes should be a separate thing? are we doing eye color vs eye-wear?
-    , eyes_a           (Category.eye,       "eyes-a-idle",     "eyes")
-    , glasses_a        (Category.eye,       "glasses-a",       "glasses")
+    , eyes_a           (Category.eye,       "eyes-a-idle",     "Eyes")
+    , glasses_a        (Category.eye,       "glasses-a",       "Glasses")
     , glasses_star        (Category.eye,       "glasses-star",       "Elton Shades")
     , glasses_cop        (Category.eye,       "glasses-reflective",       "Cop Shades")
-    , eyepatch_a       (Category.eye,       "eyepatch-a",      "eye patch")
+    , eyepatch_a       (Category.eye,       "eyepatch-a",      "Yarrr")
 
-    , nose_normal      (Category.nose,      "feature-blank",   "normal nose")
-    , nose_clown       (Category.nose,      "nose-clown",      "clown nose")
+    , nose_normal      (Category.nose,      "feature-blank",   "Nose")
+    , nose_clown       (Category.nose,      "nose-clown",      "Clown")
 
-    , tongue           (Category.mouth,     "tongue",          "tongue out")
+    , tongue           (Category.mouth,     "tongue",          "Tongue")
+    , lips_blue           (Category.mouth,     "mouth-lips-blue",          "Blue Lips")
+    , lips_green           (Category.mouth,     "mouth-lips-green",          "Green Lips")
+    , lips_red           (Category.mouth,     "mouth-lips-red",          "Red Lips")
+    , lips_plain           (Category.mouth,     "mouth-lips-plain",          "Plain Lips")
 
-    , clean_shaven     (Category.hair_face, "feature-blank",   "clean shaven")
-    , mustache_a       (Category.hair_face, "mustache-a",      "mustache")
+    , clean_shaven     (Category.hair_face, "feature-blank",   "Plain Face")
+    , mustache_a       (Category.hair_face, "mustache-a",      "Creeper 'stache")
     , beard_beard       (Category.hair_face, "beard-beard",      "Full Beard")
     , beard_goatee       (Category.hair_face, "beard-goatee",      "Goatee")
     , beard_soulpatch       (Category.hair_face, "beard-soulpatch",      "Soulpatch (lol)")
 //    ,beard_beard       (Category.hair_face, "beard-",      "")
 
-    , hair_bald        (Category.hair_head, "feature-blank",   "bald")
-    , hair_long_brown  (Category.hair_head, "hair-long-brown",  "long brown hair")
-    , hair_short_black (Category.hair_head, "hair-short-black", "short black hair")
+    , hair_bald        (Category.hair_head, "feature-blank",   "Shaved")
+    , hair_long_brown  (Category.hair_head, "hair-long-brown",  "Long Brown")
+    , hair_short_black (Category.hair_head, "hair-short-black", "Short Black")
     , hair_ponytail (Category.hair_head, "hair-ariana-ponytail", "Ari's Pony")
     , hair_balding (Category.hair_head, "hair-balding", "Balding")
     , hair_curly_black (Category.hair_head, "hair-curly-black", "Natural")
-    , hair_curly_red (Category.hair_head, "hair-curly-red", "Red Natural")
+    , hair_curly_red (Category.hair_head, "hair-curly-red", "Rocking the Red")
     , hair_leia (Category.hair_head, "hair-leia-brown", "Princess Buns")
     , hair_long_blue (Category.hair_head, "hair-long-blue", "Long Blue")
     , hair_long_darkteal (Category.hair_head, "hair-long-darkteal", "Long Teal")
@@ -70,7 +85,7 @@ public enum Feature {
         , hair_face (4)
         , hair_head (5)
 //        , hat       (6) // TODO - no 'hat' features yet
-//        , neck      (7) // TODO - no 'neck' features yet (like necklace or tie or something)
+        , neck      (6) // TODO - no 'neck' features yet (like necklace or tie or something)
         ;
         public final int layer;
         Category(int layer) {

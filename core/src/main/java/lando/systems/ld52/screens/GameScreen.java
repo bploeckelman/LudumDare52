@@ -13,6 +13,7 @@ import com.kotcrab.vis.ui.widget.toast.Toast;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.Main;
 import lando.systems.ld52.assets.Feature;
+import lando.systems.ld52.assets.Head;
 import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.data.RoundData;
 import lando.systems.ld52.data.TileData;
@@ -65,7 +66,7 @@ public class GameScreen extends BaseScreen {
         uiStage.addActor(gameScreenUI);
 
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
-        Gdx.app.log("Creating GameScreen", "Music");
+
 
         setRound(0);
     }
@@ -224,11 +225,11 @@ public class GameScreen extends BaseScreen {
             return;
         }
         if (heavenQuota.isSatisfied()) {
-            showToast("You've filled heaven's quota!", ToastManager.UNTIL_CLOSED);
+            showToast("Heaven Quota: Fully Reaped!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = Quota.Source.heaven;
             quotaToastShown = true;
         } else if (hellQuota.isSatisfied()) {
-            showToast("You've filled hell's quota!", ToastManager.UNTIL_CLOSED);
+            showToast("Hell's Quota: Fully Reaped!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = Quota.Source.hell;
             quotaToastShown = true;
         } else if (gameboard.getSecondsLeft() <= 0) {

@@ -80,7 +80,7 @@ public class QuotaListUI extends VisWindow {
                           new Container<>(new VisImage(imageBackground))
                         // TODO - use a generic head image, that's not used on the board (maybe white or gray?)
                         //  so player's don't think that the head skin tone also needs to match
-                        , new Container<>(new VisImage(Head.get(assets, Head.a).getKeyFrame(0)))
+                        , new Container<>(new VisImage(Head.get(assets, Head.blank).getKeyFrame(0)))
                 );
 
                 // add  all this person's features to an array that we can sort by layer
@@ -130,7 +130,7 @@ public class QuotaListUI extends VisWindow {
                           new Container<>(new VisImage(imageBackground))
                         // TODO - use a generic head image, that's not used on the board (maybe white or gray?)
                         //  so player's don't think that the head skin tone also needs to match
-                        , new Container<>(new VisImage(Head.get(assets, Head.a).getKeyFrame(0)))
+                        , new Container<>(new VisImage(Head.get(assets, Head.blank).getKeyFrame(0)))
                 );
 
                 // add  all this person's features to an array that we can sort by layer

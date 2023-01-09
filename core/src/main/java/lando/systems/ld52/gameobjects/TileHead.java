@@ -28,7 +28,7 @@ public class TileHead extends TileObject {
         super(tile);
         stateTime = 0f;
 
-        head = Head.a;
+        head = Head.getRandom();
         headAnim = Head.get(assets, head);
 
         // pick random features from each category in category layer order

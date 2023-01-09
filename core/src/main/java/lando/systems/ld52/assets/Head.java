@@ -1,8 +1,14 @@
 package lando.systems.ld52.assets;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 import lando.systems.ld52.Assets;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public enum Head {
 
@@ -15,6 +21,7 @@ public enum Head {
       , b2 ("head-b-2")
       , b3 ("head-b-3")
       , b4 ("head-b-4")
+      , blank ("head-blank")
 //    , ...
     ;
 
@@ -26,6 +33,20 @@ public enum Head {
     }
 
     // TODO: Randomize head chooser, a la random feature chooser
+//    private static final Map<Head, String> allHeadsMap = new HashMap<>();
+//    private static final Array<Head> allHeadsArray= new Array<Head>();
+//
+    public static Head getRandom() {
+        Head[] headsArray = Head.values();
+//        Gdx.app.log("Head", String.valueOf(headsArray[MathUtils.random(0, headsArray.length - 1)]));
+        Head headToGet = headsArray[MathUtils.random(0, headsArray.length - 1)];
+        if( headToGet.name() == "blank") {
+            headToGet = Head.b2;
+
+        }
+        return headToGet;
+
+    }
 
     public static Animation<TextureRegion> get(Assets assets, Head head) {
         return assets.heads.get(head);
