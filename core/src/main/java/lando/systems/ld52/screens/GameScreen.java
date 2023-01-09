@@ -267,7 +267,6 @@ public class GameScreen extends BaseScreen {
             gameboard.render(batch);
             particles.draw(batch, Particles.Layer.middle);
             player.render(batch);
-            particles.draw(batch, Particles.Layer.foreground);
         }
         batch.end();
         batch.setProjectionMatrix(windowCamera.combined);
@@ -278,6 +277,13 @@ public class GameScreen extends BaseScreen {
         }
         batch.end();
         uiStage.draw();
+        batch.setProjectionMatrix(screenShaker.getCombinedMatrix());
+        batch.begin();
+        {
+            particles.draw(batch, Particles.Layer.foreground);
+        }
+        batch.end();
+
     }
 
     @Override

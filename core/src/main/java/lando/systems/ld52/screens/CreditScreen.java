@@ -25,11 +25,11 @@ public class CreditScreen extends BaseScreen {
     private final Animation<TextureRegion> dogAnimation;
     private final TextureRegion background;
 
-    private final String title = "{RAINBOW}Chromo Trigger{ENDRAINBOW}";
+    private final String title = "{RAINBOW}Death Who?{ENDRAINBOW}";
     private final String theme = "Made for Ludum Dare 52: Harvest";
 
     private final String thanks = "{GRADIENT=purple;cyan}Thanks for playing our game!{ENDGRADIENT}";
-    private final String developers = "{COLOR=gray}Developed by:{COLOR=white}\n {GRADIENT=white;gray}Brian Ploeckelman{ENDGRADIENT} \n {GRADIENT=white;gray}Doug Graham{ENDGRADIENT} \n {GRADIENT=white;gray}Jeffrey Hwang{ENDGRADIENT}";
+    private final String developers = "{COLOR=gray}Developed by:{COLOR=white}\n {GRADIENT=white;gray}Brian Ploeckelman{ENDGRADIENT} \n {GRADIENT=white;gray}Doug Graham{ENDGRADIENT} \n {GRADIENT=white;gray}Brian Rossman{ENDGRADIENT} \n {GRADIENT=white;gray}Jeffrey Hwang{ENDGRADIENT}";
     private final String rossman = "{GRADIENT=gray;black}...also Brian Rossman\n(in our memories){ENDGRADIENT}";
     private final String artists = "{COLOR=gray}Art by:{COLOR=white}\n {GRADIENT=white;gray}Matt Neumann{ENDGRADIENT}";
     private final String emotionalSupport = "{COLOR=cyan}Emotional Support:{COLOR=white}\n  Asuka, Osha,\n  Cherry";
@@ -128,10 +128,10 @@ public class CreditScreen extends BaseScreen {
                 TextureRegion catTexture = catAnimation.getKeyFrame(accum);
                 TextureRegion dogTexture = dogAnimation.getKeyFrame(accum);
                 TextureRegion kittenTexture = game.assets.kitten.getKeyFrame(accum);
-                batch.draw(catTexture, 60f, 155f);
-                batch.draw(dogTexture, 60f, 185f);
-                batch.draw(kittenTexture, 270f, 185f);
-                rossmanLabel.render(batch);
+                batch.draw(catTexture, 60f, 215f);
+                batch.draw(dogTexture, 60f, 245f);
+                batch.draw(kittenTexture, 270f, 245f);
+                //rossmanLabel.render(batch);
             }
             rightCreditLabel.render(batch);
             thanksLabel.render(batch);
