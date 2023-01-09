@@ -11,6 +11,7 @@ import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.assets.Feature;
 import lando.systems.ld52.assets.Head;
+import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.data.TileData;
 import lando.systems.ld52.screens.GameScreen;
 import lando.systems.ld52.ui.QuotaListUI;
@@ -96,6 +97,7 @@ public class TileHead extends TileObject {
         gameScreen.game.particles.lightning(new Vector2(tile.bounds.x + MathUtils.random(-150, 150), Config.Screen.window_height), new Vector2(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2));
         gameScreen.game.particles.bleed(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2);
         gameScreen.screenShaker.addDamage(100f);
+        gameScreen.audioManager.playSound(AudioManager.Sounds.soulReap, .5f);
         return true;
     }
 

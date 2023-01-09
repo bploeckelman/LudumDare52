@@ -80,6 +80,7 @@ public class Assets implements Disposable {
     public Sound clock2;
     public Sound clock3;
     public Sound clock4;
+    public Sound soulReap1;
     public Sound impactGrave1;
 
     public Music mainTheme;
@@ -176,7 +177,7 @@ public class Assets implements Disposable {
             mgr.load("audio/sounds/clock2.ogg", Sound.class);
             mgr.load("audio/sounds/clock3.ogg", Sound.class);
             mgr.load("audio/sounds/clock4.ogg", Sound.class);
-//            mgr.load("audio/sounds/.ogg", Sound.class);
+            mgr.load("audio/sounds/soulreap1.ogg", Sound.class);
 //            mgr.load("audio/sounds/.ogg", Sound.class);
 //            mgr.load("audio/sounds/.ogg", Sound.class);
 //            mgr.load("audio/sounds/.ogg", Sound.class);
@@ -324,6 +325,8 @@ public class Assets implements Disposable {
         clock2 = mgr.get("audio/sounds/clock2.ogg", Sound.class);
         clock3 = mgr.get("audio/sounds/clock3.ogg", Sound.class);
         clock4 = mgr.get("audio/sounds/clock4.ogg", Sound.class);
+         soulReap1 = mgr.get("audio/sounds/soulreap1.ogg", Sound.class);
+//         = mgr.get("audio/sounds/.ogg", Sound.class);
 //         = mgr.get("audio/sounds/.ogg", Sound.class);
 //         = mgr.get("audio/sounds/.ogg", Sound.class);
 
