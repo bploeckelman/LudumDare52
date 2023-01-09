@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
+import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.tutorial.TutorialManager;
 import lando.systems.ld52.ui.SettingsUI;
 
@@ -48,6 +49,7 @@ public class TitleScreen extends BaseScreen {
     @Override
     public void show(){
         super.show();
+        game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
         exiting = false;
         TutorialManager.SHOW_TUTORIAL = true; // use title screen to say we are reseting the game
         game.getInputMultiplexer().addProcessor(uiStage);

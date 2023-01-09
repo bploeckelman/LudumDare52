@@ -50,8 +50,8 @@ public class CutsceneScreen extends BaseScreen {
     public void show(){
         super.show();
         exiting = false;
-        currentMusic = game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
-        currentMusic.setPosition(Main.game.currentMusicPosition);
+//        currentMusic = game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
+//        currentMusic.setPosition(Main.game.currentMusicPosition);
 //        Gdx.app.log("currentMusicPositionCutsceneScreenOnShow()", String.valueOf(Main.game.currentMusicPosition));
 //        game.getInputMultiplexer().addProcessor(uiStage);
     }
