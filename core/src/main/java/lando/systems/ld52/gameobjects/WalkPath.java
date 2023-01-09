@@ -27,9 +27,20 @@ public class WalkPath implements GameObject {
         String topRegionsPath = animRegionsPrefix + "topper";
         baseAnim = new Animation<>(0.5f, assets.atlas.findRegions(baseRegionsPath), Animation.PlayMode.LOOP_PINGPONG);
         topAnim = new Animation<>(0.5f, assets.atlas.findRegions(topRegionsPath), Animation.PlayMode.LOOP_PINGPONG);
+
+        // NOTE - there's a whole deal with these textures
+        //  since we want to scroll them with wrap -> repeat
+        //  gwt requires power of two textures
+        //  so those textures are stretched to be PoT and then squished down to normal size
         String texturePath = Stringf.format("images/walkpath-%s-clouds_00.png", side);
-        clouds = assets.mgr.get(texturePath, Texture.class);
-        bounds = new Rectangle(x, y, clouds.getWidth(), clouds.getHeight());
+        clouds = new Texture(texturePath);
+        clouds.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        clouds.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        boolean isLeftOrRight = side.equalsIgnoreCase("left") || side.equalsIgnoreCase("right");
+        boolean isTopOrBottom = side.equalsIgnoreCase("top") || side.equalsIgnoreCase("bottom");
+        float w = isLeftOrRight ? 88 : 520;
+        float h = isTopOrBottom ? 88 : 520;
+        bounds = new Rectangle(x, y, w, h);
         scroll = 0f;
         stateTime = 0f;
 
