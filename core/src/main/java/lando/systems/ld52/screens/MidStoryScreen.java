@@ -111,24 +111,24 @@ public class MidStoryScreen extends BaseScreen {
                     case 1:
                         cutsceneTexture = game.assets.cutscene1;
                         if (Stats.last_quota_reached == null) {
-                            subtitles = "Can't believe I didn't make quota yesterday. Boss is going to have my scythe for sure!";
+                            subtitles = "Can't believe I didn't make quota. Boss is going to have my scythe for sure";
                         } else {
                             switch (getGameScreenRoundNumber()) {
                                 case 0:
-                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "I absolutely CRUSHED my Heaven quota yesterday!" : "Hell quota: Hell yeah!";
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Absolutely CRUSHED the Heaven quota yesterday" : "Hell quota: Hell yeah";
                                     break;
                                 case 1:
-                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Heaven quota reaped AF!" : "Hell quota hella quickly";
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Heaven quota reaped AF" : "Hell quota hella quickly";
                                     break;
                                 case 2:
-                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Hey Heaven: Special  delivery!" : "Hell better watch out for that one!";
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Hey Heaven: Special delivery" : "Hell better watch out for that group";
                                     break;
                                 case 3:
-                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Heaven quota complete? Heavenly!" : "Hell yeah.";
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Heaven quota complete? Heavenly" : "Hell yeah.";
                                     break;
 
                                 default:
-                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "I absolutely CRUSHED my Heaven quota yesterday!" : "Hell quota: Hell yeah!";
+                                    subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "Absolutely CRUSHED my Heaven quota yesterday" : "Hell quota: Hell yeah";
                                     break;
 
                             }

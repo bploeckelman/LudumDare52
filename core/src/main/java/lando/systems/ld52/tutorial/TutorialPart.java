@@ -24,7 +24,7 @@ public class TutorialPart {
     private float flash = 0;
     private Color flashColor;
     private float accum;
-    private String continueText = "click to continue\npress escape to skip tutorial";
+    private String continueText = "Click: Advance Slideshow\nEsc: End Tutorial";
 
     public TutorialPart (float x, float y, float w, float h, String text) {
         this.assets = Main.game.assets;
@@ -123,7 +123,7 @@ public class TutorialPart {
         assets.font.draw(batch, assets.layout, textBounds.x + 10, textBounds.y + textBounds.height/2f + assets.layout.height/2f);
         assets.font.getData().setScale(.3f);
 
-        assets.layout.setText(assets.font, continueText, textColor, textBounds.width, Align.left, true);
+        assets.layout.setText(assets.font, continueText, textColor, textBounds.width, Align.right, true);
         assets.font.draw(batch, assets.layout, textBounds.x, textBounds.y + assets.layout.height + 5);
 
         assets.font.getData().setScale(1f);

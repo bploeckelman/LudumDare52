@@ -13,18 +13,21 @@ public class TutorialManager {
             "are required to review the standards and procedures checklist before each shift.\n\n";
 
     String explainPlayer =
-            "REMINDER: \nAs a trusted member of the Reapo Depot family, you are expected to harvest your assigned souls in a timely fashion. \n\n";
-    String explainQuotas = "REMINDER: \nYour daily quotas will appear in the upper right portion of your screen.\n\n" +
-            "You are required to harvest all souls from your assigned Heaven OR Hell quota during your shift.\n\n" +
+            "REMINDER: \n\nAs a trusted member of the Reapo Depot family, you are expected to harvest your assigned souls in a timely fashion. \n\n";
+    String explainQuotas = "REMINDER: \n\nYour daily quotas will appear in the upper right portion of your screen.\n\n" +
+            "You are required to harvest all souls from your assigned Heaven OR Hell quota during your shift based on the features provided.\n\n" +
             "You are encouraged to harvest as many souls as possible during your shift, but your assigned souls must be reaped before the end of each day.\n\n" +
             "Your shift will end upon successful harvest of the day's Heaven or Hell quota.";
-    String explainBoard = "REMINDER: \nClick and hold to engage your scythe's harvest mode. \n\n" +
+    String explainBoard = "REMINDER: \n\nClick and hold to engage your scythe's harvest mode. \n\n" +
             "Release your mouse when your scythe is above the soul you wish to harvest. \n\n";
 
-    String explainTimer = "REMINDER: \nFailing to reap a soul from an assigned quota within your shift's allotted time may incur further disciplinary action.";
-    String wrapup = "REMINDER: \n\nYour scythe's range may not be able to reach all souls from all directions.\n\n" +
-            "If you are not able to reap your desired soul from a given location, you are encouraged to try again from different side of the field. \n\n" +
-            "You may also use the provided powerups to extend your scythe's reach.\n\n" +
+    String explainTimer = "REMINDER: \n\n" +
+            "If you encounter rocks or other obstacles in the harvesting path to a given soul, consider breaking them with your scythe to harvest on your next \npass, or approach the soul from a different side of the field.\n\n "+
+            "Stay aware of the time: failing to fulfill a quota within your shift's \n allotted time may incur further disciplinary action and/or condemn you to\n eternal purgation.\n\n"
+            ;
+    String wrapup = "REMINDER: \n\nYour scythe's range may not be sufficient to reach all souls from all directions.\n\n" +
+            "If you are not able to reap a desired soul from a given location, you are encouraged to try again from different side of the field or use the\nprovided powerups to extend your scythe's reach.\n\n" +
+            "You may also encounter various forms of cryptocurrency during your shift. You are free to collect these tokens for points, but be aware that they offer no meaningful value. Just like in real life.\n\n" +
             "Happy harvesting!";
 
 

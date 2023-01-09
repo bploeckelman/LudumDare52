@@ -12,11 +12,11 @@ import java.util.Map;
 
 public enum Feature {
 
-      collar_a         (Category.clothes,   "collar-a-idle",   "Collar", "Won't get into heaven OR hell with a commie shirt like that")
+      collar_a         (Category.clothes,   "collar-a-idle",   "Collar", "Won't get into heaven OR hell with that boring shirt.")
     , buttonup_purple         (Category.clothes,   "clothes-buttonup-purple",   "Purple Buttonup", "Don't try to make a purple shirt work unless you're Prince. Which you're not.")
     , buttonup_blue         (Category.clothes,   "clothes-buttonup-blue",   "Blue Buttonup", "Is that a track jacket? \n\nWas this one in the Russian mafia?")
-    , sweatshirt_red         (Category.clothes,   "clothes-sweatshirt-red",   "Red Hoodie", "Little Dead Riding Hood!")
-    , sweatshirt_blue         (Category.clothes,   "clothes-sweatshirt-blue",   "Blue Hoodie", "Blue sweatshirt? \nWe all see it, right? \n\nUnabomber? No?")
+    , sweatshirt_red         (Category.clothes,   "clothes-sweatshirt-red",   "Red Hoodie", "Nice sweatshirt. More like Little DEAD Riding Hood, amirite?")
+    , sweatshirt_blue         (Category.clothes,   "clothes-sweatshirt-blue",   "Blue Hoodie", "Blue sweatshirt. \nWe all see it, right? \nUnabomber? No?")
     , plain_green         (Category.clothes,   "clothes-plain-green",   "Green Tee", "Green shirt! \n\nGreen means go (to hell and/or heaven)")
     , hawaiian_red         (Category.clothes,   "clothes-hawaiian-red",   "Red Hawaiian", "Red Hawaiian shirt? \nBig fat Party animal in the house!")
     , hawaiian_blue         (Category.clothes,   "clothes-hawaiian-blue",   "Blue Hawaiian", "Blue Hawaiian shirt? \nBig fat  party animal in the house!")
@@ -45,18 +45,18 @@ public enum Feature {
 
     , clean_shaven     (Category.hair_face, "feature-blank",   "No facial hair", "They won't need to shave ever again.")
     , mustache_a       (Category.hair_face, "mustache-a",      "Creeper 'stache", "With a 'stache like that, it's probably for the best he's gone.")
-    , beard_beard       (Category.hair_face, "beard-beard",      "Full Beard", "With a beard like that, wherever this one's going I hope they have IPAs.")
+    , beard_beard       (Category.hair_face, "beard-beard",      "Full Beard", "With that beard, I hope they have IPAs where this guy's going.")
     , beard_goatee       (Category.hair_face, "beard-goatee",      "Goatee", "Look at that goatee! \n\nI guess the 90s really ARE coming back")
-    , beard_soulpatch       (Category.hair_face, "beard-soulpatch",      "\"Soul\"-patch (ew)", "Soulpatch? Yikes. Glad this one's gone.")
+    , beard_soulpatch       (Category.hair_face, "beard-soulpatch",      "\"Soul\"-patch (ew)", "Unironic soulpatch? Yikes. Glad this one's gone.")
 //    ,beard_beard       (Category.hair_face, "beard-",      "")
                                                                                         // Very funny jokes go here, need to figure out what the max line length is at the normal text size"
     , hair_bald        (Category.hair_head, "feature-blank",   "Shaved", "What a beautifully smooth dome!")
     , hair_long_brown  (Category.hair_head, "hair-long-brown",  "Long Brown", "This hair looks kinda like Mitch Hedberg, right?")
     , hair_long_londe  (Category.hair_head, "hair-long-blonde",  "Long Brown", "Are there influencers in the afterlife?")
-    , hair_short_black (Category.hair_head, "hair-short-black", "Short Black", "Nothing funny about this hair.")
+    , hair_short_black (Category.hair_head, "hair-short-black", "Short Black", "Nothing funny about this dorky-ass haircut.")
     , hair_ponytail (Category.hair_head, "hair-ariana-ponytail", "Ari's Pony", "An Ariana Grande ponytail? In THIS economy?")
     , hair_balding (Category.hair_head, "hair-balding", "Balding", "He lost his hair, but at least he kept his dignity")
-    , hair_curly_black (Category.hair_head, "hair-curly-black", "Natural", "This hair is bold and beautiful.")
+    , hair_curly_black (Category.hair_head, "hair-curly-black", "Natural", "That hair is bold and beautiful.")
     , hair_curly_red (Category.hair_head, "hair-curly-red", "Rocking the Red", "Red hair is SO in this season.")
     , hair_leia (Category.hair_head, "hair-leia-brown", "Princess Buns", "Aren't you a little short for a reaper?")
 //    , hair_long_blue (Category.hair_head, "hair-long-blue", "Long Blue")
@@ -141,13 +141,13 @@ public enum Feature {
     }
 
     private static final String[] characterNames = new String[] {
-              "Billy Windows"
+              "Bill Windows"
             , "Steve Apple"
             , "Elon Stank"
-            , "Mark Suckerhill"
+            , "Mark Sugarberg"
             , "Sam Bankrun-Fired"
             , "Elizabeth Sherlock"
-            , "Storin Buffet"
+            , "Snorin Buffet"
             , "Tom Bones"
             , "Liam McPoyle"
             , "Big Richard"
@@ -156,6 +156,14 @@ public enum Feature {
             , "Tiny Tom"
             , "Urist Dwarvenson"
             , "Geoff Bezers"
+            , "Estelle Deddy"
+            , "Dua Reapa"
+            , "Queen Elizabeth"
+            , "Princess Die-ana"
+            , "JKLOL Rowling"
+            , "Noprah"
+            , "Halle Buried"
+            , "Beyond Knowles"
             // TODO - moar....
     };
 
