@@ -121,6 +121,22 @@ public class HarvestZone {
                 tempGolfPos = 2f - tempGolfPos;
             }
             golfPosition = golfInterpolation.apply(tempGolfPos);
+            int tileIndex = MathUtils.clamp((int)(currentPathLength * golfPosition), 0, currentPathLength);
+            tileIndex++; // don't want it 0 indexed
+            switch (player.currentSide) {
+                case top:
+                    tileToHarvest = player.gameBoard.tiles[player.currentCol][player.currentRow - tileIndex];
+                    break;
+                case right:
+                    tileToHarvest = player.gameBoard.tiles[player.currentCol - tileIndex][player.currentRow];
+                    break;
+                case bottom:
+                    tileToHarvest = player.gameBoard.tiles[player.currentCol][player.currentRow + tileIndex];
+                    break;
+                case left:
+                    tileToHarvest = player.gameBoard.tiles[player.currentCol + tileIndex][player.currentRow];
+                    break;
+            }
         } else {
             golfPosition = 0;
         }
