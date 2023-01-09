@@ -132,4 +132,30 @@ public enum Feature {
     public static Feature getFeature(Feature feature, Category category) {
         return feature != null ? feature : getRandomFrom(category);
     }
+
+    // ------------------------------------------------------------------------
+    // Fun names
+
+    public static String getRandomCharacterName() {
+        return characterNames[MathUtils.random(0, characterNames.length - 1)];
+    }
+
+    private static final String[] characterNames = new String[] {
+              "Billy Windows"
+            , "Steve Apple"
+            , "Elon Stank"
+            , "Mark Suckerhill"
+            , "Sam Bankrun-Fired"
+            , "Elizabeth Sherlock"
+            , "Storin Buffet"
+            , "Tom Bones"
+            , "Liam McPoyle"
+            , "Big Richard"
+            , "Max Power"
+            , "Tiny Tom"
+            , "Urist Dwarvenson"
+            , "Geoff Bezers"
+            // TODO - moar....
+    };
+
 }

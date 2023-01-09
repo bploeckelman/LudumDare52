@@ -18,7 +18,7 @@ public class LeftSideUI extends VisTable {
         scoreBoxUI = new ScoreBoxUI();
         add(scoreBoxUI).pad(MARGIN).growX().size(WIDTH, SCOREBOX_HEIGHT);
         row();
-        harvestedSoulUI = new HarvestedSoulUI();
+        harvestedSoulUI = new HarvestedSoulUI(assets);
         add(harvestedSoulUI).padLeft(MARGIN).padRight(MARGIN).padBottom(MARGIN).growX().size(WIDTH, CHARACTER_STAT_HEIGHT);
         row();
     }

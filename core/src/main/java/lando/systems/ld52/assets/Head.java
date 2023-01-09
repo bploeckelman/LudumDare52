@@ -1,14 +1,9 @@
 package lando.systems.ld52.assets;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
 import lando.systems.ld52.Assets;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public enum Head {
 

@@ -65,9 +65,13 @@ public class PlayerUI implements GameObject {
         NinePatch patch = Assets.NinePatches.plain_gradient;
         patch.draw(batch, x, y, w, h);
 
+        float margin = 10;
         TextureRegion keyframe = currentAnimation.getKeyFrame(stateTime);
         batch.draw(keyframe,
-                x + (w - keyframe.getRegionWidth()) / 2f,
-                y + (h - keyframe.getRegionHeight()) / 2f);
+                x + margin,
+                y + margin,
+                w - 2 * margin,
+                h - 2 * margin
+        );
     }
 }

@@ -109,6 +109,7 @@ public class GameScreen extends BaseScreen {
 
         gameboard.setupBoard(assets, roundData);
         player.reset();
+        gameScreenUI.leftSideUI.harvestedSoulUI.clear();
     }
 
     private RoundData getRoundData(RoundDto roundDto, Quota heavenQuota, Quota hellQuota) {
@@ -226,10 +227,10 @@ public class GameScreen extends BaseScreen {
 
         if (quotaToastShown) {
             if (Gdx.input.isTouched() && _roundNumber < MAX_ROUND_NUMBER) {
-                game.getScreenManager().pushScreen("mid-story", TransitionManager.TransitionType.CROSSHATCH.name());
+                game.getScreenManager().pushScreen("mid-story", TransitionManager.getRandomTransition().name());
             }
             else if (Gdx.input.isTouched() && _roundNumber >= MAX_ROUND_NUMBER) {
-                game.getScreenManager().pushScreen("end-story", TransitionManager.TransitionType.CROSSHATCH.name());
+                game.getScreenManager().pushScreen("end-story", TransitionManager.getRandomTransition().name());
             }
             return;
         }
@@ -269,7 +270,7 @@ public class GameScreen extends BaseScreen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
             // .hide() happens at the END of transition - can't set the time there (value will be set at 0f)
             Main.game.currentMusicPosition = currentMusic.getPosition();
-            game.getScreenManager().pushScreen("cutscene", TransitionManager.TransitionType.CROSSHATCH.name());
+            game.getScreenManager().pushScreen("cutscene", TransitionManager.getRandomTransition().name());
         }
     }
 
