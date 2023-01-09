@@ -55,8 +55,16 @@ public class Hourglass implements GameObject {
         patch.draw(batch, x, y, w, h);
 
         font.getData().setScale(.5f);
-        String timerText = gameBoard.getSecondsLeft() + " Seconds";
-        layout.setText(font, timerText, Color.WHITE, w, Align.center, false);
+        int secondsLeft = gameBoard.getSecondsLeft();
+        String timerText = secondsLeft + " Seconds";
+
+        float percent = gameBoard.getTimerPercent();
+        Color timerColor = Color.WHITE;
+        if (percent < .5f) {
+            timerColor = (percent <= .1f || secondsLeft <= 5) ? Color.RED : Color.YELLOW;
+        }
+
+        layout.setText(font, timerText, timerColor, w, Align.center, false);
         font.draw(batch, layout, 1030, 230);
         font.getData().setScale(1f);
         batch.setShader(hourglassShader);

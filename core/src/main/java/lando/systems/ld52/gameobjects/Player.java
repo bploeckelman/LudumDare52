@@ -55,7 +55,8 @@ public class Player implements GameObject {
         boardPosition = 0;
         // hack because player starts on the left, so floats right,left before first moving,
         // if starting on top side, harvestZone update causes arrayoutofbounds
-        gameBoard.cornerTransition = GameBoard.CornerTransition.top_left;
+        // commenting out because of tutorial
+        // gameBoard.cornerTransition = GameBoard.CornerTransition.top_left;
         _moveDirection = MoveDirection.clockwise;
         currentPlayerAnimation = playerWithScythe;
         _animTime = 0;
