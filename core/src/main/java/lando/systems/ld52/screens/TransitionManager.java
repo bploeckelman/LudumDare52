@@ -50,7 +50,7 @@ public class TransitionManager {
             if (type.fragmentShaderFilename.equals(BUILT_IN_TRANSITION)) continue;
 
             // TODO: Remove this before release
-            Gdx.app.log("compiling transition", type.name());
+//            Gdx.app.log("compiling transition", type.name());
             ZendoGLScreenTransition transition = new ZendoGLScreenTransition(type.duration);
             transition.compileGLTransition(Gdx.files.internal(type.fragmentShaderFilename).readString());
             screenManager.addScreenTransition(type.name(), transition);

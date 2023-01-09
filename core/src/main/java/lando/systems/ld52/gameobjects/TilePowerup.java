@@ -48,7 +48,6 @@ public class TilePowerup extends TileObject {
         gameScreen.score += 150;
         gameScreen.player.harvestZone.adjustRange(1);
 
-        // TODO: need power up sound
         gameScreen.audioManager.playSound(AudioManager.Sounds.chargeUp, .8f);
         return false;
     }

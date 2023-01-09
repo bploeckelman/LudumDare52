@@ -107,7 +107,6 @@ public class GameBoard {
     }
 
     public void update(float dt) {
-        // TODO: don't to this on pause?
         timer -= dt;
         for (int x = 0; x < gridSize; x++) {
             for (int y = 0; y < gridSize; y++) {

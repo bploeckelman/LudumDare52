@@ -63,7 +63,6 @@ public class HarvestZone {
         throwCooldown = Math.max(throwCooldown - dt, 0);
         handleInput();
         currentPathLength = tilesLong;
-        // TODO: if hits something along the way, change currentPathLength
 
         float tileSize = GameBoard.tileSize;
         int gridSize = GameBoard.gridSize;
@@ -148,7 +147,6 @@ public class HarvestZone {
     }
 
     public void render(SpriteBatch batch) {
-        // TODO: this will need to be stored if we are going to check for gravestones, etc along the path
         float maxWidth = (GameBoard.tileSize+GameBoard.margin) * currentPathLength;
         if (currentPhase == HarvestPhase.cycle) {
             batch.setColor(.5f, .5f, .5f, .1f);
@@ -179,6 +177,13 @@ public class HarvestZone {
         tilesLong = MathUtils.clamp(tilesLong, 1, GameBoard.gridSize);
     }
 
+    public void reset() {
+        resetRange();
+        currentPhase = HarvestPhase.cycle;
+        tileToHarvest = null;
+        throwCooldown = .1f;
+    }
+
     public void resetRange() {
         tilesLong = tilesStart;
     }
@@ -186,15 +191,6 @@ public class HarvestZone {
     public void handleInput() {
         // don't remove this
         if (player.inCorner() || throwCooldown > 0) { return; }
-
-        // TODO: remove this before release
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            adjustRange(1);
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
-            adjustRange(-1);
-        }
-
 
         boolean touched = Gdx.input.isTouched();
 

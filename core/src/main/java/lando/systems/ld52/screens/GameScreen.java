@@ -225,22 +225,22 @@ public class GameScreen extends BaseScreen {
         }
         tutorialManager.update(delta);
 
-        // TODO: remove me, this is debug
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)){
-            Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-            windowCamera.unproject(mousePos);
-            Gdx.app.log("MousePos", "X:" + mousePos.x + "  Y:" + mousePos.y);
-        }
+//        // TODO: remove me, this is debug
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)){
+//            Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+//            windowCamera.unproject(mousePos);
+//            Gdx.app.log("MousePos", "X:" + mousePos.x + "  Y:" + mousePos.y);
+//        }
 
         if (tutorialManager.tutorialActive()) return;
 
         playerUI.update(delta);
 
-        // TODO: remove me I am debug
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
-            nextRound();
-            return;
-        }
+//        // TODO: remove me I am debug
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
+//            nextRound();
+//            return;
+//        }
 
 
         if (quotaToastShown) {

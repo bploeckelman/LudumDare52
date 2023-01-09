@@ -46,7 +46,6 @@ public class TilePowerdown extends TileObject {
         gameScreen.score += 10;
         gameScreen.player.harvestZone.adjustRange(-1);
 
-        // TODO: need power down sound
         gameScreen.audioManager.playSound(AudioManager.Sounds.thud);
         return false;
     }
