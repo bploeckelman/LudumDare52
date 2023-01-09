@@ -27,6 +27,7 @@ import lando.systems.ld52.ui.QuotaListUI;
 public class GameScreen extends BaseScreen {
 
     private static final Color clearColor = new Color(0.15f, 0.15f, 0.2f, 1f);
+    private final int MAX_ROUND_NUMBER = 5;
 
     public GameBoard gameboard;
     public Player player;
@@ -74,7 +75,7 @@ public class GameScreen extends BaseScreen {
         return _roundNumber;
     }
     public void nextRound() {
-        if (++_roundNumber > 5) {
+        if (++_roundNumber > MAX_ROUND_NUMBER) {
             _roundNumber = 0;
         }
         setRound(_roundNumber);
@@ -205,8 +206,11 @@ public class GameScreen extends BaseScreen {
         }
 
         if (quotaToastShown) {
-            if (Gdx.input.isTouched()) {
+            if (Gdx.input.isTouched() && _roundNumber < MAX_ROUND_NUMBER) {
                 game.getScreenManager().pushScreen("mid-story", TransitionManager.TransitionType.CROSSHATCH.name());
+            }
+            else if (Gdx.input.isTouched() && _roundNumber >= MAX_ROUND_NUMBER) {
+                game.getScreenManager().pushScreen("end-story", TransitionManager.TransitionType.CROSSHATCH.name());
             }
             return;
         }

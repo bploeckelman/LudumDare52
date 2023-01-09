@@ -103,6 +103,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		screenManager.addScreen("credit", new CreditScreen());
 		screenManager.addScreen("intro-story", new IntroStoryScreen());
 		screenManager.addScreen("mid-story", new MidStoryScreen());
+		screenManager.addScreen("end-story", new EndStoryScreen());
 		TransitionManager.initialize(screenManager);
 
 		screenManager.pushScreen("title", TransitionManager.TransitionType.BLEND.name());

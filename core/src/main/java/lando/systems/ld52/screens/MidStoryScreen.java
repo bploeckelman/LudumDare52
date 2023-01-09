@@ -91,7 +91,6 @@ public class MidStoryScreen extends BaseScreen {
     public void update(float delta) {
         super.update(delta);
         phaseAccum += delta;
-        Gdx.app.log("click phase", String.valueOf(clickPhase));
 
         if (((Gdx.input.justTouched() && phaseAccum > .2f) || phaseAccum > 7.25F)&& !isStoryOver) {
 
@@ -112,7 +111,11 @@ public class MidStoryScreen extends BaseScreen {
                         break;
                     case 1:
                         cutsceneTexture = game.assets.cutscene1;
-                        subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "I worked my ass off filling heaven's quota yesterday" : "I did good for hell's quota yesterday";
+                        if (Stats.last_quota_reached == null) {
+                            subtitles = "I didn't meet the quota yesterday :(";
+                        } else {
+                            subtitles = Stats.last_quota_reached == Quota.Source.heaven ? "I worked my ass off filling heaven's quota yesterday" : "I did good for hell's quota yesterday";
+                        }
                         break;
                     case 2:
                         cutsceneTexture = game.assets.cutscene2;

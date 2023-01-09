@@ -5,10 +5,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -17,7 +15,7 @@ import lando.systems.ld52.Config;
 import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.ui.SettingsUI;
 
-public class IntroStoryScreen extends BaseScreen {
+public class EndStoryScreen extends BaseScreen {
 
     private boolean exitingScreen = false;
     private int clickPhase;
@@ -46,12 +44,6 @@ public class IntroStoryScreen extends BaseScreen {
         backgroundTexture = game.assets.cutsceneBackground;
         cutsceneTexture = game.assets.cutscene0;
 
-        ChangeListener listener = new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                game.getScreenManager().pushScreen("game", "blend");
-            }
-        };
     }
 
     @Override
@@ -85,24 +77,12 @@ public class IntroStoryScreen extends BaseScreen {
 
                 switch (clickPhase) {
                     case 0:
-                        cutsceneTexture = game.assets.cutscene0;
-                        subtitles = "Another shitty work day";
-                        break;
-                    case 1:
                         cutsceneTexture = game.assets.cutscene1;
-                        subtitles = "I can't wait till my stocks go up and quit this job. Let's get punched in.";
-                        break;
-                    case 2:
-                        cutsceneTexture = game.assets.cutscene2;
-                        subtitles = "Let's check today's quota.";
-                        break;
-                    case 3:
-                        cutsceneTexture = game.assets.cutscene3;
-                        subtitles = "Meh, same thing. Let's get this over with.";
+                        subtitles = "Time to retire";
                         break;
                     default:
                         isStoryOver = true;
-                        game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.CROSSHATCH.name());
+                        game.getScreenManager().pushScreen("credit", TransitionManager.TransitionType.CROSSHATCH.name());
                         break;
                 }
                 clickPhase++;
@@ -165,7 +145,7 @@ public class IntroStoryScreen extends BaseScreen {
         startGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.CROSSHATCH.name());
+                game.getScreenManager().pushScreen("credit", TransitionManager.TransitionType.CROSSHATCH.name());
             }
         });
         uiStage.addActor(startGameButton);
