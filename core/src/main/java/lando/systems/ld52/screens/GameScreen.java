@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.util.ToastManager;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.toast.Toast;
+import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.Main;
 import lando.systems.ld52.assets.Feature;
@@ -46,13 +48,17 @@ public class GameScreen extends BaseScreen {
     public Quota heavenQuota;
     public Quota hellQuota;
     private boolean quotaToastShown;
+    private String quotaText;
+    private float overlayAlpha;
+    private Color quotaTextColor;
+    private float overlayAlphaTarget;
     public boolean isFreshStart = true;
 
 
     @Override
     protected void create() {
         super.create();
-
+        quotaTextColor = new Color(Color.WHITE);
         OrthographicCamera worldCam = (OrthographicCamera) worldCamera;
         worldCam.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCam.update();
@@ -106,6 +112,9 @@ public class GameScreen extends BaseScreen {
         quotaListUI.setQuotas(heavenQuota, hellQuota);
         quotaToastShown = false;
         hideToast();
+        overlayAlpha = 0;
+        overlayAlphaTarget = 0;
+        quotaText = "";
         gameboard.resetTimer();
 
         gameboard.setupBoard(assets, roundData);
@@ -211,6 +220,9 @@ public class GameScreen extends BaseScreen {
     @Override
     public void update(float delta) {
         super.update(delta);
+        if (overlayAlphaTarget > overlayAlpha){
+            overlayAlpha = Math.min(overlayAlpha + delta * 1f, 1f);
+        }
         tutorialManager.update(delta);
 
         // TODO: remove me, this is debug
@@ -298,9 +310,24 @@ public class GameScreen extends BaseScreen {
         {
             hourglass.render(batch);
             playerUI.render(batch);
+
         }
         batch.end();
         uiStage.draw();
+        if (quotaToastShown) {
+            float panelWidth = 700;
+            batch.setProjectionMatrix(windowCamera.combined);
+            batch.begin();
+            batch.setColor(0, 0, 0, overlayAlpha * .5f);
+            batch.draw(assets.pixelRegion, 0,0, Config.Screen.window_width, Config.Screen.window_height);
+            batch.setColor(1f, 1f, 1f, overlayAlpha);
+            Assets.NinePatches.glass_blue.draw(batch, Config.Screen.window_width /2f - panelWidth/2f, Config.Screen.window_height /2f - 150, panelWidth, 300);
+            quotaTextColor.set(1f, 1f, 1f, overlayAlpha);
+            assets.layout.setText(assets.font, quotaText, quotaTextColor, panelWidth, Align.center, true);
+            assets.font.draw(batch, assets.layout,Config.Screen.window_width /2f - panelWidth/2f, Config.Screen.window_height /2f + assets.layout.height/2f );
+            batch.setColor(Color.WHITE);
+            batch.end();
+        }
         batch.setProjectionMatrix(screenShaker.getCombinedMatrix());
         batch.begin();
         {
@@ -322,15 +349,21 @@ public class GameScreen extends BaseScreen {
     }
 
     public void showToast(String text, float duration) {
-        VisTable table = new VisTable();
-        table.defaults().pad(8f).grow();
-        table.add(new VisLabel(text, "outfit-medium-40px"));
-        Toast toast = new Toast(table);
-        toasts.show(toast, duration);
+        quotaText = text;
+        overlayAlphaTarget = 1f;
+        quotaToastShown = true;
+//        VisTable table = new VisTable();
+//        table.defaults().pad(8f).grow();
+//        table.add(new VisLabel(text, "outfit-medium-40px"));
+//        Toast toast = new Toast(table);
+//        toasts.show(toast, duration);
     }
 
     public void hideToast() {
         toasts.clear();
+        overlayAlpha = 0;
+        overlayAlphaTarget = 0;
+        quotaToastShown = false;
     }
 
 }
