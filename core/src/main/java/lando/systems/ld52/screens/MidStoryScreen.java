@@ -16,7 +16,6 @@ import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.gameobjects.Quota;
 import lando.systems.ld52.gameobjects.Stats;
-import lando.systems.ld52.ui.SettingsUI;
 
 public class MidStoryScreen extends BaseScreen {
 
@@ -192,8 +191,6 @@ public class MidStoryScreen extends BaseScreen {
         final float BUTTON_WIDTH = 180f;
         final float BUTTON_HEIGHT = 50f;
         super.initializeUI();
-
-        SettingsUI settingsUI = new SettingsUI(assets, skin, audioManager, windowCamera);
 
         TextButton.TextButtonStyle outfitMediumStyle = skin.get("text", TextButton.TextButtonStyle.class);
         TextButton.TextButtonStyle titleScreenButtonStyle = new TextButton.TextButtonStyle(outfitMediumStyle);
