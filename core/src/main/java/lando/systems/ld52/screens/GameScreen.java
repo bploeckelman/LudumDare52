@@ -144,7 +144,7 @@ public class GameScreen extends BaseScreen {
                     tileData.type = TileType.powerUp;
                     break;
                 case powerDown_type1:
-                    // ?
+                    tileData.type = TileType.powerDown;
                     break;
             }
 

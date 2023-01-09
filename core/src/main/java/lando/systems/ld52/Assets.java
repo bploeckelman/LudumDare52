@@ -280,7 +280,7 @@ public class Assets implements Disposable {
         scythe = new Animation<>(.2f, atlas.findRegions("player/scythe"), Animation.PlayMode.LOOP);
         tombstone = new Animation<>(.2f, atlas.findRegions("objects/tombstone"), Animation.PlayMode.LOOP);
         powerup = new Animation<>(.2f, atlas.findRegions("objects/powerup"), Animation.PlayMode.LOOP);
-        powerup = new Animation<>(.2f, atlas.findRegions("objects/powerdown"), Animation.PlayMode.LOOP);
+        powerdown = new Animation<>(.2f, atlas.findRegions("objects/powerdown"), Animation.PlayMode.LOOP);
         cornerIdle = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-idle/walkpath-corner-a-idle"), Animation.PlayMode.LOOP);
         cornerAction = new Animation<>(0.06f, atlas.findRegions("world/walkpath-corner-a-action/walkpath-corner-a-action"), Animation.PlayMode.NORMAL);
 
