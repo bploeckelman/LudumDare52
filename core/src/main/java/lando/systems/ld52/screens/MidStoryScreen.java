@@ -62,6 +62,11 @@ public class MidStoryScreen extends BaseScreen {
         gameScreen.nextRound();
     }
 
+    public int getGameScreenRoundNumber() {
+        GameScreen gameScreen = (GameScreen) game.getScreenManager().getScreen("game");
+        return gameScreen.getroundNumber();
+    }
+
     @Override
     public void show() {
         super.show();
@@ -73,7 +78,7 @@ public class MidStoryScreen extends BaseScreen {
         isStoryOver = false;
         backgroundTexture = game.assets.cutsceneBackground;
         cutsceneTexture = game.assets.cutscene0;
-        subtitles = " ";
+        subtitles = "Day " + getGameScreenRoundNumber() + " over";
     }
 
     @Override
@@ -182,6 +187,7 @@ public class MidStoryScreen extends BaseScreen {
         startGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                prepUpGameScreen();
                 game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.CROSSHATCH.name());
             }
         });

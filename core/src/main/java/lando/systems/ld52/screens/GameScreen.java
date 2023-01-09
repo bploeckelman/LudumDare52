@@ -69,6 +69,10 @@ public class GameScreen extends BaseScreen {
     }
 
     private int _roundNumber = 0;
+
+    public int getroundNumber() {
+        return _roundNumber;
+    }
     public void nextRound() {
         if (++_roundNumber > 5) {
             _roundNumber = 0;
