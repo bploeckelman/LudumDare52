@@ -169,8 +169,10 @@ public class EndStoryScreen extends BaseScreen {
 //                assets.layout.setText(assets.largeFont, "PURGATORY", whiteWithAlpha, camera.viewportWidth, Align.center, false);
 //                assets.largeFont.draw(batch, assets.layout, 10, camera.viewportHeight * 6 / 7f + assets.layout.height);
 //>>>>>>> Stashed changes
-            } else {
-                batch.draw(backgroundTexture, 0, 200, windowCamera.viewportWidth, 800);
+            } else if (Stats.numHeavenQuotasMet < Stats.numHellQuotasMet) {
+                batch.draw(assets.cutsceneBackground, 0, 200, windowCamera.viewportWidth, 800);
+            } else if (Stats.numHellQuotasMet < Stats.numHeavenQuotasMet) {
+                batch.draw(assets.heavenBackground, 0, 200, windowCamera.viewportWidth, 800);
             }
 //            batch.draw(assets.chair, 50, 200, 200f, 200f);
             chairRotation = rotationCalc(chairPos, chairVelocity, chairRotation, delta);
