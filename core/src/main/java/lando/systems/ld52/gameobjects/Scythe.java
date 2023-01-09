@@ -12,7 +12,6 @@ public class Scythe implements GameObject {
 
     private final Animation<TextureRegion> animation;
     private float stateTime;
-    public boolean flipped = false;
 
     public MutableFloat rotation;
     private final Vector2 size;
@@ -40,11 +39,6 @@ public class Scythe implements GameObject {
 
         float xScale = scale.x;
         float curRotation = rotation.floatValue();
-        if (flipped) {
-            xScale *= -1;
-            curRotation = 360 - curRotation;
-        }
-
         batch.draw(keyframe,
                 position.x - size.x/2f, position.y - size.y/2f,
                 keyframe.getRegionWidth() / 2f,

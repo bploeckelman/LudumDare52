@@ -19,14 +19,9 @@ public class Player implements GameObject {
     public enum Side { top, right, bottom, left}
 
     public final GameBoard gameBoard;
-    private final Animation<TextureRegion> _front;
-    private final Animation<TextureRegion> _back;
-    private final Animation<TextureRegion> _side;
-
-    private final Animation<TextureRegion> _scythe;
-
-    private Animation<TextureRegion> _current;
-    public boolean flipped;
+    private final Animation<TextureRegion> playerWithScythe;
+    private final Animation<TextureRegion> playerNoScythe;
+    private Animation<TextureRegion> currentPlayerAnimation;
 
     private float _animTime = 0;
     private final float _moveTime = 0.88f;
@@ -41,13 +36,12 @@ public class Player implements GameObject {
     public Side currentSide = Side.left;
     public int currentCol;
     public int currentRow;
+    // this is for rotating the sprite on side
+    private float spriteRotation = 0;
 
     public Player(Assets assets, GameBoard gameBoard) {
-        _front = assets.playerFront;
-        _back = assets.playerBack;
-        _side = assets.playerSide;
-
-        _scythe = assets.playerScythe;
+        playerWithScythe = assets.playerWithScythe;
+        playerNoScythe = assets.playerNoScythe;
 
         this.gameBoard = gameBoard;
 
@@ -58,8 +52,7 @@ public class Player implements GameObject {
     private void reset() {
         boardPosition = 0;
         _moveDirection = MoveDirection.clockwise;
-        _current = _front;
-        flipped = false;
+        currentPlayerAnimation = playerWithScythe;
         _animTime = 0;
 
         setPosition(true);
@@ -137,24 +130,18 @@ public class Player implements GameObject {
             currentRow = boardPosition - (GameBoard.gridSize *3);
         }
 
-        flipped = false;
         switch (side) {
             case 1: // right
                 currentSide = Side.right;
-                flipped = true;
                 break;
             case 3: // left
                 currentSide = Side.left;
-                _current = _side;
                 break;
             case 2: // bottom
                 currentSide = Side.bottom;
-                flipped = true;
-                _current = _back;
                 break;
             default:
                 // top
-                _current = _front;
                 currentSide = Side.top;
                 break;
         }
@@ -189,19 +176,23 @@ public class Player implements GameObject {
             case 1: // right
                 xPos = gameBoard.right() + (moveLaneSize - tileSize) / 2f;
                 yPos = gameBoard.top() - (tileSize + sideOffset) - ((sidePosition + 1) * GameBoard.margin);
+                spriteRotation = 270;
                 break;
             case 2: // bottom
                 xPos = gameBoard.right() - (tileSize + sideOffset) - ((sidePosition + 1) * GameBoard.margin);
                 yPos = gameBoard.bottom() - tileSize - (moveLaneSize - tileSize) / 2f;
+                spriteRotation = 180;
                 break;
             case 3: // left
                 xPos = gameBoard.left() - tileSize - (moveLaneSize - tileSize) / 2f;
                 yPos = gameBoard.bottom() + sideOffset + ((sidePosition + 1) * GameBoard.margin);
+                spriteRotation = 90;
                 break;
             case 0: // top
             default:
                 xPos = gameBoard.left() + sideOffset + ((sidePosition + 1) * GameBoard.margin);
                 yPos = gameBoard.top() + (moveLaneSize - tileSize) / 2f;
+                spriteRotation = 0;
                 break;
         }
         _nextPosition.set(xPos, yPos);
@@ -213,35 +204,16 @@ public class Player implements GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        if (gameBoard.cornerTransition != GameBoard.CornerTransition.none) return;
+        if (inCorner()) return;
 
-        float xScale = flipped ? -1 : 1;
-
-        if (!flipped) {
-            renderScythe(batch);
-        }
-
-        batch.draw(_current.getKeyFrame(_animTime),
+        TextureRegion playerImage = currentPlayerAnimation.getKeyFrame(_animTime);
+        batch.draw(playerImage,
                 _renderPosition.x, _renderPosition.y,
-                GameBoard.tileSize / 2, 0,
-                GameBoard.tileSize, GameBoard.tileSize,
-                xScale, 1, 0);
-
-        if (flipped) {
-            renderScythe(batch);
-        }
+                GameBoard.tileSize / 2, GameBoard.tileSize / 2,
+                GameBoard.tileSize- 15, GameBoard.tileSize -15,
+                1, 1, spriteRotation);
 
         harvestZone.render(batch);
-    }
-
-    private void renderScythe(SpriteBatch batch) {
-        if (harvestZone.currentPhase == HarvestZone.HarvestPhase.collection) return;
-        float xScale = flipped ? -1 : 1;
-        batch.draw(_scythe.getKeyFrame(_animTime),
-                _renderPosition.x, _renderPosition.y,
-                GameBoard.tileSize / 2, 0,
-                GameBoard.tileSize, GameBoard.tileSize,
-                xScale, 1, 0);
     }
 
     public boolean inCorner() {

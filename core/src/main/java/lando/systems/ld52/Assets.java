@@ -57,10 +57,8 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> dog;
     public Animation<TextureRegion> kitten;
 
-    public Animation<TextureRegion> playerFront;
-    public Animation<TextureRegion> playerSide;
-    public Animation<TextureRegion> playerBack;
-    public Animation<TextureRegion> playerScythe;
+    public Animation<TextureRegion> playerWithScythe;
+    public Animation<TextureRegion> playerNoScythe;
     public Animation<TextureRegion> scythe;
     public Animation<TextureRegion> tombstone;
     public Animation<TextureRegion> cornerIdle;
@@ -243,11 +241,9 @@ public class Assets implements Disposable {
         cutscene2 = mgr.get("images/cutscene_2.png");
         cutscene3 = mgr.get("images/cutscene_3.png");
 
-        playerFront = new Animation<>(.2f, atlas.findRegions("player/reaper1"), Animation.PlayMode.LOOP);
-        playerSide = new Animation<>(.2f, atlas.findRegions("player/reaper1"), Animation.PlayMode.LOOP);
-        playerBack = new Animation<>(.2f, atlas.findRegions("player/reaper1"), Animation.PlayMode.LOOP);
-        playerScythe = new Animation<>(.2f, atlas.findRegions("player/scythe1"), Animation.PlayMode.LOOP);
-
+        playerWithScythe = new Animation<>(.2f, atlas.findRegions("player/reapo-idle-a"), Animation.PlayMode.LOOP);
+        playerNoScythe = new Animation<>(.2f, atlas.findRegions("player/reapo-idle-a"), Animation.PlayMode.LOOP);
+        
         scythe = new Animation<>(.2f, atlas.findRegions("player/scythe"), Animation.PlayMode.LOOP);
         tombstone = new Animation<>(.2f, atlas.findRegions("objects/tombstone"), Animation.PlayMode.LOOP);
         cornerIdle = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-idle/walkpath-corner-a-idle"), Animation.PlayMode.LOOP);
