@@ -1,7 +1,10 @@
 package lando.systems.ld52;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -62,10 +65,6 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> tombstone;
     public Animation<TextureRegion> cornerIdle;
     public Animation<TextureRegion> cornerAction;
-    public Animation<TextureRegion> walkpathTop;
-    public Animation<TextureRegion> walkpathBottom;
-    public Animation<TextureRegion> walkpathLeft;
-    public Animation<TextureRegion> walkpathRight;
 
     public Array<Animation<TextureRegion>> numberParticles;
 
@@ -157,6 +156,12 @@ public class Assets implements Disposable {
         shapes = new ShapeDrawer(batch, pixelRegion);
         layout = new GlyphLayout();
 
+        TextureLoader.TextureParameter walkpathTexParams = new TextureLoader.TextureParameter();
+        walkpathTexParams.minFilter = Texture.TextureFilter.Linear;
+        walkpathTexParams.magFilter = Texture.TextureFilter.Linear;
+        walkpathTexParams.wrapU = Texture.TextureWrap.Repeat;
+        walkpathTexParams.wrapV = Texture.TextureWrap.Repeat;
+
         mgr = new AssetManager();
         {
             mgr.load("sprites/sprites.atlas", TextureAtlas.class);
@@ -166,6 +171,11 @@ public class Assets implements Disposable {
             mgr.load("fonts/outfit-medium-20px.fnt", BitmapFont.class);
             mgr.load("fonts/outfit-medium-40px.fnt", BitmapFont.class);
             mgr.load("fonts/outfit-medium-80px.fnt", BitmapFont.class);
+
+            mgr.load("images/walkpath-left-clouds_00.png", Texture.class, walkpathTexParams);
+            mgr.load("images/walkpath-right-clouds_00.png", Texture.class, walkpathTexParams);
+            mgr.load("images/walkpath-top-clouds_00.png", Texture.class, walkpathTexParams);
+            mgr.load("images/walkpath-bottom-clouds_00.png", Texture.class, walkpathTexParams);
 
             mgr.load("images/layout-alpha-1.png", Texture.class);
 
@@ -237,11 +247,6 @@ public class Assets implements Disposable {
         tombstone = new Animation<>(.2f, atlas.findRegions("objects/tombstone"), Animation.PlayMode.LOOP);
         cornerIdle = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-idle/walkpath-corner-a-idle"), Animation.PlayMode.LOOP);
         cornerAction = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-action/walkpath-corner-a-action"), Animation.PlayMode.NORMAL);
-        float walkpathFrameDuration = 0.25f;
-        walkpathTop = new Animation<>(walkpathFrameDuration, atlas.findRegions("world/walkpath-top/walkpath-top"), Animation.PlayMode.LOOP);
-        walkpathBottom = new Animation<>(walkpathFrameDuration, atlas.findRegions("world/walkpath-bottom/walkpath-bottom"), Animation.PlayMode.LOOP);
-        walkpathLeft = new Animation<>(walkpathFrameDuration, atlas.findRegions("world/walkpath-left/walkpath-left"), Animation.PlayMode.LOOP);
-        walkpathRight = new Animation<>(walkpathFrameDuration, atlas.findRegions("world/walkpath-right/walkpath-right"), Animation.PlayMode.LOOP);
 
         heads = new ObjectMap<>();
         for (Head head : Head.values()) {

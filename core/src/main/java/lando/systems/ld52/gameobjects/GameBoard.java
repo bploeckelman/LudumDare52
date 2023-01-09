@@ -38,11 +38,10 @@ public class GameBoard {
     private final Animation<TextureRegion> cornerActionAnim;
     private float cornerStateTime;
 
-    private final Animation<TextureRegion> walkpathTopAnim;
-    private final Animation<TextureRegion> walkpathRightAnim;
-    private final Animation<TextureRegion> walkpathBottomAnim;
-    private final Animation<TextureRegion> walkpathLeftAnim;
-    private float walkpathStateTime;
+    private final WalkPath walkPathTop;
+    private final WalkPath walkPathBottom;
+    private final WalkPath walkPathLeft;
+    private final WalkPath walkPathRight;
 
     public Tile[][] tiles;
 
@@ -62,11 +61,10 @@ public class GameBoard {
         cornerActionAnim = assets.cornerAction;
         cornerStateTime = 0f;
 
-        walkpathTopAnim = assets.walkpathTop;
-        walkpathRightAnim = assets.walkpathRight;
-        walkpathBottomAnim = assets.walkpathBottom;
-        walkpathLeftAnim = assets.walkpathLeft;
-        walkpathStateTime = 0f;
+        walkPathTop    = new WalkPath(assets, "top",    380, 632);
+        walkPathRight  = new WalkPath(assets, "right",  912, 100);
+        walkPathBottom = new WalkPath(assets, "bottom", 380, 0);
+        walkPathLeft   = new WalkPath(assets, "left",   280, 100);
     }
     
     public void setupBoard(Assets assets, RoundData roundData) {
@@ -105,7 +103,11 @@ public class GameBoard {
         }
 
         cornerStateTime += dt;
-        walkpathStateTime += dt;
+
+        walkPathTop.update(dt);
+        walkPathRight.update(dt);
+        walkPathBottom.update(dt);
+        walkPathLeft.update(dt);
     }
 
     public void render(SpriteBatch batch) {
@@ -127,17 +129,10 @@ public class GameBoard {
 
         // draw edge animations
         // TODO - only animate the edge that the reap-o man is currently traversing
-        keyframe = walkpathTopAnim.getKeyFrame(walkpathStateTime);
-        batch.draw(keyframe, 380, 632);
-
-        keyframe = walkpathRightAnim.getKeyFrame(walkpathStateTime);
-        batch.draw(keyframe, 912, 100);
-
-        keyframe = walkpathBottomAnim.getKeyFrame(walkpathStateTime);
-        batch.draw(keyframe, 380, 0);
-
-        keyframe = walkpathLeftAnim.getKeyFrame(walkpathStateTime);
-        batch.draw(keyframe, 280, 100);
+        walkPathTop.render(batch);
+        walkPathRight.render(batch);
+        walkPathBottom.render(batch);
+        walkPathLeft.render(batch);
 
         // render corner animations
         // TODO - figure out which animation is appropriate for each
