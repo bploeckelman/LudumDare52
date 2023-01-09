@@ -127,6 +127,7 @@ public class Player implements GameObject {
             if (boardPosition == -1) {
                 boardPosition += perimeterTiles;
             } else if (boardPosition == perimeterTiles) {
+                Stats.numLoopsAroundMortalPlane++;
                 boardPosition = 0;
             }
         }

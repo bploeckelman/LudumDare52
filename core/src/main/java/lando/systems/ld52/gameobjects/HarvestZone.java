@@ -204,6 +204,7 @@ public class HarvestZone {
             golfTimer = 0;
         } else if (currentPhase == HarvestPhase.golf && (!touched && touchLastFrame)) {
             currentPhase = HarvestPhase.collection;
+            Stats.numThrows++;
             game.audioManager.stopSound(AudioManager.Sounds.charge1);
             game.audioManager.playSound(AudioManager.Sounds.poof1);
 
