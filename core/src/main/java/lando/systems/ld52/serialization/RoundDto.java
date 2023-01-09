@@ -1,6 +1,7 @@
 package lando.systems.ld52.serialization;
 
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter;
 import lando.systems.ld52.gameobjects.GameBoard;
 
 public class RoundDto {
@@ -40,6 +41,7 @@ public class RoundDto {
 
     public static RoundDto fromJson(String roundData) {
         Json json = new Json();
+        json.setOutputType(JsonWriter.OutputType.json);
         return json.fromJson(RoundDto.class, roundData);
     }
 }
