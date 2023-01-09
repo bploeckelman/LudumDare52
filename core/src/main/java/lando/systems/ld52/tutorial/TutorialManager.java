@@ -24,7 +24,7 @@ public class TutorialManager {
     String explainTimer = "REMINDER: \nFailing to reap a soul from an assigned quota within your shift's allotted time may incur further disciplinary action.";
     String wrapup = "REMINDER: \n\nYour scythe's range may not be able to reach all souls from all directions.\n\n" +
             "If you are not able to reap your desired soul from a given location, you are encouraged to try again from different side of the field. \n\n" +
-            "Happy reaping!";
+            "Happy reaping! (harvesting)";
 
 
     public TutorialManager() {
