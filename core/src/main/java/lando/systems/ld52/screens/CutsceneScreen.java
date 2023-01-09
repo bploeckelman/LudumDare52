@@ -67,12 +67,7 @@ public class CutsceneScreen extends BaseScreen {
     public void update(float delta) {
         super.update(delta);
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
-
-            Main.game.currentMusicPosition = currentMusic.getPosition();
-            currentMusic.stop();
-            game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.CROSSHATCH.name());
-        }
+//
         // ...
 //        stateTime += delta;
 //        dog = assets.dog.getKeyFrame(stateTime);

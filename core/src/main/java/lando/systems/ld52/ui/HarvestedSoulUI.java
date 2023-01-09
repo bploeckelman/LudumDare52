@@ -1,12 +1,15 @@
 package lando.systems.ld52.ui;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.github.tommyettinger.textra.TypingLabel;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisImage;
@@ -55,7 +58,7 @@ public class HarvestedSoulUI extends VisWindow {
         add(headContainer).size(80, 80).align(Align.center).padLeft(10).padRight(10).padTop(5);
         add(name).size(width, 80).padRight(10);
         row();
-        add(afterlife).colspan(2).align(Align.center).padLeft(10).padTop(10);
+        add(afterlife).colspan(2).align(Align.left).padLeft(10).padTop(15);
         row();
         add(jokes).colspan(2).grow().align(Align.left).pad(10);
     }
@@ -72,14 +75,18 @@ public class HarvestedSoulUI extends VisWindow {
         charName = charName.replace(" ", "\n");
         name.setText(charName);
         afterlife.setText(afterlifeZone);
-        jokes.setText("Very funny jokes go here, need to figure out what the max line length is at the normal text size");
+        Array<Feature> jokeTextKeys = tileHead.featureAnims.orderedKeys();
+        Feature jokeFeature = jokeTextKeys.get(MathUtils.random(0, jokeTextKeys.size - 1));
+        String jokeTextString = jokeFeature.jokeText;
+//        jokes.setText("Very funny jokes go here, need to figure out what the max line length is at the normal text size");
+        jokes.setText(jokeTextString);
 
         headStack.clear();
         headStack.add(new VisImage(new TextureRegionDrawable(Head.get(assets, tileHead.head).getKeyFrame(0))));
         for (Feature feature : tileHead.featureAnims.orderedKeys()) {
-            if (feature.category != Feature.Category.clothes) {
+//            if (feature.category != Feature.Category.clothes || true) {
                 headStack.add(new VisImage(new TextureRegionDrawable(Feature.get(assets, feature).getKeyFrame(0))));
-            }
+//            }
         }
     }
 }
