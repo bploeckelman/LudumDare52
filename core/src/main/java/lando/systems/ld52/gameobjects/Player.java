@@ -59,6 +59,9 @@ public class Player implements GameObject {
         _moveDirection = MoveDirection.clockwise;
         currentPlayerAnimation = playerWithScythe;
         _animTime = 0;
+        currentRow = GameBoard.gridSize;
+        currentCol = boardPosition;
+        currentSide = Side.top;
 
         setPosition(true);
     }
@@ -78,7 +81,8 @@ public class Player implements GameObject {
 
         harvestZone.update(dt);
 
-        currentPlayerAnimation = (harvestZone.currentPhase == HarvestZone.HarvestPhase.collection) ? playerNoScythe : playerWithScythe;
+        boolean noScythe = (harvestZone.currentPhase == HarvestZone.HarvestPhase.collection) || harvestZone.throwCooldown > 0;
+        currentPlayerAnimation = noScythe ? playerNoScythe : playerWithScythe;
 
         _renderPosition.lerp(_nextPosition, dt * 10);
     }

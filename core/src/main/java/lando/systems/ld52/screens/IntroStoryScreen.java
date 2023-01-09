@@ -51,7 +51,7 @@ public class IntroStoryScreen extends BaseScreen {
         ChangeListener listener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.getScreenManager().pushScreen("game", "blend");
+                game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.PAGE_CURL.name());
             }
         };
     }
@@ -123,7 +123,7 @@ public class IntroStoryScreen extends BaseScreen {
                         break;
                     default:
                         isStoryOver = true;
-                        game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.CROSSHATCH.name());
+                        game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.PAGE_CURL.name());
                         break;
                 }
                 clickPhase++;
@@ -192,7 +192,7 @@ public class IntroStoryScreen extends BaseScreen {
         startGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.CROSSHATCH.name());
+                game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.PAGE_CURL.name());
             }
         });
         uiStage.addActor(startGameButton);

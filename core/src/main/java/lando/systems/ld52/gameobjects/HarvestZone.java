@@ -23,7 +23,7 @@ public class HarvestZone {
 
     public enum HarvestPhase { cycle, golf, collection}
 
-    private static final float golfIndicatorSize = 8f;
+    private static final float golfIndicatorSize = 25f;
     private static final float golfMaxTime = .215f; // Time it takes to go one tile
     private static final int tilesStart = 3;
     private final Interpolation golfInterpolation = Interpolation.slowFast;
@@ -43,6 +43,7 @@ public class HarvestZone {
     private int scytheSpinTimeMultiplier;
     private ShaderProgram harvestShader;
     private TextureRegion texture;
+    public float throwCooldown;
 
     public HarvestZone(Player player) {
         this.player = player;
@@ -55,9 +56,11 @@ public class HarvestZone {
         touchLastFrame = false;
         harvestShader = player.gameBoard.screen.assets.harvestShader;
         this.texture = new TextureRegion(player.gameBoard.screen.assets.pixel);
+        this.throwCooldown = .1f;
     }
 
     public void update(float dt) {
+        throwCooldown = Math.max(throwCooldown - dt, 0);
         handleInput();
         currentPathLength = tilesLong;
         // TODO: if hits something along the way, change currentPathLength
@@ -151,6 +154,11 @@ public class HarvestZone {
             batch.setColor(.5f, .5f, .5f, .1f);
         }
         if (currentPhase == HarvestPhase.golf) {
+            batch.setColor(Color.WHITE);
+            float golfWidth = golfPosition * maxWidth;
+            float golfX = startPos.x + MathUtils.cosDeg(rotation) * golfWidth;
+            float golfY = startPos.y + MathUtils.sinDeg(rotation) * golfWidth;
+            batch.draw(game.assets.skull, golfX - golfIndicatorSize/2f, golfY- golfIndicatorSize/2f, golfIndicatorSize, golfIndicatorSize);
             batch.setColor(1f, 1f, .5f, .1f);
         }
         if (currentPhase == HarvestPhase.collection) {
@@ -173,7 +181,7 @@ public class HarvestZone {
 
     public void handleInput() {
         // don't remove this
-        if (player.inCorner()) { return; }
+        if (player.inCorner() || throwCooldown > 0) { return; }
 
         // TODO: remove this before release
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
@@ -251,6 +259,7 @@ public class HarvestZone {
                         .push(Tween.call((type, source) -> {
                             currentPhase = HarvestPhase.cycle;
                             tileToHarvest = null;
+                            throwCooldown = .75f;
                             game.audioManager.stopSound(AudioManager.Sounds.swoosh1);
                         }))
                         .start(game.tween);
