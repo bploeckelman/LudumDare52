@@ -112,6 +112,7 @@ public class GameBoard {
 
     public void update(float dt) {
         timer -= dt;
+        elapsed += dt;
         for (int x = 0; x < gridSize; x++) {
             for (int y = 0; y < gridSize; y++) {
                 tiles[x][y].update(dt);
