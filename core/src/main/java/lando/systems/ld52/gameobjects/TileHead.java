@@ -100,25 +100,30 @@ public class TileHead extends TileObject {
         heavenQuota.satisfiedCount = 0;
         hellQuota.satisfiedCount = 0;
         heavenQuota.satisfy(featureAnims.orderedKeys());
+
         if (heavenQuota.satisfiedCount > 0) {
+            gameScreen.audioManager.playSound(AudioManager.Sounds.heaven, 1f);
+
             for (int i = 0; i < heavenQuota.satisfiedCount; i++) {
                 gameScreen.game.particles.flyUp(gameScreen.game.assets.angel, tile.bounds.getX() + tile.bounds.width / 2, tile.bounds.getY() + tile.bounds.width / 2);
             }
         }
         hellQuota.satisfy(featureAnims.orderedKeys());
         if (hellQuota.satisfiedCount > 0) {
+        gameScreen.audioManager.playSound(AudioManager.Sounds.hell, 1f);
             for (int i = 0; i < hellQuota.satisfiedCount; i++) {
                 gameScreen.game.particles.flyUp(gameScreen.game.assets.devil, tile.bounds.getX() + tile.bounds.width / 2, tile.bounds.getY() + tile.bounds.width / 2);
             }
+
         }
         boolean heavenSatisfied = heavenQuota.satisfy(featureAnims.orderedKeys());
         boolean hellSatisfied = hellQuota.satisfy(featureAnims.orderedKeys());
         quotaListUI.setQuotas(heavenQuota, hellQuota);
 
         // add this head to the harvested ui
-        String afterlifeZone = "{GRADIENT=black;gray}Afterlife{ENDGRADIENT}: {GRADIENT=gray;white}Purgatory{ENDGRADIENT}";
-        if      (heavenSatisfied) afterlifeZone = "{GRADIENT=black;gray}Afterlife{ENDGRADIENT}: {GRADIENT=sky;white}Heaven{ENDGRADIENT}";
-        else if (hellSatisfied)   afterlifeZone = "{GRADIENT=black;gray}Afterlife{ENDGRADIENT}: {GRADIENT=red;black}Hell{ENDGRADIENT}";
+        String afterlifeZone = "{GRADIENT=blue;gray}Destination{ENDGRADIENT}: {GRADIENT=gray;white}Purgatory{ENDGRADIENT}";
+        if      (heavenSatisfied) afterlifeZone = "{GRADIENT=black;gray}Destination{ENDGRADIENT}: {GRADIENT=sky;white}Heaven{ENDGRADIENT}";
+        else if (hellSatisfied)   afterlifeZone = "{GRADIENT=black;gray}Destination{ENDGRADIENT}: {GRADIENT=red;black}Hell{ENDGRADIENT}";
 
         HarvestedSoulUI harvestedSoulUI = gameScreen.gameScreenUI.leftSideUI.harvestedSoulUI;
         harvestedSoulUI.setSoul(this, afterlifeZone);

@@ -84,8 +84,7 @@ public class EndStoryScreen extends BaseScreen {
                 clickPhase++;
                 switch (clickPhase) {
                     case 1:
-                        subtitles = "Can't wait to enjoy my favorite reaper leisure activities in my afterlife\n\n" +
-                                "location of choice!";
+                        subtitles = "Can't wait to enjoy my favorite reaper leisure activities in my afterlife ";
                         showBeer = true;
                         break;
                     default:
@@ -112,7 +111,7 @@ public class EndStoryScreen extends BaseScreen {
             batch.setColor(whiteWithAlpha);
             if (Stats.heavenQuotaMet == Stats.hellQuotaMet) {
                 batch.draw(Utils.getColoredTextureRegion(Color.GRAY), 0, 200, windowCamera.viewportWidth, 800);
-                assets.layout.setText(assets.largeFont, "PURGATORY", whiteWithAlpha, camera.viewportWidth, Align.center, false);
+                assets.layout.setText(assets.largeFont, "PURGATORY", whiteWithAlpha, camera.viewportWidth, Align.left, false);
                 assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
             } else {
                 batch.draw(backgroundTexture, 0, 200, windowCamera.viewportWidth, 800);
@@ -139,8 +138,8 @@ public class EndStoryScreen extends BaseScreen {
             game.particles.draw(batch, Particles.Layer.foreground);
             assets.largeFont.getData().setScale(.3f);
             assets.largeFont.setColor(whiteWithAlpha);
-            assets.layout.setText(assets.largeFont, subtitles, whiteWithAlpha, camera.viewportWidth, Align.center, false);
-            assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight / 7f + assets.layout.height);
+            assets.layout.setText(assets.largeFont, subtitles, whiteWithAlpha, camera.viewportWidth, Align.left, false);
+            assets.largeFont.draw(batch, assets.layout, 10, camera.viewportHeight / 7f + assets.layout.height);
             assets.largeFont.getData().setScale(1f);
             assets.largeFont.setColor(Color.WHITE);
 
