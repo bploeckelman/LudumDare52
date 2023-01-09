@@ -7,7 +7,8 @@ public class TileDto {
         character_heaven,
         character_hell,
         character_rando,
-        powerUp_type1 // todo, define and add more
+        powerUp_type1,
+        powerDown_type1
     }
 
     public TileType tileType = TileType.open;
