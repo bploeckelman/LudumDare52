@@ -58,6 +58,9 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> rossDog;
     public Animation<TextureRegion> whiteLab;
 
+    public Animation<TextureRegion> dogeCoin;
+    public Animation<TextureRegion> btcCoin;
+
     public Animation<TextureRegion> playerWithScythe;
     public Animation<TextureRegion> playerNoScythe;
     public Animation<TextureRegion> scythe;
@@ -291,6 +294,9 @@ public class Assets implements Disposable {
         powerdown = new Animation<>(.2f, atlas.findRegions("objects/powerdown"), Animation.PlayMode.LOOP);
         cornerIdle = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-idle/walkpath-corner-a-idle"), Animation.PlayMode.LOOP);
         cornerAction = new Animation<>(0.06f, atlas.findRegions("world/walkpath-corner-a-action/walkpath-corner-a-action"), Animation.PlayMode.NORMAL);
+        dogeCoin = new Animation<>(0.3f, atlas.findRegions("objects/doge-coin/doge-coin"), Animation.PlayMode.LOOP);
+        btcCoin = new Animation<>(0.3f, atlas.findRegions("objects/bit-coin/bitcoin-coin"), Animation.PlayMode.LOOP);
+
 
         heads = new ObjectMap<>();
         for (Head head : Head.values()) {

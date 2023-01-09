@@ -62,6 +62,7 @@ public class Player implements GameObject {
         currentRow = GameBoard.gridSize;
         currentCol = boardPosition;
         currentSide = Side.top;
+        harvestZone.resetRange();
 
         setPosition(true);
     }

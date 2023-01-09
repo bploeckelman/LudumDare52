@@ -47,6 +47,10 @@ public class Tile {
             case powerDown:
                 object = new TilePowerdown(assets, this);
                 break;
+            case open:
+                if (MathUtils.randomBoolean(.2f)){
+                    object = new TileCoin(assets, this);
+                }
         }
     }
 

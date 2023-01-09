@@ -179,6 +179,10 @@ public class HarvestZone {
         tilesLong = MathUtils.clamp(tilesLong, 1, GameBoard.gridSize);
     }
 
+    public void resetRange() {
+        tilesLong = tilesStart;
+    }
+
     public void handleInput() {
         // don't remove this
         if (player.inCorner() || throwCooldown > 0) { return; }
