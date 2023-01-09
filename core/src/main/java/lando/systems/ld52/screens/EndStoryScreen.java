@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
+import lando.systems.ld52.particles.Particles;
 
 public class EndStoryScreen extends BaseScreen {
 
@@ -20,10 +21,11 @@ public class EndStoryScreen extends BaseScreen {
     private float phaseAccum;
     private float storyAccum;
     private String subtitles;
-    private Texture cutsceneTexture;
     private Texture backgroundTexture;
     private Color whiteWithAlpha;
     private boolean isStoryOver = false;
+    private boolean showBeer = false;
+    private float beerCount = 50;
 
     @Override
     protected void create() {
@@ -39,7 +41,6 @@ public class EndStoryScreen extends BaseScreen {
 
         subtitles = "Finally! Time to kick back and relax!";
         backgroundTexture = game.assets.cutsceneBackground;
-        cutsceneTexture = game.assets.cutscene0;
 
     }
 
@@ -47,6 +48,14 @@ public class EndStoryScreen extends BaseScreen {
     public void show() {
         super.show();
         game.getInputMultiplexer().addProcessor(uiStage);
+        whiteWithAlpha = new Color(Color.WHITE);
+        clickPhase = 0;
+        phaseAccum = 0;
+
+        storyAccum = 0;
+
+        subtitles = "Finally! Time to kick back and relax!";
+        backgroundTexture = game.assets.cutsceneBackground;
 //        game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
     }
 
@@ -70,20 +79,18 @@ public class EndStoryScreen extends BaseScreen {
                 game.audioManager.stopAllSounds();
 
                 phaseAccum = 0;
-
-
+                clickPhase++;
                 switch (clickPhase) {
-                    case 0:
-                        cutsceneTexture = game.assets.cutscene1;
+                    case 1:
                         subtitles = "Can't wait to enjoy my favorite reaper leisure activities in my afterlife\n\n" +
                                 "location of choice!";
+                        showBeer = true;
                         break;
                     default:
                         isStoryOver = true;
                         game.getScreenManager().pushScreen("credit", TransitionManager.TransitionType.CROSSHATCH.name());
                         break;
                 }
-                clickPhase++;
             }
         }
 
@@ -102,8 +109,21 @@ public class EndStoryScreen extends BaseScreen {
         {
             batch.setColor(whiteWithAlpha);
             batch.draw(backgroundTexture, 0, 200, windowCamera.viewportWidth, 800);
-            batch.draw(cutsceneTexture, windowCamera.viewportWidth / 2 - 500f / 2, 200f, 500f, 500f);
-
+            batch.draw(assets.chair, 50, 200, 200f, 200f);
+            batch.draw(assets.playerNoScythe.getKeyFrame(phaseAccum), 250, 300, 250f, 250f);
+            batch.draw(assets.beerPack, 245, 200, 100f, 100f);
+            if (clickPhase < 1) {
+                batch.draw(assets.tvOff, 900, 200, 300f, 300f);
+            } else {
+                batch.draw(assets.tvOn.getKeyFrame(phaseAccum), 900, 200, 300f, 300f);
+            }
+            if (showBeer) {
+                for (int i = 0; i < 400; i++) {
+                    game.particles.flyUp(assets.beer, MathUtils.random(0, windowCamera.viewportWidth), MathUtils.random(100, windowCamera.viewportHeight));
+                }
+                showBeer = false;
+            }
+            game.particles.draw(batch, Particles.Layer.foreground);
             assets.largeFont.getData().setScale(.3f);
             assets.largeFont.setColor(whiteWithAlpha);
             assets.layout.setText(assets.largeFont, subtitles, whiteWithAlpha, camera.viewportWidth, Align.center, false);
