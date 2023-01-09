@@ -258,7 +258,7 @@ public class GameScreen extends BaseScreen {
                 }
             }
             score += 1000 + Math.pow(gameboard.getSecondsLeft(), 1.2) * 20;
-            Stats.heavenQuotaMet++;
+            Stats.numHeavenQuotasMet++;
         } else if (hellQuota.isSatisfied()) {
             showToast("Hell's Quota: Fully Reaped!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = Quota.Source.hell;
@@ -270,7 +270,7 @@ public class GameScreen extends BaseScreen {
                 }
             }
             score += 1000 + Math.pow(gameboard.getSecondsLeft(), 1.2) * 20;
-            Stats.hellQuotaMet++;
+            Stats.numHellQuotasMet++;
         } else if (gameboard.getSecondsLeft() <= 0) {
             showToast("Neither quota fulfilled.\n\nDisappointing, but not surprising.", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = null;
@@ -281,7 +281,7 @@ public class GameScreen extends BaseScreen {
                     particles.flyUp(assets.beer, bounds.getX() + bounds.width / 2, bounds.getY() + bounds.width / 2);
                 }
             }
-            Stats.noQuotaMet++;
+            Stats.numFailedQuotas++;
         }
 
         gameboard.update(delta);

@@ -6,14 +6,20 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.github.tommyettinger.textra.TypingLabel;
+import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.widget.VisTable;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.gameobjects.Stats;
 import lando.systems.ld52.particles.Particles;
 import lando.systems.ld52.utils.Utils;
+import text.formic.Stringf;
 
 public class EndStoryScreen extends BaseScreen {
 
@@ -37,8 +43,6 @@ public class EndStoryScreen extends BaseScreen {
     private Vector2 chairVelocity = new Vector2(2f, 2f);
     private float chairRotation = 20;
 
-
-    private float y = 10;
 
     @Override
     protected void create() {
@@ -157,7 +161,7 @@ public class EndStoryScreen extends BaseScreen {
         batch.begin();
         {
             batch.setColor(whiteWithAlpha);
-            if (Stats.heavenQuotaMet == Stats.hellQuotaMet) {
+            if (Stats.numHeavenQuotasMet == Stats.numHellQuotasMet) {
                 batch.draw(Utils.getColoredTextureRegion(Color.GRAY), 0, 200, windowCamera.viewportWidth, 800);
 //<<<<<<< Updated upstream
 //=======
@@ -181,37 +185,35 @@ public class EndStoryScreen extends BaseScreen {
 //                batch.draw(assets.tvOn.getKeyFrame(phaseAccum), 900, 200, 300f, 300f);
                 batch.draw(assets.tvOn.getKeyFrame(phaseAccum), tvPos.x, tvPos.y, 100f, 100f, 300, 300, 1, 1, tvRotation);
             }
-            if (Stats.heavenQuotaMet > Stats.hellQuotaMet) {
+            if (Stats.numHeavenQuotasMet > Stats.numHellQuotasMet) {
                 batch.draw(assets.halo.getKeyFrame(phaseAccum), 240, 400, 200, 300);
-            } else if (Stats.heavenQuotaMet < Stats.hellQuotaMet) {
+            } else if (Stats.numHeavenQuotasMet < Stats.numHellQuotasMet) {
                 batch.draw(assets.horns.getKeyFrame(phaseAccum), 240, 400, 200, 325);
             }
             batch.draw(assets.playerNoScythe.getKeyFrame(phaseAccum), 250, 300, 250f, 250f);
-            if (Stats.heavenQuotaMet > Stats.hellQuotaMet) {
+            if (Stats.numHeavenQuotasMet > Stats.numHellQuotasMet) {
                 assets.layout.setText(assets.largeFont, "HEAVEN", whiteWithAlpha, camera.viewportWidth, Align.center, false);
                 assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
             }
-            else if (Stats.heavenQuotaMet < Stats.hellQuotaMet) {
+            else if (Stats.numHeavenQuotasMet < Stats.numHellQuotasMet) {
                 assets.layout.setText(assets.largeFont, "HELL", whiteWithAlpha, camera.viewportWidth, Align.center, false);
                 assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
             }
-            else if (Stats.heavenQuotaMet == Stats.hellQuotaMet) {
+            else if (Stats.numHeavenQuotasMet == Stats.numHellQuotasMet) {
                 assets.layout.setText(assets.largeFont, "PURGATORY", whiteWithAlpha, camera.viewportWidth, Align.center, false);
                 assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
             }
             if (showBeer) {
-                for (int i = 0; i < 400; i++) {
+                for (int i = 0; i < 200; i++) {
                     game.particles.flyUp(assets.beer, MathUtils.random(0, windowCamera.viewportWidth), MathUtils.random(100, windowCamera.viewportHeight));
                 }
                 showBeer = false;
             }
+
             game.particles.draw(batch, Particles.Layer.foreground);
             assets.largeFont.getData().setScale(.3f);
             assets.largeFont.setColor(whiteWithAlpha);
             assets.layout.setText(assets.largeFont, subtitles, whiteWithAlpha, camera.viewportWidth, Align.left, false);
-//<<<<<<< Updated upstream
-//            assets.largeFont.draw(batch, assets.layout, 100, camera.viewportHeight / 7f + assets.layout.height);
-//=======
             assets.largeFont.draw(batch, assets.layout, 100, camera.viewportHeight / 10f + assets.layout.height);
 
             assets.largeFont.getData().setScale(1f);
@@ -250,5 +252,65 @@ public class EndStoryScreen extends BaseScreen {
 //            }
 //        });
 //        uiStage.addActor(startGameButton);
+        TextButton startGameButton = new TextButton("Skip", titleScreenButtonStyle);
+//        Gdx.app.log("startbuttonwidth&height", "width: " + startGameButton.getWidth() + " & height: " + startGameButton.getHeight());
+        startGameButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+        startGameButton.setPosition(left, top);
+        startGameButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.getScreenManager().pushScreen("credit", TransitionManager.TransitionType.CROSSHATCH.name());
+            }
+        });
+
+        uiStage.addActor(startGameButton);
+
+        String style = "outfit-medium-40px";
+
+        TypingLabel labeltotalTime                 = new TypingLabel("Time:", VisUI.getSkin(), style);
+        TypingLabel labelnumHeavenQuotas           = new TypingLabel("Heaven Quotas:", VisUI.getSkin(), style);
+        TypingLabel labelnumHellQuotas             = new TypingLabel("Hell Quotas:", VisUI.getSkin(), style);
+        TypingLabel labelnumFailedQuotas           = new TypingLabel("Failed Quotas:", VisUI.getSkin(), style);
+        TypingLabel labelnumThrows                 = new TypingLabel("Throws:", VisUI.getSkin(), style);
+        TypingLabel labelnumPeopleReaped           = new TypingLabel("People Reaped:", VisUI.getSkin(), style);
+        TypingLabel labelnumBouldersReaped         = new TypingLabel("Boulders Reaped:", VisUI.getSkin(), style);
+        TypingLabel labelnumTombstonesReaped       = new TypingLabel("Tombstones Reaped:", VisUI.getSkin(), style);
+        TypingLabel labelnumPowerupsReaped         = new TypingLabel("Powerups Reaped:", VisUI.getSkin(), style);
+        TypingLabel labelnumPowerdownsReaped       = new TypingLabel("Powerdowns Reaped:", VisUI.getSkin(), style);
+        TypingLabel labelnumLoopsAroundMortalPlane = new TypingLabel("Mortal Plane Loops:", VisUI.getSkin(), style);
+
+        TypingLabel totalTime                 = new TypingLabel(Stringf.format("%d seconds", Stats.timeTaken), VisUI.getSkin(), style);
+        TypingLabel numHeavenQuotas           = new TypingLabel(Stringf.format("%d", Stats.numHeavenQuotasMet), VisUI.getSkin(), style);
+        TypingLabel numHellQuotas             = new TypingLabel(Stringf.format("%d", Stats.numHellQuotasMet), VisUI.getSkin(), style);
+        TypingLabel numFailedQuotas           = new TypingLabel(Stringf.format("%d", Stats.numFailedQuotas), VisUI.getSkin(), style);
+        TypingLabel numThrows                 = new TypingLabel(Stringf.format("%d", Stats.numThrows), VisUI.getSkin(), style);
+        TypingLabel numPeopleReaped           = new TypingLabel(Stringf.format("%d", Stats.numPeopleReaped), VisUI.getSkin(), style);
+        TypingLabel numBouldersReaped         = new TypingLabel(Stringf.format("%d", Stats.numBouldersReaped), VisUI.getSkin(), style);
+        TypingLabel numTombstonesReaped       = new TypingLabel(Stringf.format("%d", Stats.numTombstonesReaped), VisUI.getSkin(), style);
+        TypingLabel numPowerupsReaped         = new TypingLabel(Stringf.format("%d", Stats.numPowerupsReaped), VisUI.getSkin(), style);
+        TypingLabel numPowerdownsReaped       = new TypingLabel(Stringf.format("%d", Stats.numPowerdownsReaped), VisUI.getSkin(), style);
+        TypingLabel numLoopsAroundMortalPlane = new TypingLabel(Stringf.format("%d", Stats.numLoopsAroundMortalPlane), VisUI.getSkin(), style);
+
+        float margin = 10f;
+        VisTable statsTable = new VisTable();
+        statsTable.defaults().align(Align.left).growX();
+        statsTable.setPosition(windowCamera.viewportWidth / 2f - 150, margin);
+        statsTable.setSize(windowCamera.viewportWidth / 2f - margin, windowCamera.viewportHeight - 2 * margin);
+
+        float labelWidth = 500;
+        statsTable.add(labeltotalTime                 ).width(labelWidth); statsTable.add(totalTime                 ).row(); statsTable.row();
+        statsTable.add(labelnumHeavenQuotas           ).width(labelWidth); statsTable.add(numHeavenQuotas           ).row(); statsTable.row();
+        statsTable.add(labelnumHellQuotas             ).width(labelWidth); statsTable.add(numHellQuotas             ).row(); statsTable.row();
+        statsTable.add(labelnumFailedQuotas           ).width(labelWidth); statsTable.add(numFailedQuotas           ).row(); statsTable.row();
+        statsTable.add(labelnumThrows                 ).width(labelWidth); statsTable.add(numThrows                 ).row(); statsTable.row();
+        statsTable.add(labelnumPeopleReaped           ).width(labelWidth); statsTable.add(numPeopleReaped           ).row(); statsTable.row();
+        statsTable.add(labelnumBouldersReaped         ).width(labelWidth); statsTable.add(numBouldersReaped         ).row(); statsTable.row();
+        statsTable.add(labelnumTombstonesReaped       ).width(labelWidth); statsTable.add(numTombstonesReaped       ).row(); statsTable.row();
+        statsTable.add(labelnumPowerupsReaped         ).width(labelWidth); statsTable.add(numPowerupsReaped         ).row(); statsTable.row();
+        statsTable.add(labelnumPowerdownsReaped       ).width(labelWidth); statsTable.add(numPowerdownsReaped       ).row(); statsTable.row();
+        statsTable.add(labelnumLoopsAroundMortalPlane ).width(labelWidth); statsTable.add(numLoopsAroundMortalPlane ).row(); statsTable.row();
+
+        uiStage.addActor(statsTable);
     }
+
 }
