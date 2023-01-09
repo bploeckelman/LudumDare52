@@ -102,7 +102,8 @@ public class GameScreen extends BaseScreen {
         hideToast();
         gameboard.resetTimer();
 
-        RoundDto roundDto = RoundDto.fromJson("{\"tileDtos\":[[{},{},{},{},{},{}],[{\"tileType\":\"obstacle\"},{\"tileType\":\"character_hell\",\"quotaIndex\":1},{},{},{\"tileType\":\"character_rando\"},{\"tileType\":\"obstacle\"}],[{},{},{},{},{},{}],[{},{},{\"tileType\":\"obstacle\"},{\"tileType\":\"character_heaven\",\"quotaIndex\":1},{},{}],[{},{\"tileType\":\"character_rando\"},{},{\"tileType\":\"obstacle\"},{},{}],[{},{},{},{},{},{\"tileType\":\"character_rando\"}]]}");
+        // RoundDto roundDto = RoundDto.fromJson("{\"tileDtos\":[[{},{},{},{},{},{}],[{\"tileType\":\"obstacle\"},{\"tileType\":\"character_hell\",\"quotaIndex\":1},{},{},{\"tileType\":\"character_rando\"},{\"tileType\":\"obstacle\"}],[{},{},{},{},{},{}],[{},{},{\"tileType\":\"obstacle\"},{\"tileType\":\"character_heaven\",\"quotaIndex\":1},{},{}],[{},{\"tileType\":\"character_rando\"},{},{\"tileType\":\"obstacle\"},{},{}],[{},{},{},{},{},{\"tileType\":\"character_rando\"}]]}");
+        RoundDto roundDto = new RoundDto();
         RoundData roundData = getRoundData(roundDto, heavenQuota, hellQuota);
         gameboard.setupBoard(assets, roundData);
         player.boardPosition = 0;

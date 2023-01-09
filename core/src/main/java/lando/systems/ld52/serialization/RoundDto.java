@@ -17,25 +17,25 @@ public class RoundDto {
 
         // 0,0 bottom left
         // temporary - will de/serialize
-//        tileDtos[1][0].tileType = TileDto.TileType.obstacle;
-//
-//        tileDtos[1][1].tileType = TileDto.TileType.character_hell;
-//        tileDtos[1][1].quotaIndex = 1;
-//
-//        tileDtos[4][1].tileType = TileDto.TileType.character_rando;
-//
-//        tileDtos[3][2].tileType = TileDto.TileType.obstacle;
-//
-//        tileDtos[3][3].tileType = TileDto.TileType.character_heaven;
-//        tileDtos[3][3].quotaIndex = 1;
-//
-//        tileDtos[4][3].tileType = TileDto.TileType.obstacle;
-//
-//        tileDtos[1][4].tileType = TileDto.TileType.character_rando;
-//
-//        tileDtos[1][5].tileType = TileDto.TileType.obstacle;
-//
-//        tileDtos[5][5].tileType = TileDto.TileType.character_rando;
+        tileDtos[1][0].tileType = TileDto.TileType.obstacle;
+
+        tileDtos[1][1].tileType = TileDto.TileType.character_hell;
+        tileDtos[1][1].quotaIndex = 1;
+
+        tileDtos[4][1].tileType = TileDto.TileType.character_rando;
+
+        tileDtos[3][2].tileType = TileDto.TileType.obstacle;
+
+        tileDtos[3][3].tileType = TileDto.TileType.character_heaven;
+        tileDtos[3][3].quotaIndex = 1;
+
+        tileDtos[4][3].tileType = TileDto.TileType.obstacle;
+
+        tileDtos[1][4].tileType = TileDto.TileType.character_rando;
+
+        tileDtos[1][5].tileType = TileDto.TileType.obstacle;
+
+        tileDtos[5][5].tileType = TileDto.TileType.character_rando;
     }
 
 
