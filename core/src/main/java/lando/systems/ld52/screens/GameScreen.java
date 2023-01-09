@@ -141,6 +141,10 @@ public class GameScreen extends BaseScreen {
                     // remove features? - this could gen a match in heaven/hell
                     break;
                 case powerUp_type1:
+                    tileData.type = TileType.powerUp;
+                    break;
+                case powerDown_type1:
+                    // ?
                     break;
             }
 
