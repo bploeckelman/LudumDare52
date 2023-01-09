@@ -100,6 +100,7 @@ public class GameScreen extends BaseScreen {
         quotaListUI.setQuotas(heavenQuota, hellQuota);
         quotaToastShown = false;
         hideToast();
+        gameboard.resetTimer();
 
         RoundDto roundDto = RoundDto.fromJson("{tileDtos:[[{},{},{},{},{},{}],[{tileType:obstacle},{tileType:character_hell,quotaIndex:1},{},{},{tileType:character_rando},{tileType:obstacle}],[{},{},{},{},{},{}],[{},{},{tileType:obstacle},{tileType:character_heaven,quotaIndex:1},{},{}],[{},{tileType:character_rando},{},{tileType:obstacle},{},{}],[{},{},{},{},{},{tileType:character_rando}]]}");
         RoundData roundData = getRoundData(roundDto, heavenQuota, hellQuota);
@@ -221,6 +222,10 @@ public class GameScreen extends BaseScreen {
         } else if (hellQuota.isSatisfied()) {
             showToast("You've filled hell's quota!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = Quota.Source.hell;
+            quotaToastShown = true;
+        } else if (gameboard.getSecondsLeft() <= 0) {
+            showToast("You've failed to meet quota!", ToastManager.UNTIL_CLOSED);
+            Stats.last_quota_reached = null;
             quotaToastShown = true;
         }
 

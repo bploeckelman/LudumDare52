@@ -65,6 +65,7 @@ public class EffectAnims {
         , orb_red(0,0,  1,0)
         , orb_blue(0,1, 1,1)
         , swirl(2,2)
+        , sparkle(6,10, 7,10)
         ;
         final Array<Point> coords;
         Type(int... coords) {
