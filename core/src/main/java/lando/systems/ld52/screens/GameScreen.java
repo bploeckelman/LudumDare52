@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.kotcrab.vis.ui.util.ToastManager;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
@@ -25,6 +26,7 @@ import lando.systems.ld52.serialization.PersonDto;
 import lando.systems.ld52.serialization.QuotaDto;
 import lando.systems.ld52.serialization.RoundDto;
 import lando.systems.ld52.serialization.TileDto;
+import lando.systems.ld52.tutorial.TutorialManager;
 import lando.systems.ld52.ui.GameScreenUI;
 import lando.systems.ld52.ui.QuotaListUI;
 
@@ -40,12 +42,14 @@ public class GameScreen extends BaseScreen {
     private Music currentMusic;
     public GameScreenUI gameScreenUI;
     public Particles particles;
+    public TutorialManager tutorialManager;
 
     private TextureRegion background;
     public Quota heavenQuota;
     public Quota hellQuota;
     private boolean quotaToastShown;
     public boolean isFreshStart = true;
+
 
     @Override
     protected void create() {
@@ -71,6 +75,7 @@ public class GameScreen extends BaseScreen {
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
 
 
+        tutorialManager = new TutorialManager();
         setRound(0);
     }
 
@@ -202,12 +207,25 @@ public class GameScreen extends BaseScreen {
     @Override
     public void update(float delta) {
         super.update(delta);
+        tutorialManager.update(delta);
+
+        // TODO: remove me, this is debug
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)){
+            Vector3 mousePos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+            windowCamera.unproject(mousePos);
+            Gdx.app.log("MousePos", "X:" + mousePos.x + "  Y:" + mousePos.y);
+        }
+
+        if (tutorialManager.tutorialActive()) return;
+
         playerUI.update(delta);
+
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
             nextRound();
             return;
         }
+
 
         if (quotaToastShown) {
             if (Gdx.input.isTouched() && _roundNumber < MAX_ROUND_NUMBER) {
@@ -287,6 +305,12 @@ public class GameScreen extends BaseScreen {
         }
         batch.end();
 
+
+        if (tutorialManager.tutorialActive()) {
+            batch.begin();
+            tutorialManager.render(batch);
+            batch.end();
+        }
     }
 
     @Override

@@ -118,6 +118,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 
 	public void update(float delta) {
 		// handle top level input
+		// TODO: remove this debug before release
 		{
 			if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
 				Gdx.app.exit();
