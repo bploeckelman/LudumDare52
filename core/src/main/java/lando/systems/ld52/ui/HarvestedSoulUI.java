@@ -78,15 +78,12 @@ public class HarvestedSoulUI extends VisWindow {
         Array<Feature> jokeTextKeys = tileHead.featureAnims.orderedKeys();
         Feature jokeFeature = jokeTextKeys.get(MathUtils.random(0, jokeTextKeys.size - 1));
         String jokeTextString = jokeFeature.jokeText;
-//        jokes.setText("Very funny jokes go here, need to figure out what the max line length is at the normal text size");
         jokes.setText(jokeTextString);
 
         headStack.clear();
         headStack.add(new VisImage(new TextureRegionDrawable(Head.get(assets, tileHead.head).getKeyFrame(0))));
         for (Feature feature : tileHead.featureAnims.orderedKeys()) {
-//            if (feature.category != Feature.Category.clothes || true) {
-                headStack.add(new VisImage(new TextureRegionDrawable(Feature.get(assets, feature).getKeyFrame(0))));
-//            }
+            headStack.add(new VisImage(new TextureRegionDrawable(Feature.get(assets, feature).getKeyFrame(0))));
         }
     }
 }
