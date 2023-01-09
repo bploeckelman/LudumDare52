@@ -24,7 +24,6 @@ public class EndStoryScreen extends BaseScreen {
     private Texture backgroundTexture;
     private Color whiteWithAlpha;
     private boolean isStoryOver = false;
-    private boolean isTutorialShown = false;
 
     @Override
     protected void create() {
@@ -123,7 +122,6 @@ public class EndStoryScreen extends BaseScreen {
         final float BUTTON_WIDTH = 180f;
         final float BUTTON_HEIGHT = 50f;
         super.initializeUI();
-        
         TextButton.TextButtonStyle outfitMediumStyle = skin.get("text", TextButton.TextButtonStyle.class);
         TextButton.TextButtonStyle titleScreenButtonStyle = new TextButton.TextButtonStyle(outfitMediumStyle);
         titleScreenButtonStyle.font = assets.smallFont;

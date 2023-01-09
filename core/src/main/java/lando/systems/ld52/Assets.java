@@ -66,6 +66,14 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> cornerAction;
     public Animation<TextureRegion> angel;
     public Animation<TextureRegion> devil;
+    public Animation<TextureRegion> beer;
+    public Animation<TextureRegion> halo;
+    public Animation<TextureRegion> horns;
+    public Animation<TextureRegion> tvOn;
+    public TextureRegion chair;
+    public TextureRegion tvOff;
+    public TextureRegion beerPack;
+
 
     public Array<Animation<TextureRegion>> numberParticles;
 
@@ -245,6 +253,14 @@ public class Assets implements Disposable {
         devil = new Animation<>(.1f, atlas.findRegions("particles/devils/devil"), Animation.PlayMode.LOOP);
         rossDog = new Animation<>(.1f, atlas.findRegions("pets/ross-dog"), Animation.PlayMode.LOOP);
         whiteLab = new Animation<>(.1f, atlas.findRegions("pets/white-lab-dog"), Animation.PlayMode.LOOP);
+
+        beer = new Animation<>(.1f, atlas.findRegions("objects/items-beer/items-beer"), Animation.PlayMode.LOOP);
+        chair = atlas.findRegion("objects/items-chair/items-chair_00");
+        horns = new Animation<>(.1f, atlas.findRegions("objects/items-horns-halo/item-horns"), Animation.PlayMode.LOOP);
+        halo = new Animation<>(.1f, atlas.findRegions("objects/items-horns-halo/item-halo"), Animation.PlayMode.LOOP);
+        tvOn = new Animation<>(.1f, atlas.findRegions("objects/items-tv/items-tv-on/items-tv-on"), Animation.PlayMode.LOOP);
+        tvOff = atlas.findRegion("objects/items-tv/items-tv-idle_00");
+        beerPack = atlas.findRegion("objects/items-beer/items-beer-6pack/items-6pack_00");
 
         cutsceneBackground = mgr.get("images/story-background_00.png");
         cutscene0 = mgr.get("images/cutscene_0.png");
