@@ -16,7 +16,7 @@ public class TutorialManager {
             "REMINDER: \nAs a trusted member of the Reapo Depot family, you are expected to harvest your assigned souls in a timely fashion. \n\n";
     String explainQuotas = "REMINDER: \nYour daily quotas will appear in the upper right portion of your screen.\n\n" +
             "You are required to harvest all souls from your assigned Heaven OR Hell quota during your shift.\n\n" +
-            "You are encouraged to harvest as many souls as possible during your shift, but your assigned soul must be reaped before the end of each day.\n\n" +
+            "You are encouraged to harvest as many souls as possible during your shift, but your assigned souls must be reaped before the end of each day.\n\n" +
             "Your shift will end upon successful harvest of the day's Heaven or Hell quota.";
     String explainBoard = "REMINDER: \nClick and hold to engage your scythe's harvest mode. \n\n" +
             "Release your mouse when your scythe is above the soul you wish to harvest. \n\n";
@@ -24,7 +24,8 @@ public class TutorialManager {
     String explainTimer = "REMINDER: \nFailing to reap a soul from an assigned quota within your shift's allotted time may incur further disciplinary action.";
     String wrapup = "REMINDER: \n\nYour scythe's range may not be able to reach all souls from all directions.\n\n" +
             "If you are not able to reap your desired soul from a given location, you are encouraged to try again from different side of the field. \n\n" +
-            "Happy reaping! (harvesting)";
+            "You may also use the provided powerups to extend your scythe's reach.\n\n" +
+            "Happy harvesting!";
 
 
     public TutorialManager() {

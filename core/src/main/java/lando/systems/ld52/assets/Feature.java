@@ -29,7 +29,7 @@ public enum Feature {
 //    , glasses_a        (Category.eye,       "glasses-a",       "Glasses")
     , glasses_b        (Category.eye,       "glasses-b",       "Glasses", "This person has glasses. That's it. That's the joke.")
     , glasses_big        (Category.eye,       "glasses-big-a",       "Haute Couture", "The bigger the sunglasses, the colder the heart")
-    , glasses_star        (Category.eye,       "glasses-star",       "Elton John Shades", "Elton John Shades? I guess THAT's why they call it the blues. \n\nBecause they're dead.")
+    , glasses_star        (Category.eye,       "glasses-star",       "Elton John Shades", "Elton John Shades? I guess THAT's why they call it the blues.\nBecause they're dead.")
     , glasses_cop        (Category.eye,       "glasses-reflective",       "Cop Shades", "Reflective sunglasses? I know what THIS one was doing on January 6")
     , glasses_aviator        (Category.eye,       "glasses-aviator",       "Aviators", "Aviators? \n\nI guess even cool people have to die sometime")
 //    , eyepatch_a       (Category.eye,       "eyepatch-a",      "Yarrr")
