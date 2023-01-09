@@ -34,6 +34,8 @@
 	<extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld52.particles.Particle" />
 	<extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld52.serialization.TileDto" />
 	<extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld52.serialization.RoundDto" />
+	<extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld52.serialization.QuotaDto" />
+	<extend-configuration-property name="gdx.reflect.include" value="lando.systems.ld52.serialization.PersonDto" />
 
 
 

@@ -2,6 +2,8 @@ package lando.systems.ld52.gameobjects;
 
 import com.badlogic.gdx.utils.Array;
 import lando.systems.ld52.assets.Feature;
+import lando.systems.ld52.serialization.PersonDto;
+import lando.systems.ld52.serialization.QuotaDto;
 
 import java.util.HashMap;
 
@@ -47,9 +49,20 @@ public class Quota {
     public final Array<Person> people;
     public boolean didJustSatisfy = false;
 
-    public Quota(Source source) {
-        this.source = source;
-        this.people = new Array<>();
+    public Quota(QuotaDto quotaDto) {
+        this.source = quotaDto.getSource();
+
+        for (PersonDto personDto : quotaDto.getPeople()) {
+            Feature[] features = personDto.getFeatures();
+            if (features == null) {
+                Feature.Category[] categories = personDto.getCategories();
+                features = new Feature[categories.length];
+                for (int i = 0; i < categories.length; i++) {
+                    features[i] = Feature.getRandomFrom(categories[i]);
+                }
+            }
+            addPerson(features);
+        }
     }
 
     public void addPerson(Feature... features) {

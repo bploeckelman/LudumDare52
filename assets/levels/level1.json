@@ -1,0 +1,81 @@
+{
+  "heaven": {
+    "source": "heaven",
+    "people": [
+      {
+        "features": [
+          "eyepatch_a"
+        ]
+      }
+    ]
+  },
+  "hell": {
+    "source": "hell",
+    "people": [
+      {
+        "features": [
+          "hair_bald"
+        ]
+      }
+    ]
+  },
+  "tileDtos": [
+    {},
+    {
+      "tileType": "obstacle"
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "tileType": "character_hell",
+      "quotaIndex": 1
+    },
+    {},
+    {},
+    {
+      "tileType": "character_rando"
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+      "tileType": "obstacle"
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "tileType": "character_heaven",
+      "quotaIndex": 1
+    },
+    {
+      "tileType": "obstacle"
+    },
+    {},
+    {},
+    {
+      "tileType": "character_rando"
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+      "tileType": "obstacle"
+    },
+    {},
+    {},
+    {},
+    {
+      "tileType": "character_rando"
+    }
+  ]
+}
+

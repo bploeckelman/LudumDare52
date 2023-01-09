@@ -20,6 +20,8 @@ import lando.systems.ld52.data.TileData;
 import lando.systems.ld52.data.TileType;
 import lando.systems.ld52.gameobjects.*;
 import lando.systems.ld52.particles.Particles;
+import lando.systems.ld52.serialization.PersonDto;
+import lando.systems.ld52.serialization.QuotaDto;
 import lando.systems.ld52.serialization.RoundDto;
 import lando.systems.ld52.serialization.TileDto;
 import lando.systems.ld52.ui.GameScreenUI;
@@ -89,19 +91,13 @@ public class GameScreen extends BaseScreen {
     }
 
     public void setRound(int round) {
-        heavenQuota = new Quota(Quota.Source.heaven);
-        hellQuota = new Quota(Quota.Source.hell);
 
-        heavenQuota.addPerson(
-                Feature.getRandomFrom(Feature.Category.hair_head)
-                , Feature.getRandomFrom(Feature.Category.eye)
-                , Feature.getRandomFrom(Feature.Category.nose)
-        );
-        hellQuota.addPerson(
-                Feature.getRandomFrom(Feature.Category.hair_head)
-                , Feature.getRandomFrom(Feature.Category.eye)
-                , Feature.getRandomFrom(Feature.Category.hair_face)
-        );
+        String dto = Gdx.files.internal("levels/level1.json").readString();
+        RoundDto roundDto = RoundDto.fromJson(dto);
+
+        heavenQuota = new Quota(roundDto.getHeaven());
+        hellQuota = new Quota(roundDto.getHell());
+        RoundData roundData = getRoundData(roundDto, heavenQuota, hellQuota);
 
         QuotaListUI quotaListUI = gameScreenUI.rightSideUI.quotaListUI;
         quotaListUI.setQuotas(heavenQuota, hellQuota);
@@ -109,9 +105,6 @@ public class GameScreen extends BaseScreen {
         hideToast();
         gameboard.resetTimer();
 
-        // RoundDto roundDto = RoundDto.fromJson("{\"tileDtos\":[[{},{},{},{},{},{}],[{\"tileType\":\"obstacle\"},{\"tileType\":\"character_hell\",\"quotaIndex\":1},{},{},{\"tileType\":\"character_rando\"},{\"tileType\":\"obstacle\"}],[{},{},{},{},{},{}],[{},{},{\"tileType\":\"obstacle\"},{\"tileType\":\"character_heaven\",\"quotaIndex\":1},{},{}],[{},{\"tileType\":\"character_rando\"},{},{\"tileType\":\"obstacle\"},{},{}],[{},{},{},{},{},{\"tileType\":\"character_rando\"}]]}");
-        RoundDto roundDto = new RoundDto();
-        RoundData roundData = getRoundData(roundDto, heavenQuota, hellQuota);
         gameboard.setupBoard(assets, roundData);
         player.reset();
     }
@@ -121,35 +114,36 @@ public class GameScreen extends BaseScreen {
 
         // TODO - to ensure random characters don't generate heaven/hell character
 
-        for (int x = 0; x < roundDto.tileDtos.length; x++) {
-            for (int y = 0; y < roundDto.tileDtos[x].length; y++) {
-                TileData tileData = new TileData();
+        for (int i = 0; i < roundDto.tileDtos.length; i++) {
+            int x = i % GameBoard.gridSize;
+            int y = i / GameBoard.gridSize;
 
-                TileDto tileDto = roundDto.tileDtos[x][y];
-                switch (tileDto.tileType) {
-                    case obstacle:
-                        tileData.type = TileType.obstacle;
-                        break;
-                    case character_hell:
-                        tileData.type = TileType.character;
-                        Quota.Person charHell = hellQuota.people.get(tileDto.quotaIndex - 1);
-                        mapFeatures(tileData, charHell);
-                        break;
-                    case character_heaven:
-                        tileData.type = TileType.character;
-                        Quota.Person charHeaven = heavenQuota.people.get(tileDto.quotaIndex - 1);
-                        mapFeatures(tileData, charHeaven);
-                        break;
-                    case character_rando:
-                        tileData.type = TileType.character;
-                        // remove features? - this could gen a match in heaven/hell
-                        break;
-                    case powerUp_type1:
-                        break;
-                }
+            TileData tileData = new TileData();
 
-                roundData.tileData[x][y] = tileData;
+            TileDto tileDto = roundDto.tileDtos[i];
+            switch (tileDto.tileType) {
+                case obstacle:
+                    tileData.type = TileType.obstacle;
+                    break;
+                case character_hell:
+                    tileData.type = TileType.character;
+                    Quota.Person charHell = hellQuota.people.get(tileDto.quotaIndex - 1);
+                    mapFeatures(tileData, charHell);
+                    break;
+                case character_heaven:
+                    tileData.type = TileType.character;
+                    Quota.Person charHeaven = heavenQuota.people.get(tileDto.quotaIndex - 1);
+                    mapFeatures(tileData, charHeaven);
+                    break;
+                case character_rando:
+                    tileData.type = TileType.character;
+                    // remove features? - this could gen a match in heaven/hell
+                    break;
+                case powerUp_type1:
+                    break;
             }
+
+            roundData.tileData[x][y] = tileData;
         }
 
         return roundData;
