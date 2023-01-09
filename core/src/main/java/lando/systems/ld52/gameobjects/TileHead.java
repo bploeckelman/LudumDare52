@@ -39,6 +39,7 @@ public class TileHead extends TileObject {
         features.add(Feature.getFeature(tileData.mouth, Feature.Category.mouth));
         features.add(Feature.getFeature(tileData.hair_face, Feature.Category.hair_face));
         features.add(Feature.getFeature(tileData.hair_head, Feature.Category.hair_head));
+//        features.add(Feature.getFeature(tileData.hat, Feature.Category.hat));
         // features.add(Feature.getFeature(tileData.hat, Feature.Category.hat));
         // features.add(Feature.getFeature(tileData.neck, Feature.Category.neck));
 

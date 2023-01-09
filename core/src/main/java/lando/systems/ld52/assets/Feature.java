@@ -50,14 +50,14 @@ public enum Feature {
 //    , hair_ (Category.hair_head, "hair-", "hair")
 //    , hair_ (Category.hair_head, "hair-", "hair")
 
-    , hat_beret_green (Category.hat, "hat-beret-green", "Green Beret")
-    , hat_beret_red (Category.hat, "hat-beret-red", "Raspberry Beret")
-    , hat_fez (Category.hat, "hat-fez", "Fez")
-    , hat_hardhat (Category.hat, "hat-hardhat", "Hardhat")
-    , hat_heisenberg (Category.hat, "hat-heisenberg", "Heisenberg")
-    , hat_lombardi (Category.hat, "hat-lombardi", "Generic Hat")
-    , hat_sheriff (Category.hat, "hat-sheriff", "Sheriff")
-    , hat_summer (Category.hat, "hat-summer", "White Lady Hat")
+    , hat_beret_green (Category.hair_head, "hat-beret-green", "Green Beret")
+    , hat_beret_red (Category.hair_head, "hat-beret-red", "Raspberry Beret")
+    , hat_fez (Category.hair_head, "hat-fez", "Fez")
+    , hat_hardhat (Category.hair_head, "hat-hardhat", "Hardhat")
+    , hat_heisenberg (Category.hair_head, "hat-heisenberg", "Heisenberg")
+    , hat_lombardi (Category.hair_head, "hat-lombardi", "Generic Hat")
+    , hat_sheriff (Category.hair_head, "hat-sheriff", "Sheriff")
+    , hat_summer (Category.hair_head, "hat-summer", "White Lady Hat")
 //    , hat_ (Category.hat, "hat-", "Hat")
 //    , cigarette        (Category.mouth, "cigarette", "cigarette") // NOTE - not legible onscreen so removing it as a feature option
     ;
@@ -69,7 +69,7 @@ public enum Feature {
         , mouth     (3)
         , hair_face (4)
         , hair_head (5)
-        , hat       (6) // TODO - no 'hat' features yet
+//        , hat       (6) // TODO - no 'hat' features yet
 //        , neck      (7) // TODO - no 'neck' features yet (like necklace or tie or something)
         ;
         public final int layer;
