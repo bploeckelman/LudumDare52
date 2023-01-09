@@ -46,7 +46,7 @@ public class Quota {
 
     public final Source source;
     // TODO - add a quantity modifier for each person (so we can say you need 2x or 3x people like this to fill the quota not just one)
-    public final Array<Person> people;
+    public final Array<Person> people = new Array<>();
     public boolean didJustSatisfy = false;
 
     public Quota(QuotaDto quotaDto) {
