@@ -80,9 +80,7 @@ public class EndStoryScreen extends BaseScreen {
     }
 
     private float rotationCalc(Vector2 itemPosition, Vector2 itemVelocity, float itemRotation, float delta) {
-        Gdx.app.log("rotation", "before: " + itemRotation + " dt: " + rotationDT);
         itemRotation += rotationDT * delta;
-        Gdx.app.log("rotation", "after: " + itemRotation + " dt: " + rotationDT);
         itemPosition.add(itemVelocity.x * delta * 100, itemVelocity.y * delta * 100);
         if (itemPosition.x < 0){
             rotationDT = MathUtils.random(-45, 45);
