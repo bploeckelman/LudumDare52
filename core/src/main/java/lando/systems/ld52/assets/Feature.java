@@ -47,7 +47,7 @@ public enum Feature {
     , mustache_a       (Category.hair_face, "mustache-a",      "Creeper 'stache", "With a 'stache like that, this is probably for the best.")
     , beard_beard       (Category.hair_face, "beard-beard",      "Full Beard", "I wonder if the IPAs are in heaven or hell.")
     , beard_goatee       (Category.hair_face, "beard-goatee",      "Goatee", "I guess the 90s really ARE coming back!")
-    , beard_soulpatch       (Category.hair_face, "beard-soulpatch",      "Soulpatch (lol)", "Soulpatch? Yikes.")
+    , beard_soulpatch       (Category.hair_face, "beard-soulpatch",      "Soulpatch (ew)", "Soulpatch? Yikes.")
 //    ,beard_beard       (Category.hair_face, "beard-",      "")
 
     , hair_bald        (Category.hair_head, "feature-blank",   "Shaved", "What a beautifully smooth dome!")

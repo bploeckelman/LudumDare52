@@ -15,7 +15,7 @@ public class ScoreBoxUI extends VisWindow {
         super("");
         setTouchable(Touchable.disabled);
         setBackground(new NinePatchDrawable(Assets.NinePatches.plain_gradient));
-        VisLabel label = new VisLabel("Score", "outfit-medium-20px");
+        VisLabel label = new VisLabel("Soul Points", "outfit-medium-20px");
         add(label).align(Align.top);
         row();
         scoreLabel = new VisLabel("0", "outfit-medium-20px");

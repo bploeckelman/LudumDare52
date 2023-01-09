@@ -50,7 +50,7 @@ public class EndStoryScreen extends BaseScreen {
     public void show() {
         super.show();
         game.getInputMultiplexer().addProcessor(uiStage);
-        game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
+//        game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
     }
 
     @Override

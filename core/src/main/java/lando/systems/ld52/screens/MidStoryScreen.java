@@ -72,7 +72,7 @@ public class MidStoryScreen extends BaseScreen {
     public void show() {
         super.show();
         game.getInputMultiplexer().addProcessor(uiStage);
-        game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
+//        game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
         storyAccum = 0;
         phaseAccum = 0;
         clickPhase = 1;
