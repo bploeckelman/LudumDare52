@@ -17,7 +17,7 @@ public class LaunchScreen extends BaseScreen {
 
     public LaunchScreen() {
         exitingScreen = false;
-        if (MathUtils.randomBoolean(.1f)){
+        if (MathUtils.randomBoolean(.5f)){
             shader = Main.game.assets.cityShader2;
         } else {
             shader = Main.game.assets.cityShader;
