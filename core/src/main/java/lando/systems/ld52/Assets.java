@@ -86,6 +86,7 @@ public class Assets implements Disposable {
     public Music mutedMainTheme;
 
     public ShaderProgram hourglassShader;
+    public ShaderProgram harvestShader;
 
     public enum Patch {
         debug, panel, metal, glass,
@@ -143,10 +144,13 @@ public class Assets implements Disposable {
         initialized = false;
 
         // create a single pixel texture and associated region
-        Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGBA8888);
         {
             pixmap.setColor(Color.WHITE);
             pixmap.drawPixel(0, 0);
+            pixmap.drawPixel(1, 0);
+            pixmap.drawPixel(0, 1);
+            pixmap.drawPixel(1, 1);
             pixel = new Texture(pixmap);
         }
         pixmap.dispose();
@@ -214,6 +218,7 @@ public class Assets implements Disposable {
         if (initialized) return 1;
 
         hourglassShader = loadShader("shaders/default.vert", "shaders/hourglass.frag");
+        harvestShader = loadShader("shaders/default.vert", "shaders/harvest.frag");
 
         gameScreenLayout = mgr.get("images/layout-alpha-1.png", Texture.class);
 

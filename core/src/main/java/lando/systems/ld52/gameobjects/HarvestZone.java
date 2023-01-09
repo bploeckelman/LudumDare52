@@ -6,6 +6,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -39,6 +41,8 @@ public class HarvestZone {
     public Tile tileToHarvest;
     private boolean touchLastFrame;
     private int scytheSpinTimeMultiplier;
+    private ShaderProgram harvestShader;
+    private TextureRegion texture;
 
     public HarvestZone(Player player) {
         this.player = player;
@@ -49,6 +53,8 @@ public class HarvestZone {
         this.scytheSpinTimeMultiplier = 1;
         tileToHarvest = null;
         touchLastFrame = false;
+        harvestShader = player.gameBoard.screen.assets.harvestShader;
+        this.texture = new TextureRegion(player.gameBoard.screen.assets.pixel);
     }
 
     public void update(float dt) {
@@ -115,6 +121,8 @@ public class HarvestZone {
                 tempGolfPos = 2f - tempGolfPos;
             }
             golfPosition = golfInterpolation.apply(tempGolfPos);
+        } else {
+            golfPosition = 0;
         }
 
         scythe.update(dt);
@@ -124,19 +132,21 @@ public class HarvestZone {
         // TODO: this will need to be stored if we are going to check for gravestones, etc along the path
         float maxWidth = (GameBoard.tileSize+GameBoard.margin) * currentPathLength;
         if (currentPhase == HarvestPhase.cycle) {
-            batch.setColor(1f, 1f, 1f, .5f);
+            batch.setColor(.5f, .5f, .5f, .1f);
         }
         if (currentPhase == HarvestPhase.golf) {
-            batch.setColor(1f, 1f, .5f, 1f);
-            float golfWidth = golfPosition * maxWidth;
-            float golfX = startPos.x + MathUtils.cosDeg(rotation) * golfWidth;
-            float golfY = startPos.y + MathUtils.sinDeg(rotation) * golfWidth;
-            batch.draw(game.assets.circleTex, golfX - golfIndicatorSize/2f, golfY- golfIndicatorSize/2f, golfIndicatorSize, golfIndicatorSize);
+            batch.setColor(1f, 1f, .5f, .1f);
         }
         if (currentPhase == HarvestPhase.collection) {
             scythe.render(batch);
         }
-        Assets.Patch.debug.ninePatch.draw(batch, startPos.x, startPos.y - (GameBoard.tileSize + GameBoard.margin)/2f, 0, (GameBoard.tileSize + GameBoard.margin)/2f, maxWidth, (GameBoard.tileSize + GameBoard.margin), 1f, 1f, rotation);
+        if (currentPhase != HarvestPhase.collection) {
+            batch.setShader(harvestShader);
+            harvestShader.setUniformf("u_percent", golfPosition);
+            harvestShader.setUniformf("u_dimensions", maxWidth, (GameBoard.tileSize + GameBoard.margin));
+            batch.draw(texture, startPos.x, startPos.y - (GameBoard.tileSize + GameBoard.margin) / 2f, 0, (GameBoard.tileSize + GameBoard.margin) / 2f, maxWidth, (GameBoard.tileSize + GameBoard.margin), 1f, 1f, rotation);
+            batch.setShader(null);
+        }
         batch.setColor(Color.WHITE);
     }
 
