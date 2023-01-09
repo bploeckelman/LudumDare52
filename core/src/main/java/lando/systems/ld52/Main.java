@@ -52,14 +52,18 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		VisUI.load(assets.mgr.get("ui/uiskin.json", Skin.class));
 		{
 			Skin skin = VisUI.getSkin();
-			skin.getFont("default")            .getData().markupEnabled = true;
-			skin.getFont("font")               .getData().markupEnabled = true;
-			skin.getFont("list")               .getData().markupEnabled = true;
-			skin.getFont("subtitle")           .getData().markupEnabled = true;
-			skin.getFont("window")             .getData().markupEnabled = true;
-			skin.getFont("outfit-medium-20px") .getData().markupEnabled = true;
-			skin.getFont("outfit-medium-40px") .getData().markupEnabled = true;
-			skin.getFont("outfit-medium-80px") .getData().markupEnabled = true;
+			skin.getFont("default")            .setUseIntegerPositions(false);
+			skin.getFont("font")               .setUseIntegerPositions(false);
+			skin.getFont("list")               .setUseIntegerPositions(false);
+			skin.getFont("subtitle")           .setUseIntegerPositions(false);
+			skin.getFont("window")             .setUseIntegerPositions(false);
+			skin.getFont("outfit-medium-10px") .setUseIntegerPositions(false);
+			skin.getFont("outfit-medium-14px") .setUseIntegerPositions(false);
+			skin.getFont("outfit-medium-17px") .setUseIntegerPositions(false);
+			skin.getFont("outfit-medium-19px") .setUseIntegerPositions(false);
+			skin.getFont("outfit-medium-20px") .setUseIntegerPositions(false);
+			skin.getFont("outfit-medium-40px") .setUseIntegerPositions(false);
+			skin.getFont("outfit-medium-80px") .setUseIntegerPositions(false);
 		}
 
 		engine = new Engine();
