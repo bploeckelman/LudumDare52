@@ -129,7 +129,6 @@ public class TileHead extends TileObject {
         quotaListUI.setQuotas(heavenQuota, hellQuota);
 
         // add this head to the harvested ui
-
         HarvestedSoulUI harvestedSoulUI = gameScreen.gameScreenUI.leftSideUI.harvestedSoulUI;
         harvestedSoulUI.setSoul(this, afterlifeZone);
 

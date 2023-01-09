@@ -32,6 +32,8 @@ public class AudioManager implements Disposable {
         , bell
         , heaven
         , hell
+        , chargeUp
+        , chargeDown
 
     }
 
@@ -68,6 +70,8 @@ public class AudioManager implements Disposable {
         putSound(Sounds.bell, assets.bell1);
         putSound(Sounds.heaven, assets.heaven1);
         putSound(Sounds.hell, assets.hell1);
+        putSound(Sounds.chargeUp, assets.chargeup1);
+        putSound(Sounds.chargeDown, assets.chargedown1);
 //        putSound(Sounds., assets.);
 //        putSound(Sounds., assets.);
 //        putSound(Sounds., assets.);

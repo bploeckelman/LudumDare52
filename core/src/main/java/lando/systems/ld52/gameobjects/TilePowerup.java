@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
+import lando.systems.ld52.Main;
 import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.screens.GameScreen;
 
@@ -18,6 +19,7 @@ public class TilePowerup extends TileObject {
     public TilePowerup(Assets assets, Tile tile) {
         super(tile);
         animation = assets.powerup;
+//        Main.game.audioManager.playSound(AudioManager.Sounds.chargeUp);
         stateTime = 0f;
     }
 
@@ -45,7 +47,7 @@ public class TilePowerup extends TileObject {
         gameScreen.player.harvestZone.adjustRange(1);
 
         // TODO: need power up sound
-        gameScreen.audioManager.playSound(AudioManager.Sounds.thud);
+        gameScreen.audioManager.playSound(AudioManager.Sounds.chargeUp, .8f);
         return false;
     }
 }
