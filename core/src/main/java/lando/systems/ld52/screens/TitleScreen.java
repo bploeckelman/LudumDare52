@@ -38,7 +38,10 @@ public class TitleScreen extends BaseScreen {
         worldCam.setToOrtho(false, Config.Screen.window_width, Config.Screen.window_height);
         worldCam.update();
 
-        background = assets.atlas.findRegion("fire-color-gradient");
+//        background = assets.atlas.findRegion("fire-color-gradient");
+        background = assets.atlas.findRegion("story-background");
+
+//        background = assets.mgr.get("images/story-background_00.png");
         logo = assets.atlas.findRegion("libgdx");
     }
 
@@ -87,17 +90,17 @@ public class TitleScreen extends BaseScreen {
             float margin = 10;
             float logoX = 0.5f * (Gdx.graphics.getWidth()  - logo.getRegionWidth()) + 80;
             float logoY = 0.5f * (Gdx.graphics.getHeight() - logo.getRegionHeight());
-            batch.draw(logo, logoX, logoY);
-            batch.draw(dog,
-                    margin, margin,
-                    2 * dog.getRegionWidth(), 2 * dog.getRegionHeight());
-            batch.draw(cat,
-                    margin, Gdx.graphics.getHeight() - 2 * cat.getRegionHeight() - 10,
-                    2 * cat.getRegionWidth(), 2 * cat.getRegionHeight());
-            batch.draw(kitten,
-                    logoX + logo.getRegionWidth() * (2f / 3f) - 4 * margin,
-                    logoY + logo.getRegionHeight() - 2 * margin,
-                    2 * kitten.getRegionWidth(), 2 * kitten.getRegionHeight());
+//            batch.draw(logo, logoX, logoY);
+//            batch.draw(dog,
+//                    margin, margin,
+//                    2 * dog.getRegionWidth(), 2 * dog.getRegionHeight());
+//            batch.draw(cat,
+//                    margin, Gdx.graphics.getHeight() - 2 * cat.getRegionHeight() - 10,
+//                    2 * cat.getRegionWidth(), 2 * cat.getRegionHeight());
+//            batch.draw(kitten,
+//                    logoX + logo.getRegionWidth() * (2f / 3f) - 4 * margin,
+//                    logoY + logo.getRegionHeight() - 2 * margin,
+//                    2 * kitten.getRegionWidth(), 2 * kitten.getRegionHeight());
         }
         batch.end();
         uiStage.draw();

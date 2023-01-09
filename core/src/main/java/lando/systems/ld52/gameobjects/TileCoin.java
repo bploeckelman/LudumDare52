@@ -48,7 +48,7 @@ public class TileCoin extends TileObject {
         gameScreen.score += 1337;
 
         // TODO: need coin sound
-        gameScreen.audioManager.playSound(AudioManager.Sounds.chargeUp, .8f);
+        gameScreen.audioManager.playSound(AudioManager.Sounds.coin, .5f);
         return false;
     }
 }

@@ -111,11 +111,11 @@ public class EndStoryScreen extends BaseScreen {
 
         phaseAccum += delta;
 
-        if (((Gdx.input.justTouched() && phaseAccum > .2f) || phaseAccum > 7.25F)&& !isStoryOver) {
+        if (((Gdx.input.justTouched() && phaseAccum > .2f) || phaseAccum > 30.25F)&& !isStoryOver) {
 
             storyAccum += delta * 10;
 
-            if (((Gdx.input.justTouched() && phaseAccum > .2f) || phaseAccum > 6F) && !isStoryOver) {
+            if (((Gdx.input.justTouched() && phaseAccum > .2f) || phaseAccum > 36F) && !isStoryOver) {
 
                 // todo cancel playing sounds
                 game.audioManager.stopAllSounds();
@@ -124,7 +124,17 @@ public class EndStoryScreen extends BaseScreen {
                 clickPhase++;
                 switch (clickPhase) {
                     case 1:
-                        subtitles = "Can't wait to enjoy my favorite reaper leisure activities in my afterlife ";
+                        subtitles = "Can't wait to enjoy some of my favorite non-reaping-related leisure activities in my afterlife!\n" +
+                                "Thanks for keeping me company during my shifts this week.\n\n" +
+                                "For additional fun, see if you can pick out these references in the music:";
+                        showBeer = true;
+                        break;
+                    case 2:
+                        subtitles =
+                                "Don't Fear The Reaper (Blue Oyster Cult)               Stairway To Heaven (Led Zeppelin)\n" +
+                                        "Another One Bites The Dust (Queen)             Highway To Hell (AC/DC) Tears In Heaven (Eric Clapton)         \nHeaven (Talking Heads)              Death Sound (Legend of Zelda)          " +
+                                "\nHeaven On Their Minds (Jesus Christ Superstar)            Dies Irae (Verdi)";
+
                         showBeer = true;
                         break;
                     default:
@@ -151,6 +161,11 @@ public class EndStoryScreen extends BaseScreen {
             batch.setColor(whiteWithAlpha);
             if (Stats.heavenQuotaMet == Stats.hellQuotaMet) {
                 batch.draw(Utils.getColoredTextureRegion(Color.GRAY), 0, 200, windowCamera.viewportWidth, 800);
+//<<<<<<< Updated upstream
+//=======
+//                assets.layout.setText(assets.largeFont, "PURGATORY", whiteWithAlpha, camera.viewportWidth, Align.center, false);
+//                assets.largeFont.draw(batch, assets.layout, 10, camera.viewportHeight * 6 / 7f + assets.layout.height);
+//>>>>>>> Stashed changes
             } else {
                 batch.draw(backgroundTexture, 0, 200, windowCamera.viewportWidth, 800);
             }
@@ -188,7 +203,11 @@ public class EndStoryScreen extends BaseScreen {
             assets.largeFont.getData().setScale(.3f);
             assets.largeFont.setColor(whiteWithAlpha);
             assets.layout.setText(assets.largeFont, subtitles, whiteWithAlpha, camera.viewportWidth, Align.left, false);
-            assets.largeFont.draw(batch, assets.layout, 100, camera.viewportHeight / 7f + assets.layout.height);
+//<<<<<<< Updated upstream
+//            assets.largeFont.draw(batch, assets.layout, 100, camera.viewportHeight / 7f + assets.layout.height);
+//=======
+            assets.largeFont.draw(batch, assets.layout, 10, camera.viewportHeight / 10f + assets.layout.height);
+
             assets.largeFont.getData().setScale(1f);
             assets.largeFont.setColor(Color.WHITE);
 
@@ -214,16 +233,16 @@ public class EndStoryScreen extends BaseScreen {
         float left = windowCamera.viewportWidth - 50f - BUTTON_WIDTH;
         float top = windowCamera.viewportHeight - 50f - BUTTON_HEIGHT;
 
-        TextButton startGameButton = new TextButton("Skip", titleScreenButtonStyle);
-//        Gdx.app.log("startbuttonwidth&height", "width: " + startGameButton.getWidth() + " & height: " + startGameButton.getHeight());
-        startGameButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-        startGameButton.setPosition(left, top);
-        startGameButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.getScreenManager().pushScreen("credit", TransitionManager.TransitionType.CROSSHATCH.name());
-            }
-        });
-        uiStage.addActor(startGameButton);
+//        TextButton startGameButton = new TextButton("Skip", titleScreenButtonStyle);
+////        Gdx.app.log("startbuttonwidth&height", "width: " + startGameButton.getWidth() + " & height: " + startGameButton.getHeight());
+//        startGameButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+//        startGameButton.setPosition(left, top);
+//        startGameButton.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                game.getScreenManager().pushScreen("credit", TransitionManager.TransitionType.CROSSHATCH.name());
+//            }
+//        });
+//        uiStage.addActor(startGameButton);
     }
 }
