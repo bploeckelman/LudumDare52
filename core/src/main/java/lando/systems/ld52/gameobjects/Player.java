@@ -71,6 +71,9 @@ public class Player implements GameObject {
         }
 
         harvestZone.update(dt);
+
+        currentPlayerAnimation = (harvestZone.currentPhase == HarvestZone.HarvestPhase.collection) ? playerNoScythe : playerWithScythe;
+
         _renderPosition.lerp(_nextPosition, dt * 10);
     }
 

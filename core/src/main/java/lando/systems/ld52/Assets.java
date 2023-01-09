@@ -250,7 +250,7 @@ public class Assets implements Disposable {
         cutscene3 = mgr.get("images/cutscene_3.png");
 
         playerWithScythe = new Animation<>(.2f, atlas.findRegions("player/reapo-idle-a"), Animation.PlayMode.LOOP);
-        playerNoScythe = new Animation<>(.2f, atlas.findRegions("player/reapo-idle-a"), Animation.PlayMode.LOOP);
+        playerNoScythe = new Animation<>(.2f, atlas.findRegions("player/reapo-idle-noweapon"), Animation.PlayMode.LOOP);
         
         scythe = new Animation<>(.2f, atlas.findRegions("player/scythe"), Animation.PlayMode.LOOP);
         tombstone = new Animation<>(.2f, atlas.findRegions("objects/tombstone"), Animation.PlayMode.LOOP);
