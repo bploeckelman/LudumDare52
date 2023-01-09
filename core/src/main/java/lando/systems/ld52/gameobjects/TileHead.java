@@ -96,14 +96,18 @@ public class TileHead extends TileObject {
         Quota heavenQuota = gameScreen.heavenQuota;
         Quota hellQuota = gameScreen.hellQuota;
         heavenQuota.satisfy(featureAnims.orderedKeys());
-        if (heavenQuota.didJustSatisfy) {
-            heavenQuota.didJustSatisfy = false;
-            gameScreen.game.particles.flyUp(gameScreen.game.assets.angel, tile.bounds.getX() + tile.bounds.width / 2, tile.bounds.getY() + tile.bounds.width / 2);
+        if (heavenQuota.satisfiedCount > 0) {
+            for (int i = 0; i < heavenQuota.satisfiedCount; i++) {
+                gameScreen.game.particles.flyUp(gameScreen.game.assets.angel, tile.bounds.getX() + tile.bounds.width / 2, tile.bounds.getY() + tile.bounds.width / 2);
+            }
+            heavenQuota.satisfiedCount = 0;
         }
         hellQuota.satisfy(featureAnims.orderedKeys());
-        if (hellQuota.didJustSatisfy) {
-            hellQuota.didJustSatisfy = false;
-            gameScreen.game.particles.flyUp(gameScreen.game.assets.devil, tile.bounds.getX() + tile.bounds.width / 2, tile.bounds.getY() + tile.bounds.width / 2);
+        if (hellQuota.satisfiedCount > 0) {
+            for (int i = 0; i < hellQuota.satisfiedCount; i++) {
+                gameScreen.game.particles.flyUp(gameScreen.game.assets.devil, tile.bounds.getX() + tile.bounds.width / 2, tile.bounds.getY() + tile.bounds.width / 2);
+            }
+            hellQuota.satisfiedCount = 0;
         }
         boolean heavenSatisfied = heavenQuota.satisfy(featureAnims.orderedKeys());
         boolean hellSatisfied = hellQuota.satisfy(featureAnims.orderedKeys());

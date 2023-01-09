@@ -13,7 +13,7 @@ public class Quota {
 
     public static class Person {
         public final HashMap<Feature, Boolean> features = new HashMap<>();
-        public boolean didJustSatisfy = false;
+        public int satisfiedCount = 0;
 
         // TODO - probably best to limit number of features to max of 3 so UI doesn't get nuts
         public void addAll(Feature... features) {
@@ -26,7 +26,7 @@ public class Quota {
             for (Feature feature : features) {
                 if (this.features.containsKey(feature)) {
                     this.features.put(feature, true);
-                    didJustSatisfy = true;
+                    satisfiedCount++;
                 }
             }
             return isSatisfied();
@@ -48,7 +48,7 @@ public class Quota {
     public final Source source;
     // TODO - add a quantity modifier for each person (so we can say you need 2x or 3x people like this to fill the quota not just one)
     public final Array<Person> people = new Array<>();
-    public boolean didJustSatisfy = false;
+    public int satisfiedCount = 0;
 
     public Quota(QuotaDto quotaDto) {
         this.source = quotaDto.source;
@@ -76,8 +76,9 @@ public class Quota {
         boolean didSatisfy = false;
         for (Person person : people) {
             person.satisfy(features);
-            if (person.didJustSatisfy) {
-                didJustSatisfy = true;
+            if (person.satisfiedCount > 0) {
+                satisfiedCount += person.satisfiedCount;
+                person.satisfiedCount = 0;
             }
         }
         return didSatisfy;
