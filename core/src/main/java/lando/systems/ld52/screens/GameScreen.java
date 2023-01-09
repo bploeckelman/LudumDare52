@@ -6,7 +6,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Json;
 import com.kotcrab.vis.ui.util.ToastManager;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
@@ -95,10 +94,12 @@ public class GameScreen extends BaseScreen {
         QuotaListUI quotaListUI = gameScreenUI.rightSideUI.quotaListUI;
         quotaListUI.setQuotas(heavenQuota, hellQuota);
         quotaToastShown = false;
+        hideToast();
 
         RoundDto roundDto = RoundDto.fromJson("{tileDtos:[[{},{},{},{},{},{}],[{tileType:obstacle},{tileType:character_hell,quotaIndex:1},{},{},{tileType:character_rando},{tileType:obstacle}],[{},{},{},{},{},{}],[{},{},{tileType:obstacle},{tileType:character_heaven,quotaIndex:1},{},{}],[{},{tileType:character_rando},{},{tileType:obstacle},{},{}],[{},{},{},{},{},{tileType:character_rando}]]}");
         RoundData roundData = getRoundData(roundDto, heavenQuota, hellQuota);
         gameboard.setupBoard(assets, roundData);
+        player.boardPosition = 0;
     }
 
     private RoundData getRoundData(RoundDto roundDto, Quota heavenQuota, Quota hellQuota) {
@@ -200,13 +201,18 @@ public class GameScreen extends BaseScreen {
         }
 
         if (quotaToastShown) {
+            if (Gdx.input.isTouched()) {
+                game.getScreenManager().pushScreen("mid-story", TransitionManager.TransitionType.CROSSHATCH.name());
+            }
             return;
         }
         if (heavenQuota.isSatisfied()) {
             showToast("You've filled heaven's quota!", ToastManager.UNTIL_CLOSED);
+            Stats.last_quota_reached = Quota.Source.heaven;
             quotaToastShown = true;
         } else if (hellQuota.isSatisfied()) {
             showToast("You've filled hell's quota!", ToastManager.UNTIL_CLOSED);
+            Stats.last_quota_reached = Quota.Source.hell;
             quotaToastShown = true;
         }
 
@@ -257,6 +263,10 @@ public class GameScreen extends BaseScreen {
         table.add(new VisLabel(text, "outfit-medium-40px"));
         Toast toast = new Toast(table);
         toasts.show(toast, duration);
+    }
+
+    public void hideToast() {
+        toasts.clear();
     }
 
 }
