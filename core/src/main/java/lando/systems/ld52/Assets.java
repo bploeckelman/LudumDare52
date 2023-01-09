@@ -43,6 +43,7 @@ public class Assets implements Disposable {
     public Texture pixel;
     public Texture gameScreenLayout;
     public Texture cutsceneBackground;
+    public Texture heavenBackground;
     public Texture cutscene0;
     public Texture cutscene1;
     public Texture cutscene2;
@@ -233,6 +234,7 @@ public class Assets implements Disposable {
             mgr.load("audio/music/mainthemeLowpass.ogg", Music.class);
 
             mgr.load("images/story-background_00.png", Texture.class, linearTexParams);
+            mgr.load("images/story-background-heaven_00.png", Texture.class, linearTexParams);
             mgr.load("images/cutscene_0.png", Texture.class, linearTexParams);
             mgr.load("images/cutscene_1.png", Texture.class, linearTexParams);
             mgr.load("images/cutscene_2.png", Texture.class, linearTexParams);
@@ -286,6 +288,7 @@ public class Assets implements Disposable {
         beerPack = atlas.findRegion("objects/items-beer/items-beer-6pack/items-6pack", 0);
 
         cutsceneBackground = mgr.get("images/story-background_00.png");
+        heavenBackground = mgr.get("images/story-background-heaven_00.png");
         cutscene0 = mgr.get("images/cutscene_0.png");
         cutscene1 = mgr.get("images/cutscene_1.png");
         cutscene2 = mgr.get("images/cutscene_2.png");
