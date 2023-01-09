@@ -29,6 +29,8 @@ public class EndStoryScreen extends BaseScreen {
     private boolean showBeer = false;
     private float beerCount = 50;
 
+    private float y = 10;
+
     @Override
     protected void create() {
         super.create();

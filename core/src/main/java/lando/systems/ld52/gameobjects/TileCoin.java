@@ -10,14 +10,18 @@ import lando.systems.ld52.Config;
 import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.screens.GameScreen;
 
-public class TilePowerdown extends TileObject {
-
+public class TileCoin extends TileObject {
     private final Animation<TextureRegion> animation;
     private float stateTime;
 
-    public TilePowerdown(Assets assets, Tile tile) {
+    public TileCoin(Assets assets, Tile tile) {
         super(tile);
-        animation = assets.powerdown;
+        if (MathUtils.randomBoolean()) {
+            animation = assets.btcCoin;
+        } else {
+            animation = assets.dogeCoin;
+        }
+//        Main.game.audioManager.playSound(AudioManager.Sounds.chargeUp);
         stateTime = 0f;
     }
 
@@ -38,16 +42,13 @@ public class TilePowerdown extends TileObject {
     }
 
     public boolean collect(GameScreen gameScreen) {
-        Stats.numPowerdownsReaped++;
-
         gameScreen.game.particles.lightning(new Vector2(tile.bounds.x + MathUtils.random(-150, 150), Config.Screen.window_height), new Vector2(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2));
         gameScreen.game.particles.explode(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2, tile.bounds.width);
         gameScreen.screenShaker.addDamage(25f);
-        gameScreen.score += 10;
-        gameScreen.player.harvestZone.adjustRange(-1);
+        gameScreen.score += 1337;
 
-        // TODO: need power down sound
-        gameScreen.audioManager.playSound(AudioManager.Sounds.thud);
+        // TODO: need coin sound
+        gameScreen.audioManager.playSound(AudioManager.Sounds.chargeUp, .8f);
         return false;
     }
 }

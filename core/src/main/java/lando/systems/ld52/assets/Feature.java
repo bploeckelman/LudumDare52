@@ -12,14 +12,14 @@ import java.util.Map;
 
 public enum Feature {
 
-      collar_a         (Category.clothes,   "collar-a-idle",   "Collar", "Won't get into with a commie shirt like that")
+      collar_a         (Category.clothes,   "collar-a-idle",   "Collar", "Won't get into heaven OR hell with a commie shirt like that")
     , buttonup_purple         (Category.clothes,   "clothes-buttonup-purple",   "Purple Buttonup", "Don't try to make a purple shirt work unless you're Prince. Which you're not.")
     , buttonup_blue         (Category.clothes,   "clothes-buttonup-blue",   "Blue Buttonup", "Is that a track jacket? \n\nWas this one in the Russian mafia?")
     , sweatshirt_red         (Category.clothes,   "clothes-sweatshirt-red",   "Red Hoodie", "Little Dead Riding Hood!")
     , sweatshirt_blue         (Category.clothes,   "clothes-sweatshirt-blue",   "Blue Hoodie", "Blue sweatshirt? \nWe all see it, right? \n\nUnabomber? No?")
-    , plain_green         (Category.clothes,   "clothes-plain-green",   "Green Tee", "Green shirt! \n\nGreen means go (to hell and/or heaven)!")
-    , hawaiian_red         (Category.clothes,   "clothes-hawaiian-red",   "Red Hawaiian", "Red Hawaiian shirt? \n\nBig fat Party animal in the house!")
-    , hawaiian_blue         (Category.clothes,   "clothes-hawaiian-blue",   "Blue Hawaiian", "Blue Hawaiian shirt? \n\nBig fat  party animal in the house!")
+    , plain_green         (Category.clothes,   "clothes-plain-green",   "Green Tee", "Green shirt! \n\nGreen means go (to hell and/or heaven)")
+    , hawaiian_red         (Category.clothes,   "clothes-hawaiian-red",   "Red Hawaiian", "Red Hawaiian shirt? \nBig fat Party animal in the house!")
+    , hawaiian_blue         (Category.clothes,   "clothes-hawaiian-blue",   "Blue Hawaiian", "Blue Hawaiian shirt? \nBig fat  party animal in the house!")
 //    , clothes_         (Category.clothes,   "",   "")
 //    , clothes_         (Category.clothes,   "",   "")
 
@@ -39,7 +39,7 @@ public enum Feature {
 
 //    , tongue           (Category.mouth,     "tongue",          "Tongue")
     , lips_blue           (Category.mouth,     "mouth-lips-blue",          "Blue Lips", "Man - blue lips make me uncomfortable. Not natural.")
-    , lips_green           (Category.mouth,     "mouth-lips-green",          "Green Lips", "This lipstick is extremely unpleasant. \n\nCan't say I'm sorry they're gone.")
+    , lips_green           (Category.mouth,     "mouth-lips-green",          "Green Lips", "This lipstick is *extremely* unpleasant. \n\nGood.")
     , lips_red           (Category.mouth,     "mouth-lips-red",          "Red Lips", "Strong \"Rocky Horror intro\" vibes from these lips.")
     , lips_plain           (Category.mouth,     "mouth-lips-plain",          "Plain Lips", "Hey, it's a normal-looking mouth for once!")
 
@@ -76,7 +76,7 @@ public enum Feature {
     , hat_heisenberg (Category.hair_head, "hat-heisenberg", "Heisenberg", "*I* am the one who reaps")
     , hat_lombardi (Category.hair_head, "hat-lombardi", "Disheveled Hat", "This hat looks like something a bum would wear.")
     , hat_sheriff (Category.hair_head, "hat-sheriff", "Sheriff", "Sheriff's hat? \n\nRootin', tootin', no more shootin''")
-    , hat_summer (Category.hair_head, "hat-summer", "White Lady Hat", "Did this hat belong to a farmer or white girl? We may never know")
+    , hat_summer (Category.hair_head, "hat-summer", "White Lady Hat", "Did this hat belong to a farmer or a white girl? We may never know")
 //    , hat_ (Category.hat, "hat-", "Hat")
 //    , cigarette        (Category.mouth, "cigarette", "cigarette") // NOTE - not legible onscreen so removing it as a feature option
     ;

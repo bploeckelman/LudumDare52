@@ -47,8 +47,8 @@ public class Player implements GameObject {
         this.gameBoard = gameBoard;
         gameBoard.player = this;
 
+        harvestZone = new HarvestZone(this);
         reset();
-        this.harvestZone = new HarvestZone(this);
     }
 
     public void reset() {
@@ -63,6 +63,7 @@ public class Player implements GameObject {
         currentRow = GameBoard.gridSize;
         currentCol = boardPosition;
         currentSide = Side.top;
+        harvestZone.resetRange();
 
         setPosition(true);
     }
@@ -127,6 +128,7 @@ public class Player implements GameObject {
             if (boardPosition == -1) {
                 boardPosition += perimeterTiles;
             } else if (boardPosition == perimeterTiles) {
+                Stats.numLoopsAroundMortalPlane++;
                 boardPosition = 0;
             }
         }

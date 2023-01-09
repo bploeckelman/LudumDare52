@@ -36,6 +36,8 @@ public class TileBoulder extends TileObject {
     }
 
     public boolean collect(GameScreen gameScreen) {
+        Stats.numBouldersReaped++;
+
         gameScreen.game.particles.lightning(new Vector2(tile.bounds.x + MathUtils.random(-150, 150), Config.Screen.window_height), new Vector2(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2));
         gameScreen.game.particles.explode(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2, tile.bounds.width);
         gameScreen.screenShaker.addDamage(15f);

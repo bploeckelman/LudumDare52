@@ -179,6 +179,10 @@ public class HarvestZone {
         tilesLong = MathUtils.clamp(tilesLong, 1, GameBoard.gridSize);
     }
 
+    public void resetRange() {
+        tilesLong = tilesStart;
+    }
+
     public void handleInput() {
         // don't remove this
         if (player.inCorner() || throwCooldown > 0) { return; }
@@ -200,6 +204,7 @@ public class HarvestZone {
             golfTimer = 0;
         } else if (currentPhase == HarvestPhase.golf && (!touched && touchLastFrame)) {
             currentPhase = HarvestPhase.collection;
+            Stats.numThrows++;
             game.audioManager.stopSound(AudioManager.Sounds.charge1);
             game.audioManager.playSound(AudioManager.Sounds.poof1);
 

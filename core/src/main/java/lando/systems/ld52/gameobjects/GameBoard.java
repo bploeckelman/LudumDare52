@@ -26,7 +26,7 @@ public class GameBoard {
     public final static int gridSize = 6;
     public final static float margin = 6;
     public final static float tileSize = (boardSize - (gridSize + 1) * margin) / (gridSize);
-    public final static float MAX_TIME_IN_SECONDS = 35;
+    public final static float MAX_TIME_IN_SECONDS = 60;
 
     public enum CornerTransition { none, top_left, top_right, bottom_right, bottom_left }
     public CornerTransition cornerTransition = CornerTransition.none;
@@ -51,11 +51,13 @@ public class GameBoard {
     public Rectangle bounds;
     public GameScreen screen;
     public float timer;
+    public float elapsed;
     public Player player;
 
     public GameBoard(GameScreen screen, Assets assets) {
         this.screen = screen;
         timer = MAX_TIME_IN_SECONDS;
+        elapsed = 0;
         bounds = new Rectangle(
                 (Config.Screen.window_width - boardSize) / 2f,
                 (Config.Screen.window_height - boardSize) / 2f,
@@ -99,7 +101,9 @@ public class GameBoard {
     }
 
     public void resetTimer() {
+        Stats.timeTaken += elapsed;
         timer = MAX_TIME_IN_SECONDS;
+        elapsed = 0;
     }
 
     public void update(float dt) {

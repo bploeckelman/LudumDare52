@@ -132,6 +132,8 @@ public class TileHead extends TileObject {
         HarvestedSoulUI harvestedSoulUI = gameScreen.gameScreenUI.leftSideUI.harvestedSoulUI;
         harvestedSoulUI.setSoul(this, afterlifeZone);
 
+        Stats.numPeopleReaped++;
+
         gameScreen.game.particles.lightning(new Vector2(tile.bounds.x + MathUtils.random(-150, 150), Config.Screen.window_height), new Vector2(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2));
         gameScreen.game.particles.bleed(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2);
         gameScreen.screenShaker.addDamage(100f);
