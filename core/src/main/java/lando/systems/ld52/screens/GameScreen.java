@@ -166,6 +166,9 @@ public class GameScreen extends BaseScreen {
                 case hair_head:
                     tileData.hair_head = feature;
                     break;
+                case mouth:
+                    tileData.mouth = feature;
+                    break;
                 // TODO
                 // case hat:
                 //    tileData.hat = feature;
