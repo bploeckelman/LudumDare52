@@ -261,8 +261,8 @@ public class Assets implements Disposable {
 
         beer = new Animation<>(.1f, atlas.findRegions("objects/items-beer/items-beer/items-beer"), Animation.PlayMode.LOOP);
         chair = atlas.findRegion("objects/items-chair/items-chair", 0);
-        horns = new Animation<>(.1f, atlas.findRegions("objects/items-horns-halo/item-horns"), Animation.PlayMode.LOOP);
-        halo = new Animation<>(.1f, atlas.findRegions("objects/items-horns-halo/item-halo"), Animation.PlayMode.LOOP);
+        horns = new Animation<>(.1f, atlas.findRegions("objects/items-horns-halo/items-horns"), Animation.PlayMode.LOOP);
+        halo = new Animation<>(.1f, atlas.findRegions("objects/items-horns-halo/items-halo"), Animation.PlayMode.LOOP);
         tvOn = new Animation<>(.1f, atlas.findRegions("objects/items-tv/items-tv-on/items-tv-on"), Animation.PlayMode.LOOP);
         tvOff = atlas.findRegion("objects/items-tv/items-tv-idle", 0);
         beerPack = atlas.findRegion("objects/items-beer/items-beer-6pack/items-6pack", 0);

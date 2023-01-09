@@ -117,6 +117,11 @@ public class EndStoryScreen extends BaseScreen {
             } else {
                 batch.draw(backgroundTexture, 0, 200, windowCamera.viewportWidth, 800);
             }
+            if (Stats.heavenQuotaMet > Stats.hellQuotaMet) {
+                batch.draw(assets.halo.getKeyFrame(phaseAccum), 240, 400, 200, 300);
+            } else if (Stats.heavenQuotaMet < Stats.hellQuotaMet) {
+                batch.draw(assets.horns.getKeyFrame(phaseAccum), 240, 400, 200, 325);
+            }
             batch.draw(assets.chair, 50, 200, 200f, 200f);
             batch.draw(assets.playerNoScythe.getKeyFrame(phaseAccum), 250, 300, 250f, 250f);
             batch.draw(assets.beerPack, 245, 200, 100f, 100f);
