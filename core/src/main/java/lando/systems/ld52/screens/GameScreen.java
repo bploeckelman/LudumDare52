@@ -28,7 +28,7 @@ public class GameScreen extends BaseScreen {
 
     private static final Color clearColor = new Color(0.15f, 0.15f, 0.2f, 1f);
     private final int MAX_ROUND_NUMBER = 5;
-
+    public int score = 0;
     public GameBoard gameboard;
     public Player player;
     public Hourglass hourglass;
@@ -229,12 +229,14 @@ public class GameScreen extends BaseScreen {
             quotaToastShown = true;
             particles.flyUp(assets.angel, 350f, 300f);
             particles.flyUp(assets.angel, 950f, 300f);
+            score += 1000 + gameboard.getSecondsLeft() * 20;
         } else if (hellQuota.isSatisfied()) {
             showToast("Hell's Quota: Fully Reaped!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = Quota.Source.hell;
             quotaToastShown = true;
             particles.flyUp(assets.devil, 350f, 300f);
             particles.flyUp(assets.devil, 950f, 300f);
+            score += 1000 + gameboard.getSecondsLeft() * 20;
         } else if (gameboard.getSecondsLeft() <= 0) {
             showToast("You've failed to meet quota!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = null;
@@ -244,6 +246,7 @@ public class GameScreen extends BaseScreen {
         gameboard.update(delta);
         player.update(delta);
         hourglass.update(delta);
+        gameScreenUI.leftSideUI.scoreBoxUI.setScoreLabel(score);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
             // .hide() happens at the END of transition - can't set the time there (value will be set at 0f)

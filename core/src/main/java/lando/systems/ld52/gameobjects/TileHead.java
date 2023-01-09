@@ -99,6 +99,7 @@ public class TileHead extends TileObject {
         gameScreen.game.particles.bleed(tile.bounds.x + tile.bounds.width / 2, tile.bounds.y + tile.bounds.height / 2);
         gameScreen.screenShaker.addDamage(100f);
         gameScreen.audioManager.playSound(AudioManager.Sounds.soulReap, .5f);
+        gameScreen.score += 200;
         return true;
     }
 
