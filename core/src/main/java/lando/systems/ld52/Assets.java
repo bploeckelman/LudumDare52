@@ -225,6 +225,7 @@ public class Assets implements Disposable {
 
         smallFont = mgr.get("fonts/outfit-medium-20px.fnt");
         font      = mgr.get("fonts/outfit-medium-40px.fnt");
+        font.setUseIntegerPositions(false);
         largeFont = mgr.get("fonts/outfit-medium-80px.fnt");
 
         circleTex = atlas.findRegion("particles/circle");

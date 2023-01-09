@@ -3,6 +3,7 @@ package lando.systems.ld52;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -97,6 +98,7 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		//Gdx.input.setInputProcessor(inputMux);
 
 		screenManager.initialize(inputMux, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+		screenManager.addScreen("launch", new LaunchScreen());
 		screenManager.addScreen("title", new TitleScreen());
 		screenManager.addScreen("game", new GameScreen());
 		screenManager.addScreen("cutscene", new CutsceneScreen());
@@ -106,7 +108,11 @@ public class Main extends ManagedGame<BaseScreen, ScreenTransition> {
 		screenManager.addScreen("end-story", new EndStoryScreen());
 		TransitionManager.initialize(screenManager);
 
-		screenManager.pushScreen("title", TransitionManager.TransitionType.BLEND.name());
+		if (Gdx.app.getType() == Application.ApplicationType.WebGL) {
+			screenManager.pushScreen("launch", TransitionManager.TransitionType.BLEND.name());
+		} else {
+			screenManager.pushScreen("title", TransitionManager.TransitionType.BLEND.name());
+		}
 	}
 
 
