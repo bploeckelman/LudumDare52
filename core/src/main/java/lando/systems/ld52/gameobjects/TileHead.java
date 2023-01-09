@@ -121,9 +121,10 @@ public class TileHead extends TileObject {
         quotaListUI.setQuotas(heavenQuota, hellQuota);
 
         // add this head to the harvested ui
-        String afterlifeZone = "{GRADIENT=blue;gray}Destination{ENDGRADIENT}: {GRADIENT=gray;white}Purgatory{ENDGRADIENT}";
-        if      (heavenSatisfied) afterlifeZone = "{GRADIENT=black;gray}Destination{ENDGRADIENT}: {GRADIENT=sky;white}Heaven{ENDGRADIENT}";
-        else if (hellSatisfied)   afterlifeZone = "{GRADIENT=black;gray}Destination{ENDGRADIENT}: {GRADIENT=red;black}Hell{ENDGRADIENT}";
+        String afterlifeZone = "";
+        if      (heavenSatisfied) {afterlifeZone = "{GRADIENT=black;gray}Destination{ENDGRADIENT}: {GRADIENT=sky;white}Heaven{ENDGRADIENT}";}
+        else if (hellSatisfied) { afterlifeZone = "{GRADIENT=black;gray}Destination{ENDGRADIENT}: {GRADIENT=red;black}Hell{ENDGRADIENT}";}
+        else afterlifeZone = "{GRADIENT=blue;gray}Destination{ENDGRADIENT}: {GRADIENT=gray;white}Purgatory{ENDGRADIENT}";
 
         HarvestedSoulUI harvestedSoulUI = gameScreen.gameScreenUI.leftSideUI.harvestedSoulUI;
         harvestedSoulUI.setSoul(this, afterlifeZone);
