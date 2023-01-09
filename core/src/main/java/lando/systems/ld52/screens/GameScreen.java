@@ -220,7 +220,7 @@ public class GameScreen extends BaseScreen {
 
         playerUI.update(delta);
 
-
+        // TODO: remove me I am debug
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
             nextRound();
             return;
@@ -246,7 +246,7 @@ public class GameScreen extends BaseScreen {
                     particles.flyUp(assets.angel, bounds.getX() + bounds.width / 2, bounds.getY() + bounds.width / 2);
                 }
             }
-            score += 1000 + gameboard.getSecondsLeft() * 20;
+            score += 1000 + Math.pow(gameboard.getSecondsLeft(), 1.2) * 20;
             Stats.heavenQuotaMet++;
         } else if (hellQuota.isSatisfied()) {
             showToast("Hell's Quota: Fully Reaped!", ToastManager.UNTIL_CLOSED);
@@ -258,7 +258,7 @@ public class GameScreen extends BaseScreen {
                     particles.flyUp(assets.devil, bounds.getX() + bounds.width / 2, bounds.getY() + bounds.width / 2);
                 }
             }
-            score += 1000 + gameboard.getSecondsLeft() * 20;
+            score += 1000 + Math.pow(gameboard.getSecondsLeft(), 1.2) * 20;
             Stats.hellQuotaMet++;
         } else if (gameboard.getSecondsLeft() <= 0) {
             showToast("You failed to meet either quota!", ToastManager.UNTIL_CLOSED);
