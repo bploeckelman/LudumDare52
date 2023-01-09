@@ -133,8 +133,7 @@ public class IntroStoryScreen extends BaseScreen {
                         break;
                         case 7:
                         subtitles = "Ya know, I probably don't have to get ALL the souls on my list.\n\n" +
-                                "Maybe I just reap the ones who really stick out...\n\n" +
-                                "Enough to hit both quotas, get the boss to notice... Easy peasy.";
+                                "Enough to hit a quota, maybe get the boss to notice... Easy peasy.\n\n";
 
                         break;
                         case 8:

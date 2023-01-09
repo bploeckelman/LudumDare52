@@ -69,6 +69,7 @@ public class TitleScreen extends BaseScreen {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.PAGE_CURL.name());
+//            game.getScreenManager().pushScreen("end-story", TransitionManager.TransitionType.PAGE_CURL.name());
         }
     }
 

@@ -21,15 +21,15 @@ public class CreditScreen extends BaseScreen {
     private boolean exitingScreen = false;
     private final TextureRegion background;
 
-    private final String title = "{RAINBOW}Death Who?{ENDRAINBOW}";
+    private final String title = "{RAINBOW}Reapo Man: Death Who?{ENDRAINBOW}";
     private final String theme = "Made for Ludum Dare 52: Harvest";
 
     private final String thanks = "{GRADIENT=purple;cyan}Thanks for playing our game!{ENDGRADIENT}";
-    private final String developers = "{COLOR=gray}Developed by:{COLOR=white}\n {GRADIENT=white;gray}Brian Ploeckelman{ENDGRADIENT} \n {GRADIENT=white;gray}Doug Graham{ENDGRADIENT} \n {GRADIENT=white;gray}Brian Rossman{ENDGRADIENT} \n {GRADIENT=white;gray}Jeffrey Hwang{ENDGRADIENT}";
+    private final String developers = "{COLOR=gray}Development:{COLOR=white}\n {GRADIENT=white;gray}Brian Ploeckelman{ENDGRADIENT} \n {GRADIENT=white;gray}Doug Graham{ENDGRADIENT} \n {GRADIENT=white;gray}Brian Rossman{ENDGRADIENT} \n {GRADIENT=white;gray}Jeffrey Hwang{ENDGRADIENT}";
     private final String rossman = "{GRADIENT=gray;black}...also Brian Rossman\n(in our memories){ENDGRADIENT}";
-    private final String artists = "{COLOR=gray}Art by:{COLOR=white}\n {GRADIENT=white;gray}Matt Neumann{ENDGRADIENT}";
+    private final String artists = "{COLOR=gray}Art:{COLOR=white}\n {GRADIENT=white;gray}Matt Neumann{ENDGRADIENT}";
     private final String emotionalSupport = "{COLOR=cyan}Emotional Support:{COLOR=white}\n  Asuka, Osha,\n  Cherry,\n  Obi, Yoda";
-    private final String music = "{COLOR=gray}Sound by:{COLOR=white}\n {GRADIENT=white;gray}Pete Valeo{ENDGRADIENT}";
+    private final String music = "{COLOR=gray}Music, writing, & other stuff:{COLOR=white}\n {GRADIENT=white;gray}Pete Valeo{ENDGRADIENT}";
     private final String libgdx = "Made with {COLOR=red}<3{COLOR=white}\nand LibGDX";
     private final String disclaimer = "{GRADIENT=black;gray}Disclaimer:{ENDGRADIENT}  {GRADIENT=gold;yellow}{JUMP=.2}{WAVE=0.8;1.1;1.1}No moons were harvested in the making of this game{ENDWAVE}{ENDJUMP}{ENDGRADIENT}";
 

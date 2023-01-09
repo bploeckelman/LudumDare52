@@ -71,6 +71,7 @@ public class GameScreen extends BaseScreen {
         uiStage.addActor(gameScreenUI);
 
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
+        game.audioManager.playSound(AudioManager.Sounds.bell, .5f);
 
 
         tutorialManager = new TutorialManager();
@@ -189,6 +190,7 @@ public class GameScreen extends BaseScreen {
         game.getInputMultiplexer().addProcessor(uiStage);
 //        Gdx.app.log("currentMusicPositionGameScreenOnShow()", String.valueOf(Main.game.currentMusicPosition));
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
+        game.audioManager.playSound(AudioManager.Sounds.bell);
         currentMusic.setPosition(Main.game.currentMusicPosition);
         isFreshStart = false;
 //        currentMusic.setVolume(game.audioManager.musicVolume.floatValue());

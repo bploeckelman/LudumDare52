@@ -75,12 +75,12 @@ public class MidStoryScreen extends BaseScreen {
         game.audioManager.playMusic(AudioManager.Musics.mutedMainTheme);
         storyAccum = 0;
         phaseAccum = 0;
-        clickPhase = 0;
+        clickPhase = 1;
         isStoryOver = false;
         backgroundTexture = game.assets.cutsceneBackground;
         cutsceneTexture = game.assets.cutscene0;
         int displayNumber = getGameScreenRoundNumber() + 1;
-        subtitles = "Day " + displayNumber + " complete";
+        subtitles = "Day " + displayNumber + " complete. Phew! Long one.";
     }
 
     @Override
