@@ -94,9 +94,9 @@ public class EndStoryScreen extends BaseScreen {
             itemPosition.x = windowCamera.viewportWidth - 200;
             itemVelocity.x *= -1;
         }
-        if (itemPosition.y < 100){
+        if (itemPosition.y < 150){
             rotationDT = MathUtils.random(-45, 45);
-            itemPosition.y = 100;
+            itemPosition.y = 150;
             itemVelocity.y *= -1;
         }
         if (itemPosition.y > windowCamera.viewportHeight - 200){
@@ -190,7 +190,7 @@ public class EndStoryScreen extends BaseScreen {
             assets.largeFont.getData().setScale(.3f);
             assets.largeFont.setColor(whiteWithAlpha);
             assets.layout.setText(assets.largeFont, subtitles, whiteWithAlpha, camera.viewportWidth, Align.left, false);
-            assets.largeFont.draw(batch, assets.layout, 10, camera.viewportHeight / 7f + assets.layout.height);
+            assets.largeFont.draw(batch, assets.layout, 100, camera.viewportHeight / 7f + assets.layout.height);
             assets.largeFont.getData().setScale(1f);
             assets.largeFont.setColor(Color.WHITE);
 
