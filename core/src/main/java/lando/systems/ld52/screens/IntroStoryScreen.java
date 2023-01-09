@@ -29,6 +29,7 @@ public class IntroStoryScreen extends BaseScreen {
     private Color whiteWithAlpha;
     private boolean isStoryOver = false;
     private boolean isTutorialShown = false;
+    private String clickToAdvance;
 
     @Override
     protected void create() {
@@ -43,6 +44,7 @@ public class IntroStoryScreen extends BaseScreen {
         storyAccum = 0;
 
         subtitles = " ";
+        clickToAdvance = "(click to advance)";
         backgroundTexture = game.assets.cutsceneBackground;
         cutsceneTexture = game.assets.cutscene0;
 
@@ -71,11 +73,11 @@ public class IntroStoryScreen extends BaseScreen {
         super.update(delta);
         phaseAccum += delta;
 
-        if (((Gdx.input.justTouched() && phaseAccum > .2f) || phaseAccum > 7.25F)&& !isStoryOver) {
+        if (((Gdx.input.justTouched() && phaseAccum > .2f) || phaseAccum > .25F)&& !isStoryOver) {
 
-            storyAccum += delta * 10;
+            storyAccum += delta * 3;
 
-            if (((Gdx.input.justTouched() && phaseAccum > .2f) || phaseAccum > 6F) && !isStoryOver) {
+            if (((Gdx.input.justTouched() && phaseAccum > .2f)) && !isStoryOver) {
 
                 // todo cancel playing sounds
                 game.audioManager.stopAllSounds();
@@ -85,20 +87,39 @@ public class IntroStoryScreen extends BaseScreen {
 
                 switch (clickPhase) {
                     case 0:
-                        cutsceneTexture = game.assets.cutscene0;
-                        subtitles = "Another shitty work day";
+                        subtitles = "Another day, another shift at Reapo Depot...\n\n " +
+                        "Not the most satisfying job in the world, but hey - it's a living!\n\n";
                         break;
                     case 1:
-                        cutsceneTexture = game.assets.cutscene1;
-                        subtitles = "I can't wait till my stocks go up and quit this job. Let's get punched in.";
+                        cutsceneTexture = game.assets.cutscene0;
+                        subtitles =
+                                "Not a literal living, of course. \n\n" +
+                                "Very little of that going on here.\n\n";
                         break;
                     case 2:
-                        cutsceneTexture = game.assets.cutscene2;
-                        subtitles = "Let's check today's quota.";
+                        cutsceneTexture = game.assets.cutscene1;
+                        subtitles = "What we do, kind of the exact opposite, really. More like, un-living.\n\n" +
+                                "Unliving humans, that's the deal here.";
+
                         break;
                     case 3:
+                        cutsceneTexture = game.assets.cutscene2;
+
+
+                        subtitles = "Reaping, crossing over, harvesting souls... Doesn't really matter WHAT you call it. " +
+                                "Bottom line is, we got a lot of souls need be harvested these days. Too many, if you ask me.\n\n" +
+                                "How many people on Earth these days? Numbers we're seeing, must be two, three thousand at least, huh?";
+
+                        break;
+                    case 4:
                         cutsceneTexture = game.assets.cutscene3;
-                        subtitles = "Meh, same thing. Let's get this over with.";
+                        subtitles = "8 BILLION? Jeez. Okay\n\n"+
+                        "No wonder they've been \"encouraging\" us to work overtime.";
+                        break;
+                    case 5:
+                        cutsceneTexture = game.assets.cutscene3;
+                        subtitles = "Honestly, whole gig's wearing a bit thin if you ask me.\n\n"+
+                        "Honestly? I don't even ";
                         break;
                     default:
                         isStoryOver = true;
@@ -123,13 +144,19 @@ public class IntroStoryScreen extends BaseScreen {
         batch.begin();
         {
             batch.setColor(whiteWithAlpha);
-            batch.draw(backgroundTexture, 0, 150, windowCamera.viewportWidth, 600);
-            batch.draw(cutsceneTexture, windowCamera.viewportWidth / 2 - 500f / 2, 200f, 500f, 500f);
+            batch.draw(backgroundTexture, 0, 300, windowCamera.viewportWidth, 600);
+            batch.draw(cutsceneTexture, windowCamera.viewportWidth / 2 - 500f / 2, 220f, 500f, 500f);
 
-            assets.largeFont.getData().setScale(.4f);
+            assets.largeFont.getData().setScale(.3f);
             assets.largeFont.setColor(whiteWithAlpha);
-            assets.layout.setText(assets.largeFont, subtitles, whiteWithAlpha, camera.viewportWidth, Align.center, false);
-            assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight / 7f + assets.layout.height);
+            assets.layout.setText(assets.largeFont, subtitles, whiteWithAlpha, camera.viewportWidth, Align.left, true);
+            assets.largeFont.draw(batch, assets.layout, 120, camera.viewportHeight * .05f + assets.layout.height);
+
+            assets.largeFont.getData().setScale(.23f);
+            assets.largeFont.setColor(whiteWithAlpha);
+            assets.layout.setText(assets.largeFont, clickToAdvance, Color.DARK_GRAY, camera.viewportWidth, Align.right, true);
+            assets.largeFont.draw(batch, assets.layout, -20, camera.viewportHeight * .02f + assets.layout.height);
+
             assets.largeFont.getData().setScale(1f);
             assets.largeFont.setColor(Color.WHITE);
 

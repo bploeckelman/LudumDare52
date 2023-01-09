@@ -35,7 +35,7 @@ public class TileHead extends TileObject {
         Array<Feature> features = new Array<>();
         features.add(Feature.getFeature(tileData.clothes, Feature.Category.clothes));
         features.add(Feature.getFeature(tileData.eye, Feature.Category.eye));
-        features.add(Feature.getFeature(tileData.nose, Feature.Category.nose));
+//        features.add(Feature.getFeature(tileData.nose, Feature.Category.nose));
         features.add(Feature.getFeature(tileData.mouth, Feature.Category.mouth));
         features.add(Feature.getFeature(tileData.hair_face, Feature.Category.hair_face));
         features.add(Feature.getFeature(tileData.hair_head, Feature.Category.hair_head));

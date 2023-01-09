@@ -21,7 +21,9 @@ public enum Head {
       , b2 ("head-b-2")
       , b3 ("head-b-3")
       , b4 ("head-b-4")
+//      , skull ("skull")
       , blank ("head-blank")
+//      , blank ("skull")
 //    , ...
     ;
 

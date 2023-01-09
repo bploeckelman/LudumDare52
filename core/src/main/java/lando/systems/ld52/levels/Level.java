@@ -48,7 +48,7 @@ public class Level {
                     Quota.Source.heaven,
                     new PersonDto(1,
                             Feature.Category.eye,
-                            Feature.Category.nose,
+//                            Feature.Category.nose,
                             Feature.Category.mouth
                     )
             ),
