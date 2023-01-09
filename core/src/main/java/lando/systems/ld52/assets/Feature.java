@@ -151,6 +151,7 @@ public enum Feature {
             , "Tom Bones"
             , "Liam McPoyle"
             , "Big Richard"
+            , "Walter Heisenberg"
             , "Max Power"
             , "Tiny Tom"
             , "Urist Dwarvenson"
