@@ -38,6 +38,7 @@ public class Player implements GameObject {
     public int currentRow;
     // this is for rotating the sprite on side
     private float spriteRotation = 0;
+    private Vector2 floatOffset = new Vector2();
 
     public Player(Assets assets, GameBoard gameBoard) {
         playerWithScythe = assets.playerWithScythe;
@@ -52,6 +53,9 @@ public class Player implements GameObject {
 
     public void reset() {
         boardPosition = 0;
+        // hack because player starts on the left, so floats right,left before first moving,
+        // if starting on top side, harvestZone update causes arrayoutofbounds
+        gameBoard.cornerTransition = GameBoard.CornerTransition.top_left;
         _moveDirection = MoveDirection.clockwise;
         currentPlayerAnimation = playerWithScythe;
         _animTime = 0;
@@ -62,11 +66,13 @@ public class Player implements GameObject {
     @Override
     public void update(float dt) {
         _animTime += dt;
+        float offset = 3 * (float)Math.sin(_animTime * 15);
+        setOffset(offset);
+
         if (_animTime > _moveTime) {
             _animTime = 0;
             if (harvestZone.currentPhase == HarvestZone.HarvestPhase.cycle) {
                 movePlayer();
-
             }
         }
 
@@ -75,6 +81,26 @@ public class Player implements GameObject {
         currentPlayerAnimation = (harvestZone.currentPhase == HarvestZone.HarvestPhase.collection) ? playerNoScythe : playerWithScythe;
 
         _renderPosition.lerp(_nextPosition, dt * 10);
+    }
+
+    private void setOffset(float offset) {
+        float dx = 0, dy = 0;
+        switch (currentSide) {
+            case top:
+                dy = offset;
+                break;
+            case bottom:
+                dy = -offset;
+                break;
+            case left:
+                dx = offset;
+                break;
+            case right:
+                dx = -offset;
+                break;
+        }
+        floatOffset.set(dx, dy);
+
     }
 
     private void movePlayer() {
@@ -212,7 +238,7 @@ public class Player implements GameObject {
 
         TextureRegion playerImage = currentPlayerAnimation.getKeyFrame(_animTime);
         batch.draw(playerImage,
-                _renderPosition.x, _renderPosition.y,
+                _renderPosition.x + floatOffset.x, _renderPosition.y + floatOffset.y,
                 GameBoard.tileSize / 2, GameBoard.tileSize / 2,
                 GameBoard.tileSize- 15, GameBoard.tileSize -15,
                 1, 1, spriteRotation);
