@@ -13,7 +13,6 @@ import com.kotcrab.vis.ui.widget.toast.Toast;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.Main;
 import lando.systems.ld52.assets.Feature;
-import lando.systems.ld52.assets.Head;
 import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.data.RoundData;
 import lando.systems.ld52.data.TileData;
@@ -228,10 +227,14 @@ public class GameScreen extends BaseScreen {
             showToast("Heaven Quota: Fully Reaped!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = Quota.Source.heaven;
             quotaToastShown = true;
+            particles.flyUp(assets.angel, 350f, 300f);
+            particles.flyUp(assets.angel, 950f, 300f);
         } else if (hellQuota.isSatisfied()) {
             showToast("Hell's Quota: Fully Reaped!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = Quota.Source.hell;
             quotaToastShown = true;
+            particles.flyUp(assets.devil, 350f, 300f);
+            particles.flyUp(assets.devil, 950f, 300f);
         } else if (gameboard.getSecondsLeft() <= 0) {
             showToast("You've failed to meet quota!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = null;

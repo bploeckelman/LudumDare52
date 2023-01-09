@@ -94,18 +94,15 @@ public class Particles implements Disposable {
                 .init());
     }
 
-    public void heaven_sparkle(float x, float y) {
-        Animation<TextureRegion> animation = assets.effectAnims.get(EffectAnims.Type.sparkle);
-        tempColor.set(Color.YELLOW);
+    public void flyUp(Animation<TextureRegion> animation, float x, float y) {
         activeParticles.get(Layer.foreground).add(Particle.initializer(particlePool.obtain())
                 .animation(animation)
-                .startColor(tempColor)
                 .startAlpha(1f)
                 .endAlpha(1f)
-                .startSize(150f)
-                .timeToLive(animation.getAnimationDuration())
+                .startSize(50f)
+                .timeToLive(5f)
                 .startPos(x, y)
-                .velocityDirection(MathUtils.random(-90, 90), MathUtils.random(5, 10))
+                .velocityDirection(MathUtils.random(70, 110), MathUtils.random(100, 200))
                 .init());
     }
 

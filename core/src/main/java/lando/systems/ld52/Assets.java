@@ -61,6 +61,8 @@ public class Assets implements Disposable {
     public Animation<TextureRegion> tombstone;
     public Animation<TextureRegion> cornerIdle;
     public Animation<TextureRegion> cornerAction;
+    public Animation<TextureRegion> angel;
+    public Animation<TextureRegion> devil;
 
     public Array<Animation<TextureRegion>> numberParticles;
 
@@ -233,6 +235,8 @@ public class Assets implements Disposable {
         cat = new Animation<>(0.1f, atlas.findRegions("pets/cat"), Animation.PlayMode.LOOP);
         dog = new Animation<>(0.1f, atlas.findRegions("pets/dog"), Animation.PlayMode.LOOP);
         kitten = new Animation<>(.1f, atlas.findRegions("pets/kitten"), Animation.PlayMode.LOOP);
+        angel = new Animation<>(.1f, atlas.findRegions("particles/angels/angel"), Animation.PlayMode.LOOP);
+        devil = new Animation<>(.1f, atlas.findRegions("particles/devils/devil"), Animation.PlayMode.LOOP);
 
         cutsceneBackground = mgr.get("images/title-background_00.png");
         cutscene0 = mgr.get("images/cutscene_0.png");
