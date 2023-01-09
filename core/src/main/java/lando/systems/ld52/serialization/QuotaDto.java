@@ -3,9 +3,9 @@ package lando.systems.ld52.serialization;
 import lando.systems.ld52.gameobjects.Quota;
 
 public class QuotaDto {
-    private Quota.Source source;
+    public Quota.Source source;
 
-    private PersonDto[] people;
+    public PersonDto[] people;
 
     public QuotaDto() {}
 

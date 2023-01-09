@@ -19,6 +19,7 @@ import lando.systems.ld52.data.RoundData;
 import lando.systems.ld52.data.TileData;
 import lando.systems.ld52.data.TileType;
 import lando.systems.ld52.gameobjects.*;
+import lando.systems.ld52.levels.Level;
 import lando.systems.ld52.particles.Particles;
 import lando.systems.ld52.serialization.PersonDto;
 import lando.systems.ld52.serialization.QuotaDto;
@@ -92,8 +93,10 @@ public class GameScreen extends BaseScreen {
 
     public void setRound(int round) {
 
-        String dto = Gdx.files.internal("levels/level1.json").readString();
-        RoundDto roundDto = RoundDto.fromJson(dto);
+//        String dto = Gdx.files.internal("levels/level1.json").readString();
+//        RoundDto roundDto = RoundDto.fromJson(dto);
+
+        RoundDto roundDto = Level.getLevel(round);
 
         heavenQuota = new Quota(roundDto.getHeaven());
         hellQuota = new Quota(roundDto.getHell());
@@ -114,13 +117,10 @@ public class GameScreen extends BaseScreen {
 
         // TODO - to ensure random characters don't generate heaven/hell character
 
-        for (int i = 0; i < roundDto.tileDtos.length; i++) {
-            int x = i % GameBoard.gridSize;
-            int y = i / GameBoard.gridSize;
+        for (TileDto tileDto : roundDto.tileDtos) {
 
             TileData tileData = new TileData();
 
-            TileDto tileDto = roundDto.tileDtos[i];
             switch (tileDto.tileType) {
                 case obstacle:
                     tileData.type = TileType.obstacle;
@@ -143,7 +143,7 @@ public class GameScreen extends BaseScreen {
                     break;
             }
 
-            roundData.tileData[x][y] = tileData;
+            roundData.tileData[tileDto.x][tileDto.y] = tileData;
         }
 
         return roundData;

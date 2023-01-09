@@ -2,12 +2,19 @@ package lando.systems.ld52.serialization;
 
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
-import lando.systems.ld52.gameobjects.GameBoard;
 
 public class RoundDto {
-    private QuotaDto heaven;
-    private QuotaDto hell;
+    public QuotaDto heaven;
+    public QuotaDto hell;
     public TileDto[] tileDtos;
+
+    public RoundDto() {}
+
+    public RoundDto(QuotaDto heaven, QuotaDto hell, TileDto... tileDtos) {
+        this.heaven = heaven;
+        this.hell = hell;
+        this.tileDtos = tileDtos;
+    }
 
     public QuotaDto getHeaven() {
         return heaven;
