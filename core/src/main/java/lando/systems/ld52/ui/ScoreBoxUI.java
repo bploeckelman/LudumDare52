@@ -1,6 +1,7 @@
 package lando.systems.ld52.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisWindow;
@@ -13,11 +14,11 @@ public class ScoreBoxUI extends VisWindow {
     public ScoreBoxUI() {
         super("");
         setTouchable(Touchable.disabled);
-        setBackground(Assets.Patch.metal.drawable);
-        VisLabel label = new VisLabel("Score Box");
+        setBackground(new NinePatchDrawable(Assets.NinePatches.plain_gradient));
+        VisLabel label = new VisLabel("Score", "outfit-medium-20px");
         add(label).align(Align.top);
         row();
-        scoreLabel = new VisLabel("0");
+        scoreLabel = new VisLabel("0", "outfit-medium-20px");
         add(scoreLabel).align(Align.center);
     }
 
