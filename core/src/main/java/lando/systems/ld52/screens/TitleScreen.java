@@ -72,10 +72,10 @@ public class TitleScreen extends BaseScreen {
         if (!cat.isFlipX()) cat.flip(true, false);
         if (!kitten.isFlipX()) kitten.flip(true, false);
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            game.getScreenManager().pushScreen("end-story", TransitionManager.TransitionType.PAGE_CURL.name());
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
 //            game.getScreenManager().pushScreen("end-story", TransitionManager.TransitionType.PAGE_CURL.name());
-        }
+////            game.getScreenManager().pushScreen("end-story", TransitionManager.TransitionType.PAGE_CURL.name());
+//        }
     }
 
     @Override
