@@ -13,6 +13,8 @@ import lando.systems.ld52.utils.Coord;
 
 public class Tile {
 
+    private final Assets assets;
+
     public Coord coord;
     public Rectangle bounds;
     public TileObject object;
@@ -22,6 +24,7 @@ public class Tile {
     public Color color;
 
     public Tile(Assets assets, int x, int y, float tileSize, GameBoard board, TileData tileData) {
+        this.assets = assets;
         texture = assets.atlas.findRegion("tiles/tile");
         coord = Coord.at(x, y);
         bounds = new Rectangle(
@@ -33,7 +36,7 @@ public class Tile {
 
         switch (tileData.type) {
             case obstacle:
-                object = new TileTombstone(assets, this);
+                object = new TileBoulder(assets, this);
                 break;
             case character:
                 object = new TileHead(assets, this, tileData);
@@ -67,8 +70,12 @@ public class Tile {
     public void collect(GameScreen gameScreen) {
         if (object != null) {
             object.collect(gameScreen);
-            // TODO: remove me when we actually do things
-            object = null;
+            if (object instanceof TileHead) {
+                // create a tombstone in their place
+                object = new TileTombstone(assets, this);
+            } else {
+                object = null;
+            }
         }
     }
 

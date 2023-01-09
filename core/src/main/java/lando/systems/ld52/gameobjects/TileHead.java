@@ -19,6 +19,7 @@ import lando.systems.ld52.ui.QuotaListUI;
 
 public class TileHead extends TileObject {
 
+    private final Assets assets;
     private float stateTime;
 
     public final Head head;
@@ -27,6 +28,7 @@ public class TileHead extends TileObject {
 
     public TileHead(Assets assets, Tile tile, TileData tileData) {
         super(tile);
+        this.assets = assets;
         stateTime = 0f;
 
         head = Head.getRandom();

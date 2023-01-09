@@ -23,7 +23,7 @@ public class HarvestZone {
 
     public enum HarvestPhase { cycle, golf, collection}
 
-    private static final float golfIndicatorSize = 25f;
+    private static final float golfIndicatorSize = 50f;
     private static final float golfMaxTime = .215f; // Time it takes to go one tile
     private static final int tilesStart = 3;
     private final Interpolation golfInterpolation = Interpolation.slowFast;
