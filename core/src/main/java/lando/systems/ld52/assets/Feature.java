@@ -61,7 +61,7 @@ public enum Feature {
     , hair_leia (Category.hair_head, "hair-leia-brown", "Princess Buns", "Aren't you a little short for a reaper?")
 //    , hair_long_blue (Category.hair_head, "hair-long-blue", "Long Blue")
 //    , hair_long_darkteal (Category.hair_head, "hair-long-darkteal", "Long Teal")
-    , hair_manbun (Category.hair_head, "hair-manbun", "Man-bun (ew)","Manbun? Christ. \n\nI hope he won't miss kombucha")
+    , hair_manbun (Category.hair_head, "hair-manbun", "Man-bun (ew)","Manbun? Christ.\nI hope he won't miss kombucha")
     , hair_mohawk_blue (Category.hair_head, "hair-mohawk-blue", "Blue Hawk", "Mohawk? Guess it's Skate AND Die!")
 //    , hair_mohawk_green (Category.hair_head, "hair-mohawk-green", "Green Hawk")
     , hair_mohawk_red (Category.hair_head, "hair-mohawk-red", "Red Hawk", "Mohawk? Guess it's Skate AND Die!")
