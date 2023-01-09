@@ -15,7 +15,7 @@ public class TransitionManager {
     private static final String BUILT_IN_TRANSITION = "built-in";
 
     public enum TransitionType {
-          PAGE_CURL        (0.5f, "shaders/gl-transitions/page-curl.frag")
+          PAGE_CURL        (1.5f, "shaders/gl-transitions/page-curl.frag")
         , CIRCLE_CROP      (1.5f, "shaders/gl-transitions/circle-crop.frag")
         , DIRECTIONAL_WARP (1.5f, "shaders/gl-transitions/directional-warp.frag")
         , COLOUR_DISTANCE  (1.5f, "shaders/gl-transitions/colour-distance.frag")

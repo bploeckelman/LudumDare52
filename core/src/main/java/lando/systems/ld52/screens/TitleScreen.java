@@ -132,7 +132,7 @@ public class TitleScreen extends BaseScreen {
                 if (!gameScreen.isFreshStart) {
                     gameScreen.resetGame();
                 }
-                game.getScreenManager().pushScreen("intro-story", TransitionManager.TransitionType.CROSSHATCH.name());
+                game.getScreenManager().pushScreen("intro-story", TransitionManager.TransitionType.DIRECTIONAL_WARP.name());
             }
         });
 

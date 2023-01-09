@@ -43,6 +43,7 @@ public class HarvestZone {
     private int scytheSpinTimeMultiplier;
     private ShaderProgram harvestShader;
     private TextureRegion texture;
+    public float throwCooldown;
 
     public HarvestZone(Player player) {
         this.player = player;
@@ -55,9 +56,11 @@ public class HarvestZone {
         touchLastFrame = false;
         harvestShader = player.gameBoard.screen.assets.harvestShader;
         this.texture = new TextureRegion(player.gameBoard.screen.assets.pixel);
+        this.throwCooldown = .1f;
     }
 
     public void update(float dt) {
+        throwCooldown = Math.max(throwCooldown - dt, 0);
         handleInput();
         currentPathLength = tilesLong;
         // TODO: if hits something along the way, change currentPathLength
@@ -178,7 +181,7 @@ public class HarvestZone {
 
     public void handleInput() {
         // don't remove this
-        if (player.inCorner()) { return; }
+        if (player.inCorner() || throwCooldown > 0) { return; }
 
         // TODO: remove this before release
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
@@ -256,6 +259,7 @@ public class HarvestZone {
                         .push(Tween.call((type, source) -> {
                             currentPhase = HarvestPhase.cycle;
                             tileToHarvest = null;
+                            throwCooldown = .75f;
                             game.audioManager.stopSound(AudioManager.Sounds.swoosh1);
                         }))
                         .start(game.tween);
