@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.kotcrab.vis.ui.util.ToastManager;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
@@ -227,15 +228,23 @@ public class GameScreen extends BaseScreen {
             showToast("Heaven Quota: Fully Reaped!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = Quota.Source.heaven;
             quotaToastShown = true;
-            particles.flyUp(assets.angel, 350f, 300f);
-            particles.flyUp(assets.angel, 950f, 300f);
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 6; j++) {
+                    Rectangle bounds = gameboard.tiles[i][j].bounds;
+                    particles.flyUp(assets.angel, bounds.getX() + bounds.width / 2, bounds.getY() + bounds.width / 2);
+                }
+            }
             score += 1000 + gameboard.getSecondsLeft() * 20;
         } else if (hellQuota.isSatisfied()) {
             showToast("Hell's Quota: Fully Reaped!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = Quota.Source.hell;
             quotaToastShown = true;
-            particles.flyUp(assets.devil, 350f, 300f);
-            particles.flyUp(assets.devil, 950f, 300f);
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 6; j++) {
+                    Rectangle bounds = gameboard.tiles[i][j].bounds;
+                    particles.flyUp(assets.devil, bounds.getX() + bounds.width / 2, bounds.getY() + bounds.width / 2);
+                }
+            }
             score += 1000 + gameboard.getSecondsLeft() * 20;
         } else if (gameboard.getSecondsLeft() <= 0) {
             showToast("You've failed to meet quota!", ToastManager.UNTIL_CLOSED);
