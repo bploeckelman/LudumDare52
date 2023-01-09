@@ -17,7 +17,6 @@ public class Player implements GameObject {
     }
 
     public enum Side { top, right, bottom, left}
-    public boolean visible;
 
     public final GameBoard gameBoard;
     private final Animation<TextureRegion> _front;
@@ -51,7 +50,6 @@ public class Player implements GameObject {
         _scythe = assets.playerScythe;
 
         this.gameBoard = gameBoard;
-        visible = true;
 
         reset();
         this.harvestZone = new HarvestZone(this);
@@ -92,14 +90,40 @@ public class Player implements GameObject {
         //     5   4
 
         int perimeterTiles = GameBoard.gridSize * 4;
-        boardPosition += increment;
-        if (boardPosition == -1) {
-            boardPosition += perimeterTiles;
-        } else if (boardPosition == perimeterTiles) {
-            boardPosition = 0;
+
+        // this is getting crazy, but I'm too lazy to simplify - add another variable
+        int previousSide = boardPosition / GameBoard.gridSize;
+
+        if (!inCorner()) {
+            boardPosition += increment;
+            if (boardPosition == -1) {
+                boardPosition += perimeterTiles;
+            } else if (boardPosition == perimeterTiles) {
+                boardPosition = 0;
+            }
+        }
+        int side = boardPosition / GameBoard.gridSize;
+
+        if (previousSide != side) {
+            switch (side) {
+                case 1:
+                    gameBoard.cornerTransition = GameBoard.CornerTransition.top_right;
+                    break;
+                case 2:
+                    gameBoard.cornerTransition = GameBoard.CornerTransition.bottom_right;
+                    break;
+                case 3:
+                    gameBoard.cornerTransition = GameBoard.CornerTransition.bottom_left;
+                    break;
+                default:
+                    gameBoard.cornerTransition = GameBoard.CornerTransition.top_left;
+                    break;
+            }
+            // set corner transition
+            return;
         }
 
-        if (boardPosition < GameBoard.gridSize){
+        if (boardPosition < GameBoard.gridSize) {
             currentRow = GameBoard.gridSize;
             currentCol = boardPosition;
         } else if (boardPosition < GameBoard.gridSize * 2) {
@@ -113,8 +137,6 @@ public class Player implements GameObject {
             currentRow = boardPosition - (GameBoard.gridSize *3);
         }
 
-        Side previousSide = currentSide;
-        int side = boardPosition / GameBoard.gridSize;
         flipped = false;
         switch (side) {
             case 1: // right
@@ -136,7 +158,14 @@ public class Player implements GameObject {
                 currentSide = Side.top;
                 break;
         }
-        setPosition(false);
+
+        // last 'move' was in the corner
+        if (inCorner()) {
+            gameBoard.cornerTransition = GameBoard.CornerTransition.none;
+            setPosition(true);
+        } else {
+            setPosition(false);
+        }
         game.audioManager.playSound(AudioManager.Sounds.clock, .35f);
     }
 
@@ -184,7 +213,7 @@ public class Player implements GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        if (!visible) return;
+        if (gameBoard.cornerTransition != GameBoard.CornerTransition.none) return;
 
         float xScale = flipped ? -1 : 1;
 
@@ -213,5 +242,9 @@ public class Player implements GameObject {
                 GameBoard.tileSize / 2, 0,
                 GameBoard.tileSize, GameBoard.tileSize,
                 xScale, 1, 0);
+    }
+
+    public boolean inCorner() {
+        return gameBoard.cornerTransition != GameBoard.CornerTransition.none;
     }
 }

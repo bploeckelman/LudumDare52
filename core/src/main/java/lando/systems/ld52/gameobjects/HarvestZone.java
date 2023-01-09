@@ -146,6 +146,9 @@ public class HarvestZone {
     }
 
     public void handleInput() {
+        // don't remove this
+        if (player.inCorner()) { return; }
+
         // TODO: remove this before release
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             adjustRange(1);
