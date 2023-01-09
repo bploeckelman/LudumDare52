@@ -247,6 +247,7 @@ public class GameScreen extends BaseScreen {
                 }
             }
             score += 1000 + gameboard.getSecondsLeft() * 20;
+            Stats.heavenQuotaMet++;
         } else if (hellQuota.isSatisfied()) {
             showToast("Hell's Quota: Fully Reaped!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = Quota.Source.hell;
@@ -258,10 +259,12 @@ public class GameScreen extends BaseScreen {
                 }
             }
             score += 1000 + gameboard.getSecondsLeft() * 20;
+            Stats.hellQuotaMet++;
         } else if (gameboard.getSecondsLeft() <= 0) {
             showToast("You failed to meet either quota!", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = null;
             quotaToastShown = true;
+            Stats.noQuotaMet++;
         }
 
         gameboard.update(delta);

@@ -5,4 +5,5 @@ public class Stats {
     public static float timeTaken = 0;
     public static int heavenQuotaMet = 0;
     public static int hellQuotaMet = 0;
+    public static int noQuotaMet = 0;
 }
