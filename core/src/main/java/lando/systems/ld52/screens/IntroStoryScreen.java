@@ -88,7 +88,7 @@ public class IntroStoryScreen extends BaseScreen {
 
                 switch (clickPhase) {
                     case 0:
-                        subtitles = "Another day, another shift at Reapo Depot...\n\n " +
+                        subtitles = "Another day, another shift at Reapo Depot...\n\n" +
                         "Not the most satisfying job in the world, but hey - it's a living!\n\n";
                         break;
                     case 1:
@@ -100,14 +100,14 @@ public class IntroStoryScreen extends BaseScreen {
                     case 2:
                         cutsceneTexture = game.assets.cutscene1;
                         subtitles = "What we do, kind of the exact opposite, really. More like, un-living.\n\n" +
-                                "Unliving humans, that's the deal here.";
+                                "Unliving humans, that's the deal here.\n\n";
 
                         break;
                     case 3:
                         cutsceneTexture = game.assets.cutscene2;
 
 
-                        subtitles = " Reaping, crossing over, ferrying spirits... Doesn't really matter WHAT you call it.\n\n " +
+                        subtitles = "Reaping, crossing over, ferrying spirits... Doesn't really matter WHAT you call it.\n\n" +
                                 "Bottom line, lot of souls need to be harvested these days. \n\n" +
                                 "Too many, if you ask me."
                                ;
@@ -117,7 +117,7 @@ public class IntroStoryScreen extends BaseScreen {
                         cutsceneTexture = game.assets.cutscene2;
 
 
-                        subtitles = "How many people we got on Earth these days, anyway? " +
+                        subtitles = "How many people we got on Earth these days, anyway? \n\n" +
                                     "Seven, eight thousand?\n\n";
 
                         break;

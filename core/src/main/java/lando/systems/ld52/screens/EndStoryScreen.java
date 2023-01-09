@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
-import lando.systems.ld52.audio.AudioManager;
 import lando.systems.ld52.ui.SettingsUI;
 
 public class EndStoryScreen extends BaseScreen {
@@ -104,10 +103,10 @@ public class EndStoryScreen extends BaseScreen {
         batch.begin();
         {
             batch.setColor(whiteWithAlpha);
-            batch.draw(backgroundTexture, 0, 150, windowCamera.viewportWidth, 600);
+            batch.draw(backgroundTexture, 0, 200, windowCamera.viewportWidth, 800);
             batch.draw(cutsceneTexture, windowCamera.viewportWidth / 2 - 500f / 2, 200f, 500f, 500f);
 
-            assets.largeFont.getData().setScale(.4f);
+            assets.largeFont.getData().setScale(.3f);
             assets.largeFont.setColor(whiteWithAlpha);
             assets.layout.setText(assets.largeFont, subtitles, whiteWithAlpha, camera.viewportWidth, Align.center, false);
             assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight / 7f + assets.layout.height);
