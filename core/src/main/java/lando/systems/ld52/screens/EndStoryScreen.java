@@ -44,6 +44,7 @@ public class EndStoryScreen extends BaseScreen {
     private float chairRotation = 20;
 
 
+
     @Override
     protected void create() {
         super.create();
@@ -194,10 +195,12 @@ public class EndStoryScreen extends BaseScreen {
             if (Stats.numHeavenQuotasMet > Stats.numHellQuotasMet) {
                 assets.layout.setText(assets.largeFont, "HEAVEN", whiteWithAlpha, camera.viewportWidth, Align.center, false);
                 assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
+                backgroundTexture = assets.heavenBackground;
             }
             else if (Stats.numHeavenQuotasMet < Stats.numHellQuotasMet) {
                 assets.layout.setText(assets.largeFont, "HELL", whiteWithAlpha, camera.viewportWidth, Align.center, false);
                 assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
+                backgroundTexture = assets.cutsceneBackground;
             }
             else if (Stats.numHeavenQuotasMet == Stats.numHellQuotasMet) {
                 assets.layout.setText(assets.largeFont, "PURGATORY", whiteWithAlpha, camera.viewportWidth, Align.center, false);
