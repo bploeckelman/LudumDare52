@@ -56,10 +56,11 @@ public class MidStoryScreen extends BaseScreen {
         };
     }
 
-    public void prepUpGameScreen() {
+    public void prepUpGameScreenAndTransition() {
         //prep up the gamescreen
         GameScreen gameScreen = (GameScreen) game.getScreenManager().getScreen("game");
         gameScreen.nextRound();
+        game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.CROSSHATCH.name());
     }
 
     public int getGameScreenRoundNumber() {
@@ -123,8 +124,7 @@ public class MidStoryScreen extends BaseScreen {
                         break;
                     default:
                         isStoryOver = true;
-                        prepUpGameScreen();
-                        game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.CROSSHATCH.name());
+                        prepUpGameScreenAndTransition();
                         break;
                 }
                 clickPhase++;
@@ -187,8 +187,7 @@ public class MidStoryScreen extends BaseScreen {
         startGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                prepUpGameScreen();
-                game.getScreenManager().pushScreen("game", TransitionManager.TransitionType.CROSSHATCH.name());
+                prepUpGameScreenAndTransition();
             }
         });
         uiStage.addActor(startGameButton);
