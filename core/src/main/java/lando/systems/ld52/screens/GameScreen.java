@@ -1,18 +1,13 @@
 package lando.systems.ld52.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.util.ToastManager;
-import com.kotcrab.vis.ui.widget.VisLabel;
-import com.kotcrab.vis.ui.widget.VisTable;
-import com.kotcrab.vis.ui.widget.toast.Toast;
 import lando.systems.ld52.Assets;
 import lando.systems.ld52.Config;
 import lando.systems.ld52.Main;
@@ -280,6 +275,12 @@ public class GameScreen extends BaseScreen {
             showToast("Neither quota fulfilled.\n\nDisappointing, but not surprising.", ToastManager.UNTIL_CLOSED);
             Stats.last_quota_reached = null;
             quotaToastShown = true;
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 6; j++) {
+                    Rectangle bounds = gameboard.tiles[i][j].bounds;
+                    particles.flyUp(assets.beer, bounds.getX() + bounds.width / 2, bounds.getY() + bounds.width / 2);
+                }
+            }
             Stats.noQuotaMet++;
         }
 
