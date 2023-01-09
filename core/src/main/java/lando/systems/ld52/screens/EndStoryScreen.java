@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -27,7 +28,17 @@ public class EndStoryScreen extends BaseScreen {
     private Color whiteWithAlpha;
     private boolean isStoryOver = false;
     private boolean showBeer = false;
-    private float beerCount = 50;
+    private float rotationDT;
+    private Vector2 tvPos = new Vector2(900, 200);
+    private Vector2 tvVelocity = new Vector2(-0.5f, 0.5f);
+    private float tvRotation = 15;
+    private Vector2 sixPackPos = new Vector2(245, 200);
+    private Vector2 sixPackVelocity = new Vector2(-1.5f, -1.5f);
+    private float sixPackRotation = 25;
+    private Vector2 chairPos = new Vector2(50, 200);
+    private Vector2 chairVelocity = new Vector2(2f, 2f);
+    private float chairRotation = 20;
+
 
     private float y = 10;
 
@@ -40,7 +51,7 @@ public class EndStoryScreen extends BaseScreen {
         whiteWithAlpha = new Color(Color.WHITE);
         clickPhase = 0;
         phaseAccum = 0;
-
+        rotationDT = MathUtils.random(-45, 45);
         storyAccum = 0;
 
         subtitles = "Finally! Time to kick back and relax!";
@@ -68,9 +79,38 @@ public class EndStoryScreen extends BaseScreen {
         game.getInputMultiplexer().removeProcessor(uiStage);
     }
 
+    private float rotationCalc(Vector2 itemPosition, Vector2 itemVelocity, float itemRotation, float delta) {
+        Gdx.app.log("rotation", "before: " + itemRotation + " dt: " + rotationDT);
+        itemRotation += rotationDT * delta;
+        Gdx.app.log("rotation", "after: " + itemRotation + " dt: " + rotationDT);
+        itemPosition.add(itemVelocity.x * delta * 100, itemVelocity.y * delta * 100);
+        if (itemPosition.x < 0){
+            rotationDT = MathUtils.random(-45, 45);
+            itemPosition.x = 0;
+            itemVelocity.x *= -1;
+        }
+        if (itemPosition.x > windowCamera.viewportWidth - 200){
+            rotationDT = MathUtils.random(-45, 45);
+            itemPosition.x = windowCamera.viewportWidth - 200;
+            itemVelocity.x *= -1;
+        }
+        if (itemPosition.y < 100){
+            rotationDT = MathUtils.random(-45, 45);
+            itemPosition.y = 100;
+            itemVelocity.y *= -1;
+        }
+        if (itemPosition.y > windowCamera.viewportHeight - 200){
+            rotationDT = MathUtils.random(-45, 45);
+            itemPosition.y = windowCamera.viewportHeight - 200;
+            itemVelocity.y *= -1;
+        }
+        return itemRotation;
+    }
+
     @Override
     public void update(float delta) {
         super.update(delta);
+
         phaseAccum += delta;
 
         if (((Gdx.input.justTouched() && phaseAccum > .2f) || phaseAccum > 7.25F)&& !isStoryOver) {
@@ -113,23 +153,32 @@ public class EndStoryScreen extends BaseScreen {
             batch.setColor(whiteWithAlpha);
             if (Stats.heavenQuotaMet == Stats.hellQuotaMet) {
                 batch.draw(Utils.getColoredTextureRegion(Color.GRAY), 0, 200, windowCamera.viewportWidth, 800);
-                assets.layout.setText(assets.largeFont, "PURGATORY", whiteWithAlpha, camera.viewportWidth, Align.left, false);
-                assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
             } else {
                 batch.draw(backgroundTexture, 0, 200, windowCamera.viewportWidth, 800);
+            }
+//            batch.draw(assets.chair, 50, 200, 200f, 200f);
+            chairRotation = rotationCalc(chairPos, chairVelocity, chairRotation, delta);
+            batch.draw(assets.chair, chairPos.x, chairPos.y, assets.chair.getRegionWidth() / 2, assets.chair.getRegionHeight() / 2, 200, 200, 1, 1, chairRotation);
+            //batch.draw(assets.beerPack, 245, 200, 100f, 100f);
+            sixPackRotation = rotationCalc(sixPackPos, sixPackVelocity, sixPackRotation, delta);
+            batch.draw(assets.beerPack, sixPackPos.x, sixPackPos.y, 100f, 100f, 100, 100, 1, 1, sixPackRotation);
+            tvRotation = rotationCalc(tvPos, tvVelocity, tvRotation, delta);
+            if (clickPhase < 1) {
+//                batch.draw(assets.tvOff, 900, 200, 300f, 300f);
+                batch.draw(assets.tvOff, tvPos.x, tvPos.y, 100f, 100f, 300, 300, 1, 1, tvRotation);
+            } else {
+//                batch.draw(assets.tvOn.getKeyFrame(phaseAccum), 900, 200, 300f, 300f);
+                batch.draw(assets.tvOn.getKeyFrame(phaseAccum), tvPos.x, tvPos.y, 100f, 100f, 300, 300, 1, 1, tvRotation);
             }
             if (Stats.heavenQuotaMet > Stats.hellQuotaMet) {
                 batch.draw(assets.halo.getKeyFrame(phaseAccum), 240, 400, 200, 300);
             } else if (Stats.heavenQuotaMet < Stats.hellQuotaMet) {
                 batch.draw(assets.horns.getKeyFrame(phaseAccum), 240, 400, 200, 325);
             }
-            batch.draw(assets.chair, 50, 200, 200f, 200f);
             batch.draw(assets.playerNoScythe.getKeyFrame(phaseAccum), 250, 300, 250f, 250f);
-            batch.draw(assets.beerPack, 245, 200, 100f, 100f);
-            if (clickPhase < 1) {
-                batch.draw(assets.tvOff, 900, 200, 300f, 300f);
-            } else {
-                batch.draw(assets.tvOn.getKeyFrame(phaseAccum), 900, 200, 300f, 300f);
+            if (Stats.heavenQuotaMet == Stats.hellQuotaMet) {
+                assets.layout.setText(assets.largeFont, "PURGATORY", whiteWithAlpha, camera.viewportWidth, Align.center, false);
+                assets.largeFont.draw(batch, assets.layout, 0, camera.viewportHeight * 6 / 7f + assets.layout.height);
             }
             if (showBeer) {
                 for (int i = 0; i < 400; i++) {
