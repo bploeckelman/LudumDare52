@@ -126,6 +126,10 @@ public class TitleScreen extends BaseScreen {
             public void clicked(InputEvent event, float x, float y) {
                 game.audioManager.stopAllSounds();
                 exiting = true;
+                GameScreen gameScreen = (GameScreen) game.getScreenManager().getScreen("game");
+                if (!gameScreen.isFreshStart) {
+                    gameScreen.resetGame();
+                }
                 game.getScreenManager().pushScreen("intro-story", TransitionManager.TransitionType.CROSSHATCH.name());
             }
         });

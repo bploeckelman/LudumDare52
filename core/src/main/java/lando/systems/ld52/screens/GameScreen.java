@@ -41,6 +41,7 @@ public class GameScreen extends BaseScreen {
     public Quota heavenQuota;
     public Quota hellQuota;
     private boolean quotaToastShown;
+    public boolean isFreshStart = true;
 
     @Override
     protected void create() {
@@ -79,6 +80,11 @@ public class GameScreen extends BaseScreen {
             _roundNumber = 0;
         }
         setRound(_roundNumber);
+    }
+
+    public void resetGame() {
+        _roundNumber = 0;
+        setRound(0);
     }
 
     public void setRound(int round) {
@@ -186,6 +192,7 @@ public class GameScreen extends BaseScreen {
 //        Gdx.app.log("currentMusicPositionGameScreenOnShow()", String.valueOf(Main.game.currentMusicPosition));
         currentMusic = game.audioManager.playMusic(AudioManager.Musics.mainTheme);
         currentMusic.setPosition(Main.game.currentMusicPosition);
+        isFreshStart = false;
 //        currentMusic.setVolume(game.audioManager.musicVolume.floatValue());
     }
 
