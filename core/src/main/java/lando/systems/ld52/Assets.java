@@ -50,6 +50,7 @@ public class Assets implements Disposable {
     public TextureRegion circleTex;
     public TextureRegion pixelRegion;
     public TextureRegion hourglassTex;
+    public TextureRegion skull;
 
     public Animation<TextureRegion> cherry;
     public Animation<TextureRegion> asuka;
@@ -248,6 +249,7 @@ public class Assets implements Disposable {
         cutscene1 = mgr.get("images/cutscene_1.png");
         cutscene2 = mgr.get("images/cutscene_2.png");
         cutscene3 = mgr.get("images/cutscene_3.png");
+        skull = atlas.findRegion("skull", 0);
 
         playerWithScythe = new Animation<>(.2f, atlas.findRegions("player/reapo-idle-a"), Animation.PlayMode.LOOP);
         playerNoScythe = new Animation<>(.2f, atlas.findRegions("player/reapo-idle-noweapon"), Animation.PlayMode.LOOP);
