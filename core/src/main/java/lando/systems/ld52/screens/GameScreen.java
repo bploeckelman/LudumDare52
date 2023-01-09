@@ -85,9 +85,7 @@ public class GameScreen extends BaseScreen {
         return _roundNumber;
     }
     public void nextRound() {
-        if (++_roundNumber >= MAX_ROUND_NUMBER) {
-            _roundNumber = 0;
-        }
+        _roundNumber++;
         setRound(_roundNumber);
     }
 
@@ -239,10 +237,10 @@ public class GameScreen extends BaseScreen {
 
 
         if (quotaToastShown) {
-            if (Gdx.input.isTouched() && _roundNumber < MAX_ROUND_NUMBER) {
+            if (Gdx.input.isTouched() && _roundNumber < MAX_ROUND_NUMBER - 1) {
                 game.getScreenManager().pushScreen("mid-story", TransitionManager.getRandomTransition().name());
             }
-            else if (Gdx.input.isTouched() && _roundNumber >= MAX_ROUND_NUMBER) {
+            else if (Gdx.input.isTouched() && _roundNumber >= MAX_ROUND_NUMBER - 1) {
                 game.getScreenManager().pushScreen("end-story", TransitionManager.getRandomTransition().name());
             }
             return;
