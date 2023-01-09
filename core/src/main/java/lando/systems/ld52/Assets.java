@@ -107,6 +107,8 @@ public class Assets implements Disposable {
 
     public ShaderProgram hourglassShader;
     public ShaderProgram harvestShader;
+    public ShaderProgram cityShader;
+    public ShaderProgram cityShader2;
 
     public enum Patch {
         debug, panel, metal, glass,
@@ -249,6 +251,9 @@ public class Assets implements Disposable {
 
         hourglassShader = loadShader("shaders/default.vert", "shaders/hourglass.frag");
         harvestShader = loadShader("shaders/default.vert", "shaders/harvest.frag");
+        cityShader = loadShader("shaders/standard.vert", "shaders/city_descent.frag");
+        cityShader2 = loadShader("shaders/standard.vert", "shaders/city3.frag");
+
 
         gameScreenLayout = mgr.get("images/layout-alpha-1.png", Texture.class);
 
