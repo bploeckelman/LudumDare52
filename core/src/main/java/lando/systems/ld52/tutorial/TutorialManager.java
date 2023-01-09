@@ -15,7 +15,7 @@ public class TutorialManager {
     String explainPlayer =
             "REMINDER: \nAs a trusted member of the Reapo Depot family, you are expected to harvest your assigned souls in a timely fashion. \n\n";
     String explainQuotas = "REMINDER: \nYour daily quotas will appear in the upper right portion of your screen.\n\n" +
-            "You are required to harvest at least ONE soul from your assigned Heaven OR Hell quota during your shift.\n\n" +
+            "You are required to harvest all souls from your assigned Heaven OR Hell quota during your shift.\n\n" +
             "You are encouraged to harvest as many souls as possible during your shift, but your assigned soul must be reaped before the end of each day.\n\n" +
             "Your shift will end upon successful harvest of the day's Heaven or Hell quota.";
     String explainBoard = "REMINDER: \nClick and hold to engage your scythe's harvest mode. \n\n" +
