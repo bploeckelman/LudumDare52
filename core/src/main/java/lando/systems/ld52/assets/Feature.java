@@ -39,7 +39,7 @@ public enum Feature {
 
 //    , tongue           (Category.mouth,     "tongue",          "Tongue")
     , lips_blue           (Category.mouth,     "mouth-lips-blue",          "Blue Lips", "Man - blue lips make me uncomfortable. Not natural.")
-    , lips_green           (Category.mouth,     "mouth-lips-green",          "Green Lips", "This lipstick is *extremely* unpleasant. \n\nGood.")
+    , lips_green           (Category.mouth,     "mouth-lips-green",          "Green Lips", "This lipstick is *extremely* unpleasant.")
     , lips_red           (Category.mouth,     "mouth-lips-red",          "Red Lips", "Strong \"Rocky Horror intro\" vibes from these lips.")
     , lips_plain           (Category.mouth,     "mouth-lips-plain",          "Plain Lips", "Hey, it's a normal-looking mouth for once!")
 

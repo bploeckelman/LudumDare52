@@ -268,14 +268,14 @@ public class EndStoryScreen extends BaseScreen {
 
         uiStage.addActor(startGameButton);
 
-        String style = "outfit-medium-40px";
+        String style = "outfit-medium-20px";
 
         TypingLabel labeltotalTime                 = new TypingLabel("Time:", VisUI.getSkin(), style);
         TypingLabel labelnumHeavenQuotas           = new TypingLabel("Heaven Quotas:", VisUI.getSkin(), style);
         TypingLabel labelnumHellQuotas             = new TypingLabel("Hell Quotas:", VisUI.getSkin(), style);
         TypingLabel labelnumFailedQuotas           = new TypingLabel("Failed Quotas:", VisUI.getSkin(), style);
         TypingLabel labelnumThrows                 = new TypingLabel("Throws:", VisUI.getSkin(), style);
-        TypingLabel labelnumPeopleReaped           = new TypingLabel("People Reaped:", VisUI.getSkin(), style);
+        TypingLabel labelnumPeopleReaped           = new TypingLabel("Souls Reaped:", VisUI.getSkin(), style);
         TypingLabel labelnumBouldersReaped         = new TypingLabel("Boulders Reaped:", VisUI.getSkin(), style);
         TypingLabel labelnumTombstonesReaped       = new TypingLabel("Tombstones Reaped:", VisUI.getSkin(), style);
         TypingLabel labelnumPowerupsReaped         = new TypingLabel("Powerups Reaped:", VisUI.getSkin(), style);
@@ -297,7 +297,7 @@ public class EndStoryScreen extends BaseScreen {
         float margin = 10f;
         VisTable statsTable = new VisTable();
         statsTable.defaults().align(Align.left).growX();
-        statsTable.setPosition(windowCamera.viewportWidth / 2f - 150, margin);
+        statsTable.setPosition(windowCamera.viewportWidth / 2f - 150, margin + 50f);
         statsTable.setSize(windowCamera.viewportWidth / 2f - margin, windowCamera.viewportHeight - 2 * margin);
 
         float labelWidth = 500;
