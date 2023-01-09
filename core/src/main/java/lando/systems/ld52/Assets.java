@@ -176,6 +176,10 @@ public class Assets implements Disposable {
         walkpathTexParams.wrapU = Texture.TextureWrap.Repeat;
         walkpathTexParams.wrapV = Texture.TextureWrap.Repeat;
 
+        TextureLoader.TextureParameter linearTexParams = new TextureLoader.TextureParameter();
+        linearTexParams.minFilter = Texture.TextureFilter.Linear;
+        linearTexParams.magFilter = Texture.TextureFilter.Linear;
+
         mgr = new AssetManager();
         {
             mgr.load("sprites/sprites.atlas", TextureAtlas.class);
@@ -211,12 +215,11 @@ public class Assets implements Disposable {
             mgr.load("audio/music/maintheme.ogg", Music.class);
             mgr.load("audio/music/mainthemeLowpass.ogg", Music.class);
 
-            mgr.load("images/story-background_00.png", Texture.class);
-            mgr.load("images/cutscene_0.png", Texture.class);
-            mgr.load("images/cutscene_1.png", Texture.class);
-            mgr.load("images/cutscene_2.png", Texture.class);
-            mgr.load("images/cutscene_3.png", Texture.class);
-
+            mgr.load("images/story-background_00.png", Texture.class, linearTexParams);
+            mgr.load("images/cutscene_0.png", Texture.class, linearTexParams);
+            mgr.load("images/cutscene_1.png", Texture.class, linearTexParams);
+            mgr.load("images/cutscene_2.png", Texture.class, linearTexParams);
+            mgr.load("images/cutscene_3.png", Texture.class, linearTexParams);
         }
 
         if (load == Load.SYNC) {
