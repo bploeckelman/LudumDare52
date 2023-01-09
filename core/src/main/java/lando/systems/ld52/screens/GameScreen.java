@@ -112,7 +112,7 @@ public class GameScreen extends BaseScreen {
         RoundDto roundDto = new RoundDto();
         RoundData roundData = getRoundData(roundDto, heavenQuota, hellQuota);
         gameboard.setupBoard(assets, roundData);
-        player.boardPosition = 0;
+        player.reset();
     }
 
     private RoundData getRoundData(RoundDto roundDto, Quota heavenQuota, Quota hellQuota) {

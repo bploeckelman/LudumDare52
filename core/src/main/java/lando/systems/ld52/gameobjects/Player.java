@@ -50,7 +50,7 @@ public class Player implements GameObject {
         this.harvestZone = new HarvestZone(this);
     }
 
-    private void reset() {
+    public void reset() {
         boardPosition = 0;
         _moveDirection = MoveDirection.clockwise;
         currentPlayerAnimation = playerWithScythe;
