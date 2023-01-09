@@ -44,6 +44,7 @@ public class Player implements GameObject {
         playerNoScythe = assets.playerNoScythe;
 
         this.gameBoard = gameBoard;
+        gameBoard.player = this;
 
         reset();
         this.harvestZone = new HarvestZone(this);

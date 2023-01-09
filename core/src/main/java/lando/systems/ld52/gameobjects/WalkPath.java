@@ -18,7 +18,7 @@ public class WalkPath implements GameObject {
     private float scroll;
     private float stateTime;
 
-    // TODO - add an 'active' flag for when the player is in this section
+    public boolean active;
 
     public WalkPath(Assets assets, String side, float x, float y) {
         this.side = side;
@@ -32,16 +32,17 @@ public class WalkPath implements GameObject {
         bounds = new Rectangle(x, y, clouds.getWidth(), clouds.getHeight());
         scroll = 0f;
         stateTime = 0f;
+
+        active = false;
     }
 
     @Override
     public void update(float dt) {
-        // TODO - update animations (if 'active')
-
-        stateTime += dt;
-
-        float speed = 0.1f;
-        scroll += speed * dt;
+        if (active) {
+            stateTime += dt;
+            float speed = 0.1f;
+            scroll += speed * dt;
+        }
     }
 
     @Override
@@ -62,11 +63,11 @@ public class WalkPath implements GameObject {
             u -= scroll;
             u2 -= scroll;
         } else if (side.equalsIgnoreCase("left")) {
-            v -= scroll;
-            v2 -=  scroll;
-        } else if (side.equalsIgnoreCase("right")) {
             v += scroll;
-            v2 += scroll;
+            v2 +=  scroll;
+        } else if (side.equalsIgnoreCase("right")) {
+            v -= scroll;
+            v2 -= scroll;
         }
 
         batch.draw(baseKeyframe, bounds.x, bounds.y, bounds.width, bounds.height);

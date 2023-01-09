@@ -12,6 +12,8 @@ import lando.systems.ld52.Main;
 import lando.systems.ld52.data.RoundData;
 import lando.systems.ld52.screens.GameScreen;
 
+import static lando.systems.ld52.gameobjects.GameBoard.CornerTransition.*;
+
 public class GameBoard {
 
 //    public final static int gridSize = 7;
@@ -28,6 +30,7 @@ public class GameBoard {
 
     public enum CornerTransition { none, top_left, top_right, bottom_right, bottom_left }
     public CornerTransition cornerTransition = CornerTransition.none;
+    private boolean wasInCorner;
 
     private final Vector2 cornerPosTopLeft = new Vector2(280, 590);
     private final Vector2 cornerPosTopRight = new Vector2(868, 590);
@@ -48,6 +51,7 @@ public class GameBoard {
     public Rectangle bounds;
     public GameScreen screen;
     public float timer;
+    public Player player;
 
     public GameBoard(GameScreen screen, Assets assets) {
         this.screen = screen;
@@ -60,6 +64,7 @@ public class GameBoard {
         cornerIdleAnim = assets.cornerIdle;
         cornerActionAnim = assets.cornerAction;
         cornerStateTime = 0f;
+        wasInCorner = false;
 
         walkPathTop    = new WalkPath(assets, "top",    380, 632);
         walkPathRight  = new WalkPath(assets, "right",  912, 100);
@@ -108,6 +113,26 @@ public class GameBoard {
 
         cornerStateTime += dt;
 
+        // set the walk path active
+        walkPathTop.active = false;
+        walkPathRight.active = false;
+        walkPathBottom.active = false;
+        walkPathLeft.active = false;
+        if (cornerTransition == CornerTransition.none) {
+            switch (player.currentSide) {
+                case top: walkPathTop.active = true; break;
+                case right: walkPathRight.active = true; break;
+                case bottom: walkPathBottom.active = true; break;
+                case left: walkPathLeft.active = true; break;
+            }
+            wasInCorner = false;
+        } else {
+            if (!wasInCorner) {
+                wasInCorner = true;
+                cornerStateTime = 0f;
+            }
+        }
+
         walkPathTop.update(dt);
         walkPathRight.update(dt);
         walkPathBottom.update(dt);
@@ -132,22 +157,22 @@ public class GameBoard {
         TextureRegion keyframe;
 
         // draw edge animations
-        // TODO - only animate the edge that the reap-o man is currently traversing
         walkPathTop.render(batch);
         walkPathRight.render(batch);
         walkPathBottom.render(batch);
         walkPathLeft.render(batch);
 
         // render corner animations
-        // TODO - figure out which animation is appropriate for each
-        //  and draw that keyframe rather than only the idle one
+        Animation<TextureRegion> cornerAnim;
 
         // top left
-        keyframe = cornerIdleAnim.getKeyFrame(cornerStateTime);
+        cornerAnim = (cornerTransition == top_left) ? cornerActionAnim : cornerIdleAnim;
+        keyframe = cornerAnim.getKeyFrame(cornerStateTime);
         batch.draw(keyframe, cornerPosTopLeft.x, cornerPosTopLeft.y);
 
         // top right
-        keyframe = cornerIdleAnim.getKeyFrame(cornerStateTime);
+        cornerAnim = (cornerTransition == top_right) ? cornerActionAnim : cornerIdleAnim;
+        keyframe = cornerAnim.getKeyFrame(cornerStateTime);
         batch.draw(keyframe,
                 cornerPosTopRight.x, cornerPosTopRight.y,
                 keyframe.getRegionWidth() / 2f,
@@ -159,7 +184,8 @@ public class GameBoard {
         );
 
         // bottom right
-        keyframe = cornerIdleAnim.getKeyFrame(cornerStateTime);
+        cornerAnim = (cornerTransition == bottom_right) ? cornerActionAnim : cornerIdleAnim;
+        keyframe = cornerAnim.getKeyFrame(cornerStateTime);
         batch.draw(keyframe,
                 cornerPosBottomRight.x, cornerPosBottomRight.y,
                 keyframe.getRegionWidth() / 2f,
@@ -171,7 +197,8 @@ public class GameBoard {
         );
 
         // bottom left
-        keyframe = cornerIdleAnim.getKeyFrame(cornerStateTime);
+        cornerAnim = (cornerTransition == bottom_left) ? cornerActionAnim : cornerIdleAnim;
+        keyframe = cornerAnim.getKeyFrame(cornerStateTime);
         batch.draw(keyframe,
                 cornerPosBottomLeft.x, cornerPosBottomLeft.y,
                 keyframe.getRegionWidth() / 2f,

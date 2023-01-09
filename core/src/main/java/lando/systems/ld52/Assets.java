@@ -1,8 +1,6 @@
 package lando.systems.ld52;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetDescriptor;
-import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.audio.Music;
@@ -247,7 +245,7 @@ public class Assets implements Disposable {
         scythe = new Animation<>(.2f, atlas.findRegions("player/scythe"), Animation.PlayMode.LOOP);
         tombstone = new Animation<>(.2f, atlas.findRegions("objects/tombstone"), Animation.PlayMode.LOOP);
         cornerIdle = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-idle/walkpath-corner-a-idle"), Animation.PlayMode.LOOP);
-        cornerAction = new Animation<>(0.1f, atlas.findRegions("world/walkpath-corner-a-action/walkpath-corner-a-action"), Animation.PlayMode.NORMAL);
+        cornerAction = new Animation<>(0.06f, atlas.findRegions("world/walkpath-corner-a-action/walkpath-corner-a-action"), Animation.PlayMode.NORMAL);
 
         heads = new ObjectMap<>();
         for (Head head : Head.values()) {
