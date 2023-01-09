@@ -17,7 +17,7 @@ public class TilePowerdown extends TileObject {
 
     public TilePowerdown(Assets assets, Tile tile) {
         super(tile);
-        animation = assets.tombstone;
+        animation = assets.powerdown;
         stateTime = 0f;
     }
 

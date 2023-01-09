@@ -4,5 +4,6 @@ public enum TileType {
     open,
     obstacle,
     character,
-    powerUp
+    powerUp,
+    powerDown
 }

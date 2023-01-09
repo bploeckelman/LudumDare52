@@ -41,6 +41,12 @@ public class Tile {
             case character:
                 object = new TileHead(assets, this, tileData);
                 break;
+            case powerUp:
+                object = new TilePowerup(assets, this);
+                break;
+            case powerDown:
+                object = new TilePowerdown(assets, this);
+                break;
         }
     }
 
